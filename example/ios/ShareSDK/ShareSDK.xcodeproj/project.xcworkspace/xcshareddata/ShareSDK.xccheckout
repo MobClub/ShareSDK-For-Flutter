@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C42AEFCA-0C82-4BF5-AB7C-039DA846D884</string>
+	<key>IDESourceControlProjectName</key>
+	<string>project</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>ddbbef2e-7d24-4ea3-accf-f5ea24af4a8b++6617</key>
+		<string>svn://192.168.180.65/ios/project/ShareSDK/branches/ShareSDK%2520v3.0.0</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ShareSDK/ShareSDK.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>ddbbef2e-7d24-4ea3-accf-f5ea24af4a8b++6617</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>ddbbef2e-7d24-4ea3-accf-f5ea24af4a8b++6617</key>
+		<string>svn://192.168.180.65</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>svn://192.168.180.65/ios/project/ShareSDK/branches/ShareSDK%2520v3.0.0/ShareSDK/ShareSDK.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>ddbbef2e-7d24-4ea3-accf-f5ea24af4a8b++6617</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>ddbbef2e-7d24-4ea3-accf-f5ea24af4a8b++6617</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ShareSDKv3.x</string>
+		</dict>
+	</array>
+</dict>
+</plist>
