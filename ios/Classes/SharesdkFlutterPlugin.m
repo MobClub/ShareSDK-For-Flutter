@@ -277,12 +277,41 @@ typedef NS_ENUM(NSUInteger, PluginMethod) {
 
 - (NSMutableDictionary *)_covertParams:(NSDictionary *)params
 {
-    id images = params[@"images"];
-    NSMutableDictionary *result = params.mutableCopy;
+    NSMutableDictionary *tmp = params.mutableCopy;
     
-    result[@"images"] = ((NSArray *(*)(id, SEL, id))objc_msgSend)(params.mutableCopy,NSSelectorFromString(@"_convertToImages:"),images);
+    NSArray *urlKeys = @[@"url",@"audio_url",@"audio_flash_url",@"video_flash_url",@"video_asset_url"];
+    NSArray *thumbImageKeys = @[@"thumb_image",@"wxmp_hdthumbimage"];
+    NSArray *dataKeys = @[@"emoticon_data",@"file_data",@"source_file"];
     
-    return result;
+    for (id key in params.allKeys)
+    {
+        if ([urlKeys containsObject:key])
+        {
+            tmp[key] = [NSURL URLWithString:[NSString stringWithFormat:@"%@",params[key]]];
+        }
+        
+        if ([thumbImageKeys containsObject:key])
+        {
+            tmp[key] = [SSDKImage imageWithObject:params[key]];
+        }
+        
+        if ([dataKeys containsObject:key])
+        {
+            tmp[key] = ((id(*)(id,SEL,id))objc_msgSend)(NSClassFromString(@"SSDKData"),NSSelectorFromString(@"dataWithObject:"),params[key]);
+        }
+        
+        if ([key isEqualToString:@"images"])
+        {
+            tmp[key] = ((NSArray *(*)(id, SEL, id))objc_msgSend)(params.mutableCopy,NSSelectorFromString(@"_convertToImages:"),params[key]);
+        }
+        
+        if ([params[key] isKindOfClass:NSDictionary.class])
+        {
+            tmp[key] = [self _covertParams:params[key]];
+        }
+    }
+    
+    return tmp;
 }
 
 - (void)_openMiniProgramWithArgs:(NSDictionary *)args result:(FlutterResult)result

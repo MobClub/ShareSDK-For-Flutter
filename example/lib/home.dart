@@ -85,6 +85,52 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void shareMiniProgram(BuildContext context)
+  {
+    SSDKMap params = SSDKMap()..setWeChatMiniProgram("MiniProgram", "test MiniProgram", "http://www.mob.com", "pages/index/index", null, "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522154322305&di=7f4bf3d0803fe8c2c66c140f0a6ea0b4&imgtype=0&src=http%3A%2F%2Fa4.topitme.com%2Fo%2F201007%2F29%2F12803876734174.jpg", "gh_afb25ac019c9", true, 0, ShareSDKPlatforms.wechatSession);
+    ShareSDK.share(ShareSDKPlatforms.wechatSession , params, (SSDKResponseState state, Map userdata, Map contentEntity, SSDKError error){
+
+      showAlert(state, error.rawData, context);
+    });
+  }
+
+  void shareSinaCustom(BuildContext context)
+  {
+    SSDKMap params = SSDKMap()..setSina("text", null, ["https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541659481198&di=80760a9d745a78dab3ed3d5577286682&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fbaike%2Fpic%2Fitem%2Fd1a20cf431adcbef011db9bba6af2edda3cc9f66.jpg","https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541659494384&di=ad32f8ac8c75f51612a90d6b7c1d8db8&imgtype=0&src=http%3A%2F%2Fimg3.duitang.com%2Fuploads%2Fitem%2F201609%2F14%2F20160914232743_hwnCt.thumb.700_0.jpeg"], null, null, 0.0, 0.0, null, false, SSDKContentTypes.auto);
+    ShareSDK.share(ShareSDKPlatforms.sina , params, (SSDKResponseState state, Map userdata, Map contentEntity, SSDKError error){
+
+      showAlert(state, error.rawData, context);
+    });
+  }
+
+  void shareTwitterCustom(BuildContext context)
+  {
+    SSDKMap params = SSDKMap()..setTwitter("text", "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541659481198&di=80760a9d745a78dab3ed3d5577286682&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fbaike%2Fpic%2Fitem%2Fd1a20cf431adcbef011db9bba6af2edda3cc9f66.jpg", null, 0.0, 0.0, SSDKContentTypes.auto);
+    ShareSDK.share(ShareSDKPlatforms.twitter , params, (SSDKResponseState state, Map userdata, Map contentEntity, SSDKError error){
+
+      showAlert(state, error.rawData, context);
+    });
+  }
+
+  void shareFacebookCustom(BuildContext context)
+  {
+    SSDKMap params = SSDKMap()..setFacebook("Share SDK Link Desc", "http://ww4.sinaimg.cn/bmiddle/005Q8xv4gw1evlkov50xuj30go0a6mz3.jpg", "http://www.mob.com", "Share SDK", null, null, "#MobData", "Mob官网 - 全球领先的移动开发者服务平台", SSDKContentTypes.webpage);
+    ShareSDK.share(ShareSDKPlatforms.facebook , params, (SSDKResponseState state, Map userdata, Map contentEntity, SSDKError error){
+
+      showAlert(state, error.rawData, context);
+    });
+  }
+
+  void shareQQCustom(BuildContext context)
+  {
+    SSDKMap params = SSDKMap()..setQQ("text", "title", "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT", "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT", null, null, "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541659481198&di=80760a9d745a78dab3ed3d5577286682&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fbaike%2Fpic%2Fitem%2Fd1a20cf431adcbef011db9bba6af2edda3cc9f66.jpg", SSDKContentTypes.audio, ShareSDKPlatforms.qq);
+    ShareSDK.share(ShareSDKPlatforms.qq , params, (SSDKResponseState state, Map userdata, Map contentEntity, SSDKError error){
+
+      showAlert(state, error.rawData, context);
+    });
+  }
+
+
   void showAlert(SSDKResponseState state, Map content, BuildContext context) {
     print("--------------------------> state:"+state.toString());
     String title = "失败";
@@ -190,6 +236,12 @@ class _HomePageState extends State<HomePage> {
           _creatRow("弹出分享菜单", "弹出分享菜单", showShareMenu,context),
           _creatRow("弹出编辑界面", "分享直接进行内容编辑", showEditor,context),
           _creatRow("打开微信小程序", "需要导入WechatConnector", openMiniProgram,context),
+
+          _creatRow("分享小程序到微信", "测试自定义参数", shareMiniProgram,context),
+          _creatRow("分享到微博", "测试自定义参数", shareSinaCustom,context),
+          _creatRow("分享到QQ", "测试自定义参数", shareQQCustom,context),
+          _creatRow("分享到Twitter", "测试自定义参数", shareTwitterCustom,context),
+          _creatRow("分享到Facebook", "测试自定义参数", shareFacebookCustom,context),
         ],
       ),
       );

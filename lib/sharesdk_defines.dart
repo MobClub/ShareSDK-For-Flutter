@@ -45,6 +45,7 @@ class ShareSDKPlatform
   final String name;
 }
 
+// 平台号不一致你可以改成get方式，通过平台号区分
 class ShareSDKPlatforms
 {
   // final bool _isIOS = Platform.isIOS;//Android需要以此区分
@@ -103,15 +104,21 @@ class ShareSDKPlatforms
   static final ShareSDKPlatform qqSeries = ShareSDKPlatform(name: "qqSeries",id: 998);
 }
 
-class SSDKContentTypes
+class SSDKContentType
 {
-  static const int auto = 0;
-  static const int text = 1;
-  static const int image = 2;
-  static const int webpage = 3;
-  static const int app = 4;
-  static const int audio = 5;
-  static const int video = 6;
-  static const int file = 7;
-  static const int miniProgram = 10;
+  SSDKContentType({this.value}):super();
+  final int value;
+}
+
+class SSDKContentTypes extends Object
+{
+  static SSDKContentType get auto => SSDKContentType(value: 0);
+  static SSDKContentType get text => SSDKContentType(value: 1);
+  static SSDKContentType get image => SSDKContentType(value: 2);
+  static SSDKContentType get webpage => SSDKContentType(value: 3);
+  static SSDKContentType get app => SSDKContentType(value: 4);
+  static SSDKContentType get audio => SSDKContentType(value: 5);
+  static SSDKContentType get video => SSDKContentType(value: 6);
+  static SSDKContentType get file => SSDKContentType(value: 7);
+  static SSDKContentType get miniProgram => SSDKContentType(value: 10);
 }
