@@ -1,3 +1,7 @@
 ## 0.0.1
 
-* TODO: Describe initial release.
+* initalize
+
+## 0.0.2
+
+* Add iOS bridge for plugin.

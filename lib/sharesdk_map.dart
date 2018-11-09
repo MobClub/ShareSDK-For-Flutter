@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import './sharesdk_defines.dart';
 
 const String kText = "text";
