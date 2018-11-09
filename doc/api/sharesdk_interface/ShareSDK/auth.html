@@ -87,14 +87,15 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">static Future&lt;dynamic&gt; auth(ShareSDKPlatform platform, Map settings, Function(SSDKResponseState,Map,SSDKError) result)
-{
-  Map args = {&quot;platform&quot;:platform.id,&quot;settings&quot;:settings};
-  Future&lt;dynamic&gt; callback = _channel.invokeMethod(ShareSDKMethods.auth.name,args);
-  callback.then((dynamic response){
-    if (result != null)
-    {
-      result(_state(response),response[&quot;user&quot;],SSDKError(rawData: response[&quot;error&quot;]));
+      <pre class="language-dart"><code class="language-dart">static Future&lt;dynamic&gt; auth(ShareSDKPlatform platform, Map settings,
+    Function(SSDKResponseState, Map, SSDKError) result) {
+  Map args = {&quot;platform&quot;: platform.id, &quot;settings&quot;: settings};
+  Future&lt;dynamic&gt; callback =
+      _channel.invokeMethod(ShareSDKMethods.auth.name, args);
+  callback.then((dynamic response) {
+    if (result != null) {
+      result(_state(response), response[&quot;user&quot;],
+          SSDKError(rawData: response[&quot;error&quot;]));
     }
   });
 
@@ -111,7 +112,7 @@
 
 <footer>
   <span class="no-break">
-    sharesdk_flutter 0.0.1
+    sharesdk_flutter 0.0.2
   </span>
 
 </footer>

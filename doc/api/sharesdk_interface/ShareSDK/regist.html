@@ -87,9 +87,9 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">static Future&lt;dynamic&gt; regist(ShareSDKRegister register) async
-{
-  return await _channel.invokeMethod(ShareSDKMethods.regist.name,register.platformsInfo);
+      <pre class="language-dart"><code class="language-dart">static Future&lt;dynamic&gt; regist(ShareSDKRegister register) async {
+  return await _channel.invokeMethod(
+      ShareSDKMethods.regist.name, register.platformsInfo);
 }</code></pre>
     </section>
 
@@ -102,7 +102,7 @@
 
 <footer>
   <span class="no-break">
-    sharesdk_flutter 0.0.1
+    sharesdk_flutter 0.0.2
   </span>
 
 </footer>

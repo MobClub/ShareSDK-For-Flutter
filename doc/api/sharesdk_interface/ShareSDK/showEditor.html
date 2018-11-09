@@ -87,14 +87,23 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">static Future&lt;dynamic&gt; showEditor(ShareSDKPlatform platform,SSDKMap params,Function(SSDKResponseState,ShareSDKPlatform,Map,Map,SSDKError) result)
-  {
-    Map args = {&quot;platform&quot;:platform.id,&quot;params&quot;:params.map};
-    Future&lt;dynamic&gt; callback = _channel.invokeMethod(ShareSDKMethods.showEditor.name,args);
-    callback.then((dynamic response){
+      <pre class="language-dart"><code class="language-dart">static Future&lt;dynamic&gt; showEditor(
+      ShareSDKPlatform platform,
+      SSDKMap params,
+      Function(SSDKResponseState, ShareSDKPlatform, Map, Map, SSDKError)
+          result) {
+    Map args = {&quot;platform&quot;: platform.id, &quot;params&quot;: params.map};
+    Future&lt;dynamic&gt; callback =
+        _channel.invokeMethod(ShareSDKMethods.showEditor.name, args);
+    callback.then((dynamic response) {
       print(response);
-      if(result != null){
-        result(_state(response),ShareSDKPlatform(id: response[&quot;platform&quot;],name: &quot;null&quot;),response[&quot;userData&quot;],response[&quot;contentEntity&quot;],SSDKError(rawData: response[&quot;error&quot;]));
+      if (result != null) {
+        result(
+            _state(response),
+            ShareSDKPlatform(id: response[&quot;platform&quot;], name: &quot;null&quot;),
+            response[&quot;userData&quot;],
+            response[&quot;contentEntity&quot;],
+            SSDKError(rawData: response[&quot;error&quot;]));
       }
     });
 
@@ -111,7 +120,7 @@
 
 <footer>
   <span class="no-break">
-    sharesdk_flutter 0.0.1
+    sharesdk_flutter 0.0.2
   </span>
 
 </footer>

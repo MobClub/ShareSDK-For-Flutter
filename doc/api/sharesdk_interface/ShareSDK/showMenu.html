@@ -87,20 +87,28 @@
     
     <section class="summary source-code" id="source">
       <h2><span>Implementation</span> </h2>
-      <pre class="language-dart"><code class="language-dart">static Future&lt;dynamic&gt; showMenu(List&lt;ShareSDKPlatform&gt; platforms, SSDKMap params, Function(SSDKResponseState,ShareSDKPlatform,Map,Map,SSDKError) result)
-{
+      <pre class="language-dart"><code class="language-dart">static Future&lt;dynamic&gt; showMenu(
+    List&lt;ShareSDKPlatform&gt; platforms,
+    SSDKMap params,
+    Function(SSDKResponseState, ShareSDKPlatform, Map, Map, SSDKError)
+        result) {
   List types = null;
-  if (platforms != null)
-  {
+  if (platforms != null) {
     Iterable&lt;int&gt; ids = platforms.map((ShareSDKPlatform item) =&gt; item.id);
     types = List.from(ids);
   }
 
-  Map args = {&quot;platforms&quot;:types,&quot;params&quot;:params.map};
-  Future&lt;dynamic&gt; callback = _channel.invokeMethod(ShareSDKMethods.showMenu.name,args);
-  callback.then((dynamic response){
-    if(result != null){
-      result(_state(response),ShareSDKPlatform(id: response[&quot;platform&quot;],name: &quot;null&quot;),response[&quot;userData&quot;],response[&quot;contentEntity&quot;],SSDKError(rawData: response[&quot;error&quot;]));
+  Map args = {&quot;platforms&quot;: types, &quot;params&quot;: params.map};
+  Future&lt;dynamic&gt; callback =
+      _channel.invokeMethod(ShareSDKMethods.showMenu.name, args);
+  callback.then((dynamic response) {
+    if (result != null) {
+      result(
+          _state(response),
+          ShareSDKPlatform(id: response[&quot;platform&quot;], name: &quot;null&quot;),
+          response[&quot;userData&quot;],
+          response[&quot;contentEntity&quot;],
+          SSDKError(rawData: response[&quot;error&quot;]));
     }
   });
 
@@ -117,7 +125,7 @@
 
 <footer>
   <span class="no-break">
-    sharesdk_flutter 0.0.1
+    sharesdk_flutter 0.0.2
   </span>
 
 </footer>

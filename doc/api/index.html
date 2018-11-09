@@ -21,7 +21,7 @@
 
 <header id="title">
   <ol class="breadcrumbs gt-separated dark hidden-xs">
-    <li class="self-crumb">sharesdk_flutter package</li>
+    <li><a href="http://www.mob.com">sharesdk_flutter package</a></li>
   </ol>
   <div class="self-name">sharesdk_flutter</div>
   <form class="search navbar-right" role="search">
@@ -46,11 +46,39 @@
   <div class="col-xs-12 col-sm-9 col-md-8 main-content">
       <section class="desc markdown">
         <h1>sharesdk_flutter</h1>
-<p>A new flutter plugin project.</p>
+<p>ShareSDK is a social sharing component that provides social functions for apps, like authorization and share, shortens the development time of developers, and has social statistical analysis management background.</p>
+<p>Introduce: <a href="http://www.mob.com/product/sharesdk">http://www.mob.com/product/sharesdk</a></p>
 <h2>Getting Started</h2>
 <p>For help getting started with Flutter, view our online
 <a href="https://flutter.io/">documentation</a>.</p>
 <p>For help on editing plugin code, view the <a href="https://flutter.io/developing-packages/#edit-plugin-package">documentation</a>.</p>
+<p>If you need to customize the platform:</p><ul><li>iOS : you need to editor <em>sharesdk_flutter.podspec</em></li></ul>
+<pre class="language-dart"><code>#
+# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
+#
+Pod::Spec.new do |s|
+  s.name             = 'sharesdk_flutter'
+  s.version          = '0.0.1'
+  s.summary          = 'flutter plugin for sharesdk.'
+  s.description      = 'ShareSDK is the most comprehensive Social SDK in the world,which share easily with 40+ platforms.'
+  s.homepage         = 'http://www.mob.com'
+  s.license          = { :file =&gt; '../LICENSE' }
+  s.author           = { 'Mob' =&gt; 'mobproducts@163.com' }
+  s.source           = { :path =&gt; '.' }
+  s.source_files = 'Classes/**/*'
+  s.public_header_files = 'Classes/**/*.h'
+  s.dependency 'Flutter'
+  s.dependency 'mob_sharesdk'
+#  s.dependency 'mob_sharesdk/ShareSDKUI'
+#  s.dependency 'mob_sharesdk/ShareSDKPlatforms/QQ'
+#  s.dependency 'mob_sharesdk/ShareSDKPlatforms/SinaWeibo'
+#  s.dependency 'mob_sharesdk/ShareSDKPlatforms/WeChat'
+#  s.dependency 'mob_sharesdk/ShareSDKPlatforms/Facebook'
+#  s.dependency 'mob_sharesdk/ShareSDKPlatforms/Twitter'
+  
+  s.ios.deployment_target = '8.0'
+end
+</code></pre>
       </section>
       
         <section class="summary">
@@ -90,7 +118,7 @@
 
 <footer>
   <span class="no-break">
-    sharesdk_flutter 0.0.1
+    sharesdk_flutter 0.0.2
   </span>
 
 </footer>
