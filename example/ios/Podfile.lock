@@ -1,0 +1,60 @@
+PODS:
+  - Flutter (1.0.0)
+  - mob_sharesdk (4.2.0):
+    - mob_sharesdk/ShareSDK (= 4.2.0)
+    - MOBFoundation
+  - mob_sharesdk/ShareSDK (4.2.0):
+    - MOBFoundation
+  - mob_sharesdk/ShareSDKPlatforms/Facebook (4.2.0):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation
+  - mob_sharesdk/ShareSDKPlatforms/QQ (4.2.0):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation
+  - mob_sharesdk/ShareSDKPlatforms/SinaWeibo (4.2.0):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation
+  - mob_sharesdk/ShareSDKPlatforms/Twitter (4.2.0):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation
+  - mob_sharesdk/ShareSDKPlatforms/WeChat (4.2.0):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation
+  - mob_sharesdk/ShareSDKUI (4.2.0):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation
+  - MOBFoundation (3.2.0)
+  - sharesdk (0.0.1):
+    - Flutter
+    - mob_sharesdk
+    - mob_sharesdk/ShareSDKPlatforms/Facebook
+    - mob_sharesdk/ShareSDKPlatforms/QQ
+    - mob_sharesdk/ShareSDKPlatforms/SinaWeibo
+    - mob_sharesdk/ShareSDKPlatforms/Twitter
+    - mob_sharesdk/ShareSDKPlatforms/WeChat
+    - mob_sharesdk/ShareSDKUI
+
+DEPENDENCIES:
+  - Flutter (from `.symlinks/flutter/ios`)
+  - sharesdk (from `.symlinks/plugins/sharesdk/ios`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - mob_sharesdk
+    - MOBFoundation
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: ".symlinks/flutter/ios"
+  sharesdk:
+    :path: ".symlinks/plugins/sharesdk/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
+  mob_sharesdk: fc8a9aab921c08e5e88a5b1f36229c6d406a2ff8
+  MOBFoundation: ca11e6640e995875ff755faa56ea324eed260e70
+  sharesdk: dc69ef855c237227a575efebc71fe2132c35df01
+
+PODFILE CHECKSUM: 1e5af4103afd21ca5ead147d7b81d06f494f51a2
+
+COCOAPODS: 1.5.3
