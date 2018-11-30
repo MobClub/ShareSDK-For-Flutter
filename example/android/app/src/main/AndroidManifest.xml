@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.yoozoo.sharesdkexample">
 
     <!-- The INTERNET permission is required for development. Specifically,
@@ -15,7 +16,8 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="sharesdk_example"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        tools:replace="android:name">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
