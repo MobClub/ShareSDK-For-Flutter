@@ -8,11 +8,6 @@
 
 **Document Language:** **English** | **[中文](README_CN.md)**
 
-- - - - - - - - - - - -
-
-
-
-
 ## Getting Started
 
 Introduce: http://www.mob.com/product/sharesdk
