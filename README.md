@@ -1,6 +1,12 @@
-# sharesdk
+# ShareSDK For Flutter
+### ShareSDK is a social sharing component that provides social functions for apps, like authorization and share, and has social statistical analysis management background.
 
-ShareSDK is a social sharing component that provides social functions for apps, like authorization and share, and has social statistical analysis management background.
+**supported original ShareSDK version:**
+
+- [Android](https://github.com/MobClub/ShareSDK-for-Android) - V3.4.0
+- [iOS](https://github.com/MobClub/ShareSDK-for-iOS) - V4.2.1
+
+**Document Language:** **English** | **[中文](README_CN.md)**
 
 ## Getting Started
 
