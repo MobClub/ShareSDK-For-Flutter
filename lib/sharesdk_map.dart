@@ -3,6 +3,8 @@ import './sharesdk_defines.dart';
 const String kText = "text";
 const String kThumbImage = "thumb_image";
 const String kImages = "images";
+const String kImageUrl_android = "imageUrl_android";
+const String kImagePath_android = "imagePath_android";
 const String kUrl = "url";
 const String kType = "type";
 const String kLat = "lat";
@@ -74,13 +76,21 @@ const String kFacebookQuote = "facebook_quote";
 class SSDKMap {
   final Map map = {};
 
-  void setGeneral(String text, dynamic images, String url, String title,
-      SSDKContentType contentType) {
+  void setGeneral(String text, dynamic images, String imageUrl_android,
+                  String imagePath_android, String url, String title,
+      SSDKContentType contentType, String withShareTicket, String WxUserName,
+      String WxPath, String WxMiniProgramType) {
     map[kType] = contentType.value;
     map[kText] = text;
     map[kTitle] = title;
     map[kImages] = images;
     map[kUrl] = url;
+    map[kImageUrl_android] = imageUrl_android;
+    map[kImagePath_android] = imagePath_android;
+    map[kWXMPWithTicket] = withShareTicket;
+    map[kWXMPUserName] = WxUserName;
+    map[kWXMPPath] = WxPath;
+    map[kWXMPType] = WxMiniProgramType;
   }
 
   void setWechat(
@@ -122,6 +132,7 @@ class SSDKMap {
       String path,
       String thumbImage,
       String hdThumbImage,
+      String imageUrl_android,
       String userName,
       bool withShareTicket,
       int miniProgramType,
@@ -131,10 +142,12 @@ class SSDKMap {
     params[kTitle] = title;
     params[kUrl] = webUrl;
     params[kWXMPUserName] = userName;
+    params[kWXMPPath] = path;
     params[kThumbImage] = thumbImage;
     params[kWXMPHdThumbImage] = hdThumbImage;
     params[kWXMPType] = miniProgramType;
     params[kWXMPWithTicket] = withShareTicket;
+    params[kImageUrl_android] = imageUrl_android;
 
     int id = subPlatform.id;
     map["@platform($id)"] = params;
