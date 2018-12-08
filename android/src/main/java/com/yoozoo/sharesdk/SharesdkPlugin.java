@@ -67,16 +67,18 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
                 authWithArgs(call, result);
                 break;
             case PluginMethodHasAuthed:
+                Log.e("SharesdkPlugin", " PluginMethodHasAuthed IOS platform only");
                 //IOS only
                 break;
             case PluginMethodCancelAuth:
+                Log.e("SharesdkPlugin", " PluginMethodCancelAuth IOS platform only");
                 //IOS only
                 break;
             case PluginMethodGetUserInfo:
                 getUserInfoWithArgs(call, result);
                 break;
             case PluginMethodRegist:
-                Log.e("WWW", " test " + call.method.toString() + " 核对 " + PluginMethodRegist);
+                Log.e("SharesdkPlugin", " test " + call.method.toString() + " 核对 " + PluginMethodRegist);
                 break;
             case PluginMethodActivePlatforms:
                 //IOS only
@@ -88,7 +90,7 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
                 showMenuWithArgs(call, result);
                 break;
             case PluginMethodOpenMiniProgram:
-                Log.e("WWW", " test " + call.method.toString() + " 核对 " + PluginMethodOpenMiniProgram);
+                shareMiniProgramWithArgs(call, result);
                 break;
 
             default:
@@ -98,13 +100,132 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
 
     /** 分享 **/
     private void shareWithArgs(MethodCall call, Result result) {
-        HashMap<String, Object> params = call.arguments();
-        String num = String.valueOf(params.get("platform"));
-        String images = String.valueOf(params.get("images"));
+        String imageUrl = "";
+        String imagePath = "";
+        String title = "";
+        String text = "";
+        String url = "";
+        String video = "";
+        String musicUrl = "";
+        String fileData = "";
+        String wxmpUserName = "";
+        String wxmpType = "";
+        String wxmpWithTicket = "";
+        String wxmpPath = "";
+        String type = "";
+
+
+        HashMap<String, Object> map = call.arguments();
+        String num = String.valueOf(map.get("platform"));
+
+        HashMap<String, Object> params = (HashMap<String, Object>) map.get("params");
+
+        HashMap<String, Object> platMap = (HashMap<String, Object>) params.get("@platform(" + num +")" );
+        if (platMap == null) {
+            imageUrl = String.valueOf(params.get("imageUrl_android"));
+            imagePath = String.valueOf(params.get("imagePath_android"));
+            title = String.valueOf(params.get("title"));
+            text = String.valueOf(params.get("text"));
+            url = String.valueOf(params.get("url"));
+            video = String.valueOf(params.get("video"));
+            musicUrl = String.valueOf(params.get("audio_flash_url"));
+            fileData = String.valueOf(params.get("file_data"));
+            wxmpUserName = String.valueOf(params.get("wxmp_user_name"));
+            wxmpType = String.valueOf(params.get("wxmp_type"));
+            wxmpWithTicket = String.valueOf(params.get("wxmp_with_ticket"));
+            wxmpPath = String.valueOf(params.get("wxmp_path"));
+            type = String.valueOf(params.get("type"));
+        } else {
+            imageUrl = String.valueOf(platMap.get("imageUrl_android"));
+            imagePath = String.valueOf(platMap.get("imagePath_android"));
+            title = String.valueOf(platMap.get("title"));
+            text = String.valueOf(platMap.get("text"));
+            url = String.valueOf(platMap.get("url"));
+            video = String.valueOf(platMap.get("video"));
+            musicUrl = String.valueOf(platMap.get("audio_flash_url"));
+            fileData = String.valueOf(platMap.get("file_data"));
+            wxmpUserName = String.valueOf(platMap.get("wxmp_user_name"));
+            wxmpType = String.valueOf(platMap.get("wxmp_type"));
+            wxmpWithTicket = String.valueOf(platMap.get("wxmp_with_ticket"));
+            wxmpPath = String.valueOf(platMap.get("wxmp_path"));
+            type = String.valueOf(platMap.get("type"));
+        }
+
+        String platName = Utils.platName(num);
+
+        Platform platform = ShareSDK.getPlatform(platName);
+        Platform.ShareParams shareParams = new Platform.ShareParams();
+        if (!(title.equals("null") || title == null)) {
+            shareParams.setTitle(title);
+        }
+        if (!(text.equals("null") || text == null)) {
+            shareParams.setText(text);
+        }
+        if (!(imageUrl.equals("null") || imageUrl == null)) {
+            shareParams.setImageUrl(imageUrl);
+        }
+        if (!(imagePath.equals("null") || imagePath == null)) {
+            shareParams.setImagePath(imagePath);
+        }
+        if (!(url.equals("null") || url == null)) {
+            shareParams.setUrl(url);
+        }
+        if (!(wxmpUserName.equals("null") || wxmpUserName == null)) {
+            shareParams.setWxUserName(wxmpUserName);
+        }
+        if (!(musicUrl.equals("null") || musicUrl == null)) {
+            shareParams.setMusicUrl(musicUrl);
+        }
+        if (!(fileData.equals("null") || fileData == null)) {
+            shareParams.setFilePath(fileData);
+        }
+        if (!(wxmpType == null || wxmpType.isEmpty() || wxmpType.equals("null"))) {
+            shareParams.setWxMiniProgramType(Integer.valueOf(wxmpType));
+        }
+        if (!(wxmpWithTicket == null || wxmpWithTicket.equals("null"))) {
+            shareParams.setWxWithShareTicket(Boolean.valueOf(wxmpWithTicket));
+        }
+        if (!(wxmpPath == null || wxmpPath.equals("null"))) {
+            shareParams.setWxPath(wxmpPath);
+        }
+
+        if (type.equals("1")) {
+            shareParams.setShareType(Platform.SHARE_TEXT);
+        } else if (type.equals("2")) {
+            shareParams.setShareType(Platform.SHARE_IMAGE);
+        } else if (type.equals("3")) {
+            shareParams.setShareType(Platform.SHARE_WEBPAGE);
+        } else if (type.equals("4")) {
+            shareParams.setShareType(Platform.SHARE_APPS);
+        } else if (type.equals("5")) {
+            shareParams.setShareType(Platform.SHARE_MUSIC);
+        } else if (type.equals("6")) {
+            shareParams.setShareType(Platform.SHARE_VIDEO);
+        } else if (type.equals("7")) {
+            shareParams.setShareType(platform.SHARE_FILE);
+        } else if (type.equals("10")) {
+            shareParams.setShareType(Platform.SHARE_WXMINIPROGRAM);
+        }
+        platform.share(shareParams);
+        Log.e("SharesdkPlugin", " plat " + platform + " ====> " + call.arguments.toString());
+    }
+
+
+    /** 分享微信小程序 **/
+    private void shareMiniProgramWithArgs(MethodCall call, Result result) {
+        HashMap<String, Object> map = call.arguments();
+        String num = String.valueOf(map.get("platform"));
+
+        HashMap<String, Object> params = (HashMap<String, Object>) map.get("params");
+
+        String images = String.valueOf(params.get("wxmp_hdthumbimage"));
         String title = String.valueOf(params.get("title"));
         String text = String.valueOf(params.get("text"));
         String url = String.valueOf(params.get("url"));
+        String wxmpUserName = String.valueOf(params.get("wxmp_user_name"));
+        //String thumbImage = String.valueOf(params.get("thumb_image"));
         String video = String.valueOf(params.get("video"));
+        String musicUrl = String.valueOf(params.get("audio_flash_url"));
 
         String platName = Utils.platName(num);
 
@@ -114,8 +235,12 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
         shareParams.setText(text);
         shareParams.setImageUrl(images);
         shareParams.setUrl(url);
+        shareParams.setWxUserName(wxmpUserName);
+        shareParams.setMusicUrl(musicUrl);
+        shareParams.setShareType(Platform.SHARE_WXMINIPROGRAM);
+
         platform.share(shareParams);
-        Log.e("WWW", " plat " + platform + " ====> " + call.arguments.toString());
+        Log.e("SharesdkPlugin", " plat " + platform + " ====> " + call.arguments.toString());
     }
 
     /** 授权 **/
@@ -127,7 +252,7 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
         String platStr = Utils.platName(num);
         Platform platName = ShareSDK.getPlatform(platStr);
         doAuthorize(platName);
-        Log.e("WWW", " plat " + platName + " ====> " + call.arguments.toString());
+        Log.e("SharesdkPlugin", " plat " + platName + " ====> " + call.arguments.toString());
     }
 
     /**
@@ -161,7 +286,7 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
         oks.setUrl(url);
 
         oks.show(MobSDK.getContext());
-        Log.e("WWW", call.arguments.toString());
+        Log.e("SharesdkPlugin", call.arguments.toString());
     }
 
     /** 获得用户信息 **/
@@ -172,8 +297,7 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
         Platform platName = ShareSDK.getPlatform(platStr);
         doUserInfo(platName);
 
-        Log.e("WWW", " platName " + platName + " ====> " + call.arguments.toString());
-
+        Log.e("SharesdkPlugin", " platName " + platName + " ====> " + call.arguments.toString());
     }
 
 
