@@ -9,7 +9,8 @@
 - [iOS](https://github.com/MobClub/ShareSDK-for-iOS) - V4.2.1
 
 **简介：** http://www.mob.com/product/sharesdk
-**插件主页：**https://pub.dartlang.org/packages/sharesdk
+
+**插件主页：** https://pub.dartlang.org/packages/sharesdk
 
 ## 开始集成
 
