@@ -1,3 +1,5 @@
+**文档语言 :** **中文** | **[English](README.md)**
+
 # ShareSDK For Flutter
 ### 这是一个基于ShareSDK功能的扩展的Flutter插件。使用此插件能够帮助您在使用Flutter开发应用时,快速地实现社会化功能,例如第三方授权登录,获取用户信息以及社交平台的分享等功能。
 
@@ -6,17 +8,14 @@
 - [Android](https://github.com/MobClub/ShareSDK-for-Android) - V3.4.0
 - [iOS](https://github.com/MobClub/ShareSDK-for-iOS) - V4.2.1
 
-**文档语言 :** **中文** | **[English](README.md)**
+**简介：** http://www.mob.com/product/sharesdk
+**插件主页：**https://pub.dartlang.org/packages/sharesdk
 
 ## 开始集成
-**简介:** http://www.mob.com/product/sharesdk
 
-如果需要了解Flutter相关，
-[在线文档](https://flutter.io/).
+参考[官方插件集成文档](https://pub.dartlang.org/packages/sharesdk#-installing-tab-)
 
-如需了解如何编辑插件相关代码, 可以查阅[在线文档](https://flutter.io/developing-packages/#edit-plugin-package).
-
-如何你需要自定义导入分享平台:
+自定义需要导入的分享平台:
 - iOS : 你需要重新编辑 *sharesdk.podspec* 文件设置 dependency，具体支持的平台可以参阅 pod search mob_sharesdk 或者参考[官网文档](http://wiki.mob.com/cocoapods%E9%9B%86%E6%88%90/)
 
 ```
