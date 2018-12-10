@@ -51,6 +51,7 @@ end
 你需要重新编辑build.gradle, MobSDK.gradle文件来选择你需要使用的平台，具体支持的平台可以参阅[官网技术文档](http://wiki.mob.com/%E5%AE%8C%E6%95%B4%E9%9B%86%E6%88%90%E6%96%87%E6%A1%A3%EF%BC%88gradle%EF%BC%89/)
 为满足example项目的需要，您至少要配置如下平台：
 在build.gradle文件中，需要配置：
+#=========================   build.gradle   ==================================
 buildscript {
     repositories {
         google()
@@ -65,8 +66,10 @@ buildscript {
         classpath 'com.mob.sdk:MobSDK:+'
     }
 }
+#===============================================================================
 
 MobSDK.gradle文件中，需求配置：
+#=========================   mobsdk.gradle   ===================================
 MobSDK {
     appKey "moba6b6c6d6"
     appSecret "b89d2427a3bc7ad1aea1e1e8c1d36bf3"
@@ -130,3 +133,4 @@ MobSDK {
 		}
 	}
 }
+#================================================================================

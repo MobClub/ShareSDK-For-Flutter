@@ -51,7 +51,9 @@ end
 You need to edit build.gradle, MobSDK. Gradle file again to select the platform you need to use,
 For specific supported platforms, please refer to [official website technical documentation](http://wiki.mob.com/%E5%AE%8C%E6%95%B4%E9%9B%86%E6%88%90%E6%96%87%E6%A1%A3%EF%BC%88gradle%EF%BC%89/)
 To meet the requirements of the example project, you need to configure at least the following platforms:
+
 In the build.gradle file, you need to configure:
+#=========================   build.gradle   ==================================
 buildscript {
     repositories {
         google()
@@ -66,8 +68,11 @@ buildscript {
         classpath 'com.mob.sdk:MobSDK:+'
     }
 }
+#===============================================================================
+
 
 In mobsdk.gradle file, requirement configuration:
+#=========================   mobsdk.gradle   ===================================
 MobSDK {
     appKey "moba6b6c6d6"
     appSecret "b89d2427a3bc7ad1aea1e1e8c1d36bf3"
@@ -131,3 +136,4 @@ MobSDK {
 		}
 	}
 }
+#================================================================================
