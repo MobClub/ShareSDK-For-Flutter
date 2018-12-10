@@ -26,10 +26,7 @@ class _HomePageState extends State<HomePage> {
           "http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg",
           "title",
           SSDKContentTypes.text,
-          null,
-          null,
-          null,
-          null);
+          );
 
     ShareSDK.share(
         ShareSDKPlatforms.wechatSession, params, (SSDKResponseState state,
@@ -58,10 +55,7 @@ class _HomePageState extends State<HomePage> {
           null,
           "title",
           SSDKContentTypes.auto,
-          null,
-          null,
-          null,
-          null);
+          );
 
     ShareSDK.share(
         ShareSDKPlatforms.sina, params, (SSDKResponseState state, Map userdata,
@@ -90,10 +84,7 @@ class _HomePageState extends State<HomePage> {
           null,
           "title",
           SSDKContentTypes.auto,
-          null,
-          null,
-          null,
-          null);
+          );
     ShareSDK.showMenu(
         null, params, (SSDKResponseState state, ShareSDKPlatform platform,
         Map userData, Map contentEntity, SSDKError error) {
@@ -113,10 +104,7 @@ class _HomePageState extends State<HomePage> {
           null,
           "title",
           SSDKContentTypes.auto,
-          null,
-          null,
-          null,
-          null);
+          );
 
     ShareSDK.showEditor(
         ShareSDKPlatforms.sina, params, (SSDKResponseState state,
