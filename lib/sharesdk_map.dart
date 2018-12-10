@@ -76,8 +76,13 @@ const String kFacebookQuote = "facebook_quote";
 class SSDKMap {
   final Map map = {};
 
-  void setGeneral(String text, dynamic images, String imageUrlAndroid,
-                  String imagePathAndroid, String url, String title,
+  void setGeneral(
+      String text,
+      dynamic images,
+      String imageUrlAndroid,
+      String imagePathAndroid,
+      String url,
+      String title,
       SSDKContentType contentType) {
     map[kType] = contentType.value;
     map[kText] = text;

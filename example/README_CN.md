@@ -1,19 +1,19 @@
 # sharesdk_example
 
-**supported original ShareSDK minimum version:**
+**原生SDK支持的最低版本:**
 
 - [Android](https://github.com/MobClub/ShareSDK-for-Android) - V3.4.0
 - [iOS](https://github.com/MobClub/ShareSDK-for-iOS) - V4.2.1
 
-**Document Language:** **English** | **[中文](README_CN.md)**
+**文档语言 :** **中文** | **[English](README.md)**
 
-- import library
+- 导入 library
 
     ```
     import 'package:sharesdk/sharesdk.dart';
     ```
 
-- share to facebook
+- 分享接口示例
 
     ```java
     SSDKMap params = SSDKMap()..setGeneral("text", 
@@ -24,14 +24,14 @@
       showAlert(state, error.rawData, context);
     });
     ```
-- auth
+- 授权接口示例
     
     ```java
     ShareSDK.auth(ShareSDKPlatforms.facebook, null, (SSDKResponseState state, Map user, SSDKError error){
       showAlert(state, user != null ? user:error.rawData, context);
     });
     ```
-- show platforms menu
+- 显示分享菜单
 
     ```java
     SSDKMap params = SSDKMap()..setGeneral("text", 
@@ -43,4 +43,4 @@
     });   
     ```
 
-- Please refer to **sharesdk_interface.dart** for other interfaces
+- 其他接口请参考：**sharesdk_interface.dart**

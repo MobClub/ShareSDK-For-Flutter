@@ -1,7 +1,7 @@
 # ShareSDK For Flutter
 ### ShareSDK is a social sharing component that provides social functions for apps, like authorization and share, and has social statistical analysis management background.
 
-**supported original ShareSDK version:**
+**supported original ShareSDK minimum version:**
 
 - [Android](https://github.com/MobClub/ShareSDK-for-Android) - V3.4.0
 - [iOS](https://github.com/MobClub/ShareSDK-for-iOS) - V4.2.1
@@ -10,15 +10,15 @@
 
 ## Getting Started
 
-Introduce: http://www.mob.com/product/sharesdk
+**Introduce:** http://www.mob.com/product/sharesdk
 
 For help getting started with Flutter, view our online
 [documentation](https://flutter.io/).
 
 For help on editing plugin code, view the [documentation](https://flutter.io/developing-packages/#edit-plugin-package).
 
-If you need to customize the platform:
-- iOS : you need to editor *sharesdk.podspec*
+If you need to customize the platforms:
+- iOS : You need to editor *sharesdk.podspec* , please refer to [official website document](http://wiki.mob.com/cocoapods%E9%9B%86%E6%88%90/) for supported platforms.
 
 ```
 #
@@ -47,3 +47,5 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '8.0'
 end
 ```
+
+- Android :

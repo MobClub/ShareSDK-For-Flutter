@@ -464,7 +464,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yoozoo.sharesdkExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mob.product.ShareSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = MobProvisioningProfiles;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -490,7 +490,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yoozoo.sharesdkExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mob.product.ShareSDK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = MobProvisioningProfiles;
 				VERSIONING_SYSTEM = "apple-generic";

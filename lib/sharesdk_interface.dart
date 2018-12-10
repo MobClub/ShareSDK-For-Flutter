@@ -65,7 +65,7 @@ class ShareSDK {
 
   /**
    * 取消授权 
-   * */
+   */
   static Future<dynamic> cancelAuth(int platform) async {
     return await _channel.invokeMethod(
         ShareSDKMethods.cancelAuth.name, platform);

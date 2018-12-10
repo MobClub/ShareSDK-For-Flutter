@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sharesdk/sharesdk.dart';
 
-
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
   final String title;
@@ -13,7 +12,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-
   void shareToWechat(BuildContext context) {
     SSDKMap params = SSDKMap()
       ..setGeneral(
@@ -22,11 +20,10 @@ class _HomePageState extends State<HomePage> {
             "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541565611543&di=4615c8072e155090a2b833059f19ed5b&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201501%2F06%2F20150106003502_Ajcte.jpeg"
           ],
           "http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg",
-          null,
           "http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg",
+          null,
           "title",
-          SSDKContentTypes.text,
-          );
+          SSDKContentTypes.text);
 
     ShareSDK.share(
         ShareSDKPlatforms.wechatSession, params, (SSDKResponseState state,
@@ -54,8 +51,7 @@ class _HomePageState extends State<HomePage> {
           null,
           null,
           "title",
-          SSDKContentTypes.auto,
-          );
+          SSDKContentTypes.auto);
 
     ShareSDK.share(
         ShareSDKPlatforms.sina, params, (SSDKResponseState state, Map userdata,
@@ -83,8 +79,7 @@ class _HomePageState extends State<HomePage> {
           null,
           null,
           "title",
-          SSDKContentTypes.auto,
-          );
+          SSDKContentTypes.auto);
     ShareSDK.showMenu(
         null, params, (SSDKResponseState state, ShareSDKPlatform platform,
         Map userData, Map contentEntity, SSDKError error) {
@@ -103,8 +98,7 @@ class _HomePageState extends State<HomePage> {
           null,
           null,
           "title",
-          SSDKContentTypes.auto,
-          );
+          SSDKContentTypes.auto);
 
     ShareSDK.showEditor(
         ShareSDKPlatforms.sina, params, (SSDKResponseState state,
@@ -304,10 +298,11 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     // TODO: implement initState
     ShareSDKRegister register = ShareSDKRegister();
-    register.setupSinaWeibo("568898243", "38a4f8204cc784f81f9f0daaf31e02e3",
-        "http://www.sharesdk.cn");
+
     register.setupWechat(
         "wx617c77c82218ea2c", "c7253e5289986cf4c4c74d1ccc185fb1");
+    register.setupSinaWeibo("568898243", "38a4f8204cc784f81f9f0daaf31e02e3",
+        "http://www.sharesdk.cn");
     register.setupQQ("100371282", "aed9b0303e3ed1e27bae87c33761161d");
     register.setupFacebook(
         "1412473428822331", "a42f4f3f867dc947b9ed6020c2e93558", "shareSDK");
