@@ -47,4 +47,85 @@ end
 ```
 
 - Android :
-  
+你需要重新编辑build.gradle, MobSDK.gradle文件来选择你需要使用的平台，具体支持的平台可以参阅[官网技术文档](http://wiki.mob.com/%E5%AE%8C%E6%95%B4%E9%9B%86%E6%88%90%E6%96%87%E6%A1%A3%EF%BC%88gradle%EF%BC%89/)
+为满足example项目的需要，您至少要配置如下平台：
+在build.gradle文件中，需要配置：
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        maven {
+            url "http://mvn.mob.com/android"
+        }
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.2'
+        classpath 'com.mob.sdk:MobSDK:+'
+    }
+}
+
+MobSDK.gradle文件中，需求配置：
+MobSDK {
+    appKey "moba6b6c6d6"
+    appSecret "b89d2427a3bc7ad1aea1e1e8c1d36bf3"
+
+    ShareSDK {
+
+        //平台配置信息
+        devInfo {
+			QQ {
+                id 7
+                sortId 7
+                appId "100371282"
+                appKey "aed9b0303e3ed1e27bae87c33761161d"
+                shareByAppClient true
+                bypassApproval false
+                enable true
+				}
+				
+            SinaWeibo {
+                id 1
+                sortId 1
+                appKey "568898243"
+                appSecret "38a4f8204cc784f81f9f0daaf31e02e3"
+                callbackUri "http://www.sharesdk.cn"
+                shareByAppClient true
+                enable true
+				}
+				
+			Wechat {
+                id 4
+                sortId 4
+                appId "wx4868b35061f87885"
+                appSecret "64020361b8ec4c99936c0e3999a9f249"
+                userName "gh_afb25ac019c9"
+                path "pages/index/index.html?id=1"
+                withShareTicket true
+                miniprogramType 0
+                bypassApproval false
+                enable true
+				}
+				
+			Facebook {
+                id 8
+                sortId 8
+                appKey "1412473428822331"
+                appSecret "a42f4f3f867dc947b9ed6020c2e93558"
+                callbackUri "https://mob.com"
+                shareByAppClient true
+                enable true
+            }
+
+            Twitter {
+                id 9
+                sortId 9
+                appKey "viOnkeLpHBKs6KXV7MPpeGyzE"
+                appSecret "NJEglQUy2rqZ9Io9FcAU9p17omFqbORknUpRrCDOK46aAbIiey"
+                callbackUri "http://mob.com"
+                shareByAppClient true
+                enable true
+            }
+		}
+	}
+}
