@@ -1,4 +1,4 @@
-**Document Language:** **English** | **[中文](README_CN.md)**
+**Document Language:** **English** | **[中文](https://github.com/MobClub/ShareSDK-For-Flutter/blob/master/README_CN.md)**
 
 # ShareSDK For Flutter
 ### ShareSDK is a social sharing component that provides social functions for apps, like authorization and share, and has social statistical analysis management background.
