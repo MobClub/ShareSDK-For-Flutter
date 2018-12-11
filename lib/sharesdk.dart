@@ -1,3 +1,6 @@
+/// Flutter plugin implementing share and auth
+///
+/// To use, import `package:sharesdk/sharesdk.dart`;
 library sharesdk;
 
 export './sharesdk_defines.dart';

@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 
 enum SSDKResponseState { Success, Fail, Cancel, Unknown }
 
+/// custom error
 class SSDKError extends Error {
   SSDKError({this.rawData})
       : code = rawData != null ? rawData["code"] : 0,
@@ -12,6 +13,7 @@ class SSDKError extends Error {
   final Map userInfo;
 }
 
+/// model for method
 class ShareSDKMethod {
   ShareSDKMethod({@required this.name, @required this.id})
       : assert(name != null && id != null),
@@ -20,6 +22,7 @@ class ShareSDKMethod {
   final int id;
 }
 
+/// method defines
 class ShareSDKMethods {
   static final ShareSDKMethod getVersion =
       ShareSDKMethod(name: "getVersion", id: 0);
@@ -50,9 +53,8 @@ class ShareSDKPlatform {
   final String name;
 }
 
-// 平台号不一致你可以改成get方式，通过平台号区分
+/// supported platform defines
 class ShareSDKPlatforms {
-  // final bool _isIOS = Platform.isIOS;//Android需要以此区分
   static final ShareSDKPlatform sina = ShareSDKPlatform(name: "sina", id: 1);
   static final ShareSDKPlatform tencentWeibo =
       ShareSDKPlatform(name: "tencentWeibo", id: 2);
@@ -149,11 +151,13 @@ class ShareSDKPlatforms {
       ShareSDKPlatform(name: "qqSeries", id: 998);
 }
 
+/// model for contentType
 class SSDKContentType {
   SSDKContentType({this.value}) : super();
   final int value;
 }
 
+/// supported share content types
 class SSDKContentTypes extends Object {
   static SSDKContentType get auto => SSDKContentType(value: 0);
   static SSDKContentType get text => SSDKContentType(value: 1);

@@ -1,5 +1,6 @@
 import './sharesdk_defines.dart';
 
+/// const
 const String kText = "text";
 const String kThumbImage = "thumb_image";
 const String kImages = "images";
@@ -73,9 +74,11 @@ const String kWXMPHdThumbImage = "wxmp_hdthumbimage";
 const String kFacebookHashtag = "facebook_hashtag";
 const String kFacebookQuote = "facebook_quote";
 
+/// Set sharing parameters map
 class SSDKMap {
   final Map map = {};
 
+  /// Set common share parameters
   void setGeneral(
       String text,
       dynamic images,
@@ -93,6 +96,7 @@ class SSDKMap {
     map[kImagePathAndroid] = imagePathAndroid;
   }
 
+  /// Set wechat platform share parameters
   void setWechat(
       String text,
       String title,
@@ -125,6 +129,7 @@ class SSDKMap {
     map["@platform($id)"] = params;
   }
 
+  /// Set wechat mini program share parameters
   void setWeChatMiniProgram(
       String title,
       String desc,
@@ -153,6 +158,7 @@ class SSDKMap {
     map["@platform($id)"] = params;
   }
 
+  /// Set QQ platform share parameters
   void setQQ(
       String text,
       String title,
@@ -178,6 +184,7 @@ class SSDKMap {
     map["@platform($id)"] = params;
   }
 
+  /// Set sina platform share parameters
   void setSina(
       String text,
       String title,
@@ -206,6 +213,7 @@ class SSDKMap {
     map["@platform($id)"] = params;
   }
 
+  /// Set twitter platform share parameters
   void setTwitter(String text, images, String video, double latitude,
       double longitude, SSDKContentType type) {
     Map params = {};
@@ -221,6 +229,7 @@ class SSDKMap {
     map["@platform($id)"] = params;
   }
 
+  /// Set facebook platform share parameters
   void setFacebook(
       String text,
       images,

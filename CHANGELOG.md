@@ -6,3 +6,6 @@
 
 * Add android bridge
 * Modify ReadMe.md
+
+## 1.0.2
+* Update the document

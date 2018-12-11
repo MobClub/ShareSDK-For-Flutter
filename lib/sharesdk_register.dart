@@ -1,5 +1,6 @@
 import './sharesdk_defines.dart';
 
+/// Model used to register the platforms
 class ShareSDKRegister {
   static const String _ssdkAppkey = "app_key";
   static const String _ssdkAppId = "app_id";
@@ -20,6 +21,7 @@ class ShareSDKRegister {
 
   final Map platformsInfo = {};
 
+  /// set up sina platform info
   void setupSinaWeibo(String appkey, String appSecret, String redirectUrl) {
     Map info = {
       _ssdkAppkey: appkey,
@@ -30,16 +32,19 @@ class ShareSDKRegister {
     platformsInfo[ShareSDKPlatforms.sina.id] = info;
   }
 
+  /// set up wechat platform info
   void setupWechat(String appId, String appSecret) {
     Map info = {_ssdkAppId: appId, _ssdkAppSecret: appSecret};
     platformsInfo[ShareSDKPlatforms.wechatSeries.id] = info;
   }
 
+  /// set up qq platform info
   void setupQQ(String appId, String appkey) {
     Map info = {_ssdkAppId: appId, _ssdkAppkey: appkey};
     platformsInfo[ShareSDKPlatforms.qqSeries.id] = info;
   }
 
+  /// set up twitter platform info
   void setupTwitter(
       String consumerKey, String consumerSecret, String redirectUrl) {
     Map info = {
@@ -51,6 +56,7 @@ class ShareSDKRegister {
     platformsInfo[ShareSDKPlatforms.twitter.id] = info;
   }
 
+  /// set up facebook platform info
   void setupFacebook(String appkey, String appSecret, String displayName) {
     Map info = {
       _ssdkApikey: appkey,
@@ -61,6 +67,7 @@ class ShareSDKRegister {
     platformsInfo[ShareSDKPlatforms.facebook.id] = info;
   }
 
+  /// set up TencentWeibo platform info
   void setupTencentWeibo(String appkey, String appSecret, String redirectUrl) {
     Map info = {
       _ssdkAppkey: appkey,
@@ -71,6 +78,7 @@ class ShareSDKRegister {
     platformsInfo[ShareSDKPlatforms.tencentWeibo.id] = info;
   }
 
+  /// set up yixin platform info
   void setupYiXin(String appid, String appSecret, String redirectUrl) {
     Map info = {
       _ssdkAppId: appid,
@@ -81,6 +89,7 @@ class ShareSDKRegister {
     platformsInfo[ShareSDKPlatforms.yixinSeries.id] = info;
   }
 
+  /// set up evernote platform info
   void setupEvernote(String consumerKey, String consumerSecret, bool sandbox) {
     Map info = {
       _ssdkConsumerKey: consumerKey,
@@ -91,6 +100,7 @@ class ShareSDKRegister {
     platformsInfo[ShareSDKPlatforms.yinXiang.id] = info;
   }
 
+  /// set up douban platform info
   void setupDouBan(String apikey, String appSecret, String redirectUrl) {
     Map info = {
       _ssdkApikey: apikey,
@@ -101,6 +111,7 @@ class ShareSDKRegister {
     platformsInfo[ShareSDKPlatforms.douBan.id] = info;
   }
 
+  /// set up kaixin platform info
   void setupKaiXin(String apikey, String appSecret, String redirectUrl) {
     Map info = {
       _ssdkApikey: apikey,
@@ -111,12 +122,14 @@ class ShareSDKRegister {
     platformsInfo[ShareSDKPlatforms.kaixin.id] = info;
   }
 
+  /// set up pocket platform info
   void setupPocket(String consumerKey, String redirectUrl) {
     Map info = {_ssdkConsumerKey: consumerKey, _ssdkRedirectUrl: redirectUrl};
 
     platformsInfo[ShareSDKPlatforms.pocket.id] = info;
   }
 
+  /// set up google+ platform info
   void setupGooglePlus(
       String clientId, String clientSecret, String redirectUrl) {
     Map info = {
@@ -127,6 +140,7 @@ class ShareSDKRegister {
     platformsInfo[ShareSDKPlatforms.googlePlus.id] = info;
   }
 
+  /// set up Instagram platform info
   void setupInstagram(
       String clientId, String clientSecret, String redirectUrl) {
     Map info = {
@@ -137,6 +151,7 @@ class ShareSDKRegister {
     platformsInfo[ShareSDKPlatforms.instagram.id] = info;
   }
 
+  /// set up linkedin platform info
   void setupLinkedIn(String apikey, String appSecret, String redirectUrl) {
     Map info = {
       _ssdkApikey: apikey,
@@ -147,6 +162,7 @@ class ShareSDKRegister {
     platformsInfo[ShareSDKPlatforms.linkedIn.id] = info;
   }
 
+  /// set up tumblr platform info
   void setupTumblr(
       String consumerKey, String consumerSecret, String redirectUrl) {
     Map info = {
@@ -158,6 +174,7 @@ class ShareSDKRegister {
     platformsInfo[ShareSDKPlatforms.tumblr.id] = info;
   }
 
+  /// set up flick platform info
   void setupFlick(String apikey, String apiSecret) {
     Map info = {
       _ssdkApikey: apikey,
@@ -167,6 +184,7 @@ class ShareSDKRegister {
     platformsInfo[ShareSDKPlatforms.flickr.id] = info;
   }
 
+  /// set up youdao platform info
   void setupYouDao(
       String consumerKey, String consumerSecret, String oauthCallback) {
     Map info = {
@@ -178,6 +196,7 @@ class ShareSDKRegister {
     platformsInfo[ShareSDKPlatforms.youdaoNote.id] = info;
   }
 
+  /// set up alisocial platform info
   void setupAliSocial(String appId) {
     Map info = {
       _ssdkAppId: appId,
@@ -186,6 +205,7 @@ class ShareSDKRegister {
     platformsInfo[ShareSDKPlatforms.aliSocial.id] = info;
   }
 
+  /// set up Pinterest platform info
   void setupPinterest(String clientId) {
     Map info = {
       _ssdkClientId: clientId,
@@ -194,6 +214,7 @@ class ShareSDKRegister {
     platformsInfo[ShareSDKPlatforms.pinterest.id] = info;
   }
 
+  /// set up linkedin kakao info
   void setupKakao(String appkey, String restApiKey, String redirectUrl) {
     Map info = {
       _ssdkAppkey: appkey,
@@ -204,6 +225,7 @@ class ShareSDKRegister {
     platformsInfo[ShareSDKPlatforms.kakaoSeries.id] = info;
   }
 
+  /// set up dropbox platform info
   void setupDropbox(String appkey, String appSecret, String redirectUrl) {
     Map info = {
       _ssdkAppkey: appkey,
@@ -214,6 +236,7 @@ class ShareSDKRegister {
     platformsInfo[ShareSDKPlatforms.dropbox.id] = info;
   }
 
+  /// set up VKontakte platform info
   void setupVKontakte(String applicationId, String secretKey) {
     Map info = {
       _ssdkApplicationId: applicationId,
@@ -223,6 +246,7 @@ class ShareSDKRegister {
     platformsInfo[ShareSDKPlatforms.vKontakte.id] = info;
   }
 
+  /// set up Instapaper platform info
   void setupInstapaper(String consumerKey, String consumerSecret) {
     Map info = {
       _ssdkConsumerKey: consumerKey,
@@ -232,6 +256,7 @@ class ShareSDKRegister {
     platformsInfo[ShareSDKPlatforms.instapaper.id] = info;
   }
 
+  /// set up DingTalk platform info
   void setupDingTalk(String appId) {
     Map info = {
       _ssdkAppId: appId,
@@ -240,6 +265,7 @@ class ShareSDKRegister {
     platformsInfo[ShareSDKPlatforms.dingding.id] = info;
   }
 
+  /// set up meipai platform info
   void setupMeiPai(String appkey) {
     Map info = {
       _ssdkAppkey: appkey,
@@ -248,6 +274,7 @@ class ShareSDKRegister {
     platformsInfo[ShareSDKPlatforms.meiPai.id] = info;
   }
 
+  /// set up youtube platform info
   void setupYouTube(String clientId, String clientSecret, String redirectUrl) {
     Map info = {
       _ssdkClientId: clientId,
@@ -258,6 +285,7 @@ class ShareSDKRegister {
     platformsInfo[ShareSDKPlatforms.youtube.id] = info;
   }
 
+  /// set up telegram platform info
   void setupTelegram(String botToken, String botDomain) {
     Map info = {
       "bot_token": botToken,
@@ -267,6 +295,7 @@ class ShareSDKRegister {
     platformsInfo[ShareSDKPlatforms.telegram.id] = info;
   }
 
+  /// set up reddit platform info
   void setupReddit(String appkey, String redirectUrl) {
     Map info = {
       _ssdkAppkey: appkey,

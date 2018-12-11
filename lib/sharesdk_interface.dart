@@ -8,20 +8,16 @@ class ShareSDK {
   static const MethodChannel _channel =
       const MethodChannel('com.yoozoo.mob/sharesdk');
 
-  /**
-   * 注册方法：
-   * 1. 创建register对象，
-   * 2. 通过register对象的函数设置平台参数，
-   * 3. 通过register注册
-   */
+  /// 注册方法：
+  /// 1. 创建register对象，
+  /// 2. 通过register对象的函数设置平台参数，
+  /// 3. 通过register注册
   static Future<dynamic> regist(ShareSDKRegister register) async {
     return await _channel.invokeMethod(
         ShareSDKMethods.regist.name, register.platformsInfo);
   }
 
-  /**
-   * 分享函数
-   */
+  /// 分享
   static Future<dynamic> share(ShareSDKPlatform platform, SSDKMap params,
       Function(SSDKResponseState, Map, Map, SSDKError) result) {
     Map args = {"platform": platform.id, "params": params.map};
@@ -37,9 +33,7 @@ class ShareSDK {
     return callback;
   }
 
-  /**
-   * 授权
-   */
+  /// 授权
   static Future<dynamic> auth(ShareSDKPlatform platform, Map settings,
       Function(SSDKResponseState, Map, SSDKError) result) {
     Map args = {"platform": platform.id, "settings": settings};
@@ -55,25 +49,19 @@ class ShareSDK {
     return callback;
   }
 
-  /**
-   * 判断是否授权
-   */
+  /// 判断是否授权
   static Future<dynamic> hasAuthed(int platform) async {
     return await _channel.invokeMethod(
         ShareSDKMethods.hasAuthed.name, platform);
   }
 
-  /**
-   * 取消授权 
-   */
+  /// 取消授权
   static Future<dynamic> cancelAuth(int platform) async {
     return await _channel.invokeMethod(
         ShareSDKMethods.cancelAuth.name, platform);
   }
 
-  /**
-   * 获取用户信息
-   */
+  /// 获取用户信息
   static Future<dynamic> getUserInfo(
       int platform, Function(SSDKResponseState, Map, SSDKError) result) async {
     Map args = {"platform": platform};
@@ -89,9 +77,7 @@ class ShareSDK {
     return callback;
   }
 
-  /**
-   * 弹出分享菜单
-   */
+  /// 弹出分享菜单
   static Future<dynamic> showMenu(
       List<ShareSDKPlatform> platforms,
       SSDKMap params,
@@ -120,9 +106,7 @@ class ShareSDK {
     return callback;
   }
 
-/**
- * 弹出编辑菜单
- */
+  /// 弹出编辑菜单
   static Future<dynamic> showEditor(
       ShareSDKPlatform platform,
       SSDKMap params,
@@ -146,23 +130,17 @@ class ShareSDK {
     return callback;
   }
 
-  /**
-   * 已集成的平台
-   */
+  /// 已集成的平台
   static Future<dynamic> activePlatforms() async {
     return await _channel.invokeMethod(ShareSDKMethods.activePlatforms.name);
   }
 
-  /**
-   * 获取sdk版本号
-   */
+  /// 获取sdk版本号
   static Future<dynamic> get sdkVersion async {
     return await _channel.invokeMethod(ShareSDKMethods.getVersion.name);
   }
 
-  /**
-   * 打开微信小程序
-   */
+  /// 打开微信小程序
   static Future<dynamic> openWeChatMiniProgram(
       String userName, String path, int miniProgramType) async {
     Map args = {"userName": userName, "path": path, "type": miniProgramType};
