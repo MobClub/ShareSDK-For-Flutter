@@ -9,3 +9,6 @@
 
 ## 1.0.5
 * Update the document
+
+## 1.0.6
+* Update registration instructions
