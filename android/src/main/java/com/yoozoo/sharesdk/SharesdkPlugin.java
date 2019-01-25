@@ -18,6 +18,7 @@ import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import cn.sharesdk.tencent.qq.QQ;
+import cn.sharesdk.wechat.friends.Wechat;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
@@ -90,7 +91,8 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
                 showMenuWithArgs(call, result);
                 break;
             case PluginMethodOpenMiniProgram:
-                shareMiniProgramWithArgs(call, result);
+                //shareMiniProgramWithArgs(call, result);
+                openMinProgramWithArgs(call, result);
                 break;
 
             default:
@@ -112,6 +114,7 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
         String wxmpType = "";
         String wxmpWithTicket = "";
         String wxmpPath = "";
+        String videoUrl = "";
         String type = "";
 
 
@@ -134,6 +137,7 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
             wxmpType = String.valueOf(params.get("wxmp_type"));
             wxmpWithTicket = String.valueOf(params.get("wxmp_with_ticket"));
             wxmpPath = String.valueOf(params.get("wxmp_path"));
+            videoUrl = String.valueOf(params.get("videoUrl_android"));
             type = String.valueOf(params.get("type"));
         } else {
             imageUrl = String.valueOf(platMap.get("imageUrl_android"));
@@ -148,6 +152,7 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
             wxmpType = String.valueOf(platMap.get("wxmp_type"));
             wxmpWithTicket = String.valueOf(platMap.get("wxmp_with_ticket"));
             wxmpPath = String.valueOf(platMap.get("wxmp_path"));
+            videoUrl = String.valueOf(platMap.get("videoUrl_android"));
             type = String.valueOf(platMap.get("type"));
         }
 
@@ -155,28 +160,28 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
 
         Platform platform = ShareSDK.getPlatform(platName);
         Platform.ShareParams shareParams = new Platform.ShareParams();
-        if (!(title.equals("null") || title == null)) {
+        if (!(title.equals("null") || title != null)) {
             shareParams.setTitle(title);
         }
-        if (!(text.equals("null") || text == null)) {
+        if (!(text.equals("null") || text != null)) {
             shareParams.setText(text);
         }
-        if (!(imageUrl.equals("null") || imageUrl == null)) {
+        if (!(imageUrl.equals("null") || imageUrl != null)) {
             shareParams.setImageUrl(imageUrl);
         }
-        if (!(imagePath.equals("null") || imagePath == null)) {
+        if (!(imagePath.equals("null") || imagePath != null)) {
             shareParams.setImagePath(imagePath);
         }
-        if (!(url.equals("null") || url == null)) {
+        if (!(url.equals("null") || url != null)) {
             shareParams.setUrl(url);
         }
-        if (!(wxmpUserName.equals("null") || wxmpUserName == null)) {
+        if (!(wxmpUserName.equals("null") || wxmpUserName != null)) {
             shareParams.setWxUserName(wxmpUserName);
         }
-        if (!(musicUrl.equals("null") || musicUrl == null)) {
+        if (!(musicUrl.equals("null") || musicUrl != null)) {
             shareParams.setMusicUrl(musicUrl);
         }
-        if (!(fileData.equals("null") || fileData == null)) {
+        if (!(fileData.equals("null") || fileData != null)) {
             shareParams.setFilePath(fileData);
         }
         if (!(wxmpType == null || wxmpType.isEmpty() || wxmpType.equals("null"))) {
@@ -210,6 +215,25 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
         Log.e("SharesdkPlugin", " plat " + platform + " ====> " + call.arguments.toString());
     }
 
+    /** 打开微信小程序 **/
+    private void openMinProgramWithArgs(MethodCall call, Result result) {
+        HashMap<String, Object> map = call.arguments();
+        //int type =Integer.valueOf(map.get("type"));
+        String typeStr = String.valueOf(map.get("type"));
+        int type = Integer.valueOf(typeStr);
+        String path =String.valueOf(map.get("path"));
+        String userName =String.valueOf(map.get("userName"));
+
+        Platform wexin = ShareSDK.getPlatform(Wechat.NAME);
+        Platform.ShareParams sp = new Platform.ShareParams();
+        sp.setWxUserName(userName);
+        sp.setWxPath(path);
+        //sp.setShareType(Platform.SHARE_WXMINIPROGRAM);
+        sp.setShareType(Platform.OPEN_WXMINIPROGRAM);
+        sp.setWxMiniProgramType(type);
+        wexin.share(sp);
+
+    }
 
     /** 分享微信小程序 **/
     private void shareMiniProgramWithArgs(MethodCall call, Result result) {
@@ -272,18 +296,31 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
 
     /** 分享菜单 **/
     private void showMenuWithArgs(MethodCall call, Result result) {
-        HashMap<String, Object> params = call.arguments();
+        HashMap<String, Object> map = call.arguments();
+        HashMap<String, Object> params = (HashMap<String, Object>) map.get("params");
         String images = String.valueOf(params.get("images"));
         String title = String.valueOf(params.get("title"));
         String text = String.valueOf(params.get("text"));
         String url = String.valueOf(params.get("url"));
         String video = String.valueOf(params.get("video"));
 
+        String titleUrl = String.valueOf(params.get("titleUrl_android"));
+        String musciUrl = String.valueOf(params.get("musicUrl"));
+        String imageUrlAndroid = String.valueOf(params.get("imageUrl_android"));
+        String imagePath = String.valueOf(params.get("imagePath_android"));
+        String videoUrl = String.valueOf(params.get("videoUrl_android"));
+
         OnekeyShare oks = new OnekeyShare();
         oks.setImageUrl(images);
         oks.setTitle(title);
         oks.setText(text);
         oks.setUrl(url);
+
+        oks.setTitleUrl(titleUrl);
+        oks.setMusicUrl(musciUrl);
+        oks.setImageUrl(imageUrlAndroid);
+        oks.setImagePath(imagePath);
+        oks.setVideoUrl(videoUrl);
 
         oks.show(MobSDK.getContext());
         Log.e("SharesdkPlugin", call.arguments.toString());

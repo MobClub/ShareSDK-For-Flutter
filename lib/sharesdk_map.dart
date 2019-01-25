@@ -6,6 +6,9 @@ const String kThumbImage = "thumb_image";
 const String kImages = "images";
 const String kImageUrlAndroid = "imageUrl_android";
 const String kImagePathAndroid = "imagePath_android";
+const String kTitleUrlAndroid = "titleUrl_android";
+const String kMusicUrlAndroid = "musicUrl_android";
+const String kVideoUrlAndroid = "videoUrl_android";
 const String kUrl = "url";
 const String kType = "type";
 const String kLat = "lat";
@@ -80,18 +83,24 @@ class SSDKMap {
 
   /// Set common share parameters
   void setGeneral(
+      String title,
       String text,
       dynamic images,
       String imageUrlAndroid,
       String imagePathAndroid,
       String url,
-      String title,
+      String titleUrlAndroid,
+      String musicUrlAndroid,
+      String videoUrlAndroid,
       SSDKContentType contentType) {
     map[kType] = contentType.value;
     map[kText] = text;
     map[kTitle] = title;
     map[kImages] = images;
     map[kUrl] = url;
+    map[kTitleUrlAndroid] = titleUrlAndroid;
+    map[kMusicUrlAndroid] = musicUrlAndroid;
+    map[kVideoUrlAndroid] = videoUrlAndroid;
     map[kImageUrlAndroid] = imageUrlAndroid;
     map[kImagePathAndroid] = imagePathAndroid;
   }
@@ -165,8 +174,13 @@ class SSDKMap {
       String url,
       String audio,
       String video,
+      String musicUrl,
+      String videoUrl,
       String thumbImage,
       dynamic images,
+      String imageUrlAndroid,
+      String imagePathAndroid,
+      String titleUrlAndroid,
       SSDKContentType type,
       ShareSDKPlatform subPlatform) {
     Map params = {};
@@ -174,11 +188,16 @@ class SSDKMap {
     params[kType] = type.value;
     params[kText] = text;
     params[kTitle] = title;
+    params[kTitleUrlAndroid] = titleUrlAndroid;
     params[kUrl] = url;
+    params[kMusicUrlAndroid] = musicUrl;
+    params[kVideoUrlAndroid] = videoUrl;
     params[kAudioFlashURL] = audio;
     params[kVideoFlashURL] = video;
     params[kThumbImage] = thumbImage;
     params[kImages] = images;
+    params[kImageUrlAndroid] = imageUrlAndroid;
+    params[kImagePathAndroid] = imagePathAndroid;
 
     int id = subPlatform.id;
     map["@platform($id)"] = params;

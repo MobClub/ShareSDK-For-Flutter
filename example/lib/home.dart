@@ -15,14 +15,17 @@ class _HomePageState extends State<HomePage> {
   void shareToWechat(BuildContext context) {
     SSDKMap params = SSDKMap()
       ..setGeneral(
+          "title",
           "text",
           [
             "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541565611543&di=4615c8072e155090a2b833059f19ed5b&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201501%2F06%2F20150106003502_Ajcte.jpeg"
           ],
-          "http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg",
-          "http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg",
+          "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
           null,
-          "title",
+          "http://www.mob.com/",
+          "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
+          "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
+          "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
           SSDKContentTypes.text);
 
     ShareSDK.share(
@@ -43,14 +46,17 @@ class _HomePageState extends State<HomePage> {
   void shareToSina(BuildContext context) {
     SSDKMap params = SSDKMap()
       ..setGeneral(
+          "title",
           "text",
           [
             "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541565611543&di=4615c8072e155090a2b833059f19ed5b&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201501%2F06%2F20150106003502_Ajcte.jpeg"
           ],
+          "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
           null,
-          null,
-          null,
-          "title",
+          "http://www.mob.com/",
+          "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
+          "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
+          "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
           SSDKContentTypes.auto);
 
     ShareSDK.share(
@@ -71,14 +77,17 @@ class _HomePageState extends State<HomePage> {
   void showShareMenu(BuildContext context) {
     SSDKMap params = SSDKMap()
       ..setGeneral(
+          "title",
           "text",
           [
             "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541565611543&di=4615c8072e155090a2b833059f19ed5b&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201501%2F06%2F20150106003502_Ajcte.jpeg"
           ],
+          "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
           null,
-          null,
-          null,
-          "title",
+          "http://www.mob.com/",
+          "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
+          "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
+          "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
           SSDKContentTypes.auto);
     ShareSDK.showMenu(
         null, params, (SSDKResponseState state, ShareSDKPlatform platform,
@@ -90,14 +99,17 @@ class _HomePageState extends State<HomePage> {
   void showEditor(BuildContext context) {
     SSDKMap params = SSDKMap()
       ..setGeneral(
+          "title",
           "text",
           [
             "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541565611543&di=4615c8072e155090a2b833059f19ed5b&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201501%2F06%2F20150106003502_Ajcte.jpeg"
           ],
+          "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
           null,
-          null,
-          null,
-          "title",
+          "http://www.mob.com/",
+          "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
+          "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
+          "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
           SSDKContentTypes.auto);
 
     ShareSDK.showEditor(
@@ -109,7 +121,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void openMiniProgram(BuildContext context) {
-    ShareSDK.openWeChatMiniProgram("gh_afb25ac019c9", "pages/index/index", 0)
+    ShareSDK.openWeChatMiniProgram("gh_52568203455c", "pages/index/index", 0)
         .then((dynamic open) {
       if (open) {
         showAlert(SSDKResponseState.Success, null, context);
@@ -145,13 +157,13 @@ class _HomePageState extends State<HomePage> {
     SSDKMap params = SSDKMap()
       ..setSina(
           "text",
-          null,
+          "title",
           [
             "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541659481198&di=80760a9d745a78dab3ed3d5577286682&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fbaike%2Fpic%2Fitem%2Fd1a20cf431adcbef011db9bba6af2edda3cc9f66.jpg",
             "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541659494384&di=ad32f8ac8c75f51612a90d6b7c1d8db8&imgtype=0&src=http%3A%2F%2Fimg3.duitang.com%2Fuploads%2Fitem%2F201609%2F14%2F20160914232743_hwnCt.thumb.700_0.jpeg"
           ],
           null,
-          null,
+          "http://www.mob.com/",
           0.0,
           0.0,
           null,
@@ -201,9 +213,14 @@ class _HomePageState extends State<HomePage> {
           "title",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
-          null,
-          null,
+          "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
+          "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
+          "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
           "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541659481198&di=80760a9d745a78dab3ed3d5577286682&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fbaike%2Fpic%2Fitem%2Fd1a20cf431adcbef011db9bba6af2edda3cc9f66.jpg",
+          null,
+          "http://wx3.sinaimg.cn/large/006nLajtly1fkegnmnwuxj30dw0dw408.jpg",
+          null,
+          "http://wx4.sinaimg.cn/large/006tkBCzly1fy8hfqdoy6j30dw0dw759.jpg",
           SSDKContentTypes.audio,
           ShareSDKPlatforms.qq);
     ShareSDK.share(
