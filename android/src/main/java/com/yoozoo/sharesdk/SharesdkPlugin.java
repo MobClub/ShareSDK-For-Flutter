@@ -116,8 +116,6 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
         String wxmpPath = "";
         String videoUrl = "";
         String type = "";
-
-
         HashMap<String, Object> map = call.arguments();
         String num = String.valueOf(map.get("platform"));
 
@@ -160,28 +158,28 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
 
         Platform platform = ShareSDK.getPlatform(platName);
         Platform.ShareParams shareParams = new Platform.ShareParams();
-        if (!(title.equals("null") || title != null)) {
+        if (!(title.equals("null") || title == null)) {
             shareParams.setTitle(title);
         }
-        if (!(text.equals("null") || text != null)) {
+        if (!(text.equals("null") || text == null)) {
             shareParams.setText(text);
         }
-        if (!(imageUrl.equals("null") || imageUrl != null)) {
+        if (!(imageUrl.equals("null") || imageUrl == null)) {
             shareParams.setImageUrl(imageUrl);
         }
-        if (!(imagePath.equals("null") || imagePath != null)) {
+        if (!(imagePath.equals("null") || imagePath == null)) {
             shareParams.setImagePath(imagePath);
         }
-        if (!(url.equals("null") || url != null)) {
+        if (!(url.equals("null") || url == null)) {
             shareParams.setUrl(url);
         }
-        if (!(wxmpUserName.equals("null") || wxmpUserName != null)) {
+        if (!(wxmpUserName.equals("null") || wxmpUserName == null)) {
             shareParams.setWxUserName(wxmpUserName);
         }
-        if (!(musicUrl.equals("null") || musicUrl != null)) {
+        if (!(musicUrl.equals("null") || musicUrl == null)) {
             shareParams.setMusicUrl(musicUrl);
         }
-        if (!(fileData.equals("null") || fileData != null)) {
+        if (!(fileData.equals("null") || fileData == null)) {
             shareParams.setFilePath(fileData);
         }
         if (!(wxmpType == null || wxmpType.isEmpty() || wxmpType.equals("null"))) {
@@ -212,7 +210,6 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
             shareParams.setShareType(Platform.SHARE_WXMINIPROGRAM);
         }
         platform.share(shareParams);
-        Log.e("SharesdkPlugin", " plat " + platform + " ====> " + call.arguments.toString());
     }
 
     /** 打开微信小程序 **/
