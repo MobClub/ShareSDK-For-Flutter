@@ -17,16 +17,14 @@ class _HomePageState extends State<HomePage> {
       ..setGeneral(
           "title",
           "text",
-          [
-            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541565611543&di=4615c8072e155090a2b833059f19ed5b&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201501%2F06%2F20150106003502_Ajcte.jpeg"
-          ],
-          "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
           null,
-          "http://www.mob.com/",
-          "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
+          "http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg",
+          null,
+          "http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg",
+          "http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
-          "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
-          SSDKContentTypes.text);
+          "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
+          SSDKContentTypes.image);
 
     ShareSDK.share(
         ShareSDKPlatforms.wechatSession, params, (SSDKResponseState state,
