@@ -105,6 +105,7 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
         String imageUrl = "";
         String imagePath = "";
         String title = "";
+        String titleUrl = "";
         String text = "";
         String url = "";
         String video = "";
@@ -126,6 +127,7 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
             imageUrl = String.valueOf(params.get("imageUrl_android"));
             imagePath = String.valueOf(params.get("imagePath_android"));
             title = String.valueOf(params.get("title"));
+            titleUrl = String.valueOf(params.get("titleUrl_android"));
             text = String.valueOf(params.get("text"));
             url = String.valueOf(params.get("url"));
             video = String.valueOf(params.get("video"));
@@ -141,6 +143,7 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
             imageUrl = String.valueOf(platMap.get("imageUrl_android"));
             imagePath = String.valueOf(platMap.get("imagePath_android"));
             title = String.valueOf(platMap.get("title"));
+            titleUrl = String.valueOf(platMap.get("titleUrl_android"));
             text = String.valueOf(platMap.get("text"));
             url = String.valueOf(platMap.get("url"));
             video = String.valueOf(platMap.get("video"));
@@ -160,6 +163,9 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
         Platform.ShareParams shareParams = new Platform.ShareParams();
         if (!(title.equals("null") || title == null)) {
             shareParams.setTitle(title);
+        }
+        if (!(titleUrl.equals("null") || titleUrl == null)) {
+            shareParams.setTitleUrl(titleUrl);
         }
         if (!(text.equals("null") || text == null)) {
             shareParams.setText(text);
