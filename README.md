@@ -19,7 +19,9 @@
 Refer to [the official document](https://pub.dartlang.org/packages/sharesdk#-installing-tab-)
 
 If you need to customize the platforms:
-- iOS : You need to editor *sharesdk.podspec* , please refer to [official website document](http://wiki.mob.com/cocoapods%E9%9B%86%E6%88%90/) for supported platforms.
+
+### iOS
+You need to editor *sharesdk.podspec* , please refer to [official website document](http://wiki.mob.com/cocoapods%E9%9B%86%E6%88%90/) for supported platforms.
 
 ```
 #
@@ -49,14 +51,14 @@ s.ios.deployment_target = '8.0'
 end
 ```
 
-- Then you need to configure Appkey and AppSecret in info.plist according to [the official document](http://wiki.mob.com/快速集成/), as well as the whitelist and urlScheme of each platform.
+Then you need to configure Appkey and AppSecret in info.plist according to [the official document](http://wiki.mob.com/快速集成/), as well as the whitelist and urlScheme of each platform.
 
-- Android :
+### Android
 You need to edit build.gradle, mobsdk.gradle file again to select the platform you need to use,
 For specific supported platforms, please refer to [official website technical documentation](http://wiki.mob.com/%E5%AE%8C%E6%95%B4%E9%9B%86%E6%88%90%E6%96%87%E6%A1%A3%EF%BC%88gradle%EF%BC%89/)
 To meet the requirements of the example project, you need to configure at least the following platforms:
 
--  build.gradle:
+#### build.gradle:
 
 ```
 buildscript {
@@ -75,7 +77,7 @@ classpath 'com.mob.sdk:MobSDK:+'
 }
 ```
 
-- mobsdk.gradle：
+#### mobsdk.gradle：
 
 ```
 MobSDK {
