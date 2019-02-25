@@ -12,3 +12,6 @@
 
 ## 1.0.6
 * Update registration instructions
+
+## 1.0.6
+* Update interfaces
