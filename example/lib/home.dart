@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
           "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
           "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
-          SSDKContentTypes.auto);
+          SSDKContentTypes.webpage);
     ShareSDK.showMenu(
         null, params, (SSDKResponseState state, ShareSDKPlatform platform,
         Map userData, Map contentEntity, SSDKError error) {
@@ -166,6 +166,8 @@ class _HomePageState extends State<HomePage> {
           0.0,
           null,
           false,
+          null,
+          null,
           SSDKContentTypes.auto);
     ShareSDK.share(ShareSDKPlatforms.sina, params,
             (SSDKResponseState state, Map userdata, Map contentEntity,
