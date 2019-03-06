@@ -1,5 +1,4 @@
 import './sharesdk_defines.dart';
-
 /// const
 const String kText = "text";
 const String kThumbImage = "thumb_image";
@@ -76,6 +75,14 @@ const String kWXMPHdThumbImage = "wxmp_hdthumbimage";
 
 const String kFacebookHashtag = "facebook_hashtag";
 const String kFacebookQuote = "facebook_quote";
+
+const String ksina_createat = "sina_createat";
+const String ksina_displayname = "sina_displayname";
+const String ksina_summary = "sina_summary";
+const String ksina_url = "sina_url";
+const String ksina_object_type = "sina_object_type";
+const String ksina_android_image = "sina_android_image";
+const String ksina_ios_image = "sina_ios_image";
 
 /// Set sharing parameters map
 class SSDKMap {
@@ -214,6 +221,15 @@ class SSDKMap {
       double longitude,
       String objectId,
       bool isStory,
+
+      String sina_createat,
+      String sina_displayname,
+      String sina_summary,
+      String sina_url,
+      String sina_object_type,
+      String sina_android_image,
+      String sina_ios_image,
+
       SSDKContentType type) {
     Map params = {};
 
@@ -227,6 +243,15 @@ class SSDKMap {
     params[kLong] = longitude;
     params[kWeiboIsStory] = isStory;
     params[kWeiboObjectId] = objectId;
+
+    params[ksina_createat] = sina_createat;
+    params[ksina_displayname] = sina_displayname;
+    params[ksina_summary] = sina_summary;
+    params[ksina_url] = sina_url;
+    params[ksina_object_type] = sina_object_type;
+    params[ksina_android_image] = sina_android_image;
+    params[ksina_ios_image] = sina_ios_image;
+
 
     int id = ShareSDKPlatforms.sina.id;
     map["@platform($id)"] = params;
