@@ -267,7 +267,7 @@ class SSDKMap {
     params[kimage_url] = image_url;
     params[kimage_x] = imageX;
     params[kimage_y] = imageY;
-    params[kType] = SSDKContentTypes.webpage;
+    params[kType] = SSDKContentTypes.webpage.value;
 
     int id = ShareSDKPlatforms.sina.id;
     map["@platform($id)"] = params;
