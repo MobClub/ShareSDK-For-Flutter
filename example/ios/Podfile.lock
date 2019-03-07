@@ -1,29 +1,29 @@
 PODS:
   - Flutter (1.0.0)
-  - mob_sharesdk (4.2.0):
-    - mob_sharesdk/ShareSDK (= 4.2.0)
+  - mob_sharesdk (4.2.3):
+    - mob_sharesdk/ShareSDK (= 4.2.3)
     - MOBFoundation
-  - mob_sharesdk/ShareSDK (4.2.0):
+  - mob_sharesdk/ShareSDK (4.2.3):
     - MOBFoundation
-  - mob_sharesdk/ShareSDKPlatforms/Facebook (4.2.0):
+  - mob_sharesdk/ShareSDKPlatforms/Facebook (4.2.3):
     - mob_sharesdk/ShareSDK
     - MOBFoundation
-  - mob_sharesdk/ShareSDKPlatforms/QQ (4.2.0):
+  - mob_sharesdk/ShareSDKPlatforms/QQ (4.2.3):
     - mob_sharesdk/ShareSDK
     - MOBFoundation
-  - mob_sharesdk/ShareSDKPlatforms/SinaWeibo (4.2.0):
+  - mob_sharesdk/ShareSDKPlatforms/SinaWeibo (4.2.3):
     - mob_sharesdk/ShareSDK
     - MOBFoundation
-  - mob_sharesdk/ShareSDKPlatforms/Twitter (4.2.0):
+  - mob_sharesdk/ShareSDKPlatforms/Twitter (4.2.3):
     - mob_sharesdk/ShareSDK
     - MOBFoundation
-  - mob_sharesdk/ShareSDKPlatforms/WeChat (4.2.0):
+  - mob_sharesdk/ShareSDKPlatforms/WeChat (4.2.3):
     - mob_sharesdk/ShareSDK
     - MOBFoundation
-  - mob_sharesdk/ShareSDKUI (4.2.0):
+  - mob_sharesdk/ShareSDKUI (4.2.3):
     - mob_sharesdk/ShareSDK
     - MOBFoundation
-  - MOBFoundation (3.2.0)
+  - MOBFoundation (3.2.1)
   - sharesdk (0.0.1):
     - Flutter
     - mob_sharesdk
@@ -51,8 +51,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
-  mob_sharesdk: fc8a9aab921c08e5e88a5b1f36229c6d406a2ff8
-  MOBFoundation: ca11e6640e995875ff755faa56ea324eed260e70
+  mob_sharesdk: e906a03f75d03ba1404fb046e055160c8258242d
+  MOBFoundation: ce2ba976fd435b0cb06897466b2746e639895b7d
   sharesdk: dc69ef855c237227a575efebc71fe2132c35df01
 
 PODFILE CHECKSUM: 1e5af4103afd21ca5ead147d7b81d06f494f51a2
