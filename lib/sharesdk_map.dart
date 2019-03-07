@@ -79,6 +79,7 @@ const String kFacebookQuote = "facebook_quote";
 
 const String ksina_summary = "sina_cardSummary";
 const String ksina_displayname = "sina_displayname";
+const String ksina_cardTitle = "sina_cardTitle";
 const String ksina_linkcard = "sina_linkCard";
 const String kimage_url = "image_url";
 const String kimage_x = "image_x";
@@ -258,7 +259,7 @@ class SSDKMap {
 
     Map params = {};
     params[kText] = text;
-    params[kTitle] = title;
+    params[ksina_cardTitle] = title;
     params[ksina_displayname] = title;
     params[ksina_summary] = sina_summary;
     params[kUrl] = url;
