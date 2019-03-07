@@ -166,7 +166,7 @@ class _HomePageState extends State<HomePage> {
           0.0,
           null,
           false,
-          null,
+          "http://wx4.sinaimg.cn/large/006WfoFPly1fq0jo9svnaj30dw0dwdhv.jpg",
           null,
           SSDKContentTypes.auto);
     ShareSDK.share(ShareSDKPlatforms.sina, params,
