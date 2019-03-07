@@ -361,7 +361,7 @@ class _HomePageState extends State<HomePage> {
           _creatRow("新浪分享", "分享多图到新浪微博", shareToSina, context),
           _creatRow("新浪授权", "新浪授权", authToSina, context),
           _creatRow("弹出分享菜单", "弹出分享菜单", showShareMenu, context),
-          _creatRow("弹出编辑界面", "分享直接进行内容编辑", showEditor, context),
+          _creatRow("弹出编辑界面", "分享直接进行内容编辑(IOS)", showEditor, context),
           _creatRow("打开微信小程序", "需要导入WechatConnector", openMiniProgram, context),
 
           _creatRow("分享小程序到微信", "测试自定义参数", shareMiniProgram, context),
