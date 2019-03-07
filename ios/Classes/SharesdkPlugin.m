@@ -306,7 +306,16 @@ typedef NS_ENUM(NSUInteger, PluginMethod) {
             tmp[key] = [self _covertParams:params[key]];
         }
     }
-    
+
+    if (params[@"sina_linkCard"] != nil && [params[@"sina_linkCard"] boolValue] == YES)
+    {
+        tmp[@"sina_linkCard"] = @1;
+        if (tmp[@"images"] == nil && params[@"image_url"] != nil)
+        {
+            tmp[@"images"] = ((NSArray *(*)(id, SEL, id))objc_msgSend)(params.mutableCopy,NSSelectorFromString(@"_convertToImages:"),params[@"image_url"]);
+        }
+    }
+
     return tmp;
 }
 
