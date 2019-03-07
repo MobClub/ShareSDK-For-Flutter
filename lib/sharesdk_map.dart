@@ -81,6 +81,8 @@ const String ksina_summary = "sina_summary";
 const String ksina_displayname = "sina_displayname";
 const String ksina_linkcard = "sina_linkcard";
 const String kimage_url = "image_url";
+const String kimage_x = "image_x";
+const String kimage_y = "image_y";
 
 /// Set sharing parameters map
 class SSDKMap {
@@ -256,12 +258,13 @@ class SSDKMap {
 
     Map params = {};
     params[kText] = text;
-    params[kTitle] = title;
     params[ksina_displayname] = title;
     params[ksina_summary] = sina_summary;
     params[kUrl] = url;
     params[ksina_linkcard] = true;
     params[kimage_url] = image_url;
+    params[kimage_x] = imageX;
+    params[kimage_y] = imageY;
     params[kType] = SSDKContentTypes.webpage;
 
     int id = ShareSDKPlatforms.sina.id;
