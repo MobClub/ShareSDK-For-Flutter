@@ -258,6 +258,7 @@ class SSDKMap {
 
     Map params = {};
     params[kText] = text;
+    params[kTitle] = title;
     params[ksina_displayname] = title;
     params[ksina_summary] = sina_summary;
     params[kUrl] = url;
