@@ -78,6 +78,7 @@ const String kFacebookHashtag = "facebook_hashtag";
 const String kFacebookQuote = "facebook_quote";
 
 const String ksina_summary = "sina_summary";
+const String ksina_displayname = "sina_displayname";
 const String ksina_linkcard = "sina_linkcard";
 const String kimage_url = "image_url";
 
