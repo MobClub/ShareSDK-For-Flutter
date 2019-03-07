@@ -11,6 +11,11 @@ import com.mob.MobSDK;
 import com.mob.commons.SHARESDK;
 import com.mob.tools.utils.UIHandler;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import cn.sharesdk.framework.Platform;
@@ -117,6 +122,13 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
         String wxmpPath = "";
         String videoUrl = "";
         String type = "";
+        //linkcard
+        String sina_summary;
+        String sina_displayname;
+        String image_url;
+        String imageX;
+        String imageY;
+
         HashMap<String, Object> map = call.arguments();
         String num = String.valueOf(map.get("platform"));
 
@@ -139,6 +151,13 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
             wxmpPath = String.valueOf(params.get("wxmp_path"));
             videoUrl = String.valueOf(params.get("videoUrl_android"));
             type = String.valueOf(params.get("type"));
+            //linkcard
+            sina_summary = String.valueOf(params.get("sina_cardSummary"));
+            image_url = String.valueOf(params.get("image_url"));
+            imageX = String.valueOf(params.get("image_x"));
+            imageY = String.valueOf(params.get("image_y"));
+            sina_displayname = String.valueOf(params.get("sina_displayname"));
+
         } else {
             imageUrl = String.valueOf(platMap.get("imageUrl_android"));
             imagePath = String.valueOf(platMap.get("imagePath_android"));
@@ -155,6 +174,13 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
             wxmpPath = String.valueOf(platMap.get("wxmp_path"));
             videoUrl = String.valueOf(platMap.get("videoUrl_android"));
             type = String.valueOf(platMap.get("type"));
+            //linkcard
+            sina_summary = String.valueOf(platMap.get("sina_cardSummary"));
+            image_url = String.valueOf(platMap.get("image_url"));
+            sina_displayname = String.valueOf(platMap.get("sina_displayname"));
+            imageX = String.valueOf(platMap.get("image_x"));
+            imageY = String.valueOf(platMap.get("image_y"));
+
         }
 
         String platName = Utils.platName(num);
@@ -196,6 +222,42 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
         }
         if (!(wxmpPath == null || wxmpPath.equals("null"))) {
             shareParams.setWxPath(wxmpPath);
+        }
+        //linkcard
+        if (!(sina_summary == null || sina_summary.equals("null"))) {
+            shareParams.setLcSummary(sina_summary);
+            //此参数不为空，说明用户是想分享linkcard，顺带把其他几个不需要用户输入的参数带进去
+            Date date = new Date();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String dateStr = simpleDateFormat.format(date);
+            if (dateStr != null) {
+                shareParams.setLcCreateAt(dateStr);
+            }
+
+        }
+        if (!(sina_displayname == null || sina_displayname.equals("null"))) {
+            shareParams.setLcDisplayName(sina_displayname);
+        }
+        if (!(url.equals("null") || url == null)) {
+            shareParams.setLcUrl(url);
+        }
+        if (!(type.equals("null") || type == null)) {
+            shareParams.setLcObjectType(type);
+        }
+        if (!(image_url == null || image_url.equals("null"))) {
+            if (!(imageX == null || imageX.equals("null"))) {
+                if (!(imageY == null || imageY.equals("null"))) {
+                    JSONObject jsonObject = new JSONObject();
+                    try {
+                        jsonObject.put("url", image_url);
+                        jsonObject.put("width", Integer.valueOf(imageX));
+                        jsonObject.put("height", Integer.valueOf(imageY));
+                        shareParams.setLcImage(jsonObject);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
 
         if (type.equals("1")) {
@@ -308,13 +370,13 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
         String video = String.valueOf(params.get("video"));
 
         String titleUrl = String.valueOf(params.get("titleUrl_android"));
-        String musciUrl = String.valueOf(params.get("musicUrl"));
+        String musciUrl = String.valueOf(params.get("musicUrl_android"));
         String imageUrlAndroid = String.valueOf(params.get("imageUrl_android"));
         String imagePath = String.valueOf(params.get("imagePath_android"));
         String videoUrl = String.valueOf(params.get("videoUrl_android"));
 
         OnekeyShare oks = new OnekeyShare();
-        oks.setImageUrl(images);
+        //oks.setImageUrl(images);
         oks.setTitle(title);
         oks.setText(text);
         oks.setUrl(url);
