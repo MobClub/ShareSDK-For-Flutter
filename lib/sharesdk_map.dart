@@ -1,5 +1,4 @@
 import './sharesdk_defines.dart';
-import 'dart:io';
 /// const
 const String kText = "text";
 const String kThumbImage = "thumb_image";
