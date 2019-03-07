@@ -176,6 +176,23 @@ class _HomePageState extends State<HomePage> {
         });
   }
 
+  void shareSinaLinkCard(BuildContext context) {
+    SSDKMap params = SSDKMap()
+      ..setSinaLinkCard(
+          "linkcard_text",
+          "linkcard_title",
+          "http://www.mob.com/",
+          "全新品牌，优质服务",
+          "http://wx4.sinaimg.cn/large/006WfoFPly1fq0jo9svnaj30dw0dwdhv.jpg",
+          "120",
+          "120");
+    ShareSDK.share(ShareSDKPlatforms.sina, params,
+            (SSDKResponseState state, Map userdata, Map contentEntity,
+            SSDKError error) {
+          showAlert(state, error.rawData, context);
+        });
+  }
+
   void shareTwitterCustom(BuildContext context) {
     SSDKMap params = SSDKMap()
       ..setTwitter("text",
@@ -348,7 +365,8 @@ class _HomePageState extends State<HomePage> {
           _creatRow("打开微信小程序", "需要导入WechatConnector", openMiniProgram, context),
 
           _creatRow("分享小程序到微信", "测试自定义参数", shareMiniProgram, context),
-          _creatRow("分享到微博", "测试自定义参数", shareSinaCustom, context),
+          _creatRow("分享到新浪微博", "测试自定义参数", shareSinaCustom, context),
+          _creatRow("分享到新浪微博LinkCard", "分享到LinkCard", shareSinaLinkCard, context),
           _creatRow("分享到QQ", "测试自定义参数", shareQQCustom, context),
           _creatRow("分享到Twitter", "测试自定义参数", shareTwitterCustom, context),
           _creatRow("分享到Facebook", "测试自定义参数", shareFacebookCustom, context),
