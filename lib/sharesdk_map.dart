@@ -77,9 +77,9 @@ const String kWXMPHdThumbImage = "wxmp_hdthumbimage";
 const String kFacebookHashtag = "facebook_hashtag";
 const String kFacebookQuote = "facebook_quote";
 
-const String ksina_summary = "sina_summary";
+const String ksina_summary = "sina_cardSummary";
 const String ksina_displayname = "sina_displayname";
-const String ksina_linkcard = "sina_linkcard";
+const String ksina_linkcard = "sina_linkCard";
 const String kimage_url = "image_url";
 const String kimage_x = "image_x";
 const String kimage_y = "image_y";
