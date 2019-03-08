@@ -7,6 +7,19 @@ import './sharesdk_map.dart';
 class ShareSDK {
   static const MethodChannel _channel =
   const MethodChannel('com.yoozoo.mob/sharesdk');
+  static const EventChannel java_to_flutter = const EventChannel("JAVA_TO_FLUTTER");
+
+  static Future<dynamic> listenNativeEvent() {
+    java_to_flutter.receiveBroadcastStream().listen(_onEvent, onError:_onError);
+  }
+
+  static Future<dynamic> _onEvent(Object event) {
+    print("onEvent: $event ");
+  }
+
+  static Future<dynamic> _onError(Object error) {
+    print(error);
+  }
 
   /// 注册方法：
   /// 1. 创建register对象，
@@ -40,6 +53,7 @@ class ShareSDK {
     Future<dynamic> callback =
     _channel.invokeMethod(ShareSDKMethods.auth.name, args);
     callback.then((dynamic response) {
+      print('======> $callback !' + '~~~~~> $response');
       if (result != null) {
         result(_state(response), response["user"],
             SSDKError(rawData: response["error"]));
