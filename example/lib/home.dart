@@ -343,6 +343,9 @@ class _HomePageState extends State<HomePage> {
     register.setupTwitter("viOnkeLpHBKs6KXV7MPpeGyzE",
         "NJEglQUy2rqZ9Io9FcAU9p17omFqbORknUpRrCDOK46aAbIiey", "http://mob.com");
     ShareSDK.regist(register);
+
+    ShareSDK.listenNativeEvent();
+
     super.initState();
   }
 
