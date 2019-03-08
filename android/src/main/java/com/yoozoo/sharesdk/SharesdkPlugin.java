@@ -109,7 +109,7 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
     }
 
     /** 分享 **/
-    private void shareWithArgs(MethodCall call, Result result) {
+    private void shareWithArgs(MethodCall call, final Result result) {
         String imageUrl = "";
         String imagePath = "";
         String title = "";
@@ -133,7 +133,7 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
         String imageY;
 
         HashMap<String, Object> map = call.arguments();
-        String num = String.valueOf(map.get("platform"));
+        final String num = String.valueOf(map.get("platform"));
 
         HashMap<String, Object> params = (HashMap<String, Object>) map.get("params");
 
@@ -280,6 +280,28 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
         } else if (type.equals("10")) {
             shareParams.setShareType(Platform.SHARE_WXMINIPROGRAM);
         }
+        platform.setPlatformActionListener(new PlatformActionListener() {
+            @Override
+            public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+                Map<String, Object> map = new HashMap<>();
+                map.put("state", 1);
+                result.success(map);
+            }
+
+            @Override
+            public void onError(Platform platform, int i, Throwable throwable) {
+                Map<String, Object> map = new HashMap<>();
+                map.put("state", 2);
+                result.success(map);
+            }
+
+            @Override
+            public void onCancel(Platform platform, int i) {
+                Map<String, Object> map = new HashMap<>();
+                map.put("state", 3);
+                result.success(map);
+            }
+        });
         platform.share(shareParams);
     }
 
