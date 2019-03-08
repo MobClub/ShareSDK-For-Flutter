@@ -1,14 +1,14 @@
 package com.yoozoo.sharesdk;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.mob.MobSDK;
-import com.mob.commons.SHARESDK;
 import com.mob.tools.utils.UIHandler;
 
 import org.json.JSONException;
@@ -17,23 +17,25 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
-import cn.sharesdk.tencent.qq.QQ;
 import cn.sharesdk.wechat.friends.Wechat;
+import io.flutter.app.FlutterActivity;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
-import io.flutter.plugin.common.PluginRegistry.Registrar;
+import io.flutter.plugin.common.EventChannel;
+import io.flutter.plugin.common.PluginRegistry;
 
 /**
  * SharesdkPlugin
  */
-public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
+public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHandler, Handler.Callback {
 
     private static final String PluginMethodGetVersion = "getVersion";
     private static final String PluginMethodShare = "share";
@@ -47,22 +49,23 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
     private static final String PluginMethodShowMenu = "showMenu";
     private static final String PluginMethodOpenMiniProgram = "openMiniProgram";
 
+    private static final String EVENTCHANNEL = "JAVA_TO_FLUTTER";
+    private static EventChannel eventChannel;
+    private EventChannel.EventSink eventSink;
+
     /**
      * Plugin registration.
      */
-    public static void registerWith(Registrar registrar) {
+    public static void registerWith(PluginRegistry.Registrar registrar) {
         final MethodChannel channel = new MethodChannel(registrar.messenger(), "com.yoozoo.mob/sharesdk");
         channel.setMethodCallHandler(new SharesdkPlugin());
+
+        eventChannel = new EventChannel(registrar.messenger(), EVENTCHANNEL);
+        eventChannel.setStreamHandler(new SharesdkPlugin());
     }
 
     @Override
     public void onMethodCall(MethodCall call, Result result) {
-        if (call.method.equals("getPlatformVersion")) {
-            result.success("Android " + android.os.Build.VERSION.RELEASE);
-        } else {
-            result.notImplemented();
-        }
-
         switch (call.method) {
             case PluginMethodGetVersion:
                 break;
@@ -340,20 +343,41 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
 
         String platStr = Utils.platName(num);
         Platform platName = ShareSDK.getPlatform(platStr);
-        doAuthorize(platName);
-        Log.e("SharesdkPlugin", " plat " + platName + " ====> " + call.arguments.toString());
+        doAuthorize(platName, result);
     }
 
     /**
-     * 授权的代码
+     * 授权的代码,不返回数据，只返回授权成功与否的结果
      */
-    private void doAuthorize(Platform platform) {
+    private void doAuthorize(Platform platform, final Result result) {
         if (platform != null) {
-            //platform.setPlatformActionListener(myPlatformActionListener);
             if (platform.isAuthValid()) {
                 platform.removeAccount(true);
                 return;
             }
+            platform.setPlatformActionListener(new PlatformActionListener() {
+                @Override
+                public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("state", 1);
+                    result.success(map);
+                }
+
+                @Override
+                public void onError(Platform platform, int i, Throwable throwable) {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("state", 2);
+                    map.put("error", throwable.getMessage());
+                    result.error(null, null, map);
+                }
+
+                @Override
+                public void onCancel(Platform platform, int i) {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("state", 3);
+                    result.error(null, null, map);
+                }
+            });
             platform.SSOSetting(true);
             platform.authorize();
         }
@@ -466,5 +490,27 @@ public class SharesdkPlugin implements MethodCallHandler, Handler.Callback {
     public void onCancel(int i){
         String text = " canceled ";
         Toast.makeText(MobSDK.getContext(), text, Toast.LENGTH_LONG).show();
+    }
+
+
+    /**
+     * java层给flutter层发送消息,写了但是没用到，留着吧
+     * **/
+    @Override
+    public void onListen(Object o, EventChannel.EventSink mEventSink) {
+        this.eventSink = mEventSink;
+    }
+
+    @Override
+    public void onCancel(Object o) {
+
+    }
+
+    private void setEventChannel(Object data) {
+        if (eventSink != null) {
+            eventSink.success(data);
+        } else {
+            Log.e("FFF", " ===== FlutterEventChannel.eventSink 为空 需要检查一下 ===== ");
+        }
     }
 }
