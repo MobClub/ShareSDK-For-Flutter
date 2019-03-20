@@ -221,8 +221,8 @@ class SSDKMap {
       double longitude,
       String objectId,
       bool isStory,
-      String image_url,
-      String image_path,
+      String imageUrl,
+      String imagePath,
 
 
       SSDKContentType type) {
@@ -238,8 +238,8 @@ class SSDKMap {
     params[kLong] = longitude;
     params[kWeiboIsStory] = isStory;
     params[kWeiboObjectId] = objectId;
-    params[kImagePathAndroid] = image_path;
-    params[kImageUrlAndroid] = image_url;
+    params[kImagePathAndroid] = imageUrl;
+    params[kImageUrlAndroid] = imagePath;
 
 
     int id = ShareSDKPlatforms.sina.id;
@@ -250,8 +250,8 @@ class SSDKMap {
       String text,
       String title,
       String url,
-      String sina_summary,
-      String image_url,
+      String sinaSummary,
+      String imageUrl,
       String imageX,
       String imageY,
       ) {
@@ -260,10 +260,10 @@ class SSDKMap {
     params[kText] = text;
     params[ksina_cardTitle] = title;
     params[ksina_displayname] = title;
-    params[ksina_summary] = sina_summary;
+    params[ksina_summary] = sinaSummary;
     params[kUrl] = url;
     params[ksina_linkcard] = true;
-    params[kimage_url] = image_url;
+    params[kimage_url] = imageUrl;
     params[kimage_x] = imageX;
     params[kimage_y] = imageY;
     params[kType] = SSDKContentTypes.webpage.value;

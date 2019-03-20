@@ -13,5 +13,11 @@
 ## 1.0.6
 * Update registration instructions
 
-## 1.0.6
+## 1.0.7
 * Update interfaces
+
+## 1.0.8
+* Add sina link card share function
+
+## 1.0.9
+* Update docs and interfaces

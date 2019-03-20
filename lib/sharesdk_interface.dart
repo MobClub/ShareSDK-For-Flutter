@@ -11,14 +11,17 @@ class ShareSDK {
 
   static Future<dynamic> listenNativeEvent() {
     java_to_flutter.receiveBroadcastStream().listen(_onEvent, onError:_onError);
+    return null;
   }
 
   static Future<dynamic> _onEvent(Object event) {
     print("onEvent: $event ");
+    return null;
   }
 
   static Future<dynamic> _onError(Object error) {
     print(error);
+    return null;
   }
 
   /// 注册方法：
