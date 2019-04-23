@@ -209,6 +209,16 @@
 				<string>ak1412473428822331</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>douyin</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>aw9ivykfjvi4hpwo</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
@@ -283,12 +293,15 @@
 		<string>fb-messenger</string>
 		<string>fbauth2</string>
 		<string>fbapi20130214</string>
+		<string>fbapi</string>
 		<string>twitterauth</string>
 		<string>tg</string>
 		<string>telegram</string>
 		<string>renrenapi</string>
 		<string>renrenios</string>
 		<string>renreniphone</string>
+		<string>douyinsharesdk</string>
+		<string>douyinopensdk</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
