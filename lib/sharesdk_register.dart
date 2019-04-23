@@ -304,4 +304,14 @@ class ShareSDKRegister {
 
     platformsInfo[ShareSDKPlatforms.reddit.id] = info;
   }
+
+  /// set up reddit platform info
+  void setupDouyin(String appkey, String appSecret) {
+    Map info = {
+      _ssdkAppkey: appkey,
+      _ssdkAppSecret: appSecret,
+    };
+
+    platformsInfo[ShareSDKPlatforms.douyin.id] = info;
+  }
 }

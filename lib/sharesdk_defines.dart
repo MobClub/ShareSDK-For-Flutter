@@ -138,6 +138,8 @@ class ShareSDKPlatforms {
   static final ShareSDKPlatform cmcc = ShareSDKPlatform(name: "cmcc", id: 55);
   static final ShareSDKPlatform reddit =
       ShareSDKPlatform(name: "reddit", id: 56);
+  static final ShareSDKPlatform douyin =
+      ShareSDKPlatform(name: "douyin", id: 59);
 
   static final ShareSDKPlatform yixinSeries =
       ShareSDKPlatform(name: "yixinSeries", id: 994);
