@@ -1,19 +1,9 @@
 package com.yoozoo.sharesdk;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
-
 import com.mob.MobSDK;
-import com.mob.tools.utils.UIHandler;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -24,7 +14,6 @@ import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import cn.sharesdk.wechat.friends.Wechat;
-import io.flutter.app.FlutterActivity;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
@@ -35,14 +24,14 @@ import io.flutter.plugin.common.PluginRegistry;
 /**
  * SharesdkPlugin
  */
-public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHandler, Handler.Callback {
+public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHandler {
 
     private static final String PluginMethodGetVersion = "getVersion";
     private static final String PluginMethodShare = "share";
     private static final String PluginMethodAuth = "auth";
     private static final String PluginMethodHasAuthed = "hasAuthed";
     private static final String PluginMethodCancelAuth = "cancelAuth";
-    private static final String PluginMethodGetUserInfo = "getUserinfo";
+    private static final String PluginMethodGetUserInfo = "getUserInfo";
     private static final String PluginMethodRegist = "regist";
     private static final String PluginMethodActivePlatforms = "activePlatforms";
     private static final String PluginMethodShowEditor = "showEditor";
@@ -400,7 +389,7 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
                     result.error(null, null, map);
                 }
             });
-            platform.SSOSetting(true);
+            //platform.SSOSetting(true);
             platform.authorize();
         }
     }
@@ -443,75 +432,40 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
         String num = String.valueOf(params.get("platform"));
         String platStr = Utils.platName(num);
         Platform platName = ShareSDK.getPlatform(platStr);
-        doUserInfo(platName);
-
+        doUserInfo(platName, result);
         Log.e("SharesdkPlugin", " platName " + platName + " ====> " + call.arguments.toString());
     }
 
 
-    private void doUserInfo(Platform platform) {
+    private void doUserInfo(Platform platform,final Result result) {
         if (platform != null) {
             platform.showUser(null);
             platform.setPlatformActionListener(new PlatformActionListener() {
                 @Override
                 public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
-                    Message msg = new Message();
-                    msg.what = 1;
-                    msg.arg2 = i;
-                    msg.obj = hashMap;
-                    UIHandler.sendMessage(msg, SharesdkPlugin.this);
+                    String text = StrUtils.format("", hashMap);
+                    HashMap<String, Object> userMap = new HashMap<>();
+                    userMap.put("user", hashMap);
+                    userMap.put("state", 1);
+                    result.success(userMap);
                 }
 
                 @Override
                 public void onError(Platform platform, int i, Throwable throwable) {
-                    Message msg = new Message();
-                    msg.what = 2;
-                    msg.arg2 = i;
-                    msg.obj = throwable;
-                    UIHandler.sendMessage(msg, SharesdkPlugin.this);
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("state", 2);
+                    map.put("error", throwable.getMessage());
+                    result.error(null, null, map);
                 }
 
                 @Override
                 public void onCancel(Platform platform, int i) {
-                    Message msg = new Message();
-                    msg.what = 3;
-                    msg.arg2 = i;
-                    msg.obj = platform;
-                    UIHandler.sendMessage(msg, SharesdkPlugin.this);
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("state", 3);
+                    result.error(null, null, map);
                 }
             });
         }
-    }
-
-    @Override
-    public boolean handleMessage(Message msg) {
-        switch (msg.what) {
-            case 1: {
-                onComplete(msg.arg2, (HashMap<String, Object>) msg.obj);
-            } break;
-            case 2: {
-                onError(msg.arg2, (Throwable) msg.obj);
-            } break;
-            case 3: {
-                onCancel(msg.arg2);
-            } break;
-        }
-        return false;
-    }
-
-    public void onComplete(int i, HashMap<String, Object> hashMap){
-        String text = StrUtils.format("", hashMap);
-        Toast.makeText(MobSDK.getContext(), text, Toast.LENGTH_LONG).show();
-    }
-
-    public void onError(int i, Throwable throwable){
-       String text = " caught error at " + String.valueOf(throwable);
-       Toast.makeText(MobSDK.getContext(), text, Toast.LENGTH_LONG).show();
-    }
-
-    public void onCancel(int i){
-        String text = " canceled ";
-        Toast.makeText(MobSDK.getContext(), text, Toast.LENGTH_LONG).show();
     }
 
 

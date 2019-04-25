@@ -79,11 +79,11 @@ class ShareSDK {
   }
 
   /// 获取用户信息
-  static Future<dynamic> getUserInfo(int platform,
-      Function(SSDKResponseState, Map, SSDKError) result) async {
-    Map args = {"platform": platform};
+  static Future<dynamic> getUserInfo(ShareSDKPlatform platform,
+      Function(SSDKResponseState, Map, SSDKError) result) {
+    Map args = {"platform": platform.id};
     Future<dynamic> callback =
-    await _channel.invokeMethod(ShareSDKMethods.getUserInfo.name, args);
+    _channel.invokeMethod(ShareSDKMethods.getUserInfo.name, args);
     callback.then((dynamic response) {
       if (result != null) {
         result(_state(response), response["user"],

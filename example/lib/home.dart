@@ -65,10 +65,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   void authToSina(BuildContext context) {
-    ShareSDK.auth(
-        ShareSDKPlatforms.sina, null, (SSDKResponseState state, Map user,
-        SSDKError error) {
-      showAlert(state, user != null ? user : error.rawData, context);
+    ShareSDK.getUserInfo(ShareSDKPlatforms.qq, (SSDKResponseState state, Map userdata, SSDKError error) {
+      print("--------------------------> authToSina:");
+      showAlert(state, userdata, context);
     });
   }
 
@@ -360,9 +359,9 @@ class _HomePageState extends State<HomePage> {
         padding: EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
         children: <Widget>[
           _creatRow("分享到微信", "分享图片到微信", shareToWechat, context),
-          _creatRow("微信授权", "微信授权", authToWechat, context),
+          _creatRow("微信授权", "微信授权(不返回用户数据)", authToWechat, context),
           _creatRow("新浪分享", "分享多图到新浪微博", shareToSina, context),
-          _creatRow("新浪授权", "新浪授权", authToSina, context),
+          _creatRow("新浪授权", "新浪授权(返回用户数据)", authToSina, context),
           _creatRow("弹出分享菜单", "弹出分享菜单", showShareMenu, context),
           _creatRow("弹出编辑界面", "分享直接进行内容编辑(IOS)", showEditor, context),
           _creatRow("打开微信小程序", "需要导入WechatConnector", openMiniProgram, context),
