@@ -1,5 +1,6 @@
 package com.yoozoo.sharesdk;
 
+import android.text.TextUtils;
 import android.util.Log;
 import com.mob.MobSDK;
 import org.json.JSONException;
@@ -411,17 +412,37 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
         String videoUrl = String.valueOf(params.get("videoUrl_android"));
 
         OnekeyShare oks = new OnekeyShare();
-        //oks.setImageUrl(images);
-        oks.setTitle(title);
-        oks.setText(text);
-        oks.setUrl(url);
+        if ((!TextUtils.isEmpty(title)) && !(title.equals("null"))) {
+            oks.setTitle(title);
+        }
 
-        oks.setTitleUrl(titleUrl);
-        oks.setMusicUrl(musciUrl);
-        oks.setImageUrl(imageUrlAndroid);
-        oks.setImagePath(imagePath);
-        oks.setVideoUrl(videoUrl);
+        if ((!TextUtils.isEmpty(text)) && !(text.equals("null"))) {
+            oks.setText(text);
+        }
 
+        if ((!TextUtils.isEmpty(url)) && !(url.equals("null"))) {
+            oks.setUrl(url);
+        }
+
+        if ((!TextUtils.isEmpty(titleUrl)) && !(titleUrl.equals("null"))) {
+            oks.setTitleUrl(titleUrl);
+        }
+
+        if ((!TextUtils.isEmpty(musciUrl)) && !(musciUrl.equals("null"))) {
+            oks.setMusicUrl(musciUrl);
+        }
+
+        if ((!TextUtils.isEmpty(imageUrlAndroid)) && !(imageUrlAndroid.equals("null"))) {
+            oks.setImageUrl(imageUrlAndroid);
+        }
+
+        if ((!TextUtils.isEmpty(imagePath)) && !(imagePath.equals("null"))) {
+            oks.setImagePath(imagePath);
+        }
+
+        if ((!TextUtils.isEmpty(videoUrl)) && !(videoUrl.equals("null"))) {
+            oks.setVideoUrl(videoUrl);
+        }
         oks.show(MobSDK.getContext());
         Log.e("SharesdkPlugin", call.arguments.toString());
     }
