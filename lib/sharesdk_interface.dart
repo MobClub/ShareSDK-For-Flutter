@@ -6,11 +6,14 @@ import './sharesdk_map.dart';
 
 class ShareSDK {
   static const MethodChannel _channel =
-  const MethodChannel('com.yoozoo.mob/sharesdk');
-  static const EventChannel java_to_flutter = const EventChannel("JAVA_TO_FLUTTER");
+      const MethodChannel('com.yoozoo.mob/sharesdk');
+  static const EventChannel java_to_flutter =
+      const EventChannel("JAVA_TO_FLUTTER");
 
   static Future<dynamic> listenNativeEvent() {
-    java_to_flutter.receiveBroadcastStream().listen(_onEvent, onError:_onError);
+    java_to_flutter
+        .receiveBroadcastStream()
+        .listen(_onEvent, onError: _onError);
     return null;
   }
 
@@ -38,7 +41,7 @@ class ShareSDK {
       Function(SSDKResponseState, Map, Map, SSDKError) result) {
     Map args = {"platform": platform.id, "params": params.map};
     Future<dynamic> callback =
-    _channel.invokeMethod(ShareSDKMethods.share.name, args);
+        _channel.invokeMethod(ShareSDKMethods.share.name, args);
     callback.then((dynamic response) {
       if (result != null) {
         result(_state(response), response["userData"],
@@ -54,7 +57,7 @@ class ShareSDK {
       Function(SSDKResponseState, Map, SSDKError) result) {
     Map args = {"platform": platform.id, "settings": settings};
     Future<dynamic> callback =
-    _channel.invokeMethod(ShareSDKMethods.auth.name, args);
+        _channel.invokeMethod(ShareSDKMethods.auth.name, args);
     callback.then((dynamic response) {
       print('======> $callback !' + '~~~~~> $response');
       if (result != null) {
@@ -83,7 +86,7 @@ class ShareSDK {
       Function(SSDKResponseState, Map, SSDKError) result) {
     Map args = {"platform": platform.id};
     Future<dynamic> callback =
-    _channel.invokeMethod(ShareSDKMethods.getUserInfo.name, args);
+        _channel.invokeMethod(ShareSDKMethods.getUserInfo.name, args);
     callback.then((dynamic response) {
       if (result != null) {
         result(_state(response), response["user"],
@@ -95,10 +98,11 @@ class ShareSDK {
   }
 
   /// 弹出分享菜单
-  static Future<dynamic> showMenu(List<ShareSDKPlatform> platforms,
+  static Future<dynamic> showMenu(
+      List<ShareSDKPlatform> platforms,
       SSDKMap params,
       Function(SSDKResponseState, ShareSDKPlatform, Map, Map, SSDKError)
-      result) {
+          result) {
     List types;
     if (platforms != null) {
       Iterable<int> ids = platforms.map((ShareSDKPlatform item) => item.id);
@@ -107,7 +111,7 @@ class ShareSDK {
 
     Map args = {"platforms": types, "params": params.map};
     Future<dynamic> callback =
-    _channel.invokeMethod(ShareSDKMethods.showMenu.name, args);
+        _channel.invokeMethod(ShareSDKMethods.showMenu.name, args);
     callback.then((dynamic response) {
       if (result != null) {
         result(
@@ -123,13 +127,14 @@ class ShareSDK {
   }
 
   /// 弹出编辑菜单
-  static Future<dynamic> showEditor(ShareSDKPlatform platform,
+  static Future<dynamic> showEditor(
+      ShareSDKPlatform platform,
       SSDKMap params,
       Function(SSDKResponseState, ShareSDKPlatform, Map, Map, SSDKError)
-      result) {
+          result) {
     Map args = {"platform": platform.id, "params": params.map};
     Future<dynamic> callback =
-    _channel.invokeMethod(ShareSDKMethods.showEditor.name, args);
+        _channel.invokeMethod(ShareSDKMethods.showEditor.name, args);
     callback.then((dynamic response) {
       print(response);
       if (result != null) {
@@ -156,8 +161,8 @@ class ShareSDK {
   }
 
   /// 打开微信小程序
-  static Future<dynamic> openWeChatMiniProgram(String userName, String path,
-      int miniProgramType) async {
+  static Future<dynamic> openWeChatMiniProgram(
+      String userName, String path, int miniProgramType) async {
     Map args = {"userName": userName, "path": path, "type": miniProgramType};
     return await _channel.invokeMethod(
         ShareSDKMethods.openMiniProgram.name, args);

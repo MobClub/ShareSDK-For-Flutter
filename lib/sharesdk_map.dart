@@ -1,4 +1,5 @@
 import './sharesdk_defines.dart';
+
 /// const
 const String kText = "text";
 const String kThumbImage = "thumb_image";
@@ -223,8 +224,6 @@ class SSDKMap {
       bool isStory,
       String imageUrl,
       String imagePath,
-
-
       SSDKContentType type) {
     Map params = {};
 
@@ -241,21 +240,20 @@ class SSDKMap {
     params[kImagePathAndroid] = imageUrl;
     params[kImageUrlAndroid] = imagePath;
 
-
     int id = ShareSDKPlatforms.sina.id;
     map["@platform($id)"] = params;
   }
 
-  void setSinaLinkCard(  // linkCard
-      String text,
-      String title,
-      String url,
-      String sinaSummary,
-      String imageUrl,
-      String imageX,
-      String imageY,
-      ) {
-
+  void setSinaLinkCard(
+    // linkCard
+    String text,
+    String title,
+    String url,
+    String sinaSummary,
+    String imageUrl,
+    String imageX,
+    String imageY,
+  ) {
     Map params = {};
     params[kText] = text;
     params[ksina_cardTitle] = title;
@@ -270,8 +268,6 @@ class SSDKMap {
 
     int id = ShareSDKPlatforms.sina.id;
     map["@platform($id)"] = params;
-
-
   }
 
   /// Set twitter platform share parameters
