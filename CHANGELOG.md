@@ -21,3 +21,7 @@
 
 ## 1.0.9
 * Update docs and interfaces
+
+## 1.1.0
+* Repair onekeyshare bug
+* Added access to user information interface
