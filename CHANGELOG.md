@@ -25,3 +25,6 @@
 ## 1.1.0
 * Repair onekeyshare bug
 * Added access to user information interface
+
+## 1.1.1
+* Get user information interface new return token field
