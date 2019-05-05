@@ -468,6 +468,8 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
                     HashMap<String, Object> userMap = new HashMap<>();
                     userMap.put("user", hashMap);
                     userMap.put("state", 1);
+                    //新增token
+                    hashMap.put("token", platform.getDb().getToken());
                     result.success(userMap);
                 }
 
