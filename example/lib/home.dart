@@ -237,6 +237,8 @@ class _HomePageState extends State<HomePage> {
           "http://wx4.sinaimg.cn/large/006tkBCzly1fy8hfqdoy6j30dw0dw759.jpg",
           null,
           "http://www.mob.com/api/documentList",
+          null,
+          null,
           SSDKContentTypes.webpage,
           ShareSDKPlatforms.qq);
     ShareSDK.share(
