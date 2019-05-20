@@ -121,6 +121,8 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
         String image_url;
         String imageX;
         String imageY;
+        String site;
+        String siteUrl;
 
         HashMap<String, Object> map = call.arguments();
         final String num = String.valueOf(map.get("platform"));
@@ -150,6 +152,8 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
             imageX = String.valueOf(params.get("image_x"));
             imageY = String.valueOf(params.get("image_y"));
             sina_displayname = String.valueOf(params.get("sina_displayname"));
+            site = String.valueOf(params.get("site"));
+            siteUrl = String.valueOf(params.get("siteUrl"));
 
         } else {
             imageUrl = String.valueOf(platMap.get("imageUrl_android"));
@@ -173,6 +177,8 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
             sina_displayname = String.valueOf(platMap.get("sina_displayname"));
             imageX = String.valueOf(platMap.get("image_x"));
             imageY = String.valueOf(platMap.get("image_y"));
+            site = String.valueOf(platMap.get("site"));
+            siteUrl = String.valueOf(platMap.get("siteUrl"));
 
         }
 
@@ -251,6 +257,13 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
                     }
                 }
             }
+        }
+
+        if (!(site.equals("null") || site == null)) {
+            shareParams.setSite(site);
+        }
+        if (!(siteUrl.equals("null") || siteUrl == null)) {
+            shareParams.setSiteUrl(siteUrl);
         }
 
         if (type.equals("1")) {
