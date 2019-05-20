@@ -24,7 +24,7 @@ public class Utils {
             case "5":
                 return "douBan";
             case "6":
-                return "qZone";
+                return "QZone";
             case "7":
                 return "renren";
             case "8":
