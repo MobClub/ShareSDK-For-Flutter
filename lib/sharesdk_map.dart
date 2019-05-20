@@ -85,6 +85,9 @@ const String kimage_url = "image_url";
 const String kimage_x = "image_x";
 const String kimage_y = "image_y";
 
+const String ksite = "site";
+const String ksiteUrl = "siteUrl";
+
 /// Set sharing parameters map
 class SSDKMap {
   final Map map = {};
@@ -189,6 +192,8 @@ class SSDKMap {
       String imageUrlAndroid,
       String imagePathAndroid,
       String titleUrlAndroid,
+      String siteAndroid,
+      String siteUrlAndroid,
       SSDKContentType type,
       ShareSDKPlatform subPlatform) {
     Map params = {};
@@ -206,6 +211,8 @@ class SSDKMap {
     params[kImages] = images;
     params[kImageUrlAndroid] = imageUrlAndroid;
     params[kImagePathAndroid] = imagePathAndroid;
+    params[ksite] = siteAndroid;
+    params[ksiteUrl] = siteUrlAndroid;
 
     int id = subPlatform.id;
     map["@platform($id)"] = params;
