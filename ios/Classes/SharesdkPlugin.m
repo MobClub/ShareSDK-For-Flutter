@@ -33,7 +33,7 @@ typedef NS_ENUM(NSUInteger, PluginMethod) {
                            @"auth":@(PluginMethodAuth),
                            @"hasAuthed":@(PluginMethodHasAuthed),
                            @"cancelAuth":@(PluginMethodCancelAuth),
-                           @"getUserinfo":@(PluginMethodGetUserInfo),
+                           @"getUserInfo":@(PluginMethodGetUserInfo),
                            @"regist":@(PluginMethodRegist),
                            @"activePlatforms":@(PluginMethodActivePlatforms),
                            @"showEditor":@(PluginMethodShowEditor),

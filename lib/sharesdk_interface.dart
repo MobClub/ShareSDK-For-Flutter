@@ -70,15 +70,15 @@ class ShareSDK {
   }
 
   /// 判断是否授权
-  static Future<dynamic> hasAuthed(int platform) async {
+  static Future<dynamic> hasAuthed(ShareSDKPlatform platform) async {
     return await _channel.invokeMethod(
-        ShareSDKMethods.hasAuthed.name, platform);
+        ShareSDKMethods.hasAuthed.name, platform.id);
   }
 
   /// 取消授权
-  static Future<dynamic> cancelAuth(int platform) async {
+  static Future<dynamic> cancelAuth(ShareSDKPlatform platform) async {
     return await _channel.invokeMethod(
-        ShareSDKMethods.cancelAuth.name, platform);
+        ShareSDKMethods.cancelAuth.name, platform.id);
   }
 
   /// 获取用户信息

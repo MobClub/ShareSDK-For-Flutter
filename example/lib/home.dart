@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sharesdk/sharesdk.dart';
+import 'dart:io';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key, this.title}) : super(key: key);
@@ -12,12 +13,33 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+ void shareSdkVersion(BuildContext context)
+  {
+    ShareSDK.sdkVersion
+        .then((dynamic version) {
+      if (version.length > 0) {
+        if (Platform.isIOS) {
+          showAlertText("ShareSDK iOS 版本", version.toString(), context);
+        }
+        else if (Platform.isAndroid) {
+          showAlertText("ShareSDK Android 版本", version.toString(), context);
+        }
+        
+      }
+      else {
+        showAlertText("ShareSDK版本", "获取失败", context);
+      }
+    });
+  }
+
   void shareToWechat(BuildContext context) {
     SSDKMap params = SSDKMap()
       ..setGeneral(
           "title",
           "text",
-          null,
+          [
+            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541565611543&di=4615c8072e155090a2b833059f19ed5b&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201501%2F06%2F20150106003502_Ajcte.jpeg"
+          ],
           "http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg",
           null,
           "http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg",
@@ -36,6 +58,14 @@ class _HomePageState extends State<HomePage> {
   void authToWechat(BuildContext context) {
     ShareSDK.auth(
         ShareSDKPlatforms.wechatSession, null, (SSDKResponseState state,
+        Map user, SSDKError error) {
+      showAlert(state, user != null ? user : error.rawData, context);
+    });
+  }
+
+  void getUserInfoToWechat(BuildContext context) {
+    ShareSDK.getUserInfo(
+        ShareSDKPlatforms.wechatSession, (SSDKResponseState state,
         Map user, SSDKError error) {
       showAlert(state, user != null ? user : error.rawData, context);
     });
@@ -284,6 +314,24 @@ class _HomePageState extends State<HomePage> {
             ));
   }
 
+void showAlertText(String title, String content, BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) =>
+            CupertinoAlertDialog(
+                title: new Text(title),
+                content: new Text(content != null ? content : ""),
+                actions: <Widget>[
+                  new FlatButton(
+                    child: new Text("OK"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  )
+                ]
+            ));
+  }
+
   Widget _creatRow(String methodName, String methodDes, Function method,
       BuildContext context) {
     return new GestureDetector(
@@ -360,8 +408,10 @@ class _HomePageState extends State<HomePage> {
       body: new ListView(
         padding: EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
         children: <Widget>[
+          _creatRow("ShareSDK版本号", "ShareSDK版本号", shareSdkVersion, context),
           _creatRow("分享到微信", "分享图片到微信", shareToWechat, context),
           _creatRow("微信授权", "微信授权(不返回用户数据)", authToWechat, context),
+          _creatRow("微信用户信息", "获取微信用户信息", getUserInfoToWechat, context),
           _creatRow("新浪分享", "分享多图到新浪微博", shareToSina, context),
           _creatRow("新浪/QQ授权", "新浪/QQ授权(返回用户数据)", authToSina, context),
           _creatRow("弹出分享菜单", "弹出分享菜单", showShareMenu, context),
