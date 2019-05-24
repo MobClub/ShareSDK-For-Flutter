@@ -28,3 +28,7 @@
 
 ## 1.1.1
 * Get user information interface new return token field
+
+##1.1.2
+*   IOS：Fixed an invalid API for getUserInfo on iOS
+*  Android: Return personal information to add a new database field
