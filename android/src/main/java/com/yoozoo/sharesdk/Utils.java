@@ -20,37 +20,37 @@ public class Utils {
             case "1":
                 return SinaWeibo.NAME;
             case "2":
-                return "tencentWeibo";
+                return "TencentWeibo";
             case "5":
-                return "douBan";
+                return "Douban";
             case "6":
                 return "QZone";
             case "7":
-                return "renren";
+                return "Renren";
             case "8":
-                return "kaixin";
+                return "KaiXin";
             case "10":
                 return Facebook.NAME;
             case "11":
                 return Twitter.NAME;
             case "12":
-                return "yinXiang";
+                return "Evernote";
             case "14":
-                return "googlePlus";
+                return "GooglePlus";
             case "15":
-                return "instagram";
+                return "Instagram";
             case "16":
-                return "linkedIn";
+                return "LinkedIn";
             case "17":
-                return "tumblr";
+                return "Tumblr";
             case "18":
-                return "mail";
+                return "Email";
             case "19":
-                return "sms";
-            case "20":
+                return "ShortMessage";
+           /* case "20":
                 return "print";
             case "21":
-                return "copy";
+                return "copy";*/
             case "22":
                 return Wechat.NAME;  //"wechatSession";
             case "23":
@@ -58,71 +58,64 @@ public class Utils {
             case "24":
                 return QQ.NAME;
             case "25":
-                return "instapaper";
+                return "Instapaper";
             case "26":
-                return "pocket";
+                return "Pocket";
             case "27":
-                return "youdaoNote";
+                return "YouDao";
             case "30":
-                return "pinterest";
+                return "Pinterest";
             case "34":
-                return "flickr";
+                return "Flickr";
             case "35":
-                return "dropbox";
+                return "Dropbox";
             case "36":
-                return "vKontakte";
-            case "37":
-                return "weChatFavorites";
+                return "VKontakte";
+            /*case "37":
+                return "weChatFavorites";*/
             case "38":
-                return "yixinSession";
+                return "Yixin";
             case "39":
-                return "yixinTimeline";
-            case "40":
-                return "yixinFav";
+                return "YixinMoments";
+           /* case "40":
+                return "yixinFav";*/
             case "41":
-                return "mingDao";
+                return "Mingdao";
             case "42":
-                return "line";
+                return "Line";
             case "43":
-                return "whatsApp";
+                return "WhatsApp";
             case "44":
-                return "kakaoTalk";
+                return "KakaoTalk";
             case "45":
-                return "kakaoStory";
+                return "KakaoStory";
             case "46":
-                return "messenger";
+                return "FacebookMessenger";
             case "47":
-                return "telegram";
+                return "Telegram";
             case "50":
-                return "aliSocial";
+                return "Alipay";
             case "51":
-                return "aliSocialTimeline";
+                return "AlipayMoments";
             case "52":
-                return "dingding";
+                return "Dingding";
             case "54":
-                return "meiPai";
+                return "Meipai";
             case "55":
-                return "cmcc";
+                return "Cmcc";
             case "56":
-                return "reddit";
-            case "994":
+                return "Reddit";
+           /* case "994":
                 return "yixinSeries";
             case "995":
                 return "kakaoSeries";
             case "997":
                 return "wechatSeries";
             case "998":
-                return "qqSeries";
+                return "qqSeries";*/
         }
         return null;
     }
-   public enum platParams{
-       sina("SDF", 2);
-
-       platParams(String sdf, int i) {
-
-       }
-   }
 
     private void initPlat(String platId, String  platName) {
         if (platName != null && platId != null) {
