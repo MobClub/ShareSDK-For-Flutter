@@ -77,6 +77,7 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
                 getUserInfoWithArgs(call, result);
                 break;
             case PluginMethodRegist:
+                regist(call, result);
                 Log.e("SharesdkPlugin", " test " + call.method.toString() + " 核对 " + PluginMethodRegist);
                 break;
             case PluginMethodActivePlatforms:
@@ -96,6 +97,17 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
             default:
                 break;
         }
+    }
+
+    private void regist(MethodCall call, final Result result) {
+        HashMap<String, Object> map = call.arguments();
+        String num = String.valueOf(map.get("platform"));
+        String platName = Utils.platName(num);
+
+        //TODO TEST
+        //Log.e("WWW", " 测试平台名称==> num:  " + num + " platName: " + platName);
+
+
     }
 
     /** 分享 **/
@@ -392,15 +404,25 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
                 public void onError(Platform platform, int i, Throwable throwable) {
                     Map<String, Object> map = new HashMap<>();
                     map.put("state", 2);
-                    map.put("error", throwable.getMessage());
-                    result.error(null, null, map);
+                    HashMap<String, Object> errorMap = new HashMap<>();
+
+                    if (throwable.getMessage() != null) {
+                        errorMap.put("error", String.valueOf(throwable.getMessage()));
+                    } else if (throwable.getCause() != null) {
+                        errorMap.put("error", String.valueOf(throwable.getCause()));
+                    } else if (throwable != null) {
+                        errorMap.put("error", String.valueOf(throwable));
+                    }
+                    map.put("error", errorMap);
+                    result.success(map);
                 }
 
                 @Override
                 public void onCancel(Platform platform, int i) {
                     Map<String, Object> map = new HashMap<>();
                     map.put("state", 3);
-                    result.error(null, null, map);
+                    result.success(map);
+                    //result.error(null, null, map);
                 }
             });
             //platform.SSOSetting(true);
@@ -477,10 +499,15 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
             platform.setPlatformActionListener(new PlatformActionListener() {
                 @Override
                 public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+
+
                     String text = StrUtils.format("", hashMap);
                     HashMap<String, Object> userMap = new HashMap<>();
                     userMap.put("user", hashMap);
                     userMap.put("state", 1);
+                    if (platform.getDb().exportData() != null) {
+                        hashMap.put("dbInfo", platform.getDb().exportData());
+                    }
                     //新增token
                     hashMap.put("token", platform.getDb().getToken());
                     result.success(userMap);
@@ -488,17 +515,29 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
 
                 @Override
                 public void onError(Platform platform, int i, Throwable throwable) {
-                    Map<String, Object> map = new HashMap<>();
+                    HashMap<String, Object> map = new HashMap<>();
                     map.put("state", 2);
-                    map.put("error", throwable.getMessage());
-                    result.error(null, null, map);
+
+                    HashMap<String, Object> errorMap = new HashMap<>();
+
+                    if (throwable.getMessage() != null) {
+                        errorMap.put("error", String.valueOf(throwable.getMessage()));
+                    } else if (throwable.getCause() != null) {
+                        errorMap.put("error", String.valueOf(throwable.getCause()));
+                    } else if (throwable != null) {
+                        errorMap.put("error", String.valueOf(throwable));
+                    }
+                    map.put("error", errorMap);
+                    result.success(map);
+                    //result.error(null, null, map);
                 }
 
                 @Override
                 public void onCancel(Platform platform, int i) {
                     Map<String, Object> map = new HashMap<>();
                     map.put("state", 3);
-                    result.error(null, null, map);
+                    result.success(map);
+                    //result.error(null, null, map);
                 }
             });
         }
