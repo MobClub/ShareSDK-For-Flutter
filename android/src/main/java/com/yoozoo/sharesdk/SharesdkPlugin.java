@@ -496,6 +496,11 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
     private void doUserInfo(Platform platform,final Result result) {
         if (platform != null) {
             platform.showUser(null);
+            //add 2019.06.13
+            if (platform.isAuthValid()) {
+                platform.removeAccount(true);
+            }
+
             platform.setPlatformActionListener(new PlatformActionListener() {
                 @Override
                 public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
