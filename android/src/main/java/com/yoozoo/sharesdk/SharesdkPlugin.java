@@ -3,6 +3,7 @@ package com.yoozoo.sharesdk;
 import android.text.TextUtils;
 import android.util.Log;
 import com.mob.MobSDK;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.text.SimpleDateFormat;
@@ -14,7 +15,6 @@ import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
-import cn.sharesdk.wechat.friends.Wechat;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
@@ -77,8 +77,7 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
                 getUserInfoWithArgs(call, result);
                 break;
             case PluginMethodRegist:
-                regist(call, result);
-                Log.e("SharesdkPlugin", " test " + call.method.toString() + " 核对 " + PluginMethodRegist);
+                Log.e("SharesdkPlugin", " Android no need this method, Please use gradle set ");
                 break;
             case PluginMethodActivePlatforms:
                 //IOS only
@@ -97,17 +96,6 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
             default:
                 break;
         }
-    }
-
-    private void regist(MethodCall call, final Result result) {
-        HashMap<String, Object> map = call.arguments();
-        String num = String.valueOf(map.get("platform"));
-        String platName = Utils.platName(num);
-
-        //TODO TEST
-        //Log.e("WWW", " 测试平台名称==> num:  " + num + " platName: " + platName);
-
-
     }
 
     /** 分享 **/
@@ -329,7 +317,7 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
         String path =String.valueOf(map.get("path"));
         String userName =String.valueOf(map.get("userName"));
 
-        Platform wexin = ShareSDK.getPlatform(Wechat.NAME);
+        Platform wexin = ShareSDK.getPlatform("Wechat");
         Platform.ShareParams sp = new Platform.ShareParams();
         sp.setWxUserName(userName);
         sp.setWxPath(path);
