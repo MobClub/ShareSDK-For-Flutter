@@ -66,12 +66,11 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
                 authWithArgs(call, result);
                 break;
             case PluginMethodHasAuthed:
-                Log.e("SharesdkPlugin", " PluginMethodHasAuthed IOS platform only");
-                //IOS only
+                hasAuthed(call, result);
                 break;
             case PluginMethodCancelAuth:
+                cancelAuth(call, result);
                 Log.e("SharesdkPlugin", " PluginMethodCancelAuth IOS platform only");
-                //IOS only
                 break;
             case PluginMethodGetUserInfo:
                 getUserInfoWithArgs(call, result);
@@ -364,7 +363,6 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
     private void authWithArgs(MethodCall call, Result result) {
         HashMap<String, Object> params = call.arguments();
         String num = String.valueOf(params.get("platform"));
-        String settings = String.valueOf(params.get("settings"));
 
         String platStr = Utils.platName(num);
         Platform platName = ShareSDK.getPlatform(platStr);
@@ -414,6 +412,60 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
             });
             //platform.SSOSetting(true);
             platform.authorize();
+        }
+    }
+
+    /** 取消授权 **/
+    private void cancelAuth(MethodCall call, Result result) {
+        String platStr = Utils.platName(String.valueOf(call.arguments()));
+        Platform platform = ShareSDK.getPlatform(platStr);
+
+        if (platform != null) {
+            if (platform.isAuthValid()) {
+                platform.removeAccount(true);
+                Log.e("QQQ", " 我已经取消了授权 ");
+                Map<String, Object> map = new HashMap<>();
+                map.put("state", 1);
+                result.success(map);
+            } else {
+                Log.e("QQQ", " 您还没有授权，请先授权 ");
+                Map<String, Object> map = new HashMap<>();
+                map.put("state", 2);
+                HashMap<String, Object> errorMap = new HashMap<>();
+                errorMap.put("error", "您还没有授权，请先授权");
+                map.put("error", errorMap);
+                result.success(map);
+            }
+        }
+    }
+
+    /** 判断是否授权 **/
+    private void hasAuthed(MethodCall call, Result result) {
+        String platStr = Utils.platName(String.valueOf(call.arguments));
+        Platform platform = ShareSDK.getPlatform(platStr);
+        if (platform != null) {
+            if (platform.isAuthValid()) {
+                Map<String, Object> map = new HashMap<>();
+                map.put("state", 1);
+                HashMap<String, Object> reMap = new HashMap<>();
+                reMap.put("true", "授权了");
+                map.put("user", reMap);
+                result.success(map);
+            } else {
+                Map<String, Object> map = new HashMap<>();
+                map.put("state", 2);
+                HashMap<String, Object> reMap = new HashMap<>();
+                reMap.put("false", "没有授权");
+                map.put("error", reMap);
+                result.success(map);
+            }
+        } else {
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("state", 2);
+            HashMap<String, Object> errorMap = new HashMap<>();
+            errorMap.put("error", "平台为空");
+            map.put("error", errorMap);
+            result.success(map);
         }
     }
 
@@ -491,9 +543,6 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
             platform.setPlatformActionListener(new PlatformActionListener() {
                 @Override
                 public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
-
-
-                    String text = StrUtils.format("", hashMap);
                     HashMap<String, Object> userMap = new HashMap<>();
                     userMap.put("user", hashMap);
                     userMap.put("state", 1);
