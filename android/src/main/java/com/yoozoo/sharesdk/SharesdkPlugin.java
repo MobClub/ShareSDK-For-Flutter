@@ -378,7 +378,6 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
         if (platform != null) {
             if (platform.isAuthValid()) {
                 platform.removeAccount(true);
-                return;
             }
             platform.setPlatformActionListener(new PlatformActionListener() {
                 @Override
