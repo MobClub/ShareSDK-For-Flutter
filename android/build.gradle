@@ -1,7 +1,8 @@
 group 'com.yoozoo.sharesdk'
 version '1.0-SNAPSHOT'
 apply plugin: 'com.android.library'
-apply from: 'MobSDK.gradle'
+//apply from: 'MobSDK.gradle'
+apply plugin: 'com.mob.sdk'
 
 buildscript {
     repositories {
@@ -54,6 +55,12 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+}
+
+MobSDK {
+    ShareSDK {
+
+    }
 }
 
 def localProperties = new Properties()
