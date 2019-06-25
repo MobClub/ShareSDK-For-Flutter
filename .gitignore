@@ -22,6 +22,7 @@ build/
 .idea/dictionaries
 .idea/libraries
 .idea/caches
+.idea
 
 # generated files
 bin/
