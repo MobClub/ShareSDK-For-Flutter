@@ -2,13 +2,6 @@ package com.yoozoo.sharesdk;
 
 import java.util.HashMap;
 
-import cn.sharesdk.facebook.Facebook;
-import cn.sharesdk.sina.weibo.SinaWeibo;
-import cn.sharesdk.tencent.qq.QQ;
-import cn.sharesdk.twitter.Twitter;
-import cn.sharesdk.wechat.friends.Wechat;
-import cn.sharesdk.wechat.moments.WechatMoments;
-
 /**
  * Created by xiangli on 2018/11/29.
  */
@@ -18,7 +11,7 @@ public class Utils {
     public static String platName(String platId) {
         switch (platId) {
             case "1":
-                return SinaWeibo.NAME;
+                return "SinaWeibo";
             case "2":
                 return "TencentWeibo";
             case "5":
@@ -30,9 +23,9 @@ public class Utils {
             case "8":
                 return "KaiXin";
             case "10":
-                return Facebook.NAME;
+                return "Facebook";
             case "11":
-                return Twitter.NAME;
+                return "Twitter";
             case "12":
                 return "Evernote";
             case "14":
@@ -52,11 +45,11 @@ public class Utils {
             case "21":
                 return "copy";*/
             case "22":
-                return Wechat.NAME;  //"wechatSession";
+                return "Wechat";  //"wechatSession";
             case "23":
-                return WechatMoments.NAME; //"wechatTimeline"
+                return "WechatMoments"; //"wechatTimeline"
             case "24":
-                return QQ.NAME;
+                return "QQ";
             case "25":
                 return "Instapaper";
             case "26":
