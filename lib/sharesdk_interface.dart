@@ -70,15 +70,31 @@ class ShareSDK {
   }
 
   /// 判断是否授权
-  static Future<dynamic> hasAuthed(ShareSDKPlatform platform) async {
-    return await _channel.invokeMethod(
+  static Future<dynamic> hasAuthed(ShareSDKPlatform platform,
+      Function(SSDKResponseState, Map, SSDKError) result) {
+    Future<dynamic> callback = _channel.invokeMethod(
         ShareSDKMethods.hasAuthed.name, platform.id);
+    callback.then((dynamic response) {
+      if(result != null) {
+        result(_state(response), response["user"],
+                SSDKError(rawData: response["error"]));
+      }
+    });
+
   }
 
   /// 取消授权
-  static Future<dynamic> cancelAuth(ShareSDKPlatform platform) async {
-    return await _channel.invokeMethod(
+  static Future<dynamic> cancelAuth(ShareSDKPlatform platform,
+      Function(SSDKResponseState, Map, SSDKError) result) {
+    Future<dynamic> callback = _channel.invokeMethod(
         ShareSDKMethods.cancelAuth.name, platform.id);
+    callback.then((dynamic response) {
+      if(result != null) {
+        result(_state(response), response["user"],
+              SSDKError(rawData: response["error"]));
+      }
+    });
+
   }
 
   /// 获取用户信息
