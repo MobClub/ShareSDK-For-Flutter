@@ -71,6 +71,20 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void cancelAuth(BuildContext context) {
+   ShareSDK.cancelAuth(ShareSDKPlatforms.wechatSession,
+      (SSDKResponseState state, Map user, SSDKError error) {
+        showAlert(state, error.rawData, context);
+      });
+  }
+
+  void hasAuthed(BuildContext context) {
+    ShareSDK.hasAuthed(ShareSDKPlatforms.wechatSession,
+    (SSDKResponseState state, Map user, SSDKError error) {
+      showAlert(state, error.rawData, context);
+    });
+  }
+
   void shareToSina(BuildContext context) {
     SSDKMap params = SSDKMap()
       ..setGeneral(
@@ -411,6 +425,8 @@ void showAlertText(String title, String content, BuildContext context) {
           _creatRow("ShareSDK版本号", "ShareSDK版本号", shareSdkVersion, context),
           _creatRow("分享到微信", "分享图片到微信", shareToWechat, context),
           _creatRow("微信授权", "微信授权(不返回用户数据)", authToWechat, context),
+          _creatRow("取消微信授权", "取消微信平台的授权", cancelAuth, context),
+          _creatRow("判断微信是否授权", "判断微信平台是否授权", hasAuthed, context),
           _creatRow("微信用户信息", "获取微信用户信息", getUserInfoToWechat, context),
           _creatRow("新浪分享", "分享多图到新浪微博", shareToSina, context),
           _creatRow("新浪/QQ授权", "新浪/QQ授权(返回用户数据)", authToSina, context),
