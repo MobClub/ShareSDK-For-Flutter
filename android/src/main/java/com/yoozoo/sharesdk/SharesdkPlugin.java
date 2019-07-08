@@ -58,6 +58,7 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
     public void onMethodCall(MethodCall call, Result result) {
         switch (call.method) {
             case PluginMethodGetVersion:
+                getVersion(call, result);
                 break;
             case PluginMethodShare:
                 shareWithArgs(call, result);
@@ -95,6 +96,13 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
             default:
                 break;
         }
+    }
+
+    /** 获取版本 **/
+    private void getVersion(MethodCall call, Result result) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("版本号", "3.6.2");
+        result.success(map);
     }
 
     /** 分享 **/
@@ -294,6 +302,17 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
             public void onError(Platform platform, int i, Throwable throwable) {
                 Map<String, Object> map = new HashMap<>();
                 map.put("state", 2);
+
+                HashMap<String, Object> errorMap = new HashMap<>();
+                if (throwable.getMessage() != null) {
+                    errorMap.put("error", String.valueOf(throwable.getMessage()));
+                } else if (throwable.getCause() != null) {
+                    errorMap.put("error", String.valueOf(throwable.getCause()));
+                } else if (throwable != null) {
+                    errorMap.put("error", String.valueOf(throwable));
+                }
+                map.put("error", errorMap);
+
                 result.success(map);
             }
 
