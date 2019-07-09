@@ -101,7 +101,7 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
     /** 获取版本 **/
     private void getVersion(MethodCall call, Result result) {
         Map<String, Object> map = new HashMap<>();
-        map.put("版本号", "3.6.2");
+        map.put("版本号", "3.6.1");
         result.success(map);
     }
 
