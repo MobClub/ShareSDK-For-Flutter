@@ -35,14 +35,16 @@ class ShareSDKMethods {
   static final ShareSDKMethod getUserInfo =
       ShareSDKMethod(name: "getUserInfo", id: 5);
   static final ShareSDKMethod regist = ShareSDKMethod(name: "regist", id: 6);
-  static final ShareSDKMethod activePlatforms =
-      ShareSDKMethod(name: "activePlatforms", id: 7);
   static final ShareSDKMethod showMenu =
       ShareSDKMethod(name: "showMenu", id: 7);
   static final ShareSDKMethod showEditor =
       ShareSDKMethod(name: "showEditor", id: 8);
   static final ShareSDKMethod openMiniProgram =
       ShareSDKMethod(name: "openMiniProgram", id: 9);
+  static final ShareSDKMethod activePlatforms =
+      ShareSDKMethod(name: "activePlatforms", id: 10);
+  static final ShareSDKMethod isClientInstalled =
+      ShareSDKMethod(name: "isClientInstalled", id: 11);
 }
 
 class ShareSDKPlatform {

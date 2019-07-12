@@ -1,6 +1,8 @@
 #import "SharesdkPlugin.h"
-#import <ShareSDK/ShareSDK.h>
-#import <ShareSDK/ShareSDK+Base.h>
+#import <ShareSDK/ShareSDKHeader.h>
+#import <ShareSDKExtension/ShareSDK+Extension.h>
+// #import <ShareSDK/ShareSDK.h>
+// #import <ShareSDK/ShareSDK+Base.h>
 #import <objc/message.h>
 
 typedef NS_ENUM(NSUInteger, PluginMethod) {
@@ -11,10 +13,11 @@ typedef NS_ENUM(NSUInteger, PluginMethod) {
     PluginMethodCancelAuth,
     PluginMethodGetUserInfo,
     PluginMethodRegist,
-    PluginMethodActivePlatforms,
     PluginMethodShowMenu,
     PluginMethodShowEditor,
-    PluginMethodOpenMiniProgram
+    PluginMethodOpenMiniProgram,
+    PluginMethodActivePlatforms,
+    PluginMethodIsClientInstalled,
 };
 
 @interface SharesdkPlugin()
@@ -38,7 +41,8 @@ typedef NS_ENUM(NSUInteger, PluginMethod) {
                            @"activePlatforms":@(PluginMethodActivePlatforms),
                            @"showEditor":@(PluginMethodShowEditor),
                            @"showMenu":@(PluginMethodShowMenu),
-                           @"openMiniProgram":@(PluginMethodOpenMiniProgram)
+                           @"openMiniProgram":@(PluginMethodOpenMiniProgram),
+                           @"isClientInstalled":@(PluginMethodIsClientInstalled)
                            };
   [registrar addMethodCallDelegate:instance channel:channel];
 }
@@ -82,6 +86,9 @@ typedef NS_ENUM(NSUInteger, PluginMethod) {
                 break;
             case PluginMethodOpenMiniProgram:
                 [self _openMiniProgramWithArgs:call.arguments result:result];
+                break;
+            case PluginMethodIsClientInstalled:
+                [self _isClientInstalledWithArgs:call.arguments result:result];
                 break;
             default:
                 NSAssert(NO, @"The method requires an implementation ！");
@@ -326,6 +333,12 @@ typedef NS_ENUM(NSUInteger, PluginMethod) {
     SEL openMiniProgramSEL = NSSelectorFromString(@"openMiniProgramWithUserName:path:miniProgramType:");
     BOOL opened = ((BOOL(*)(id,SEL,NSString *,NSString *,int))objc_msgSend)(connector,openMiniProgramSEL,args[@"userName"],args[@"path"],[args[@"type"] intValue]);
     result(@(opened));
+}
+
+- (void)_isClientInstalledWithArgs:(NSDictionary *)args result:(FlutterResult)result
+{
+    SSDKPlatformType type = [args[@"platform"] integerValue];
+    result(@([ShareSDK isClientInstalled:type]));
 }
 
 @end
