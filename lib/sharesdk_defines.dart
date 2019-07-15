@@ -44,7 +44,7 @@ class ShareSDKMethods {
   static final ShareSDKMethod activePlatforms =
       ShareSDKMethod(name: "activePlatforms", id: 10);
   static final ShareSDKMethod isClientInstalled =
-      ShareSDKMethod(name: "isClientInstalled", id: 11);
+      ShareSDKMethod(name: "isClientInstalled", id: 11);//只iOS支持
 }
 
 class ShareSDKPlatform {
