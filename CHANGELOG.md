@@ -35,3 +35,4 @@
 
 ## 1.1.3
 * iOS：Added access interface to judge whether the client exists or not
+* Android：fix bug
