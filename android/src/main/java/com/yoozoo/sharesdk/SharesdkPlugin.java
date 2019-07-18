@@ -563,13 +563,15 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
                 @Override
                 public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
                     HashMap<String, Object> userMap = new HashMap<>();
+
+                    if (platform.getDb().exportData() != null) {
+                        hashMap.clear();
+                        hashMap.put("dbInfo", platform.getDb().exportData());
+                    } else {
+                        hashMap.put("token", platform.getDb().getToken());
+                    }
                     userMap.put("user", hashMap);
                     userMap.put("state", 1);
-                    if (platform.getDb().exportData() != null) {
-                        hashMap.put("dbInfo", platform.getDb().exportData());
-                    }
-                    //新增token
-                    hashMap.put("token", platform.getDb().getToken());
                     result.success(userMap);
                 }
 
