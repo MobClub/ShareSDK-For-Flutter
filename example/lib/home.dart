@@ -292,6 +292,11 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void isClientInstalledQQ(BuildContext context) {
+    ShareSDK.isClientInstalled(ShareSDKPlatforms.qq).then((dynamic hasClient) {
+      showAlertText("是否安装了QQ客户端", hasClient.toString(), context);
+    });
+  }
 
   void showAlert(SSDKResponseState state, Map content, BuildContext context) {
     print("--------------------------> state:" + state.toString());
@@ -440,6 +445,7 @@ void showAlertText(String title, String content, BuildContext context) {
           _creatRow("分享到QQ", "测试自定义参数", shareQQCustom, context),
           _creatRow("分享到Twitter", "测试自定义参数", shareTwitterCustom, context),
           _creatRow("分享到Facebook", "测试自定义参数", shareFacebookCustom, context),
+          _creatRow("判断客户端安装", "是否安装了QQ客户端", isClientInstalledQQ, context)
         ],
       ),
     );

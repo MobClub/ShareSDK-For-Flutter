@@ -184,6 +184,12 @@ class ShareSDK {
         ShareSDKMethods.openMiniProgram.name, args);
   }
 
+  /// 判断是否安装了客户端
+  static Future<dynamic> isClientInstalled(ShareSDKPlatform platform) async {
+    Map args = {"platform": platform.id};
+    return await _channel.invokeMethod(ShareSDKMethods.isClientInstalled.name, args);
+  }
+
   static SSDKResponseState _state(Map response) {
     SSDKResponseState state = SSDKResponseState.Unknown;
     switch (response["state"]) {

@@ -30,5 +30,9 @@
 * Get user information interface new return token field
 
 ## 1.1.2
-* IOS：Fixed an invalid API for getUserInfo on iOS
+* iOS：Fixed an invalid API for getUserInfo on iOS
 * Android: Return personal information to add a new database field
+
+## 1.1.3
+* iOS：Added access interface to judge whether the client exists or not
+* Android：fix bug
