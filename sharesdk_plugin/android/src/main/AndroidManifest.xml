@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yoozoo.sharesdk">
+
+    <application>
+
+        <meta-data
+            android:name="Mob-AppKey"
+            android:value="moba6b6c6d6" />
+        <meta-data
+            android:name="Mob-AppSecret"
+            android:value="b89d2427a3bc7ad1aea1e1e8c1d36bf3" />
+    </application>
+
+</manifest>
