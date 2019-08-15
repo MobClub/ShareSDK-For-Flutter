@@ -36,3 +36,7 @@
 ## 1.1.3
 * iOS：Added access interface to judge whether the client exists or not
 * Android：fix bug
+
+## 1.1.4
+
+* Remake new plugin for iOS Swift project support. We strongly recommended you use the new [sharesdk_plugin](https://pub.dev/packages/sharesdk_plugin) . Thank you !
