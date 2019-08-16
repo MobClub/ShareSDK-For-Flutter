@@ -10,7 +10,7 @@
 
 **简介：** http://www.mob.com/product/sharesdk
 
-**插件主页：** https://pub.dartlang.org/packages/sharesdk
+**插件主页：** https://pub.dartlang.org/packages/sharesdk_plugin
 
 **官网文档：** http://wiki.mob.com/快速集成/
 
