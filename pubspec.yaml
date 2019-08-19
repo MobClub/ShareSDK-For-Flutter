@@ -1,7 +1,7 @@
 name: sharesdk
 description: ShareSDK is a social sharing component that provides social functions for apps, like authorization and share, and has social statistical analysis management background.
-version: 1.1.4
-author: Max<vhbvbqc@gmail.com>
+version: 1.1.8
+author: lishuzhi1121 <lishuzhi1121@163.com>
 homepage: https://www.mob.com/product/sharesdk
 
 environment:

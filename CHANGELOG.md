@@ -40,3 +40,11 @@
 ## 1.1.4
 
 * Remake new plugin for iOS Swift project support. We strongly recommended you use the new [sharesdk_plugin](https://pub.dev/packages/sharesdk_plugin) . Thank you !
+
+## 1.1.7
+
+* update for remake.
+
+## 1.1.8
+
+* update README
