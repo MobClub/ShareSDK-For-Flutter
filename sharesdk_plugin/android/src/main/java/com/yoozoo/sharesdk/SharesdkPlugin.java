@@ -25,7 +25,7 @@ import io.flutter.plugin.common.PluginRegistry;
 /**
  * SharesdkPlugin
  */
-public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHandler {
+public class SharesdkPlugin implements MethodCallHandler {
 
     private static final String PluginMethodGetVersion = "getVersion";
     private static final String PluginMethodShare = "share";
@@ -50,8 +50,8 @@ public class SharesdkPlugin implements EventChannel.StreamHandler,MethodCallHand
         final MethodChannel channel = new MethodChannel(registrar.messenger(), "com.yoozoo.mob/sharesdk");
         channel.setMethodCallHandler(new SharesdkPlugin());
 
-        eventChannel = new EventChannel(registrar.messenger(), EVENTCHANNEL);
-        eventChannel.setStreamHandler(new SharesdkPlugin());
+        //eventChannel = new EventChannel(registrar.messenger(), EVENTCHANNEL);
+        //eventChannel.setStreamHandler(new SharesdkPlugin());
     }
 
     @Override
