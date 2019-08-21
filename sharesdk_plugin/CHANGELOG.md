@@ -10,3 +10,7 @@
 
 * iOS：Support all API & release for swift & bug fix.
 * Android：Remove useless interface & bug fix.
+
+## 1.1.1
+
+* Update androidPackage to com.yoozoo.sharesdk
