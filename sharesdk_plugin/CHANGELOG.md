@@ -14,3 +14,7 @@
 ## 1.1.1
 
 * Update androidPackage to com.yoozoo.sharesdk
+
+## 1.1.1
+
+* Update android support
