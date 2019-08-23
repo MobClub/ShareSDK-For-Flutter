@@ -43,6 +43,8 @@ public class SharesdkPlugin implements MethodCallHandler {
     private static EventChannel eventChannel;
     private EventChannel.EventSink eventSink;
 
+    private static final String TAG = "SHARESDK";
+
     /**
      * Plugin registration.
      */
@@ -101,7 +103,7 @@ public class SharesdkPlugin implements MethodCallHandler {
     /** 获取版本 **/
     private void getVersion(MethodCall call, Result result) {
         Map<String, Object> map = new HashMap<>();
-        map.put("版本号", "3.6.1");
+        map.put("版本号", "3.6.6");
         result.success(map);
     }
 
@@ -296,6 +298,7 @@ public class SharesdkPlugin implements MethodCallHandler {
                 Map<String, Object> map = new HashMap<>();
                 map.put("state", 1);
                 result.success(map);
+                Log.e(TAG, " onComplete===> " + map);
             }
 
             @Override
@@ -312,8 +315,8 @@ public class SharesdkPlugin implements MethodCallHandler {
                     errorMap.put("error", String.valueOf(throwable));
                 }
                 map.put("error", errorMap);
-
                 result.success(map);
+                Log.e(TAG, " onError===> " + map);
             }
 
             @Override
@@ -321,6 +324,7 @@ public class SharesdkPlugin implements MethodCallHandler {
                 Map<String, Object> map = new HashMap<>();
                 map.put("state", 3);
                 result.success(map);
+                Log.e(TAG, " onCancel===> " + map);
             }
         });
         platform.share(shareParams);
@@ -399,9 +403,14 @@ public class SharesdkPlugin implements MethodCallHandler {
             platform.setPlatformActionListener(new PlatformActionListener() {
                 @Override
                 public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
-                    Map<String, Object> map = new HashMap<>();
-                    map.put("state", 1);
-                    result.success(map);
+                    try {
+                        Map<String, Object> map = new HashMap<>();
+                        map.put("state", 1);
+                        result.success(map);
+                        Log.e(TAG, "doAuthorize onComplete()===> " + map);
+                    } catch (Throwable t) {
+                        Log.e(TAG, "doAuthorize onComplete() catch===> " + t);
+                    }
                 }
 
                 @Override
@@ -419,6 +428,7 @@ public class SharesdkPlugin implements MethodCallHandler {
                     }
                     map.put("error", errorMap);
                     result.success(map);
+                    Log.e(TAG, "doAuthorize onError()===> " + map);
                 }
 
                 @Override
@@ -426,6 +436,7 @@ public class SharesdkPlugin implements MethodCallHandler {
                     Map<String, Object> map = new HashMap<>();
                     map.put("state", 3);
                     result.success(map);
+                    Log.e(TAG, "doAuthorize onCancel()===> " + map);
                     //result.error(null, null, map);
                 }
             });
@@ -573,6 +584,7 @@ public class SharesdkPlugin implements MethodCallHandler {
                     userMap.put("user", hashMap);
                     userMap.put("state", 1);
                     result.success(userMap);
+                    Log.e(TAG, "doUserInfo onComplete" + userMap);
                 }
 
                 @Override
@@ -592,6 +604,7 @@ public class SharesdkPlugin implements MethodCallHandler {
                     map.put("error", errorMap);
                     result.success(map);
                     //result.error(null, null, map);
+                    Log.e(TAG, "doUserInfo onError" + map);
                 }
 
                 @Override
@@ -600,6 +613,7 @@ public class SharesdkPlugin implements MethodCallHandler {
                     map.put("state", 3);
                     result.success(map);
                     //result.error(null, null, map);
+                    Log.e(TAG, "doUserInfo onCancel" + map);
                 }
             });
         }
