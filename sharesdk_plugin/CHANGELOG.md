@@ -18,3 +18,11 @@
 ## 1.1.1
 
 * Update android support
+
+## 1.1.2
+
+* Android bug fix.
+
+## 1.1.3
+
+* Android bug fix.
