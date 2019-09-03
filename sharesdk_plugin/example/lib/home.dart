@@ -32,6 +32,33 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  //微信分享文件示例
+/* void shareToWechat(BuildContext context) {
+   SSDKMap params = SSDKMap()
+     ..setWechat(
+         "title",
+         "text",
+         null,
+         null,
+         null,
+         null,
+         null,
+         "http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg",
+         "/storage/emulated/0/Mob/cn.sharesdk.demo/cache/images/aa.jpg",
+         null,
+         null,
+         null,
+         SSDKContentTypes.file,
+         ShareSDKPlatforms.wechatSession
+     );
+
+   SharesdkPlugin.share(
+       ShareSDKPlatforms.wechatSession, params, (SSDKResponseState state,
+       Map userdata, Map contentEntity, SSDKError error) {
+     showAlert(state, error.rawData, context);
+   });
+ }*/
+
   void shareToWechat(BuildContext context) {
     SSDKMap params = SSDKMap()
       ..setGeneral(
