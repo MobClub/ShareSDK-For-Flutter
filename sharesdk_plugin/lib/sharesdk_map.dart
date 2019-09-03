@@ -125,6 +125,7 @@ class SSDKMap {
       dynamic images,
       String musicFileURL,
       String extInfo,
+      String imageUrl,
       String fileData,
       String emoticonData,
       String fileExtension,
@@ -144,7 +145,7 @@ class SSDKMap {
     params[kWeChatFileExtension] = fileExtension;
     params[kWeChatFile] = sourceFileData;
     params[kEmoticon] = emoticonData;
-
+    params[kImageUrlAndroid] = imageUrl;
     int id = subPlatform.id;
     map["@platform($id)"] = params;
   }
@@ -244,8 +245,8 @@ class SSDKMap {
     params[kLong] = longitude;
     params[kWeiboIsStory] = isStory;
     params[kWeiboObjectId] = objectId;
-    params[kImagePathAndroid] = imageUrl;
-    params[kImageUrlAndroid] = imagePath;
+    params[kImagePathAndroid] = imagePath;
+    params[kImageUrlAndroid] = imageUrl;
 
     int id = ShareSDKPlatforms.sina.id;
     map["@platform($id)"] = params;
