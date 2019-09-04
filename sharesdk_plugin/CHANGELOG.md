@@ -26,3 +26,7 @@
 ## 1.1.3
 
 * Android bug fix.
+
+## 1.1.4
+
+* Android add wechat file share
