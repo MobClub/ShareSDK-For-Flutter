@@ -6,11 +6,11 @@
 **supported original ShareSDK minimum version:**
 
 - [Android](https://github.com/MobClub/ShareSDK-for-Android) - V3.4.0
-- [iOS](https://github.com/MobClub/ShareSDK-for-iOS) - V4.2.1
+- [iOS](https://github.com/MobClub/ShareSDK-for-iOS) - V4.3.2
 
 **introduce:** http://www.mob.com/product/sharesdk
 
-**plugin homepage:** https://pub.dartlang.org/packages/sharesdk
+**plugin homepage:** https://pub.dartlang.org/packages/sharesdk_plugin
 
 **official document:** http://wiki.mob.com/快速集成/
 

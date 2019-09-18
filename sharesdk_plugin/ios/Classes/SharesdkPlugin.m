@@ -145,14 +145,34 @@ typedef NS_ENUM(NSUInteger, PluginMethod) {
 
 - (void)_hasAuthedWithArgs:(NSNumber *)args result:(FlutterResult)result
 {
-    result(@([ShareSDK hasAuthorized:args.integerValue]));
+    NSInteger state = SSDKResponseStateFail;
+    BOOL hasAuthed = [ShareSDK hasAuthorized:args.integerValue];
+    if (hasAuthed)
+    {
+        state = SSDKResponseStateSuccess;
+    }
+    NSDictionary *dic = @{
+                          @"state":@(state),
+                          @"user":[NSNull null],
+                          @"error":[NSNull null]
+                          };
+    result(dic);
 }
 
 - (void)_cancelAuthWithArgs:(NSNumber *)args result:(FlutterResult)result
 {
     [ShareSDK cancelAuthorize:args.integerValue result:^(NSError *error) {
-        
-        result([self _covertError:error]);
+        NSInteger state = SSDKResponseStateFail;
+        if (error == nil)
+        {
+            NSInteger state = SSDKResponseStateSuccess;
+        }
+        NSDictionary *dic = @{
+                              @"state":@(state),
+                              @"user":[NSNull null],
+                              @"error":[self _covertError:error]
+                              };
+        result(dic);
     }];
 }
 

@@ -6,11 +6,11 @@
 **原生SDK支持的最低版本:**
 
 - [Android](https://github.com/MobClub/ShareSDK-for-Android) - V3.4.0
-- [iOS](https://github.com/MobClub/ShareSDK-for-iOS) - V4.2.1
+- [iOS](https://github.com/MobClub/ShareSDK-for-iOS) - V4.3.2
 
 **简介：** http://www.mob.com/product/sharesdk
 
-**插件主页：** https://pub.dartlang.org/packages/sharesdk
+**插件主页：** https://pub.dartlang.org/packages/sharesdk_plugin
 
 **官网文档：** http://wiki.mob.com/快速集成/
 
