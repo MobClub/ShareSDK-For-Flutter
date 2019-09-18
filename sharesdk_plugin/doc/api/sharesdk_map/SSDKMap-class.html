@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="API docs for the SSDKMap class from the sharesdk_map library, for the Dart programming language.">
+  <title>SSDKMap class - sharesdk_map library - Dart API</title>
+  <!-- required because all the links are pseudo-absolute -->
+  <base href="..">
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500,400i,400,300|Source+Sans+Pro:400,300,700" rel="stylesheet">
+  <link rel="stylesheet" href="static-assets/github.css">
+  <link rel="stylesheet" href="static-assets/styles.css">
+  <link rel="icon" href="static-assets/favicon.png">
+
+</head>
+
+<body>
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="index.html">sharesdk</a></li>
+    <li><a href="sharesdk_map/sharesdk_map-library.html">sharesdk_map</a></li>
+    <li class="self-crumb">SSDKMap class</li>
+  </ol>
+  <div class="self-name">SSDKMap</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div class="col-xs-6 col-sm-3 col-md-2 sidebar sidebar-offcanvas-left">
+    <h5>sharesdk_map library</h5>
+    <ol>
+      <li class="section-title"><a href="sharesdk_map/sharesdk_map-library.html#classes">Classes</a></li>
+      <li><a href="sharesdk_map/SSDKMap-class.html">SSDKMap</a></li>
+    
+      <li class="section-title"><a href="sharesdk_map/sharesdk_map-library.html#constants">Constants</a></li>
+      <li><a href="sharesdk_map/kAlbumId-constant.html">kAlbumId</a></li>
+      <li><a href="sharesdk_map/kAndroidExecParam-constant.html">kAndroidExecParam</a></li>
+      <li><a href="sharesdk_map/kAttachments-constant.html">kAttachments</a></li>
+      <li><a href="sharesdk_map/kAudio-constant.html">kAudio</a></li>
+      <li><a href="sharesdk_map/kAudioFlashURL-constant.html">kAudioFlashURL</a></li>
+      <li><a href="sharesdk_map/kAudioUrl-constant.html">kAudioUrl</a></li>
+      <li><a href="sharesdk_map/kAuthor-constant.html">kAuthor</a></li>
+      <li><a href="sharesdk_map/kBCCRecipients-constant.html">kBCCRecipients</a></li>
+      <li><a href="sharesdk_map/kBlogName-constant.html">kBlogName</a></li>
+      <li><a href="sharesdk_map/kBoard-constant.html">kBoard</a></li>
+      <li><a href="sharesdk_map/kCCRecipients-constant.html">kCCRecipients</a></li>
+      <li><a href="sharesdk_map/kComment-constant.html">kComment</a></li>
+      <li><a href="sharesdk_map/kContentType-constant.html">kContentType</a></li>
+      <li><a href="sharesdk_map/kDeepLinkId-constant.html">kDeepLinkId</a></li>
+      <li><a href="sharesdk_map/kDesc-constant.html">kDesc</a></li>
+      <li><a href="sharesdk_map/kEmoticon-constant.html">kEmoticon</a></li>
+      <li><a href="sharesdk_map/kEnableShare-constant.html">kEnableShare</a></li>
+      <li><a href="sharesdk_map/kExtension-constant.html">kExtension</a></li>
+      <li><a href="sharesdk_map/kFacebookHashtag-constant.html">kFacebookHashtag</a></li>
+      <li><a href="sharesdk_map/kFacebookQuote-constant.html">kFacebookQuote</a></li>
+      <li><a href="sharesdk_map/kFile-constant.html">kFile</a></li>
+      <li><a href="sharesdk_map/kFolderId-constant.html">kFolderId</a></li>
+      <li><a href="sharesdk_map/kGroupId-constant.html">kGroupId</a></li>
+      <li><a href="sharesdk_map/kHidden-constant.html">kHidden</a></li>
+      <li><a href="sharesdk_map/kImages-constant.html">kImages</a></li>
+      <li><a href="sharesdk_map/kIPhoneExecParam-constant.html">kIPhoneExecParam</a></li>
+      <li><a href="sharesdk_map/kIsFamily-constant.html">kIsFamily</a></li>
+      <li><a href="sharesdk_map/kIsFriend-constant.html">kIsFriend</a></li>
+      <li><a href="sharesdk_map/kIsPublic-constant.html">kIsPublic</a></li>
+      <li><a href="sharesdk_map/kLat-constant.html">kLat</a></li>
+      <li><a href="sharesdk_map/kLong-constant.html">kLong</a></li>
+      <li><a href="sharesdk_map/kMenuDisplayX-constant.html">kMenuDisplayX</a></li>
+      <li><a href="sharesdk_map/kMenuDisplayY-constant.html">kMenuDisplayY</a></li>
+      <li><a href="sharesdk_map/kNoteBook-constant.html">kNoteBook</a></li>
+      <li><a href="sharesdk_map/kPermission-constant.html">kPermission</a></li>
+      <li><a href="sharesdk_map/kPrivacyStatus-constant.html">kPrivacyStatus</a></li>
+      <li><a href="sharesdk_map/kPrivateFromSource-constant.html">kPrivateFromSource</a></li>
+      <li><a href="sharesdk_map/kRecipients-constant.html">kRecipients</a></li>
+      <li><a href="sharesdk_map/kResolveFinalUrl-constant.html">kResolveFinalUrl</a></li>
+      <li><a href="sharesdk_map/kSafetyLevel-constant.html">kSafetyLevel</a></li>
+      <li><a href="sharesdk_map/kSource-constant.html">kSource</a></li>
+      <li><a href="sharesdk_map/kTags-constant.html">kTags</a></li>
+      <li><a href="sharesdk_map/kTemplateArgs-constant.html">kTemplateArgs</a></li>
+      <li><a href="sharesdk_map/kTemplateId-constant.html">kTemplateId</a></li>
+      <li><a href="sharesdk_map/kText-constant.html">kText</a></li>
+      <li><a href="sharesdk_map/kThumbImage-constant.html">kThumbImage</a></li>
+      <li><a href="sharesdk_map/kTitle-constant.html">kTitle</a></li>
+      <li><a href="sharesdk_map/kTweetId-constant.html">kTweetId</a></li>
+      <li><a href="sharesdk_map/kType-constant.html">kType</a></li>
+      <li><a href="sharesdk_map/kUid-constant.html">kUid</a></li>
+      <li><a href="sharesdk_map/kUrl-constant.html">kUrl</a></li>
+      <li><a href="sharesdk_map/kURLName-constant.html">kURLName</a></li>
+      <li><a href="sharesdk_map/kVideo-constant.html">kVideo</a></li>
+      <li><a href="sharesdk_map/kVideoAssetURL-constant.html">kVideoAssetURL</a></li>
+      <li><a href="sharesdk_map/kVideoFlashURL-constant.html">kVideoFlashURL</a></li>
+      <li><a href="sharesdk_map/kVisibility-constant.html">kVisibility</a></li>
+      <li><a href="sharesdk_map/kWeChatFile-constant.html">kWeChatFile</a></li>
+      <li><a href="sharesdk_map/kWeChatFileExtension-constant.html">kWeChatFileExtension</a></li>
+      <li><a href="sharesdk_map/kWeChatScene-constant.html">kWeChatScene</a></li>
+      <li><a href="sharesdk_map/kWeiboIsStory-constant.html">kWeiboIsStory</a></li>
+      <li><a href="sharesdk_map/kWeiboObjectId-constant.html">kWeiboObjectId</a></li>
+      <li><a href="sharesdk_map/kWXMPHdThumbImage-constant.html">kWXMPHdThumbImage</a></li>
+      <li><a href="sharesdk_map/kWXMPPath-constant.html">kWXMPPath</a></li>
+      <li><a href="sharesdk_map/kWXMPType-constant.html">kWXMPType</a></li>
+      <li><a href="sharesdk_map/kWXMPUserName-constant.html">kWXMPUserName</a></li>
+      <li><a href="sharesdk_map/kWXMPWithTicket-constant.html">kWXMPWithTicket</a></li>
+      <li><a href="sharesdk_map/kYouTubeJsonString-constant.html">kYouTubeJsonString</a></li>
+      <li><a href="sharesdk_map/kYouTubeParts-constant.html">kYouTubeParts</a></li>
+    
+    
+    
+    
+    
+    </ol>
+  </div>
+
+  <div class="col-xs-12 col-sm-9 col-md-8 main-content">
+    <h1>SSDKMap class</h1>
+
+    
+
+    <section class="summary offset-anchor" id="constructors">
+      <h2>Constructors</h2>
+
+      <dl class="constructor-summary-list">
+        <dt id="SSDKMap" class="callable">
+          <span class="name"><a href="sharesdk_map/SSDKMap/SSDKMap.html">SSDKMap</a></span><span class="signature">()</span>
+        </dt>
+        <dd>
+          
+        </dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="instance-properties">
+      <h2>Properties</h2>
+
+      <dl class="properties">
+        <dt id="map" class="property">
+          <span class="name"><a href="sharesdk_map/SSDKMap/map.html">map</a></span>
+          <span class="signature">&#8594; Map</span>
+        </dt>
+        <dd>
+          
+          <div class="features">final</div>
+</dd>
+        <dt id="hashCode" class="property inherited">
+          <span class="name"><a href="sharesdk_map/SSDKMap/hashCode.html">hashCode</a></span>
+          <span class="signature">&#8594; int</span>
+        </dt>
+        <dd class="inherited">
+          The hash code for this object. <a href="sharesdk_map/SSDKMap/hashCode.html">[...]</a>
+          <div class="features">read-only, inherited</div>
+</dd>
+        <dt id="runtimeType" class="property inherited">
+          <span class="name"><a href="sharesdk_map/SSDKMap/runtimeType.html">runtimeType</a></span>
+          <span class="signature">&#8594; Type</span>
+        </dt>
+        <dd class="inherited">
+          A representation of the runtime type of the object.
+          <div class="features">read-only, inherited</div>
+</dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="instance-methods">
+      <h2>Methods</h2>
+      <dl class="callables">
+        <dt id="setFacebook" class="callable">
+          <span class="name"><a href="sharesdk_map/SSDKMap/setFacebook.html">setFacebook</a></span><span class="signature">(<wbr><span class="parameter" id="setFacebook-param-text"><span class="type-annotation">String</span> <span class="parameter-name">text</span>, </span> <span class="parameter" id="setFacebook-param-images"><span class="type-annotation">dynamic</span> <span class="parameter-name">images</span>, </span> <span class="parameter" id="setFacebook-param-url"><span class="type-annotation">String</span> <span class="parameter-name">url</span>, </span> <span class="parameter" id="setFacebook-param-urlTitle"><span class="type-annotation">String</span> <span class="parameter-name">urlTitle</span>, </span> <span class="parameter" id="setFacebook-param-urlName"><span class="type-annotation">String</span> <span class="parameter-name">urlName</span>, </span> <span class="parameter" id="setFacebook-param-attachementUrl"><span class="type-annotation">String</span> <span class="parameter-name">attachementUrl</span>, </span> <span class="parameter" id="setFacebook-param-hasTag"><span class="type-annotation">String</span> <span class="parameter-name">hasTag</span>, </span> <span class="parameter" id="setFacebook-param-quote"><span class="type-annotation">String</span> <span class="parameter-name">quote</span>, </span> <span class="parameter" id="setFacebook-param-type"><span class="type-annotation"><a href="sharesdk_defines/SSDKContentType-class.html">SSDKContentType</a></span> <span class="parameter-name">type</span></span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+        </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="setGeneral" class="callable">
+          <span class="name"><a href="sharesdk_map/SSDKMap/setGeneral.html">setGeneral</a></span><span class="signature">(<wbr><span class="parameter" id="setGeneral-param-text"><span class="type-annotation">String</span> <span class="parameter-name">text</span>, </span> <span class="parameter" id="setGeneral-param-images"><span class="type-annotation">dynamic</span> <span class="parameter-name">images</span>, </span> <span class="parameter" id="setGeneral-param-url"><span class="type-annotation">String</span> <span class="parameter-name">url</span>, </span> <span class="parameter" id="setGeneral-param-title"><span class="type-annotation">String</span> <span class="parameter-name">title</span>, </span> <span class="parameter" id="setGeneral-param-contentType"><span class="type-annotation"><a href="sharesdk_defines/SSDKContentType-class.html">SSDKContentType</a></span> <span class="parameter-name">contentType</span></span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+        </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="setQQ" class="callable">
+          <span class="name"><a href="sharesdk_map/SSDKMap/setQQ.html">setQQ</a></span><span class="signature">(<wbr><span class="parameter" id="setQQ-param-text"><span class="type-annotation">String</span> <span class="parameter-name">text</span>, </span> <span class="parameter" id="setQQ-param-title"><span class="type-annotation">String</span> <span class="parameter-name">title</span>, </span> <span class="parameter" id="setQQ-param-url"><span class="type-annotation">String</span> <span class="parameter-name">url</span>, </span> <span class="parameter" id="setQQ-param-audio"><span class="type-annotation">String</span> <span class="parameter-name">audio</span>, </span> <span class="parameter" id="setQQ-param-video"><span class="type-annotation">String</span> <span class="parameter-name">video</span>, </span> <span class="parameter" id="setQQ-param-thumbImage"><span class="type-annotation">String</span> <span class="parameter-name">thumbImage</span>, </span> <span class="parameter" id="setQQ-param-images"><span class="type-annotation">dynamic</span> <span class="parameter-name">images</span>, </span> <span class="parameter" id="setQQ-param-type"><span class="type-annotation"><a href="sharesdk_defines/SSDKContentType-class.html">SSDKContentType</a></span> <span class="parameter-name">type</span>, </span> <span class="parameter" id="setQQ-param-subPlatform"><span class="type-annotation"><a href="sharesdk_defines/ShareSDKPlatform-class.html">ShareSDKPlatform</a></span> <span class="parameter-name">subPlatform</span></span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+        </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="setSina" class="callable">
+          <span class="name"><a href="sharesdk_map/SSDKMap/setSina.html">setSina</a></span><span class="signature">(<wbr><span class="parameter" id="setSina-param-text"><span class="type-annotation">String</span> <span class="parameter-name">text</span>, </span> <span class="parameter" id="setSina-param-title"><span class="type-annotation">String</span> <span class="parameter-name">title</span>, </span> <span class="parameter" id="setSina-param-images"><span class="type-annotation">dynamic</span> <span class="parameter-name">images</span>, </span> <span class="parameter" id="setSina-param-video"><span class="type-annotation">String</span> <span class="parameter-name">video</span>, </span> <span class="parameter" id="setSina-param-url"><span class="type-annotation">String</span> <span class="parameter-name">url</span>, </span> <span class="parameter" id="setSina-param-latitude"><span class="type-annotation">double</span> <span class="parameter-name">latitude</span>, </span> <span class="parameter" id="setSina-param-longitude"><span class="type-annotation">double</span> <span class="parameter-name">longitude</span>, </span> <span class="parameter" id="setSina-param-objectId"><span class="type-annotation">String</span> <span class="parameter-name">objectId</span>, </span> <span class="parameter" id="setSina-param-isStory"><span class="type-annotation">bool</span> <span class="parameter-name">isStory</span>, </span> <span class="parameter" id="setSina-param-type"><span class="type-annotation"><a href="sharesdk_defines/SSDKContentType-class.html">SSDKContentType</a></span> <span class="parameter-name">type</span></span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+        </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="setTwitter" class="callable">
+          <span class="name"><a href="sharesdk_map/SSDKMap/setTwitter.html">setTwitter</a></span><span class="signature">(<wbr><span class="parameter" id="setTwitter-param-text"><span class="type-annotation">String</span> <span class="parameter-name">text</span>, </span> <span class="parameter" id="setTwitter-param-images"><span class="type-annotation">dynamic</span> <span class="parameter-name">images</span>, </span> <span class="parameter" id="setTwitter-param-video"><span class="type-annotation">String</span> <span class="parameter-name">video</span>, </span> <span class="parameter" id="setTwitter-param-latitude"><span class="type-annotation">double</span> <span class="parameter-name">latitude</span>, </span> <span class="parameter" id="setTwitter-param-longitude"><span class="type-annotation">double</span> <span class="parameter-name">longitude</span>, </span> <span class="parameter" id="setTwitter-param-type"><span class="type-annotation"><a href="sharesdk_defines/SSDKContentType-class.html">SSDKContentType</a></span> <span class="parameter-name">type</span></span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+        </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="setWechat" class="callable">
+          <span class="name"><a href="sharesdk_map/SSDKMap/setWechat.html">setWechat</a></span><span class="signature">(<wbr><span class="parameter" id="setWechat-param-text"><span class="type-annotation">String</span> <span class="parameter-name">text</span>, </span> <span class="parameter" id="setWechat-param-title"><span class="type-annotation">String</span> <span class="parameter-name">title</span>, </span> <span class="parameter" id="setWechat-param-url"><span class="type-annotation">String</span> <span class="parameter-name">url</span>, </span> <span class="parameter" id="setWechat-param-thumbImage"><span class="type-annotation">String</span> <span class="parameter-name">thumbImage</span>, </span> <span class="parameter" id="setWechat-param-images"><span class="type-annotation">dynamic</span> <span class="parameter-name">images</span>, </span> <span class="parameter" id="setWechat-param-musicFileURL"><span class="type-annotation">String</span> <span class="parameter-name">musicFileURL</span>, </span> <span class="parameter" id="setWechat-param-extInfo"><span class="type-annotation">String</span> <span class="parameter-name">extInfo</span>, </span> <span class="parameter" id="setWechat-param-fileData"><span class="type-annotation">String</span> <span class="parameter-name">fileData</span>, </span> <span class="parameter" id="setWechat-param-emoticonData"><span class="type-annotation">String</span> <span class="parameter-name">emoticonData</span>, </span> <span class="parameter" id="setWechat-param-fileExtension"><span class="type-annotation">String</span> <span class="parameter-name">fileExtension</span>, </span> <span class="parameter" id="setWechat-param-sourceFileData"><span class="type-annotation">String</span> <span class="parameter-name">sourceFileData</span>, </span> <span class="parameter" id="setWechat-param-contentType"><span class="type-annotation"><a href="sharesdk_defines/SSDKContentType-class.html">SSDKContentType</a></span> <span class="parameter-name">contentType</span>, </span> <span class="parameter" id="setWechat-param-subPlatform"><span class="type-annotation"><a href="sharesdk_defines/ShareSDKPlatform-class.html">ShareSDKPlatform</a></span> <span class="parameter-name">subPlatform</span></span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+        </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="setWeChatMiniProgram" class="callable">
+          <span class="name"><a href="sharesdk_map/SSDKMap/setWeChatMiniProgram.html">setWeChatMiniProgram</a></span><span class="signature">(<wbr><span class="parameter" id="setWeChatMiniProgram-param-title"><span class="type-annotation">String</span> <span class="parameter-name">title</span>, </span> <span class="parameter" id="setWeChatMiniProgram-param-desc"><span class="type-annotation">String</span> <span class="parameter-name">desc</span>, </span> <span class="parameter" id="setWeChatMiniProgram-param-webUrl"><span class="type-annotation">String</span> <span class="parameter-name">webUrl</span>, </span> <span class="parameter" id="setWeChatMiniProgram-param-path"><span class="type-annotation">String</span> <span class="parameter-name">path</span>, </span> <span class="parameter" id="setWeChatMiniProgram-param-thumbImage"><span class="type-annotation">String</span> <span class="parameter-name">thumbImage</span>, </span> <span class="parameter" id="setWeChatMiniProgram-param-hdThumbImage"><span class="type-annotation">String</span> <span class="parameter-name">hdThumbImage</span>, </span> <span class="parameter" id="setWeChatMiniProgram-param-userName"><span class="type-annotation">String</span> <span class="parameter-name">userName</span>, </span> <span class="parameter" id="setWeChatMiniProgram-param-withShareTicket"><span class="type-annotation">bool</span> <span class="parameter-name">withShareTicket</span>, </span> <span class="parameter" id="setWeChatMiniProgram-param-miniProgramType"><span class="type-annotation">int</span> <span class="parameter-name">miniProgramType</span>, </span> <span class="parameter" id="setWeChatMiniProgram-param-subPlatform"><span class="type-annotation"><a href="sharesdk_defines/ShareSDKPlatform-class.html">ShareSDKPlatform</a></span> <span class="parameter-name">subPlatform</span></span>)
+            <span class="returntype parameter">&#8594; void</span>
+          </span>
+        </dt>
+        <dd>
+          
+          
+</dd>
+        <dt id="noSuchMethod" class="callable inherited">
+          <span class="name"><a href="sharesdk_map/SSDKMap/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation">Invocation</span> <span class="parameter-name">invocation</span></span>)
+            <span class="returntype parameter">&#8594; dynamic</span>
+          </span>
+        </dt>
+        <dd class="inherited">
+          Invoked when a non-existent method or property is accessed. <a href="sharesdk_map/SSDKMap/noSuchMethod.html">[...]</a>
+          <div class="features">@pragma(&quot;vm:entry-point&quot;), inherited</div>
+</dd>
+        <dt id="toString" class="callable inherited">
+          <span class="name"><a href="sharesdk_map/SSDKMap/toString.html">toString</a></span><span class="signature">(<wbr>)
+            <span class="returntype parameter">&#8594; String</span>
+          </span>
+        </dt>
+        <dd class="inherited">
+          Returns a string representation of this object.
+          <div class="features">inherited</div>
+</dd>
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor inherited" id="operators">
+      <h2>Operators</h2>
+      <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+          <span class="name"><a href="sharesdk_map/SSDKMap/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation">dynamic</span> <span class="parameter-name">other</span></span>)
+            <span class="returntype parameter">&#8594; bool</span>
+          </span>
+        </dt>
+        <dd class="inherited">
+          The equality operator. <a href="sharesdk_map/SSDKMap/operator_equals.html">[...]</a>
+          <div class="features">inherited</div>
+</dd>
+      </dl>
+    </section>
+
+
+
+
+  </div> <!-- /.main-content -->
+
+  <div class="col-xs-6 col-sm-6 col-md-2 sidebar sidebar-offcanvas-right">
+    <ol>
+      <li class="section-title"><a href="sharesdk_map/SSDKMap-class.html#constructors">Constructors</a></li>
+      <li><a href="sharesdk_map/SSDKMap/SSDKMap.html">SSDKMap</a></li>
+    
+      <li class="section-title">
+        <a href="sharesdk_map/SSDKMap-class.html#instance-properties">Properties</a>
+      </li>
+      <li><a href="sharesdk_map/SSDKMap/map.html">map</a></li>
+      <li class="inherited"><a href="sharesdk_map/SSDKMap/hashCode.html">hashCode</a></li>
+      <li class="inherited"><a href="sharesdk_map/SSDKMap/runtimeType.html">runtimeType</a></li>
+    
+      <li class="section-title"><a href="sharesdk_map/SSDKMap-class.html#instance-methods">Methods</a></li>
+      <li><a href="sharesdk_map/SSDKMap/setFacebook.html">setFacebook</a></li>
+      <li><a href="sharesdk_map/SSDKMap/setGeneral.html">setGeneral</a></li>
+      <li><a href="sharesdk_map/SSDKMap/setQQ.html">setQQ</a></li>
+      <li><a href="sharesdk_map/SSDKMap/setSina.html">setSina</a></li>
+      <li><a href="sharesdk_map/SSDKMap/setTwitter.html">setTwitter</a></li>
+      <li><a href="sharesdk_map/SSDKMap/setWechat.html">setWechat</a></li>
+      <li><a href="sharesdk_map/SSDKMap/setWeChatMiniProgram.html">setWeChatMiniProgram</a></li>
+      <li class="inherited"><a href="sharesdk_map/SSDKMap/noSuchMethod.html">noSuchMethod</a></li>
+      <li class="inherited"><a href="sharesdk_map/SSDKMap/toString.html">toString</a></li>
+    
+      <li class="section-title inherited"><a href="sharesdk_map/SSDKMap-class.html#operators">Operators</a></li>
+      <li class="inherited"><a href="sharesdk_map/SSDKMap/operator_equals.html">operator ==</a></li>
+    
+    
+    
+    </ol>
+  </div><!--/.sidebar-offcanvas-->
+
+</main>
+
+<footer>
+  <span class="no-break">
+    sharesdk 0.0.1
+  </span>
+
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="static-assets/typeahead.bundle.min.js"></script>
+<script src="static-assets/highlight.pack.js"></script>
+<script src="static-assets/URI.js"></script>
+<script src="static-assets/script.js"></script>
+
+
+</body>
+
+</html>
