@@ -165,7 +165,7 @@ typedef NS_ENUM(NSUInteger, PluginMethod) {
         NSInteger state = SSDKResponseStateFail;
         if (error == nil)
         {
-            NSInteger state = SSDKResponseStateSuccess;
+            state = SSDKResponseStateSuccess;
         }
         NSDictionary *dic = @{
                               @"state":@(state),
