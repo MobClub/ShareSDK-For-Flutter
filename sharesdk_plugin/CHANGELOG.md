@@ -30,3 +30,6 @@
 ## 1.1.4
 
 * Android add wechat file share
+
+## 1.1.5
+* Android  adapt to flutter sdk 1.9+
