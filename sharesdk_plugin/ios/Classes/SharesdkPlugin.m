@@ -1,6 +1,7 @@
 #import "SharesdkPlugin.h"
 #import <ShareSDK/ShareSDKHeader.h>
 #import <ShareSDKExtension/ShareSDK+Extension.h>
+#import <MOBFoundation/MOBFoundation.h>import 'package:flutter/services.dart';
 #import <objc/message.h>
 
 typedef NS_ENUM(NSUInteger, PluginMethod) {
@@ -18,13 +19,18 @@ typedef NS_ENUM(NSUInteger, PluginMethod) {
     PluginMethodIsClientInstalled,
 };
 
-@interface SharesdkPlugin()
+@interface SharesdkPlugin()<FlutterStreamHandler,ISSERestoreSceneDelegate>
 
 @property (strong, nonatomic) NSDictionary *methodMap;
+
+// 事件回调
+@property (nonatomic, copy) void (^callBack) (id _Nullable event);
 
 @end
 
 @implementation SharesdkPlugin
+
+static NSString *const receiverStr = @"SSDKRestoreReceiver";
 
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
     FlutterMethodChannel* channel = [FlutterMethodChannel
@@ -46,6 +52,11 @@ typedef NS_ENUM(NSUInteger, PluginMethod) {
                            @"isClientInstalled":@(PluginMethodIsClientInstalled)
                            };
     [registrar addMethodCallDelegate:instance channel:channel];
+    
+    FlutterEventChannel* e_channel = [FlutterEventChannel eventChannelWithName:receiverStr binaryMessenger:[registrar messenger]];
+    [e_channel setStreamHandler:instance];
+    
+    [instance addObserver];
 }
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
@@ -360,6 +371,58 @@ typedef NS_ENUM(NSUInteger, PluginMethod) {
 {
     SSDKPlatformType type = [args[@"platform"] integerValue];
     result(@([ShareSDK isClientInstalled:type]));
+}
+
+
+#pragma mark - FlutterStreamHandler Protocol
+
+- (FlutterError *)onListenWithArguments:(id)arguments eventSink:(FlutterEventSink)events
+{
+    self.callBack = events;
+    return nil;
+}
+
+- (FlutterError * _Nullable)onCancelWithArguments:(id _Nullable)arguments
+{
+    return nil;
+}
+
+
+#pragma mark - 场景还原 添加监听
+- (void)addObserver
+{
+    [ShareSDK setRestoreSceneDelegate:self];
+}
+
+#pragma mark - ISSERestoreSceneDelegate
+
+/**
+ 闭环分享代理回调
+ 
+ */
+- (void)ISSEWillRestoreScene:(SSERestoreScene *)scene error:(NSError *)error
+{
+    NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
+       
+    if (scene.path.length > 0)
+    {
+        resultDict[@"path"] = scene.path;
+    }
+       
+    if (scene.params && scene.params.count > 0)
+    {
+        resultDict[@"params"] = scene.params;
+    }
+       
+    NSString *resultStr  = @"";
+    if (resultDict.count > 0)
+    {
+        resultStr = [MOBFJson jsonStringFromObject:resultDict];
+    }
+    if (self.callBack)
+    {
+        self.callBack(resultDict);
+    }
 }
 
 @end

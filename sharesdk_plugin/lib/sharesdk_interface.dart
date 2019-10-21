@@ -4,11 +4,15 @@ import './sharesdk_defines.dart';
 import './sharesdk_register.dart';
 import './sharesdk_map.dart';
 
+typedef void EventHandler(Object event);
+
 class SharesdkPlugin {
   static const MethodChannel _channel =
       const MethodChannel('com.yoozoo.mob/sharesdk');
   static const EventChannel java_to_flutter =
       const EventChannel("JAVA_TO_FLUTTER");
+
+  static EventChannel _channelReciever = const EventChannel('SSDKRestoreReceiver');
 
   // static Future<dynamic> listenNativeEvent() {
   //   java_to_flutter
@@ -205,5 +209,12 @@ class SharesdkPlugin {
     }
 
     return state;
+  }
+
+  /*
+   * 添加闭环分享回调监听
+   */
+  static addRestoreReceiver(EventHandler onEvent, EventHandler onError) {
+      _channelReciever.receiveBroadcastStream().listen(onEvent, onError: onError);
   }
 }

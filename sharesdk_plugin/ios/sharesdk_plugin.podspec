@@ -23,6 +23,9 @@ Pod::Spec.new do |s|
   s.dependency 'mob_sharesdk/ShareSDKPlatforms/WeChat'
   s.dependency 'mob_sharesdk/ShareSDKPlatforms/Facebook'
   s.dependency 'mob_sharesdk/ShareSDKPlatforms/Twitter'
+
+  #分享闭环
+  s.dependency 'mob_sharesdk/ShareSDKRestoreScene'
   s.static_framework = true
 
   s.ios.deployment_target = '8.0'

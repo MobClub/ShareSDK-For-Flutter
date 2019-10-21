@@ -23,6 +23,9 @@ PODS:
   - mob_sharesdk/ShareSDKPlatforms/WeChat (4.3.3):
     - mob_sharesdk/ShareSDK
     - MOBFoundation
+  - mob_sharesdk/ShareSDKRestoreScene (4.3.3):
+    - mob_sharesdk/ShareSDKExtension
+    - MOBFoundation
   - mob_sharesdk/ShareSDKUI (4.3.3):
     - mob_sharesdk/ShareSDK
     - MOBFoundation
@@ -36,6 +39,7 @@ PODS:
     - mob_sharesdk/ShareSDKPlatforms/SinaWeibo
     - mob_sharesdk/ShareSDKPlatforms/Twitter
     - mob_sharesdk/ShareSDKPlatforms/WeChat
+    - mob_sharesdk/ShareSDKRestoreScene
     - mob_sharesdk/ShareSDKUI
 
 DEPENDENCIES:
@@ -57,7 +61,7 @@ SPEC CHECKSUMS:
   Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
   mob_sharesdk: 48cb240a4b9cc393be2d6ff9c5b597ae77a1da73
   MOBFoundation: 08c456357888e4c984fba23bbf04cfd2f4fc1e02
-  sharesdk_plugin: ea8d25bc07d62398c4486a994f1bca7b53f21ea6
+  sharesdk_plugin: 8b57f21721efb60b147d40bcf49b7114cdf71f76
 
 PODFILE CHECKSUM: 7fb83752f59ead6285236625b82473f90b1cb932
 
