@@ -1,10 +1,9 @@
 package com.yoozoo.sharesdk;
 
-import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
 import com.mob.MobSDK;
-import com.mob.tools.utils.UIHandler;
+import com.mob.commons.SHARESDK;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,7 +11,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Handler;
 
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
@@ -57,6 +55,9 @@ public class SharesdkPlugin implements MethodCallHandler {
 
         //eventChannel = new EventChannel(registrar.messenger(), EVENTCHANNEL);
         //eventChannel.setStreamHandler(new SharesdkPlugin());
+
+        //setChannelId
+        MobSDK.setChannel(new SHARESDK(), MobSDK.CHANNEL_FLUTTER);
     }
 
     @Override
