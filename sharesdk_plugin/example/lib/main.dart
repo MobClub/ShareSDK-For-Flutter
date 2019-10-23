@@ -17,9 +17,9 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    if (Platform.isIOS) {
+    //if (Platform.isIOS) {
     	SharesdkPlugin.addRestoreReceiver(_onEvent, _onError);
-    }
+    //}
   }
 
   void _onEvent(Object event) {
