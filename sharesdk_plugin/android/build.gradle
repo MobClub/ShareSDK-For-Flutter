@@ -59,7 +59,7 @@ dependencies {
 
 MobSDK {
     ShareSDK {
-
+        loopShare true
     }
 }
 

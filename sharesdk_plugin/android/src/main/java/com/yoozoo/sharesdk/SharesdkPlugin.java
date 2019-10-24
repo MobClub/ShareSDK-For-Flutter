@@ -1,10 +1,11 @@
 package com.yoozoo.sharesdk;
 
-import android.os.Looper;
+import android.app.Activity;
 import android.text.TextUtils;
 import android.util.Log;
 import com.mob.MobSDK;
-import com.mob.tools.utils.UIHandler;
+import com.mob.commons.SHARESDK;
+import com.mob.tools.utils.Hashon;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,11 +13,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Handler;
 
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.framework.loopshare.LoopShareResultListener;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
@@ -28,7 +29,7 @@ import io.flutter.plugin.common.PluginRegistry;
 /**
  * SharesdkPlugin
  */
-public class SharesdkPlugin implements MethodCallHandler {
+public class SharesdkPlugin implements MethodCallHandler{
 
     private static final String PluginMethodGetVersion = "getVersion";
     private static final String PluginMethodShare = "share";
@@ -42,21 +43,81 @@ public class SharesdkPlugin implements MethodCallHandler {
     private static final String PluginMethodShowMenu = "showMenu";
     private static final String PluginMethodOpenMiniProgram = "openMiniProgram";
 
-    private static final String EVENTCHANNEL = "JAVA_TO_FLUTTER";
+    private static final String EVENTCHANNEL = "SSDKRestoreReceiver";
     private static EventChannel eventChannel;
-    private EventChannel.EventSink eventSink;
+    private static EventChannel.EventSink outerEventSink;
 
     private static final String TAG = "SHARESDK";
+
 
     /**
      * Plugin registration.
      */
     public static void registerWith(PluginRegistry.Registrar registrar) {
+        //SharesdkPlugin instance = new SharesdkPlugin();
+
         final MethodChannel channel = new MethodChannel(registrar.messenger(), "com.yoozoo.mob/sharesdk");
         channel.setMethodCallHandler(new SharesdkPlugin());
 
         //eventChannel = new EventChannel(registrar.messenger(), EVENTCHANNEL);
         //eventChannel.setStreamHandler(new SharesdkPlugin());
+        eventChannel = new EventChannel(registrar.messenger(), EVENTCHANNEL);
+        Log.e("WWW", " eventChannel " + eventChannel);
+        eventChannel.setStreamHandler(new EventChannel.StreamHandler(){
+
+            @Override
+            public void onListen(Object o, EventChannel.EventSink eventSink) {
+                Log.e("WWW", " onListen " + " Object " + o + " eventSink " + eventSink);
+                if (eventSink != null) {
+                    outerEventSink = eventSink;
+                    Log.e("WWW", "onListen ===> outerEventSink " + outerEventSink);
+                } else {
+                    Log.e("WWW", "onListen ===> eventSink is null ");
+                }
+
+            }
+
+            @Override
+            public void onCancel(Object o) {
+                Log.e("WWW", " onCancel " + " Object " + o);
+            }
+        });
+
+
+        //setChannelId
+        MobSDK.setChannel(new SHARESDK(), MobSDK.CHANNEL_FLUTTER);
+
+        /**
+         * loopshare init and set Listener
+         * **/
+        ShareSDK.prepareLoopShare(new LoopShareResultListener() {
+            @Override
+            public void onResult(Object var1) {
+                String test = new Hashon().fromHashMap((HashMap<String, Object>) var1);
+                Log.e("WWW", "LoopShareResultListener onResult " + test);
+
+                if (outerEventSink != null) {
+                    HashMap<String, Object> map = new HashMap<>();
+                    map.put("innerMapOneKey", "innerMapOneValue");
+                    map.put("innerMapTwoKey", "innerMapTwoValue");
+
+                    HashMap<String, Object> outer = new HashMap<String, Object>();
+                    outer.put("path", "outPathValue");
+                    outer.put("params", map);
+                    outerEventSink.success(outer);
+                    Log.e("WWW", "LoopShareResultListener onResult outerEventSink.success is ok");
+                } else {
+                    Log.e("WWW", "LoopShareResultListener onResult outerEventSink is null");
+                }
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                Log.e("WWW", "LoopShareResultListener onError " + t);
+            }
+        });
+        Log.e("WWW", " ShareSDK.prepareLoopShare() successed ");
+
     }
 
     @Override

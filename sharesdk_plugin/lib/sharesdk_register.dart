@@ -18,6 +18,7 @@ class ShareSDKRegister {
   static const String _ssdkOAuthCallback = "oauth_callback";
   static const String _ssdkDisplayName = "display_name";
   static const String _ssdkSandbox = "sandbox_mode";
+  static const String _ssdkAppUniversalLink = "app_universalLink";
 
   final Map platformsInfo = {};
 
@@ -33,8 +34,8 @@ class ShareSDKRegister {
   }
 
   /// set up wechat platform info
-  void setupWechat(String appId, String appSecret) {
-    Map info = {_ssdkAppId: appId, _ssdkAppSecret: appSecret};
+  void setupWechat(String appId, String appSecret, String appUniversalLink) {
+    Map info = {_ssdkAppId: appId, _ssdkAppSecret: appSecret, _ssdkAppUniversalLink: appUniversalLink};
     platformsInfo[ShareSDKPlatforms.wechatSeries.id] = info;
   }
 
