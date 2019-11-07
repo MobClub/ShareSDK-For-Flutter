@@ -33,3 +33,7 @@
 
 ## 1.1.5
 * Android  adapt to flutter sdk 1.9+
+
+## 1.1.6
+* Android Add to Douyin sharing function
+* Android Add to share video url for general interface
