@@ -11,6 +11,7 @@ public class MainActivity extends FlutterActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     GeneratedPluginRegistrant.registerWith(this);
+
     Log.e("WWW", " example android MainActivity  onCreate");
   }
 }

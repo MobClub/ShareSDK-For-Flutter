@@ -437,6 +437,15 @@ MobSDK {
                 enable true
             }
 
+            Douyin {
+                id 59
+                sortId 1
+                appKey "aw9ivykfjvi4hpwo"
+                appSecret "42b4caa6bda60bd49f05f06d0a4956e1"
+                callbackAct "cn.sharesdk.demo.MainActivity"
+                enable true
+            }
+
         }
     }
 }
