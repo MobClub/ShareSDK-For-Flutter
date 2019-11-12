@@ -59,6 +59,28 @@ class _HomePageState extends State<HomePage> {
    });
  }*/
 
+  void shareToDouyin(BuildContext context) {
+    SSDKMap params = SSDKMap()
+      ..setGeneral(
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          "/storage/emulated/0/Mob/cn.sharesdk.demo/cache/videos/e613d3d6ba6c1524b4abab146249dac0.mp4",
+          SSDKContentTypes.video);
+
+    SharesdkPlugin.share(
+        ShareSDKPlatforms.douyin, params, (SSDKResponseState state,
+        Map userdata, Map contentEntity, SSDKError error) {
+      showAlert(state, error.rawData, context);
+    });
+  }
+
   void shareToWechat(BuildContext context) {
     SSDKMap params = SSDKMap()
       ..setGeneral(
@@ -73,6 +95,7 @@ class _HomePageState extends State<HomePage> {
           "http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
+          null,
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(
@@ -126,6 +149,7 @@ class _HomePageState extends State<HomePage> {
           "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
           "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
+          null,
           SSDKContentTypes.auto);
 
     SharesdkPlugin.share(
@@ -156,6 +180,7 @@ class _HomePageState extends State<HomePage> {
           "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
           "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
+          null,
           SSDKContentTypes.webpage);
     SharesdkPlugin.showMenu(
         null, params, (SSDKResponseState state, ShareSDKPlatform platform,
@@ -178,6 +203,7 @@ class _HomePageState extends State<HomePage> {
           "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
           "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
+          null,
           SSDKContentTypes.auto);
 
     SharesdkPlugin.showEditor(
@@ -451,6 +477,7 @@ void showAlertText(String title, String content, BuildContext context) {
         children: <Widget>[
           _creatRow("ShareSDK版本号", "ShareSDK版本号", shareSdkVersion, context),
           _creatRow("分享到微信", "分享图片到微信", shareToWechat, context),
+          _creatRow("分享到抖音", "需要传入当前手机视频文件的路径，不同手机文件路径不同，需要修改demo的源码才可以演示", shareToDouyin, context),
           _creatRow("微信授权", "微信授权(不返回用户数据)", authToWechat, context),
           _creatRow("取消微信授权", "取消微信平台的授权", cancelAuth, context),
           _creatRow("判断微信是否授权", "判断微信平台是否授权", hasAuthed, context),
@@ -467,7 +494,7 @@ void showAlertText(String title, String content, BuildContext context) {
           _creatRow("分享到QQ", "测试自定义参数", shareQQCustom, context),
           _creatRow("分享到Twitter", "测试自定义参数", shareTwitterCustom, context),
           _creatRow("分享到Facebook", "测试自定义参数", shareFacebookCustom, context),
-          _creatRow("判断客户端安装", "是否安装了QQ客户端(IOS only)", isClientInstalledQQ, context)
+          _creatRow("判断客户端安装", "是否安装了QQ客户端", isClientInstalledQQ, context)
         ],
       ),
     );

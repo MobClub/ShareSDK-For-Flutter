@@ -42,10 +42,13 @@ public class SharesdkPlugin implements MethodCallHandler{
     private static final String PluginMethodShowEditor = "showEditor";
     private static final String PluginMethodShowMenu = "showMenu";
     private static final String PluginMethodOpenMiniProgram = "openMiniProgram";
+    private static final String PluginMethodIsClientInstalled = "isClientInstalled";
 
     private static final String EVENTCHANNEL = "SSDKRestoreReceiver";
     private static EventChannel eventChannel;
     private static EventChannel.EventSink outerEventSink;
+
+    private static Activity activity = null;
 
     private static final String TAG = "SHARESDK";
 
@@ -55,6 +58,8 @@ public class SharesdkPlugin implements MethodCallHandler{
      */
     public static void registerWith(PluginRegistry.Registrar registrar) {
         //SharesdkPlugin instance = new SharesdkPlugin();
+
+        activity = registrar.activity();
 
         final MethodChannel channel = new MethodChannel(registrar.messenger(), "com.yoozoo.mob/sharesdk");
         channel.setMethodCallHandler(new SharesdkPlugin());
@@ -82,7 +87,6 @@ public class SharesdkPlugin implements MethodCallHandler{
                 Log.e("WWW", " onCancel " + " Object " + o);
             }
         });
-
 
         //setChannelId
         MobSDK.setChannel(new SHARESDK(), MobSDK.CHANNEL_FLUTTER);
@@ -158,7 +162,9 @@ public class SharesdkPlugin implements MethodCallHandler{
                 //shareMiniProgramWithArgs(call, result);
                 openMinProgramWithArgs(call, result);
                 break;
-
+            case PluginMethodIsClientInstalled:
+                isClientInstalled(call, result);
+                break;
             default:
                 break;
         }
@@ -197,6 +203,8 @@ public class SharesdkPlugin implements MethodCallHandler{
         String site;
         String siteUrl;
 
+        String filePath;
+
         HashMap<String, Object> map = call.arguments();
         final String num = String.valueOf(map.get("platform"));
 
@@ -228,6 +236,8 @@ public class SharesdkPlugin implements MethodCallHandler{
             site = String.valueOf(params.get("site"));
             siteUrl = String.valueOf(params.get("siteUrl"));
 
+            filePath = String.valueOf(params.get("filePath"));
+
         } else {
             imageUrl = String.valueOf(platMap.get("imageUrl_android"));
             imagePath = String.valueOf(platMap.get("imagePath_android"));
@@ -253,12 +263,23 @@ public class SharesdkPlugin implements MethodCallHandler{
             site = String.valueOf(platMap.get("site"));
             siteUrl = String.valueOf(platMap.get("siteUrl"));
 
+            filePath = String.valueOf(platMap.get("filePath"));
+
         }
 
         String platName = Utils.platName(num);
 
         Platform platform = ShareSDK.getPlatform(platName);
         Platform.ShareParams shareParams = new Platform.ShareParams();
+
+        if (platName.equals("Douyin")) {
+            if (activity != null) {
+                shareParams.setActivity(activity);
+            } else {
+                Log.e(TAG,"SharesdkPlugin that activity is null");
+            }
+        }
+
         if (!(title.equals("null") || title == null)) {
             shareParams.setTitle(title);
         }
@@ -286,6 +307,11 @@ public class SharesdkPlugin implements MethodCallHandler{
         if (!(fileData.equals("null") || fileData == null)) {
             shareParams.setFilePath(fileData);
         }
+        if (!(filePath.equals("null") || filePath == null)) {
+            shareParams.setFilePath(filePath);
+            Log.e("WWW", " filePath===》 " + filePath);
+        }
+
         if (!(wxmpType == null || wxmpType.isEmpty() || wxmpType.equals("null"))) {
             shareParams.setWxMiniProgramType(Integer.valueOf(wxmpType));
         }
@@ -774,6 +800,35 @@ public class SharesdkPlugin implements MethodCallHandler{
         }
     }
 
+    /**
+     * 判断客户端是否有效
+     * **/
+    private void isClientInstalled(MethodCall call, final Result result) {
+        HashMap<String, Object> map = call.arguments();
+        String num = String.valueOf(map.get("platform"));
+        String platName = Utils.platName(num);
+        Platform platform = ShareSDK.getPlatform(platName);
+        boolean clientValid = platform.isClientValid();
+        if (clientValid) {
+            final Map<String, Object> resMapSucceed = new HashMap<>();
+            resMapSucceed.put("state", "installed");
+            ThreadManager.getMainHandler().post(new Runnable() {
+                @Override
+                public void run() {
+                    result.success(resMapSucceed);
+                }
+            });
+        } else {
+            final Map<String, Object> resMapFail = new HashMap<>();
+            resMapFail.put("state", "uninstalled");
+            ThreadManager.getMainHandler().post(new Runnable() {
+                @Override
+                public void run() {
+                    result.success(resMapFail);
+                }
+            });
+        }
+    }
 
     /**
      * java层给flutter层发送消息,写了但是没用到，留着吧

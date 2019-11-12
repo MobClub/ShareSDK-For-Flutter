@@ -88,6 +88,8 @@ const String kimage_y = "image_y";
 const String ksite = "site";
 const String ksiteUrl = "siteUrl";
 
+const String kFilePath = "filePath";
+
 /// Set sharing parameters map
 class SSDKMap {
   final Map map = {};
@@ -103,6 +105,7 @@ class SSDKMap {
       String titleUrlAndroid,
       String musicUrlAndroid,
       String videoUrlAndroid,
+      String filePath,
       SSDKContentType contentType) {
     map[kType] = contentType.value;
     map[kText] = text;
@@ -114,6 +117,7 @@ class SSDKMap {
     map[kVideoUrlAndroid] = videoUrlAndroid;
     map[kImageUrlAndroid] = imageUrlAndroid;
     map[kImagePathAndroid] = imagePathAndroid;
+    map[kFilePath] = filePath;
   }
 
   /// Set wechat platform share parameters

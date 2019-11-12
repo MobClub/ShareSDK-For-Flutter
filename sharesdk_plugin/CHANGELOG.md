@@ -34,5 +34,6 @@
 ## 1.1.5
 * Android  adapt to flutter sdk 1.9+
 
-## 1.1.5
-* 更新桥阶层代码；更新相关key；新增渠道标识；整理日志打印
+## 1.1.6
+* Android Add to Douyin sharing function
+* Android Add to share video url for general interface
