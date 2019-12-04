@@ -142,7 +142,8 @@ class ShareSDKPlatforms {
       ShareSDKPlatform(name: "reddit", id: 56);
   static final ShareSDKPlatform douyin =
       ShareSDKPlatform(name: "douyin", id: 59);
-
+  static final ShareSDKPlatform apple =
+      ShareSDKPlatform(name: 'apple',id: 61);
   static final ShareSDKPlatform yixinSeries =
       ShareSDKPlatform(name: "yixinSeries", id: 994);
   static final ShareSDKPlatform kakaoSeries =

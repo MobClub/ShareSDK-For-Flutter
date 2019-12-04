@@ -30,6 +30,17 @@ typedef NS_ENUM(NSUInteger, PluginMethod) {
 
 @implementation SharesdkPlugin
 
++ (void)load{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        SEL sel = sel_registerName("addChannelWithSdkName:channel:");
+        Method method = class_getClassMethod([MobSDK class],sel) ;
+        if (method && method_getImplementation(method) != _objc_msgForward) {
+            ((void (*)(id, SEL,id,id))objc_msgSend)([MobSDK class],sel,@"SHARESDK",@"4");
+        }
+    });
+}
+
 static NSString *const receiverStr = @"SSDKRestoreReceiver";
 
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
