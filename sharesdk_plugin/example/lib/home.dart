@@ -205,7 +205,6 @@ class _HomePageState extends State<HomePage> {
           "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
           null,
           SSDKContentTypes.auto);
-
     SharesdkPlugin.showEditor(
         ShareSDKPlatforms.sina, params, (SSDKResponseState state,
         ShareSDKPlatform platform, Map userData, Map contentEntity,
@@ -346,6 +345,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void isClientInstalledQQ(BuildContext context) {
+
     SharesdkPlugin.isClientInstalled(ShareSDKPlatforms.qq).then((dynamic hasClient) {
       showAlertText("是否安装了QQ客户端", hasClient.toString(), context);
     });
@@ -452,7 +452,6 @@ void showAlertText(String title, String content, BuildContext context) {
   @override
   void initState() {
     super.initState();
-
     ShareSDKRegister register = ShareSDKRegister();
     register.setupWechat(
         "wx617c77c82218ea2c", "c7253e5289986cf4c4c74d1ccc185fb1", "https://www.sandslee.com/");
@@ -488,7 +487,6 @@ void showAlertText(String title, String content, BuildContext context) {
           _creatRow("弹出分享菜单", "弹出分享菜单", showShareMenu, context),
           _creatRow("弹出编辑界面", "分享直接进行内容编辑(IOS)", showEditor, context),
           _creatRow("打开微信小程序", "需要导入WechatConnector", openMiniProgram, context),
-
           _creatRow("分享小程序到微信", "测试自定义参数", shareMiniProgram, context),
           _creatRow("分享到新浪微博", "测试自定义参数", shareSinaCustom, context),
           _creatRow("分享到新浪微博LinkCard", "分享到LinkCard", shareSinaLinkCard, context),
