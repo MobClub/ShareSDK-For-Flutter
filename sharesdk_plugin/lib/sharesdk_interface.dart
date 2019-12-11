@@ -180,6 +180,7 @@ class SharesdkPlugin {
     return await _channel.invokeMethod(ShareSDKMethods.getVersion.name);
   }
 
+
   /// 打开微信小程序
   static Future<dynamic> openWeChatMiniProgram(
       String userName, String path, int miniProgramType) async {
@@ -217,4 +218,5 @@ class SharesdkPlugin {
   static addRestoreReceiver(EventHandler onEvent, EventHandler onError) {
       _channelReciever.receiveBroadcastStream().listen(onEvent, onError: onError);
   }
+
 }

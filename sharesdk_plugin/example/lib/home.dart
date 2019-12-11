@@ -64,15 +64,15 @@ class _HomePageState extends State<HomePage> {
       ..setGeneral(
           null,
           null,
+          "http://ww4.sinaimg.cn/bmiddle/005Q8xv4gw1evlkov50xuj30go0a6mz3.jpg",
+          null,
+          null,
+          "",
           null,
           null,
           null,
           null,
-          null,
-          null,
-          null,
-          "/storage/emulated/0/Mob/cn.sharesdk.demo/cache/videos/e613d3d6ba6c1524b4abab146249dac0.mp4",
-          SSDKContentTypes.video);
+          SSDKContentTypes.image);
 
     SharesdkPlugin.share(
         ShareSDKPlatforms.douyin, params, (SSDKResponseState state,
@@ -205,7 +205,6 @@ class _HomePageState extends State<HomePage> {
           "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
           null,
           SSDKContentTypes.auto);
-
     SharesdkPlugin.showEditor(
         ShareSDKPlatforms.sina, params, (SSDKResponseState state,
         ShareSDKPlatform platform, Map userData, Map contentEntity,
@@ -324,16 +323,16 @@ class _HomePageState extends State<HomePage> {
       ..setQQ(
           "text",
           "title",
+          "http://m.93lj.com/sharelink?mobid=ziqMNf",
           null,
           null,
           null,
           null,
-          null,
-          null,
-          null,
+          "",
           "http://wx4.sinaimg.cn/large/006tkBCzly1fy8hfqdoy6j30dw0dw759.jpg",
           null,
-          "http://www.mob.com/api/documentList",
+          null,
+          "http://m.93lj.com/sharelink?mobid=ziqMNf",
           null,
           null,
           SSDKContentTypes.webpage,
@@ -346,6 +345,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void isClientInstalledQQ(BuildContext context) {
+
     SharesdkPlugin.isClientInstalled(ShareSDKPlatforms.qq).then((dynamic hasClient) {
       showAlertText("是否安装了QQ客户端", hasClient.toString(), context);
     });
@@ -452,13 +452,13 @@ void showAlertText(String title, String content, BuildContext context) {
   @override
   void initState() {
     super.initState();
-
     ShareSDKRegister register = ShareSDKRegister();
     register.setupWechat(
         "wx617c77c82218ea2c", "c7253e5289986cf4c4c74d1ccc185fb1", "https://www.sandslee.com/");
     register.setupSinaWeibo("568898243", "38a4f8204cc784f81f9f0daaf31e02e3",
         "http://www.sharesdk.cn");
     register.setupQQ("100371282", "aed9b0303e3ed1e27bae87c33761161d");
+    register.setupDouyin("aw9ivykfjvi4hpwo", "42b4caa6bda60bd49f05f06d0a4956e1");
     register.setupFacebook(
         "1412473428822331", "a42f4f3f867dc947b9ed6020c2e93558", "shareSDK");
     register.setupTwitter("viOnkeLpHBKs6KXV7MPpeGyzE",
@@ -477,7 +477,7 @@ void showAlertText(String title, String content, BuildContext context) {
         children: <Widget>[
           _creatRow("ShareSDK版本号", "ShareSDK版本号", shareSdkVersion, context),
           _creatRow("分享到微信", "分享图片到微信", shareToWechat, context),
-          _creatRow("分享到抖音", "需要传入当前手机视频文件的路径，不同手机文件路径不同，需要修改demo的源码才可以演示", shareToDouyin, context),
+          _creatRow("分享到抖音", "需要传入当前图片到抖音", shareToDouyin, context),
           _creatRow("微信授权", "微信授权(不返回用户数据)", authToWechat, context),
           _creatRow("取消微信授权", "取消微信平台的授权", cancelAuth, context),
           _creatRow("判断微信是否授权", "判断微信平台是否授权", hasAuthed, context),
@@ -487,7 +487,6 @@ void showAlertText(String title, String content, BuildContext context) {
           _creatRow("弹出分享菜单", "弹出分享菜单", showShareMenu, context),
           _creatRow("弹出编辑界面", "分享直接进行内容编辑(IOS)", showEditor, context),
           _creatRow("打开微信小程序", "需要导入WechatConnector", openMiniProgram, context),
-
           _creatRow("分享小程序到微信", "测试自定义参数", shareMiniProgram, context),
           _creatRow("分享到新浪微博", "测试自定义参数", shareSinaCustom, context),
           _creatRow("分享到新浪微博LinkCard", "分享到LinkCard", shareSinaLinkCard, context),

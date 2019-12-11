@@ -5,18 +5,19 @@
 #import <objc/message.h>
 
 typedef NS_ENUM(NSUInteger, PluginMethod) {
-    PluginMethodGetVersion,
-    PluginMethodShare,
-    PluginMethodAuth,
-    PluginMethodHasAuthed,
-    PluginMethodCancelAuth,
-    PluginMethodGetUserInfo,
-    PluginMethodRegist,
-    PluginMethodShowMenu,
-    PluginMethodShowEditor,
-    PluginMethodOpenMiniProgram,
-    PluginMethodActivePlatforms,
-    PluginMethodIsClientInstalled,
+    PluginMethodGetVersion          = 0,
+    PluginMethodShare               = 1,
+    PluginMethodAuth                = 2,
+    PluginMethodHasAuthed           = 3,
+    PluginMethodCancelAuth          = 4,
+    PluginMethodGetUserInfo         = 5,
+    PluginMethodRegist              = 6,
+    PluginMethodShowMenu            = 7,
+    PluginMethodShowEditor          = 8,
+    PluginMethodOpenMiniProgram     = 9,
+    PluginMethodActivePlatforms     = 10,
+    PluginMethodIsClientInstalled   = 11,
+
 };
 
 @interface SharesdkPlugin()<FlutterStreamHandler,ISSERestoreSceneDelegate>
@@ -29,6 +30,17 @@ typedef NS_ENUM(NSUInteger, PluginMethod) {
 @end
 
 @implementation SharesdkPlugin
+
++ (void)load{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        SEL sel = sel_registerName("addChannelWithSdkName:channel:");
+        Method method = class_getClassMethod([MobSDK class],sel) ;
+        if (method && method_getImplementation(method) != _objc_msgForward) {
+            ((void (*)(id, SEL,id,id))objc_msgSend)([MobSDK class],sel,@"SHARESDK",@"4");
+        }
+    });
+}
 
 static NSString *const receiverStr = @"SSDKRestoreReceiver";
 
@@ -49,7 +61,8 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
                            @"showEditor":@(PluginMethodShowEditor),
                            @"showMenu":@(PluginMethodShowMenu),
                            @"openMiniProgram":@(PluginMethodOpenMiniProgram),
-                           @"isClientInstalled":@(PluginMethodIsClientInstalled)
+                           @"isClientInstalled":@(PluginMethodIsClientInstalled),
+
                            };
     [registrar addMethodCallDelegate:instance channel:channel];
     
@@ -424,5 +437,7 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
         self.callBack(resultDict);
     }
 }
+
+
 
 @end
