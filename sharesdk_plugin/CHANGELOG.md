@@ -37,3 +37,6 @@
 ## 1.1.6
 * Android Add to Douyin sharing function
 * Android Add to share video url for general interface
+
+## 1.1.7
+* iOS Add " Sign in with Apple"
