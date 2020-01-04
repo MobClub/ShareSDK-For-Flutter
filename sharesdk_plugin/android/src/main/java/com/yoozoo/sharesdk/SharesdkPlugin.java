@@ -833,21 +833,21 @@ public class SharesdkPlugin implements MethodCallHandler{
     /**
      * java层给flutter层发送消息,写了但是没用到，留着吧
      * **/
-    // @Override
-    // public void onListen(Object o, EventChannel.EventSink mEventSink) {
-    //     this.eventSink = mEventSink;
-    // }
+     @Override
+     public void onListen(Object o, EventChannel.EventSink mEventSink) {
+         this.eventSink = mEventSink;
+     }
 
-    // @Override
-    // public void onCancel(Object o) {
+     @Override
+     public void onCancel(Object o) {
 
-    // }
+     }
 
-    // private void setEventChannel(Object data) {
-    //     if (eventSink != null) {
-    //         eventSink.success(data);
-    //     } else {
-    //         Log.e("FFF", " ===== FlutterEventChannel.eventSink 为空 需要检查一下 ===== ");
-    //     }
-    // }
+     private void setEventChannel(Object data) {
+         if (eventSink != null) {
+             eventSink.success(data);
+         } else {
+             Log.e("FFF", " ===== FlutterEventChannel.eventSink 为空 需要检查一下 ===== ");
+         }
+     }
 }
