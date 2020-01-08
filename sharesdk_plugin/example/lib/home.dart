@@ -44,6 +44,7 @@ class _HomePageState extends State<HomePage> {
          null,
          null,
          "http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg",
+         null,
          "/storage/emulated/0/Mob/cn.sharesdk.demo/cache/images/aa.jpg",
          null,
          null,

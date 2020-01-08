@@ -1,6 +1,7 @@
 package com.yoozoo.sharesdk;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.util.Log;
 import com.mob.MobSDK;
@@ -198,6 +199,7 @@ public class SharesdkPlugin implements MethodCallHandler{
         String sina_summary;
         String sina_displayname;
         String image_url;
+        Bitmap image_data;
         String imageX;
         String imageY;
         String site;
@@ -230,6 +232,7 @@ public class SharesdkPlugin implements MethodCallHandler{
             //linkcard
             sina_summary = String.valueOf(params.get("sina_cardSummary"));
             image_url = String.valueOf(params.get("image_url"));
+            image_data = (Bitmap) params.get("imageData");
             imageX = String.valueOf(params.get("image_x"));
             imageY = String.valueOf(params.get("image_y"));
             sina_displayname = String.valueOf(params.get("sina_displayname"));
@@ -257,6 +260,7 @@ public class SharesdkPlugin implements MethodCallHandler{
             //linkcard
             sina_summary = String.valueOf(platMap.get("sina_cardSummary"));
             image_url = String.valueOf(platMap.get("image_url"));
+            image_data = (Bitmap) platMap.get("imageData");
             sina_displayname = String.valueOf(platMap.get("sina_displayname"));
             imageX = String.valueOf(platMap.get("image_x"));
             imageY = String.valueOf(platMap.get("image_y"));
@@ -292,6 +296,11 @@ public class SharesdkPlugin implements MethodCallHandler{
         if (!(imageUrl.equals("null") || imageUrl == null)) {
             shareParams.setImageUrl(imageUrl);
         }
+
+        if (!(image_data.equals("null") || image_data == null)) {
+            shareParams.setImageData(image_data);
+        }
+
         if (!(imagePath.equals("null") || imagePath == null)) {
             shareParams.setImagePath(imagePath);
         }

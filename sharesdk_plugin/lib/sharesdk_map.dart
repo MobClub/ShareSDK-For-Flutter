@@ -6,6 +6,7 @@ const String kThumbImage = "thumb_image";
 const String kImages = "images";
 const String kImageUrlAndroid = "imageUrl_android";
 const String kImagePathAndroid = "imagePath_android";
+const String kImageDataAndroid = "imageData";
 const String kTitleUrlAndroid = "titleUrl_android";
 const String kMusicUrlAndroid = "musicUrl_android";
 const String kVideoUrlAndroid = "videoUrl_android";
@@ -130,6 +131,7 @@ class SSDKMap {
       String musicFileURL,
       String extInfo,
       String imageUrl,
+      dynamic imageData,
       String fileData,
       String emoticonData,
       String fileExtension,
@@ -150,6 +152,7 @@ class SSDKMap {
     params[kWeChatFile] = sourceFileData;
     params[kEmoticon] = emoticonData;
     params[kImageUrlAndroid] = imageUrl;
+    params[kImageDataAndroid] = imageData;
     int id = subPlatform.id;
     map["@platform($id)"] = params;
   }
