@@ -77,6 +77,7 @@ const String kWXMPHdThumbImage = "wxmp_hdthumbimage";
 
 const String kFacebookHashtag = "facebook_hashtag";
 const String kFacebookQuote = "facebook_quote";
+const String kFacebookShareType = "facebook_shareType";
 
 const String ksina_summary = "sina_cardSummary";
 const String ksina_displayname = "sina_displayname";
@@ -311,6 +312,7 @@ class SSDKMap {
       String attachementUrl,
       String hasTag,
       String quote,
+      SSDKFacebookShareType shareType,
       SSDKContentType type) {
     Map params = {};
     params[kType] = type.value;
@@ -328,8 +330,29 @@ class SSDKMap {
     params[kAttachments] = attachementUrl;
     params[kFacebookHashtag] = hasTag;
     params[kFacebookQuote] = quote;
-
+    params[kFacebookShareType] = shareType.value;
     int id = ShareSDKPlatforms.facebook.id;
     map["@platform($id)"] = params;
+  }
+  void setOasis(
+      String title,
+      String text,
+      assetLoacalIds,
+      image,
+      video,
+      String fileExtension,
+      SSDKContentType type
+      ){
+      Map params = {};
+      params[kType] = type.value;
+      params[kText] = text;
+      params[kImages] = image;
+      params[kTitle] = title;
+      params[kWeChatFileExtension] = fileExtension;
+      if (video!=null) {
+        params[kVideo] = video;
+      }
+      int id = ShareSDKPlatforms.oasis.id;
+      map["@platform($id)"] = params;
   }
 }

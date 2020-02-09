@@ -312,7 +312,9 @@ class _HomePageState extends State<HomePage> {
           null,
           "#MobData",
           "Mob官网 - 全球领先的移动开发者服务平台",
-          SSDKContentTypes.webpage);
+          SSDKFacebookShareTypes.native,
+          SSDKContentTypes.image);
+    print(params);
     SharesdkPlugin.share(ShareSDKPlatforms.facebook, params, (SSDKResponseState state,
         Map userdata, Map contentEntity, SSDKError error) {
       showAlert(state, error.rawData, context);
@@ -450,6 +452,9 @@ void showAlertText(String title, String content, BuildContext context) {
     );
   }
 
+  void getPrivacyPolicy(bool data){
+    print(data);
+  }
   @override
   void initState() {
     super.initState();
@@ -465,6 +470,7 @@ void showAlertText(String title, String content, BuildContext context) {
     register.setupTwitter("viOnkeLpHBKs6KXV7MPpeGyzE",
         "NJEglQUy2rqZ9Io9FcAU9p17omFqbORknUpRrCDOK46aAbIiey", "http://mob.com");
     SharesdkPlugin.regist(register);
+    SharesdkPlugin.uploadPrivacyPermissionStatus(0,  getPrivacyPolicy);
   }
 
   @override

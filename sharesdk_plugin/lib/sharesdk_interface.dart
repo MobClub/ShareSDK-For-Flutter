@@ -169,6 +169,45 @@ class SharesdkPlugin {
 
     return callback;
   }
+  //get ShareSDK PrivacyPolicy
+  static Future<dynamic> getPrivacyPolicy(String type,Function(Map data,Map error) result){
+    Map args = {"type": type};
+    Future<dynamic> callback =
+    _channel.invokeMethod(ShareSDKMethods.getPrivacyPolicy.name, args);
+    callback.then((dynamic response) {
+    print(response);
+    if (result != null) {
+        result(response["data"],response["error"]);
+    }
+    });
+    return callback;
+  }
+  ///upload user permissionStatus to Share
+  static Future<dynamic> uploadPrivacyPermissionStatus(int status,Function(bool success) result){
+    Map args = {"status": status};
+    Future<dynamic> callback =
+    _channel.invokeMethod(ShareSDKMethods.uploadPrivacyPermissionStatus.name, args);
+    callback.then((dynamic response) {
+      print(response);
+      if (result != null) {
+        result(response["success"]);
+      }
+    });
+    return callback;
+  }
+
+  ///setPrivacyWindow Show
+  static Future<dynamic> setAllowShowPrivacyWindow(int show) {
+    Map args = {"show": show};
+    return _channel.invokeMethod(ShareSDKMethods.setAllowShowPrivacyWindow.name, args);
+  }
+
+
+
+  static Future<dynamic> setPrivacyUI(int backColor,List<int> operationButtonColors){
+    Map args = {"backColor": backColor,"oprationButtonColors":operationButtonColors};
+   return _channel.invokeMethod(ShareSDKMethods.setPrivacyUI.name, args);
+  }
 
   /// 已集成的平台
   static Future<dynamic> activePlatforms() async {
@@ -194,6 +233,8 @@ class SharesdkPlugin {
     Map args = {"platform": platform.id};
     return await _channel.invokeMethod(ShareSDKMethods.isClientInstalled.name, args);
   }
+
+
 
   static SSDKResponseState _state(Map response) {
     SSDKResponseState state = SSDKResponseState.Unknown;
