@@ -219,7 +219,6 @@ class SharesdkPlugin {
     return await _channel.invokeMethod(ShareSDKMethods.getVersion.name);
   }
 
-
   /// 打开微信小程序
   static Future<dynamic> openWeChatMiniProgram(
       String userName, String path, int miniProgramType) async {

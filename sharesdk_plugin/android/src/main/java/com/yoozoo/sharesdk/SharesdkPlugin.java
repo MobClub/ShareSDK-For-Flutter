@@ -5,9 +5,14 @@ import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.util.Log;
 import com.mob.MobSDK;
+import com.mob.OperationCallback;
+import com.mob.PrivacyPolicy;
 import com.mob.commons.SHARESDK;
+import com.mob.commons.dialog.entity.MobPolicyUi;
 import com.mob.tools.utils.Hashon;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.text.SimpleDateFormat;
@@ -44,6 +49,11 @@ public class SharesdkPlugin implements MethodCallHandler {
   private static final String PluginMethodShowMenu = "showMenu";
   private static final String PluginMethodOpenMiniProgram = "openMiniProgram";
   private static final String PluginMethodIsClientInstalled = "isClientInstalled";
+  //隐私协议 getPrivacyPolicy
+  private static final String PluginMethodGetPrivacyPolicy = "getPrivacyPolicy";
+  private static final String PluginMethodUploadPrivacyPermissionStatus = "uploadPrivacyPermissionStatus";
+  private static final String PluginMethodSetAllowShowPrivacyWindow = "setAllowShowPrivacyWindow";
+  private static final String PluginMethodSetPrivacyUI = "setPrivacyUI";
 
   private static final String EVENTCHANNEL = "SSDKRestoreReceiver";
   private static EventChannel eventChannel;
@@ -167,9 +177,156 @@ public class SharesdkPlugin implements MethodCallHandler {
       case PluginMethodIsClientInstalled:
         isClientInstalled(call, result);
         break;
+      case PluginMethodGetPrivacyPolicy: //隐私协议
+        getPrivacyPolicy(call, result);
+        break;
+      case PluginMethodUploadPrivacyPermissionStatus:
+        submitPrivacyGrantResult(call, result);
+        break;
+      case PluginMethodSetAllowShowPrivacyWindow:
+        setAllowDialog(call, result);
+        break;
+      case PluginMethodSetPrivacyUI:
+        setPrivacyUI(call, result);
+        break;
       default:
         break;
     }
+  }
+
+  //设置隐私二次弹框的UI
+  private void setPrivacyUI(MethodCall call, Result result) {
+    HashMap<String, Object> map = call.arguments();
+
+    String backColorStr = String.valueOf(map.get("backColor"));
+    int backColorInt = Integer.valueOf(backColorStr);
+    Log.e("qqq", "设置弹框背景色资源ID " + backColorInt);
+
+    List<Integer> oprationButtonColors = new ArrayList<>();
+    oprationButtonColors = (List<Integer>) map.get("oprationButtonColors");
+
+    int PositiveBtnColorId = -1;
+    int NegativeBtnColorId = -1;
+
+    if (oprationButtonColors.size() >= 1) {
+      PositiveBtnColorId = oprationButtonColors.get(0);
+      Log.e("qqq", "设置同意按钮背景色资源ID " + PositiveBtnColorId);
+    }
+    if (oprationButtonColors.size() >= 2) {
+      NegativeBtnColorId = oprationButtonColors.get(1);
+      Log.e("qqq", "设置拒绝按钮背景色资源ID " + NegativeBtnColorId);
+    }
+
+
+    MobPolicyUi mobPolicyUi = new MobPolicyUi.Builder()
+        // 设置弹框背景色资源ID
+        .setBackgroundColorId(backColorInt)
+        // 设置同意按钮背景色资源ID
+        .setPositiveBtnColorId(PositiveBtnColorId)
+        // 设置拒绝按钮背景色资源ID
+        .setNegativeBtnColorId(NegativeBtnColorId)
+        .build();
+    // 需在使用SDK接口前调用，否则不生效
+    MobSDK.setPolicyUi(mobPolicyUi);
+
+    Log.e("qqq", "设置隐私二次弹框的UI完成 ");
+  }
+
+  //设置是否同意二次弹框
+  private void setAllowDialog(MethodCall call, Result result) {
+    //Log.e("qqq", "====> setAllowDialog");
+    HashMap<String, Object> map = call.arguments();
+    String boolStr = String.valueOf(map.get("show"));
+    int boolInt = Integer.valueOf(boolStr);
+    if (boolInt == 1) {
+      MobSDK.setAllowDialog(true);
+      Log.e("qqq", " 同意隐私二次弹框 ");
+    } else {
+      MobSDK.setAllowDialog(false);
+      Log.e("qqq", " 不同意隐私二次弹框 ");
+
+    }
+
+  }
+
+  private void submitPrivacyGrantResult(MethodCall call, final Result result) {
+    Log.e("qqq", "====> submitPrivacyGrantResult");
+    HashMap<String, Object> map = call.arguments();
+    String boolStr = String.valueOf(map.get("status"));
+    boolean granted;
+    if (boolStr.equals("1")) { //1 代表同意
+      granted = true;
+    } else {
+      granted = false;
+    }
+
+    MobSDK.submitPolicyGrantResult(granted, new OperationCallback<Void>() {
+      @Override
+      public void onComplete(Void data) {
+        //success
+        Map<String, Object> map = new HashMap<>();
+        String resp = String.valueOf(data);
+        Log.d("qqq", "隐私协议授权结果提交：成功 " + resp);
+        boolean success = true;
+        map.put("success", success);
+        result.success(map);
+
+      }
+
+      @Override
+      public void onFailure(Throwable t) {
+        Map<String, Object> map = new HashMap<>();
+        String resp = String.valueOf(t.getMessage());
+        boolean fail = false;
+        map.put("success", fail);
+        result.success(map);
+        Log.d("qqq", "隐私协议授权结果提交：失败" + resp);
+      }
+    });
+  }
+
+  //隐私协议的方法
+  private void getPrivacyPolicy(MethodCall call, final Result result) {
+    try {
+      HashMap<String, Object> map = call.arguments();
+      String type = String.valueOf(map.get("type"));
+      int Type = Integer.valueOf(type);
+      //String respValue = MobSDK.getPrivacyPolicy(Type);
+
+      // 异步方法
+      MobSDK.getPrivacyPolicyAsync(Type, new PrivacyPolicy.OnPolicyListener() {
+        @Override
+        public void onComplete(PrivacyPolicy data) {
+          if (data != null) {
+            Map<String, Object> map = new HashMap<>();
+            HashMap<String, Object> valueMap = new HashMap<>();
+            String resp = String.valueOf(data.getContent());
+
+            valueMap.put("data", resp);
+            map.put("data", valueMap);
+            result.success(map);
+          }
+        }
+
+        @Override
+        public void onFailure(Throwable t) {
+          // 请求失败
+          Map<String, Object> map = new HashMap<>();
+          HashMap<String, Object> valueMap = new HashMap<>();
+          String resp = String.valueOf(t.getMessage());
+
+          valueMap.put("error", resp);
+          map.put("error", valueMap);
+          result.success(map);
+          Log.e(TAG, "隐私协议查询结果：失败 " + t);
+        }
+      });
+
+    } catch (Throwable t) {
+      Log.e("qqq", "getPrivacyPolicy catch===> " + t);
+    }
+
+
   }
 
   /**
