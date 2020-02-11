@@ -156,8 +156,14 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
 - (void)_shareWithArgs:(NSDictionary *)args result:(FlutterResult)result
 {
     NSInteger type = [args[@"platform"] integerValue];
-    NSDictionary *params = [self _covertParams:args[@"params"]];
-    
+    NSMutableDictionary *params = [self _covertParams:args[@"params"]].mutableCopy;
+    if (type == SSDKPlatformTypeOasis) {
+        if ([params[@"type"] integerValue] == SSDKContentTypeVideo) {
+            if ([params[@"video"] isKindOfClass:[NSString class]]) {
+                params[@"video"] = [NSData dataWithContentsOfFile:params[@"video"]];
+            }
+        }
+    }
     [ShareSDK share:type parameters:params.mutableCopy onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
         if (state != SSDKResponseStateBegin)
         {
@@ -256,7 +262,14 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
 - (void)_showEditorWithArgs:(NSDictionary *)args result:(FlutterResult)result
 {
     SSDKPlatformType type = [args[@"platform"] integerValue];
-    NSDictionary *params = [self _covertParams:args[@"params"]];
+    NSMutableDictionary *params = [self _covertParams:args[@"params"]].mutableCopy;
+    if (type == SSDKPlatformTypeOasis) {
+        if ([params[@"type"] integerValue] == SSDKContentTypeVideo) {
+            if ([params[@"video"] isKindOfClass:[NSString class]]) {
+                params[@"video"] = [NSData dataWithContentsOfFile:params[@"video"]];
+            }
+        }
+    }
     SEL showEditorSEL = NSSelectorFromString(@"showShareEditor:otherPlatforms:shareParams:editorConfiguration:onStateChanged:");
     NSAssert([ShareSDK.class respondsToSelector:showEditorSEL], @"Need to import ShareSDKUI.framework");
     ((id(*)(id,
@@ -297,7 +310,8 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
 - (void)_showMenuWithArgs:(NSDictionary *)args result:(FlutterResult)result
 {
     NSArray *types = [args[@"platforms"] isKindOfClass:NSArray.class] ?args[@"platforms"]:nil;
-    NSDictionary *params = [self _covertParams:args[@"params"]];
+    NSDictionary *params = [self _covertParams:args[@"params"]].mutableCopy;
+    
     SEL showMenuSEL = NSSelectorFromString(@"showShareActionSheet:customItems:shareParams:sheetConfiguration:onStateChanged:");
     NSAssert([ShareSDK.class respondsToSelector:showMenuSEL], @"Need to import ShareSDKUI.framework");
     

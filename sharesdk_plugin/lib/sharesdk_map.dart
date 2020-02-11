@@ -334,12 +334,13 @@ class SSDKMap {
     int id = ShareSDKPlatforms.facebook.id;
     map["@platform($id)"] = params;
   }
+
   void setOasis(
       String title,
       String text,
       assetLoacalIds,
       image,
-      video,
+      String video,
       String fileExtension,
       SSDKContentType type
       ){

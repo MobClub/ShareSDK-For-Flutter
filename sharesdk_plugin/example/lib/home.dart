@@ -343,9 +343,28 @@ class _HomePageState extends State<HomePage> {
     SharesdkPlugin.share(
         ShareSDKPlatforms.qq, params, (SSDKResponseState state, Map userdata,
         Map contentEntity, SSDKError error) {
-      showAlert(state, error.rawData, context);
+       showAlert(state, error.rawData, context);
     });
   }
+  void shareOassisCustom(BuildContext context){
+    SSDKMap params = SSDKMap()
+      ..setOasis(
+          "title",
+          "text",
+          null,
+           "http://wx4.sinaimg.cn/large/006tkBCzly1fy8hfqdoy6j30dw0dw759.jpg",
+          "",
+          "",
+          SSDKContentTypes.image
+          );
+
+    SharesdkPlugin.share(
+        ShareSDKPlatforms.oasis, params, (SSDKResponseState state, Map userdata,
+        Map contentEntity, SSDKError error) {
+        showAlert(state, error.rawData, context);
+    });
+  }
+
 
   void isClientInstalledQQ(BuildContext context) {
 
@@ -452,6 +471,8 @@ void showAlertText(String title, String content, BuildContext context) {
     );
   }
 
+
+
   void getPrivacyPolicy(bool data){
     print(data);
   }
@@ -469,6 +490,7 @@ void showAlertText(String title, String content, BuildContext context) {
         "1412473428822331", "a42f4f3f867dc947b9ed6020c2e93558", "shareSDK");
     register.setupTwitter("viOnkeLpHBKs6KXV7MPpeGyzE",
         "NJEglQUy2rqZ9Io9FcAU9p17omFqbORknUpRrCDOK46aAbIiey", "http://mob.com");
+    register.setupOasis("568898243");
     SharesdkPlugin.regist(register);
     SharesdkPlugin.uploadPrivacyPermissionStatus(0,  getPrivacyPolicy);
   }
@@ -500,7 +522,8 @@ void showAlertText(String title, String content, BuildContext context) {
           _creatRow("分享到QQ", "测试自定义参数", shareQQCustom, context),
           _creatRow("分享到Twitter", "测试自定义参数", shareTwitterCustom, context),
           _creatRow("分享到Facebook", "测试自定义参数", shareFacebookCustom, context),
-          _creatRow("判断客户端安装", "是否安装了QQ客户端", isClientInstalledQQ, context)
+          _creatRow("判断客户端安装", "是否安装了QQ客户端", isClientInstalledQQ, context),
+          _creatRow("分享到绿洲", "测试自定义参数", shareOassisCustom, context)
         ],
       ),
     );

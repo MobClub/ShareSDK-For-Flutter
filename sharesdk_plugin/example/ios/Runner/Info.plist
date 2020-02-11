@@ -8,8 +8,6 @@
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-	<key>FacebookAppID</key>
-	<string>1412473428822331</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -222,11 +220,22 @@
 			</array>
 		</dict>
 		<dict/>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>oasis568898243</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>20190815</string>
+	<key>FacebookAppID</key>
+	<string>1412473428822331</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>oasis</string>
 		<string>weixinULAPI</string>
 		<string>kakaotalk-5.9.7</string>
 		<string>pinterestsdk.v1</string>
