@@ -40,3 +40,7 @@
 
 ## 1.1.7
 * iOS Add " Sign in with Apple"
+
+## 1.2.0
+* Android Add to policy Privacy policy
+* IOS Add to Privacy policy
