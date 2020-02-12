@@ -87,7 +87,7 @@ if (flutterVersionName == null) {
 }
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 29
 
     lintOptions {
         disable 'InvalidPackage'
