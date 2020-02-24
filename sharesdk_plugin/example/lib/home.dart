@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
       }
 
       if (error != null) {
-        errorStr = data["error"];
+        errorStr = error["error"];
         print("==============>errorStr " + errorStr);
       }
 
