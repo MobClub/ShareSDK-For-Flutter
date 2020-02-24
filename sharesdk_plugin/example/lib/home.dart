@@ -526,10 +526,6 @@ class _HomePageState extends State<HomePage> {
   }
 
 
-  void getPrivacyPolicy(bool data) {
-    print(data);
-  }
-
   @override
   void initState() {
     super.initState();

@@ -55,7 +55,7 @@ DEPENDENCIES:
   - sharesdk_plugin (from `.symlinks/plugins/sharesdk_plugin/ios`)
 
 SPEC REPOS:
-  trunk:
+  https://github.com/cocoapods/specs.git:
     - mob_sharesdk
     - MOBFoundation
 
@@ -68,9 +68,9 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   mob_sharesdk: c7c69b2a51d99949627fb2ea9f4f581528c012cc
-  MOBFoundation: c75f286de178a089fff63ecad0e19d4dc8eb1c29
+  MOBFoundation: 1d1e72421680d7f6e17734070e95484c4fbacc6e
   sharesdk_plugin: d778833c2ca3af2f42a8c1516aedfc049a3bc309
 
 PODFILE CHECKSUM: 3dbe063e9c90a5d7c9e4e76e70a821b9e2c1d271
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.7.5
