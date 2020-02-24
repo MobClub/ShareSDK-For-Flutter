@@ -437,7 +437,7 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
     [MobSDK getPrivacyPolicy:args[@"type"] compeletion:^(NSDictionary * _Nullable data, NSError * _Nullable error) {
         result(@{
             @"data":data?:[NSNull null],
-            @"error":error?@"获取失败":[NSNull null]
+            @"error":error?@{@"error":@"获取失败"}:[NSNull null]
         });
     }];
 }
