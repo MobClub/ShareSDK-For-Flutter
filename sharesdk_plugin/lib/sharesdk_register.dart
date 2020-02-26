@@ -315,4 +315,12 @@ class ShareSDKRegister {
 
     platformsInfo[ShareSDKPlatforms.douyin.id] = info;
   }
+  /// set up oasis platform info
+  void setupOasis(String appkey) {
+    Map info = {
+      _ssdkAppkey: appkey,
+    };
+
+    platformsInfo[ShareSDKPlatforms.oasis.id] = info;
+  }
 }

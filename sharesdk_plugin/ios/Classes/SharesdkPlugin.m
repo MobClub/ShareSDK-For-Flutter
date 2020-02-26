@@ -3,7 +3,7 @@
 #import <ShareSDKExtension/ShareSDK+Extension.h>
 #import <MOBFoundation/MOBFoundation.h>import 'package:flutter/services.dart';
 #import <objc/message.h>
-
+#import <MOBFoundation/MobSDK+Privacy.h>
 typedef NS_ENUM(NSUInteger, PluginMethod) {
     PluginMethodGetVersion          = 0,
     PluginMethodShare               = 1,
@@ -17,7 +17,10 @@ typedef NS_ENUM(NSUInteger, PluginMethod) {
     PluginMethodOpenMiniProgram     = 9,
     PluginMethodActivePlatforms     = 10,
     PluginMethodIsClientInstalled   = 11,
-
+    PluginMethodUploadPrivacyPermissionStatus = 12,
+    PluginMethodSetAllowShowPrivacyWindow = 13,
+    PluginMethodGetPrivacyPolicy = 14,
+    PluginMethodSetPrivacyUI = 15
 };
 
 @interface SharesdkPlugin()<FlutterStreamHandler,ISSERestoreSceneDelegate>
@@ -62,7 +65,10 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
                            @"showMenu":@(PluginMethodShowMenu),
                            @"openMiniProgram":@(PluginMethodOpenMiniProgram),
                            @"isClientInstalled":@(PluginMethodIsClientInstalled),
-
+                           @"uploadPrivacyPermissionStatus":@(PluginMethodUploadPrivacyPermissionStatus),
+                           @"setAllowShowPrivacyWindow":@(PluginMethodSetAllowShowPrivacyWindow),
+                           @"setPrivacyUI":@(PluginMethodSetPrivacyUI),
+                           @"getPrivacyPolicy":@(PluginMethodGetPrivacyPolicy)
                            };
     [registrar addMethodCallDelegate:instance channel:channel];
     
@@ -115,6 +121,22 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
             case PluginMethodIsClientInstalled:
                 [self _isClientInstalledWithArgs:call.arguments result:result];
                 break;
+            case PluginMethodGetPrivacyPolicy:{
+                [self _getPrivacyPolicy:call.arguments result:result];
+            }
+                break;
+            case PluginMethodSetAllowShowPrivacyWindow:{
+                [self _setAllowShowPrivacyWindow:call.arguments result:result];
+            }
+                break;
+            case PluginMethodSetPrivacyUI:{
+                [self _setPrivacyUI:call.arguments result:result];
+            }
+                break;
+            case PluginMethodUploadPrivacyPermissionStatus:{
+                [self _uploadPrivacyPermissionStatus:call.arguments result:result];
+            }
+                break;
             default:
                 NSAssert(NO, @"The method requires an implementation ！");
                 break;
@@ -134,8 +156,14 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
 - (void)_shareWithArgs:(NSDictionary *)args result:(FlutterResult)result
 {
     NSInteger type = [args[@"platform"] integerValue];
-    NSDictionary *params = [self _covertParams:args[@"params"]];
-    
+    NSMutableDictionary *params = [self _covertParams:args[@"params"]].mutableCopy;
+    if (type == SSDKPlatformTypeOasis) {
+        if ([params[@"type"] integerValue] == SSDKContentTypeVideo) {
+            if ([params[@"video"] isKindOfClass:[NSString class]]) {
+                params[@"video"] = [NSData dataWithContentsOfFile:params[@"video"]];
+            }
+        }
+    }
     [ShareSDK share:type parameters:params.mutableCopy onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
         if (state != SSDKResponseStateBegin)
         {
@@ -234,7 +262,14 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
 - (void)_showEditorWithArgs:(NSDictionary *)args result:(FlutterResult)result
 {
     SSDKPlatformType type = [args[@"platform"] integerValue];
-    NSDictionary *params = [self _covertParams:args[@"params"]];
+    NSMutableDictionary *params = [self _covertParams:args[@"params"]].mutableCopy;
+    if (type == SSDKPlatformTypeOasis) {
+        if ([params[@"type"] integerValue] == SSDKContentTypeVideo) {
+            if ([params[@"video"] isKindOfClass:[NSString class]]) {
+                params[@"video"] = [NSData dataWithContentsOfFile:params[@"video"]];
+            }
+        }
+    }
     SEL showEditorSEL = NSSelectorFromString(@"showShareEditor:otherPlatforms:shareParams:editorConfiguration:onStateChanged:");
     NSAssert([ShareSDK.class respondsToSelector:showEditorSEL], @"Need to import ShareSDKUI.framework");
     ((id(*)(id,
@@ -275,7 +310,8 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
 - (void)_showMenuWithArgs:(NSDictionary *)args result:(FlutterResult)result
 {
     NSArray *types = [args[@"platforms"] isKindOfClass:NSArray.class] ?args[@"platforms"]:nil;
-    NSDictionary *params = [self _covertParams:args[@"params"]];
+    NSDictionary *params = [self _covertParams:args[@"params"]].mutableCopy;
+    
     SEL showMenuSEL = NSSelectorFromString(@"showShareActionSheet:customItems:shareParams:sheetConfiguration:onStateChanged:");
     NSAssert([ShareSDK.class respondsToSelector:showMenuSEL], @"Need to import ShareSDKUI.framework");
     
@@ -386,6 +422,46 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
     result(@([ShareSDK isClientInstalled:type]));
 }
 
+- (void)_uploadPrivacyPermissionStatus:(NSDictionary *)args result:(FlutterResult)result{
+    [MobSDK uploadPrivacyPermissionStatus:[args[@"status"]boolValue] onResult:^(BOOL success) {
+        result(@{@"success":@(success)});
+    }];
+}
+
+- (void)_setAllowShowPrivacyWindow:(NSDictionary *)args result:(FlutterResult)result{
+    [MobSDK setAllowShowPrivacyWindow:[args[@"show"]boolValue]];
+    result(@1);
+}
+
+- (void)_getPrivacyPolicy:(NSDictionary *)args result:(FlutterResult)result{
+    [MobSDK getPrivacyPolicy:args[@"type"] compeletion:^(NSDictionary * _Nullable data, NSError * _Nullable error) {
+        result(@{
+            @"data":@{@"data":(data[@"content"]?:[NSNull null])},
+            @"error":error?@{@"error":@"获取失败"}:[NSNull null]
+        });
+    }];
+}
+
+- (void)_setPrivacyUI:(NSDictionary *)args result:(FlutterResult)result{
+    UIColor *color = nil;
+    NSMutableArray *colors = [NSMutableArray array];
+    NSString *colorString = args[@"backColor"];
+    if ([colorString isKindOfClass:[NSNumber class]]) {
+        color = [MOBFColor colorWithRGB:[colorString integerValue]];
+    }
+    
+    NSArray *colorsNumber = args[@"oprationButtonColors"];
+    if ([colorsNumber isKindOfClass:[NSArray class]]) {
+        for (NSNumber *number in colorsNumber) {
+            id colorElement = [MOBFColor colorWithRGB:[number integerValue]];
+            if (colorElement) {
+                [colors addObject:colorElement];
+            }
+        }
+    }
+    [MobSDK setPrivacyBackgroundColor:color operationButtonColor:colors];
+    result(nil);
+}
 
 #pragma mark - FlutterStreamHandler Protocol
 

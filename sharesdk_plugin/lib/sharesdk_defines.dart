@@ -45,6 +45,14 @@ class ShareSDKMethods {
       ShareSDKMethod(name: "activePlatforms", id: 10);
   static final ShareSDKMethod isClientInstalled =
       ShareSDKMethod(name: "isClientInstalled", id: 11);
+  static final ShareSDKMethod uploadPrivacyPermissionStatus =
+  ShareSDKMethod(name: "uploadPrivacyPermissionStatus", id: 12);
+  static final ShareSDKMethod setAllowShowPrivacyWindow =
+  ShareSDKMethod(name: "setAllowShowPrivacyWindow", id: 13);
+  static final ShareSDKMethod getPrivacyPolicy =
+  ShareSDKMethod(name: "getPrivacyPolicy", id: 14);
+  static final ShareSDKMethod setPrivacyUI =
+  ShareSDKMethod(name: "setPrivacyUI", id: 15);
 }
 
 class ShareSDKPlatform {
@@ -144,6 +152,8 @@ class ShareSDKPlatforms {
       ShareSDKPlatform(name: "douyin", id: 59);
   static final ShareSDKPlatform apple =
       ShareSDKPlatform(name: 'apple',id: 61);
+  static final ShareSDKPlatform oasis =
+  ShareSDKPlatform(name: 'oasis',id: 64);
   static final ShareSDKPlatform yixinSeries =
       ShareSDKPlatform(name: "yixinSeries", id: 994);
   static final ShareSDKPlatform kakaoSeries =
@@ -156,12 +166,22 @@ class ShareSDKPlatforms {
       ShareSDKPlatform(name: "qqSeries", id: 998);
 }
 
-/// model for contentType
+/// model for FacebookShareType
+class SSDKFacebookShareType {
+  SSDKFacebookShareType({this.value}) : super();
+  final int value;
+}
+
+/// supported Facebook share types
+class SSDKFacebookShareTypes extends Object {
+  static SSDKFacebookShareType get native => SSDKFacebookShareType(value: 1);
+  static SSDKFacebookShareType get sheet => SSDKFacebookShareType(value: 2);
+}
+
 class SSDKContentType {
   SSDKContentType({this.value}) : super();
   final int value;
 }
-
 /// supported share content types
 class SSDKContentTypes extends Object {
   static SSDKContentType get auto => SSDKContentType(value: 0);

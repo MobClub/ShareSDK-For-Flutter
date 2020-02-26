@@ -24,6 +24,7 @@ Pod::Spec.new do |s|
   s.dependency 'mob_sharesdk/ShareSDKPlatforms/Facebook'
   s.dependency 'mob_sharesdk/ShareSDKPlatforms/Twitter'
   s.dependency 'mob_sharesdk/ShareSDKPlatforms/Douyin'
+  s.dependency 'mob_sharesdk/ShareSDKPlatforms/Oasis'
   #分享闭环
   s.dependency 'mob_sharesdk/ShareSDKRestoreScene'
   s.static_framework = true
