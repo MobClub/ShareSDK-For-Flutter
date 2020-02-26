@@ -264,22 +264,35 @@ public class SharesdkPlugin implements MethodCallHandler {
       @Override
       public void onComplete(Void data) {
         //success
-        Map<String, Object> map = new HashMap<>();
+        final Map<String, Object> map = new HashMap<>();
         String resp = String.valueOf(data);
         Log.d("qqq", "隐私协议授权结果提交：成功 " + resp);
         boolean success = true;
         map.put("success", success);
-        result.success(map);
 
+        ThreadManager.getMainHandler().post(new Runnable() {
+          @Override
+          public void run() {
+            result.success(map);
+            Log.e(TAG, "MobSDK.submitPolicyGrantResult onComplete===> " + map);
+          }
+        });
       }
 
       @Override
       public void onFailure(Throwable t) {
-        Map<String, Object> map = new HashMap<>();
+        final Map<String, Object> map = new HashMap<>();
         String resp = String.valueOf(t.getMessage());
         boolean fail = false;
         map.put("success", fail);
-        result.success(map);
+
+        ThreadManager.getMainHandler().post(new Runnable() {
+          @Override
+          public void run() {
+            result.success(map);
+            Log.e(TAG, "MobSDK.submitPolicyGrantResult onFailure===> " + map);
+          }
+        });
         Log.d("qqq", "隐私协议授权结果提交：失败" + resp);
       }
     });
@@ -334,7 +347,7 @@ public class SharesdkPlugin implements MethodCallHandler {
    **/
   private void getVersion(MethodCall call, Result result) {
     Map<String, Object> map = new HashMap<>();
-    map.put("版本号", "3.6.6");
+    map.put("版本号", "3.7.1");
     result.success(map);
   }
 
