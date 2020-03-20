@@ -228,6 +228,14 @@
 				<string>oasis568898243</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>line3rdp.$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>20190815</string>
@@ -235,6 +243,9 @@
 	<string>1412473428822331</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>lineauth</string>
+		<string>line</string>
+		<string>lineauth2</string>
 		<string>oasis</string>
 		<string>weixinULAPI</string>
 		<string>kakaotalk-5.9.7</string>

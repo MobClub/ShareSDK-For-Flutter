@@ -1,47 +1,51 @@
 PODS:
   - Flutter (1.0.0)
-  - mob_sharesdk (4.3.6):
-    - mob_sharesdk/ShareSDK (= 4.3.6)
+  - mob_sharesdk (4.3.7):
+    - mob_sharesdk/ShareSDK (= 4.3.7)
     - MOBFoundation (>= 3.2.9)
-  - mob_sharesdk/ShareSDK (4.3.6):
+  - mob_sharesdk/ShareSDK (4.3.7):
     - MOBFoundation (>= 3.2.9)
-  - mob_sharesdk/ShareSDKExtension (4.3.6):
+  - mob_sharesdk/ShareSDKExtension (4.3.7):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
-  - mob_sharesdk/ShareSDKPlatforms/Douyin (4.3.6):
+  - mob_sharesdk/ShareSDKPlatforms/Douyin (4.3.7):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
-  - mob_sharesdk/ShareSDKPlatforms/Facebook (4.3.6):
+  - mob_sharesdk/ShareSDKPlatforms/Facebook (4.3.7):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
-  - mob_sharesdk/ShareSDKPlatforms/Oasis (4.3.6):
+  - mob_sharesdk/ShareSDKPlatforms/Line (4.3.7):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
-  - mob_sharesdk/ShareSDKPlatforms/QQ (4.3.6):
+  - mob_sharesdk/ShareSDKPlatforms/Oasis (4.3.7):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
-  - mob_sharesdk/ShareSDKPlatforms/SinaWeibo (4.3.6):
+  - mob_sharesdk/ShareSDKPlatforms/QQ (4.3.7):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
-  - mob_sharesdk/ShareSDKPlatforms/Twitter (4.3.6):
+  - mob_sharesdk/ShareSDKPlatforms/SinaWeibo (4.3.7):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
-  - mob_sharesdk/ShareSDKPlatforms/WeChat (4.3.6):
+  - mob_sharesdk/ShareSDKPlatforms/Twitter (4.3.7):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
-  - mob_sharesdk/ShareSDKRestoreScene (4.3.6):
+  - mob_sharesdk/ShareSDKPlatforms/WeChat (4.3.7):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation (>= 3.2.9)
+  - mob_sharesdk/ShareSDKRestoreScene (4.3.7):
     - mob_sharesdk/ShareSDKExtension
     - MOBFoundation (>= 3.2.9)
-  - mob_sharesdk/ShareSDKUI (4.3.6):
+  - mob_sharesdk/ShareSDKUI (4.3.7):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
-  - MOBFoundation (3.2.9)
-  - sharesdk_plugin (1.1.0):
+  - MOBFoundation (3.2.12)
+  - sharesdk_plugin (1.1.1):
     - Flutter
     - mob_sharesdk
     - mob_sharesdk/ShareSDKExtension
     - mob_sharesdk/ShareSDKPlatforms/Douyin
     - mob_sharesdk/ShareSDKPlatforms/Facebook
+    - mob_sharesdk/ShareSDKPlatforms/Line
     - mob_sharesdk/ShareSDKPlatforms/Oasis
     - mob_sharesdk/ShareSDKPlatforms/QQ
     - mob_sharesdk/ShareSDKPlatforms/SinaWeibo
@@ -67,9 +71,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  mob_sharesdk: c7c69b2a51d99949627fb2ea9f4f581528c012cc
-  MOBFoundation: 1d1e72421680d7f6e17734070e95484c4fbacc6e
-  sharesdk_plugin: d778833c2ca3af2f42a8c1516aedfc049a3bc309
+  mob_sharesdk: bcbb8662136487fd94dd3afd36b0504366b40a9f
+  MOBFoundation: 8b679c59f14588770fa307b830e64290d31f3227
+  sharesdk_plugin: f10df9966eb8e07b8965d059c793c42a32393be4
 
 PODFILE CHECKSUM: 3dbe063e9c90a5d7c9e4e76e70a821b9e2c1d271
 

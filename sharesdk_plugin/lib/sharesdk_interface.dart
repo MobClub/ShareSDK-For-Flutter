@@ -169,9 +169,13 @@ class SharesdkPlugin {
 
     return callback;
   }
-  //get ShareSDK PrivacyPolicy
-  static Future<dynamic> getPrivacyPolicy(String type,Function(Map data,Map error) result){
+  //get ShareSDK PrivacyPolicy, language forExample en-CN,zh-Hans-CN,zh,en. null will be zh
+  static Future<dynamic> getPrivacyPolicy(String type, String language,Function(Map data,Map error) result){
     Map args = {"type": type};
+    if (language != null){
+
+      args["language"] = language;
+    }
     Future<dynamic> callback =
     _channel.invokeMethod(ShareSDKMethods.getPrivacyPolicy.name, args);
     callback.then((dynamic response) {

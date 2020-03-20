@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
   /// POLICY_TYPE_URL = 1
   /// POLICY_TYPE_TXT = 2
   getPrivacyPolicyUrl(BuildContext context) {
-    SharesdkPlugin.getPrivacyPolicy("1", (Map data, Map error) {
+    SharesdkPlugin.getPrivacyPolicy("1","en-CN", (Map data, Map error) {
       String policyData, errorStr;
       if (data != null) {
         policyData = data["data"];
@@ -162,7 +162,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void authToWechat(BuildContext context) {
-    SharesdkPlugin.auth(ShareSDKPlatforms.wechatSession, null,
+    SharesdkPlugin.auth(ShareSDKPlatforms.line, null,
         (SSDKResponseState state, Map user, SSDKError error) {
       showAlert(state, user != null ? user : error.rawData, context);
     });
@@ -373,7 +373,8 @@ class _HomePageState extends State<HomePage> {
           "Mob官网 - 全球领先的移动开发者服务平台",
           SSDKFacebookShareTypes.native,
           SSDKContentTypes.image);
-    print(params);
+    params
+    ..setFacebookAssetLocalIdentifier("73EC5698-20CF-4030-8FB2-CC0C80EF8156/L0/001,B2A42CA3-FA0F-45EC-92B2-F0F94A8A5A2B/L0/001,AA97F2F3-D2E4-43BB-8C2A-06D77480D7CA/L0/001,B220D191-2D5F-43E1-BF97-E3D7E61E86DB/L0/001,F064C692-79A1-4768-9530-1EFEA8360843/L0/001", "asdf");
     SharesdkPlugin.share(ShareSDKPlatforms.facebook, params,
         (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
@@ -556,10 +557,10 @@ class _HomePageState extends State<HomePage> {
         padding: EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
         children: <Widget>[
           _creatRow("ShareSDK版本号", "ShareSDK版本号", shareSdkVersion, context),
-          _creatRow("获取隐私协议内容", "android only", getPrivacyPolicyUrl, context),
-          _creatRow("设置同意隐私政策", "android only", submitPrivacyGrantResult, context),
-          _creatRow("隐私二次确认框开关设置", "android only", setAllowDialog, context),
-          _creatRow("开发者自定义弹窗样式", "android only", setPrivacyUI, context),
+          _creatRow("获取隐私协议内容", "", getPrivacyPolicyUrl, context),
+          _creatRow("设置同意隐私政策", "", submitPrivacyGrantResult, context),
+          _creatRow("隐私二次确认框开关设置", "", setAllowDialog, context),
+          _creatRow("开发者自定义弹窗样式", "", setPrivacyUI, context),
           _creatRow("分享到微信", "分享图片到微信", shareToWechat, context),
           _creatRow("分享到抖音", "需要传入当前图片到抖音", shareToDouyin, context),
           _creatRow("微信授权", "微信授权(不返回用户数据)", authToWechat, context),

@@ -334,6 +334,16 @@ class SSDKMap {
     int id = ShareSDKPlatforms.facebook.id;
     map["@platform($id)"] = params;
   }
+  //setFacebookAssetImagesOrVideo，设置相册中的image或者video的localIdentifier
+  void setFacebookAssetLocalIdentifier(
+      String imageLocalIdentifiers,
+      String videoLocalIdentifier
+      ){
+
+    map["facebookAssetLocalIdentifierKey_image"] = imageLocalIdentifiers;
+    map["facebookAssetLocalIdentifierKey_video"] = videoLocalIdentifier;
+  }
+
 
   void setOasis(
       String title,

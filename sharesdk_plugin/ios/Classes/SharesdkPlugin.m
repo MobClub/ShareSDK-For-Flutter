@@ -165,6 +165,17 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
             }
         }
     }
+    NSArray *imageIdentifier = nil;
+    if ([params[@"facebookAssetLocalIdentifierKey_image"] isKindOfClass:[NSString class]])  {
+        imageIdentifier = [params[@"facebookAssetLocalIdentifierKey_image"] componentsSeparatedByString:@","];
+    }
+    id videoIdentifier = nil;
+    if ([params[@"facebookAssetLocalIdentifierKey_video"] isKindOfClass:[NSString class]])  {
+        videoIdentifier = params[@"facebookAssetLocalIdentifierKey_video"];
+    }
+    if (imageIdentifier || videoIdentifier) {
+        [params SSDKSetupFacebookParamsByImagePHAsset:imageIdentifier videoPHAsset:videoIdentifier];
+    }
     [ShareSDK share:type parameters:params.mutableCopy onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
         if (state != SSDKResponseStateBegin)
         {
@@ -214,6 +225,7 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
 
 - (void)_cancelAuthWithArgs:(NSNumber *)args result:(FlutterResult)result
 {
+    
     [ShareSDK cancelAuthorize:args.integerValue result:^(NSError *error) {
         NSInteger state = SSDKResponseStateFail;
         if (error == nil)
@@ -271,6 +283,17 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
             }
         }
     }
+    NSArray *imageIdentifier = nil;
+    if ([params[@"facebookAssetLocalIdentifierKey_image"] isKindOfClass:[NSString class]])  {
+        imageIdentifier = [params[@"facebookAssetLocalIdentifierKey_image"] componentsSeparatedByString:@","];
+    }
+    id videoIdentifier = nil;
+    if ([params[@"facebookAssetLocalIdentifierKey_video"] isKindOfClass:[NSString class]])  {
+        videoIdentifier = params[@"facebookAssetLocalIdentifierKey_video"];
+    }
+    if (imageIdentifier || videoIdentifier) {
+        [params SSDKSetupFacebookParamsByImagePHAsset:imageIdentifier videoPHAsset:videoIdentifier];
+    }
     SEL showEditorSEL = NSSelectorFromString(@"showShareEditor:otherPlatforms:shareParams:editorConfiguration:onStateChanged:");
     NSAssert([ShareSDK.class respondsToSelector:showEditorSEL], @"Need to import ShareSDKUI.framework");
     ((id(*)(id,
@@ -311,7 +334,20 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
 - (void)_showMenuWithArgs:(NSDictionary *)args result:(FlutterResult)result
 {
     NSArray *types = [args[@"platforms"] isKindOfClass:NSArray.class] ?args[@"platforms"]:nil;
-    NSDictionary *params = [self _covertParams:args[@"params"]].mutableCopy;
+    NSMutableDictionary *params = [self _covertParams:args[@"params"]].mutableCopy;
+    
+    NSArray *imageIdentifier = nil;
+    if ([params[@"facebookAssetLocalIdentifierKey_image"] isKindOfClass:[NSString class]])  {
+        imageIdentifier = [params[@"facebookAssetLocalIdentifierKey_image"] componentsSeparatedByString:@","];
+    }
+    id videoIdentifier = nil;
+    if ([params[@"facebookAssetLocalIdentifierKey_video"] isKindOfClass:[NSString class]])  {
+        videoIdentifier = params[@"facebookAssetLocalIdentifierKey_video"];
+    }
+    if (imageIdentifier || videoIdentifier) {
+        [params SSDKSetupFacebookParamsByImagePHAsset:imageIdentifier videoPHAsset:videoIdentifier];
+    }
+
     
     SEL showMenuSEL = NSSelectorFromString(@"showShareActionSheet:customItems:shareParams:sheetConfiguration:onStateChanged:");
     NSAssert([ShareSDK.class respondsToSelector:showMenuSEL], @"Need to import ShareSDKUI.framework");
@@ -414,7 +450,6 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
     NSAssert(connector != NULL, @"Need to import WechatConnector.framework !");
     
     void(^ complete)(BOOL) = ^(BOOL success) {
-       
         result(@(success));
     };
     SEL openMiniProgramSEL = NSSelectorFromString(@"openMiniProgramWithUserName:path:miniProgramType:complete:");
@@ -439,7 +474,7 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
 }
 
 - (void)_getPrivacyPolicy:(NSDictionary *)args result:(FlutterResult)result{
-    [MobSDK getPrivacyPolicy:args[@"type"] compeletion:^(NSDictionary * _Nullable data, NSError * _Nullable error) {
+    [MobSDK getPrivacyPolicy:args[@"type"] language:@"en"  compeletion:^(NSDictionary * _Nullable data, NSError * _Nullable error) {
         result(@{
             @"data":@{@"data":(data[@"content"]?:[NSNull null])},
             @"error":error?@{@"error":@"获取失败"}:[NSNull null]
