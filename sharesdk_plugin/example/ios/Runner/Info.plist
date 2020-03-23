@@ -236,6 +236,14 @@
 				<string>line3rdp.$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>line3rdp.$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>20190815</string>
@@ -327,6 +335,13 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>LineSDKConfig</key>
+	<dict>
+		<key>ChannelID</key>
+		<string>1639219273</string>
+		<key>UniversalLink</key>
+		<string>https://ybpre.share2dlink.com/line-auth/</string>
+	</dict>
 	<key>MOBAppKey</key>
 	<string>moba0b0c0d0</string>
 	<key>MOBAppSecret</key>

@@ -162,7 +162,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void authToWechat(BuildContext context) {
-    SharesdkPlugin.auth(ShareSDKPlatforms.line, null,
+    SharesdkPlugin.auth(ShareSDKPlatforms.wechatSession, null,
         (SSDKResponseState state, Map user, SSDKError error) {
       showAlert(state, user != null ? user : error.rawData, context);
     });
@@ -214,7 +214,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void authToSina(BuildContext context) {
-    SharesdkPlugin.getUserInfo(ShareSDKPlatforms.qq,
+    SharesdkPlugin.getUserInfo(ShareSDKPlatforms.sina,
         (SSDKResponseState state, Map userdata, SSDKError error) {
       print("--------------------------> authToSina:");
       showAlert(state, userdata, context);

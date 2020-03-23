@@ -474,7 +474,7 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
 }
 
 - (void)_getPrivacyPolicy:(NSDictionary *)args result:(FlutterResult)result{
-    [MobSDK getPrivacyPolicy:args[@"type"] language:@"en"  compeletion:^(NSDictionary * _Nullable data, NSError * _Nullable error) {
+    [MobSDK getPrivacyPolicy:args[@"type"] language:args[@"language"]  compeletion:^(NSDictionary * _Nullable data, NSError * _Nullable error) {
         result(@{
             @"data":@{@"data":(data[@"content"]?:[NSNull null])},
             @"error":error?@{@"error":@"获取失败"}:[NSNull null]
