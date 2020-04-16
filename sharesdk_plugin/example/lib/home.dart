@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
       }
 
       if (error != null) {
-        errorStr = data["error"];
+        errorStr = error["error"];
         print("==============>errorStr " + errorStr);
       }
 
@@ -525,10 +525,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-
-  void getPrivacyPolicy(bool data) {
-    print(data);
-  }
 
   @override
   void initState() {
