@@ -17,6 +17,7 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="sharesdk_plugin_example"
         android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true"
         tools:replace="android:name">
         <activity
             android:name=".MainActivity"
