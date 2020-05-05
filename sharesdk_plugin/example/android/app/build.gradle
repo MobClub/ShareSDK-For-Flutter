@@ -45,20 +45,48 @@ android {
         config {
             keyAlias 'demokey.keystore'
             keyPassword '123456'
-            storeFile file('demokey.keystore')
+            storeFile file('../demokey.keystore')
+            storePassword '123456'
+        }
+        release {
+            keyAlias 'demokey.keystore'
+            keyPassword '123456'
+            storeFile file('../demokey.keystore')
+            storePassword '123456'
+        }
+        debug {
+            keyAlias 'demokey.keystore'
+            keyPassword '123456'
+            storeFile file('../demokey.keystore')
             storePassword '123456'
         }
     }
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            //signingConfig signingConfigs.debug
-            signingConfig signingConfigs.config
+            ndk{
+                //这里其实我觉可以直接是用"armeabi-v7a"，但国内几个大哥之前使用的都是"armeabi"
+                abiFilters "armeabi"
+            }
+
+            debuggable true
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //signingConfig signingConfigs.release
+            signingConfig signingConfigs.debug
         }
+
         debug {
-            signingConfig signingConfigs.config
+            ndk {
+                //这里要加上，否则debug包会出问题,后面三个为可选，x86建议加上不然部分模拟器回报错
+                abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86"
+            }
+
+            debuggable true
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //signingConfig signingConfigs.release
+            signingConfig signingConfigs.debug
         }
     }
 }
@@ -68,5 +96,5 @@ flutter {
 }
 
 dependencies {
-    implementation 'org.greenrobot:eventbus:3.1.1'
+
 }
