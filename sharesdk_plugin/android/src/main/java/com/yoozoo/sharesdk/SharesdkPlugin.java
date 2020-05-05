@@ -59,6 +59,8 @@ public class SharesdkPlugin implements MethodCallHandler {
 
   private static Activity activity = null;
 
+  public static int IS_ALIVE = 123;
+
   private static final String TAG = "SHARESDK";
 
 
@@ -66,25 +68,35 @@ public class SharesdkPlugin implements MethodCallHandler {
    * Plugin registration.
    */
   public static void registerWith(PluginRegistry.Registrar registrar) {
-    //SharesdkPlugin instance = new SharesdkPlugin();
-
     activity = registrar.activity();
 
     final MethodChannel channel = new MethodChannel(registrar.messenger(),
         "com.yoozoo.mob/sharesdk");
     channel.setMethodCallHandler(new SharesdkPlugin());
 
-    //eventChannel = new EventChannel(registrar.messenger(), EVENTCHANNEL);
-    //eventChannel.setStreamHandler(new SharesdkPlugin());
     eventChannel = new EventChannel(registrar.messenger(), EVENTCHANNEL);
-    Log.e("WWW", " eventChannel " + eventChannel);
     eventChannel.setStreamHandler(new EventChannel.StreamHandler() {
 
       @Override
       public void onListen(Object o, EventChannel.EventSink eventSink) {
-        Log.e("WWW", " onListen " + " Object " + o + " eventSink " + eventSink);
         if (eventSink != null) {
           outerEventSink = eventSink;
+          if (IS_ALIVE != 123) {
+            try {
+              HashMap<String, Object> resMap = ShareSDK.getCustomDataFromLoopShare();
+
+              HashMap<String, Object> fedbackMap = new HashMap<>();
+              if (resMap.containsKey("path")) {
+                fedbackMap.put("path", resMap.get("path"));
+              }
+              fedbackMap.put("params", resMap);
+              outerEventSink.success(fedbackMap);
+            } catch (Throwable t) {
+              Log.e("www", " catch====> " + t);
+            }
+
+            IS_ALIVE = 123;
+          }
           Log.e("WWW", "onListen ===> outerEventSink " + outerEventSink);
         } else {
           Log.e("WWW", "onListen ===> eventSink is null ");
@@ -111,14 +123,20 @@ public class SharesdkPlugin implements MethodCallHandler {
         Log.e("WWW", "LoopShareResultListener onResult " + test);
 
         if (outerEventSink != null) {
-          HashMap<String, Object> map = new HashMap<>();
-          map.put("innerMapOneKey", "innerMapOneValue");
-          map.put("innerMapTwoKey", "innerMapTwoValue");
 
-          HashMap<String, Object> outer = new HashMap<String, Object>();
-          outer.put("path", "outPathValue");
-          outer.put("params", map);
-          outerEventSink.success(outer);
+          try {
+            HashMap<String, Object> resMap = (HashMap<String, Object>) var1;
+
+            HashMap<String, Object> fedbackMap = new HashMap<>();
+            if (resMap.containsKey("path")) {
+              fedbackMap.put("path", resMap.get("path"));
+            }
+            fedbackMap.put("params", resMap);
+            outerEventSink.success(fedbackMap);
+          } catch (Throwable t) {
+            Log.e("www", " catch====> " + t);
+          }
+
           Log.e("WWW", "LoopShareResultListener onResult outerEventSink.success is ok");
         } else {
           Log.e("WWW", "LoopShareResultListener onResult outerEventSink is null");
@@ -157,7 +175,6 @@ public class SharesdkPlugin implements MethodCallHandler {
         getUserInfoWithArgs(call, result);
         break;
       case PluginMethodRegist:
-        Log.e("SharesdkPlugin", " Android no need this method, Please use gradle set ");
         break;
       case PluginMethodActivePlatforms:
         //IOS only
