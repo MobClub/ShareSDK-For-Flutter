@@ -9,27 +9,9 @@ typedef void EventHandler(Object event);
 class SharesdkPlugin {
   static const MethodChannel _channel =
       const MethodChannel('com.yoozoo.mob/sharesdk');
-  static const EventChannel java_to_flutter =
-      const EventChannel("JAVA_TO_FLUTTER");
 
   static EventChannel _channelReciever = const EventChannel('SSDKRestoreReceiver');
 
-  // static Future<dynamic> listenNativeEvent() {
-  //   java_to_flutter
-  //       .receiveBroadcastStream()
-  //       .listen(_onEvent, onError: _onError);
-  //   return null;
-  // }
-
-  static Future<dynamic> _onEvent(Object event) {
-    print("onEvent: $event ");
-    return null;
-  }
-
-  static Future<dynamic> _onError(Object error) {
-    print(error);
-    return null;
-  }
 
   /// 注册方法：
   /// 1. 创建register对象，
@@ -256,11 +238,11 @@ class SharesdkPlugin {
     return state;
   }
 
+
   /*
    * 添加闭环分享回调监听
    */
   static addRestoreReceiver(EventHandler onEvent, EventHandler onError) {
       _channelReciever.receiveBroadcastStream().listen(onEvent, onError: onError);
   }
-
 }

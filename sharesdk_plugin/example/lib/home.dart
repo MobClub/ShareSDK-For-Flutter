@@ -526,7 +526,33 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void _onEvent(Object event) {
+    print('>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+    Map resMap_t = event;
+    Map<String, dynamic> resMap = Map<String, dynamic>.from(resMap_t);
+    String path = resMap['path'];
+    Map<String, dynamic> params = Map<String, dynamic>.from(resMap['params']);
+    print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onSuccess:' + resMap.toString());
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => CupertinoAlertDialog(
+            title: new Text(path),
+            content: new Text(resMap.toString()),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ]));
+  }
 
+  void _onError(Object event) {
+    setState(() {
+      print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onError:' + event.toString());
+    });
+  }
   @override
   void initState() {
     super.initState();
@@ -545,6 +571,7 @@ class _HomePageState extends State<HomePage> {
     register.setupOasis("568898243");
     SharesdkPlugin.regist(register);
     //SharesdkPlugin.uploadPrivacyPermissionStatus(0, getPrivacyPolicy);
+    SharesdkPlugin.addRestoreReceiver(_onEvent, _onError);
   }
 
   @override

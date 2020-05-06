@@ -483,23 +483,7 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
 }
 
 - (void)_setPrivacyUI:(NSDictionary *)args result:(FlutterResult)result{
-    UIColor *color = nil;
-    NSMutableArray *colors = [NSMutableArray array];
-    NSString *colorString = args[@"backColor"];
-    if ([colorString isKindOfClass:[NSNumber class]]) {
-        color = [MOBFColor colorWithRGB:[colorString integerValue]];
-    }
     
-    NSArray *colorsNumber = args[@"oprationButtonColors"];
-    if ([colorsNumber isKindOfClass:[NSArray class]]) {
-        for (NSNumber *number in colorsNumber) {
-            id colorElement = [MOBFColor colorWithRGB:[number integerValue]];
-            if (colorElement) {
-                [colors addObject:colorElement];
-            }
-        }
-    }
-    [MobSDK setPrivacyBackgroundColor:color operationButtonColor:colors];
     result(nil);
 }
 
@@ -513,6 +497,7 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
 
 - (FlutterError * _Nullable)onCancelWithArguments:(id _Nullable)arguments
 {
+    self.callBack = nil;
     return nil;
 }
 
@@ -541,12 +526,6 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
     if (scene.params && scene.params.count > 0)
     {
         resultDict[@"params"] = scene.params;
-    }
-       
-    NSString *resultStr  = @"";
-    if (resultDict.count > 0)
-    {
-        resultStr = [MOBFJson jsonStringFromObject:resultDict];
     }
     if (self.callBack)
     {
