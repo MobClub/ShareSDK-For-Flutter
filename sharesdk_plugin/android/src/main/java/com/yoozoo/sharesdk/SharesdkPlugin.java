@@ -52,14 +52,14 @@ public class SharesdkPlugin implements MethodCallHandler {
   //隐私协议 getPrivacyPolicy
   private static final String PluginMethodGetPrivacyPolicy = "getPrivacyPolicy";
   private static final String PluginMethodUploadPrivacyPermissionStatus = "uploadPrivacyPermissionStatus";
-  private static final String PluginMethodSetAllowShowPrivacyWindow = "setAllowShowPrivacyWindow";
-  private static final String PluginMethodSetPrivacyUI = "setPrivacyUI";
 
   private static final String EVENTCHANNEL = "SSDKRestoreReceiver";
   private static EventChannel eventChannel;
   private static EventChannel.EventSink outerEventSink;
 
   private static Activity activity = null;
+
+  public static int IS_ALIVE = 123;
 
   private static final String TAG = "SHARESDK";
 
@@ -68,25 +68,35 @@ public class SharesdkPlugin implements MethodCallHandler {
    * Plugin registration.
    */
   public static void registerWith(PluginRegistry.Registrar registrar) {
-    //SharesdkPlugin instance = new SharesdkPlugin();
-
     activity = registrar.activity();
 
     final MethodChannel channel = new MethodChannel(registrar.messenger(),
         "com.yoozoo.mob/sharesdk");
     channel.setMethodCallHandler(new SharesdkPlugin());
 
-    //eventChannel = new EventChannel(registrar.messenger(), EVENTCHANNEL);
-    //eventChannel.setStreamHandler(new SharesdkPlugin());
     eventChannel = new EventChannel(registrar.messenger(), EVENTCHANNEL);
-    Log.e("WWW", " eventChannel " + eventChannel);
     eventChannel.setStreamHandler(new EventChannel.StreamHandler() {
 
       @Override
       public void onListen(Object o, EventChannel.EventSink eventSink) {
-        Log.e("WWW", " onListen " + " Object " + o + " eventSink " + eventSink);
         if (eventSink != null) {
           outerEventSink = eventSink;
+          if (IS_ALIVE != 123) {
+            try {
+              HashMap<String, Object> resMap = ShareSDK.getCustomDataFromLoopShare();
+
+              HashMap<String, Object> fedbackMap = new HashMap<>();
+              if (resMap.containsKey("path")) {
+                fedbackMap.put("path", resMap.get("path"));
+              }
+              fedbackMap.put("params", resMap);
+              outerEventSink.success(fedbackMap);
+            } catch (Throwable t) {
+              Log.e("www", " catch====> " + t);
+            }
+
+            IS_ALIVE = 123;
+          }
           Log.e("WWW", "onListen ===> outerEventSink " + outerEventSink);
         } else {
           Log.e("WWW", "onListen ===> eventSink is null ");
@@ -113,14 +123,20 @@ public class SharesdkPlugin implements MethodCallHandler {
         Log.e("WWW", "LoopShareResultListener onResult " + test);
 
         if (outerEventSink != null) {
-          HashMap<String, Object> map = new HashMap<>();
-          map.put("innerMapOneKey", "innerMapOneValue");
-          map.put("innerMapTwoKey", "innerMapTwoValue");
 
-          HashMap<String, Object> outer = new HashMap<String, Object>();
-          outer.put("path", "outPathValue");
-          outer.put("params", map);
-          outerEventSink.success(outer);
+          try {
+            HashMap<String, Object> resMap = (HashMap<String, Object>) var1;
+
+            HashMap<String, Object> fedbackMap = new HashMap<>();
+            if (resMap.containsKey("path")) {
+              fedbackMap.put("path", resMap.get("path"));
+            }
+            fedbackMap.put("params", resMap);
+            outerEventSink.success(fedbackMap);
+          } catch (Throwable t) {
+            Log.e("www", " catch====> " + t);
+          }
+
           Log.e("WWW", "LoopShareResultListener onResult outerEventSink.success is ok");
         } else {
           Log.e("WWW", "LoopShareResultListener onResult outerEventSink is null");
@@ -159,7 +175,6 @@ public class SharesdkPlugin implements MethodCallHandler {
         getUserInfoWithArgs(call, result);
         break;
       case PluginMethodRegist:
-        Log.e("SharesdkPlugin", " Android no need this method, Please use gradle set ");
         break;
       case PluginMethodActivePlatforms:
         //IOS only
@@ -183,71 +198,12 @@ public class SharesdkPlugin implements MethodCallHandler {
       case PluginMethodUploadPrivacyPermissionStatus:
         submitPrivacyGrantResult(call, result);
         break;
-      case PluginMethodSetAllowShowPrivacyWindow:
-        setAllowDialog(call, result);
-        break;
-      case PluginMethodSetPrivacyUI:
-        setPrivacyUI(call, result);
-        break;
       default:
         break;
     }
   }
 
-  //设置隐私二次弹框的UI
-  private void setPrivacyUI(MethodCall call, Result result) {
-    HashMap<String, Object> map = call.arguments();
 
-    String backColorStr = String.valueOf(map.get("backColor"));
-    int backColorInt = Integer.valueOf(backColorStr);
-    Log.e("qqq", "设置弹框背景色资源ID " + backColorInt);
-
-    List<Integer> oprationButtonColors = new ArrayList<>();
-    oprationButtonColors = (List<Integer>) map.get("oprationButtonColors");
-
-    int PositiveBtnColorId = -1;
-    int NegativeBtnColorId = -1;
-
-    if (oprationButtonColors.size() >= 1) {
-      PositiveBtnColorId = oprationButtonColors.get(0);
-      Log.e("qqq", "设置同意按钮背景色资源ID " + PositiveBtnColorId);
-    }
-    if (oprationButtonColors.size() >= 2) {
-      NegativeBtnColorId = oprationButtonColors.get(1);
-      Log.e("qqq", "设置拒绝按钮背景色资源ID " + NegativeBtnColorId);
-    }
-
-
-    MobPolicyUi mobPolicyUi = new MobPolicyUi.Builder()
-        // 设置弹框背景色资源ID
-        .setBackgroundColorId(backColorInt)
-        // 设置同意按钮背景色资源ID
-        .setPositiveBtnColorId(PositiveBtnColorId)
-        // 设置拒绝按钮背景色资源ID
-        .setNegativeBtnColorId(NegativeBtnColorId)
-        .build();
-    // 需在使用SDK接口前调用，否则不生效
-    MobSDK.setPolicyUi(mobPolicyUi);
-
-    Log.e("qqq", "设置隐私二次弹框的UI完成 ");
-  }
-
-  //设置是否同意二次弹框
-  private void setAllowDialog(MethodCall call, Result result) {
-    //Log.e("qqq", "====> setAllowDialog");
-    HashMap<String, Object> map = call.arguments();
-    String boolStr = String.valueOf(map.get("show"));
-    int boolInt = Integer.valueOf(boolStr);
-    if (boolInt == 1) {
-      MobSDK.setAllowDialog(true);
-      Log.e("qqq", " 同意隐私二次弹框 ");
-    } else {
-      MobSDK.setAllowDialog(false);
-      Log.e("qqq", " 不同意隐私二次弹框 ");
-
-    }
-
-  }
 
   private void submitPrivacyGrantResult(MethodCall call, final Result result) {
     Log.e("qqq", "====> submitPrivacyGrantResult");
@@ -347,7 +303,7 @@ public class SharesdkPlugin implements MethodCallHandler {
    **/
   private void getVersion(MethodCall call, Result result) {
     Map<String, Object> map = new HashMap<>();
-    map.put("版本号", "3.7.1");
+    map.put("版本号", "3.7.3");
     result.success(map);
   }
 
@@ -405,6 +361,9 @@ public class SharesdkPlugin implements MethodCallHandler {
       wxmpPath = String.valueOf(params.get("wxmp_path"));
       videoUrl = String.valueOf(params.get("videoUrl_android"));
       type = String.valueOf(params.get("type"));
+      //todo
+      Log.e("QQQ", " type===> " + type);
+
       //linkcard
       sina_summary = String.valueOf(params.get("sina_cardSummary"));
       image_url = String.valueOf(params.get("image_url"));

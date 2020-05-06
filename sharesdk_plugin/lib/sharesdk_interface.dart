@@ -182,18 +182,6 @@ class SharesdkPlugin {
     return callback;
   }
 
-  ///setPrivacyWindow Show
-  static Future<dynamic> setAllowShowPrivacyWindow(int show) {
-    Map args = {"show": show};
-    return _channel.invokeMethod(ShareSDKMethods.setAllowShowPrivacyWindow.name, args);
-  }
-
-
-
-  static Future<dynamic> setPrivacyUI(int backColor,List<int> operationButtonColors){
-    Map args = {"backColor": backColor,"oprationButtonColors":operationButtonColors};
-   return _channel.invokeMethod(ShareSDKMethods.setPrivacyUI.name, args);
-  }
 
   /// 已集成的平台
   static Future<dynamic> activePlatforms() async {

@@ -64,8 +64,8 @@ public class Utils {
                 return "Dropbox";
             case "36":
                 return "VKontakte";
-            /*case "37":
-                return "weChatFavorites";*/
+            case "37":
+                return "WechatFavorite";
             case "38":
                 return "Yixin";
             case "39":

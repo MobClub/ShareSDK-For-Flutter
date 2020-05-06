@@ -67,25 +67,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  ///隐私二次确认框开关设置
-  /// 1 ===> 同意
-  /// 0 ===> 不同意
-  setAllowDialog(BuildContext context) {
-    SharesdkPlugin.setAllowShowPrivacyWindow(1);
-  }
 
-  /// 自定义隐私二次确认框UI
-  setPrivacyUI(BuildContext context) {
-    int BackgroundColorId = 1001;
-    int PositiveBtnColorId = 1002;
-    int setNegativeBtnColorId = 1003;
-
-    List<int> operationButtonColors = new List<int>();
-    operationButtonColors.add(PositiveBtnColorId);
-    operationButtonColors.add(setNegativeBtnColorId);
-
-    SharesdkPlugin.setPrivacyUI(BackgroundColorId, operationButtonColors);
-  }
 
   //微信分享文件示例
 /* void shareToWechat(BuildContext context) {
@@ -159,6 +141,19 @@ class _HomePageState extends State<HomePage> {
             SSDKError error) {
       showAlert(state, error.rawData, context);
     });
+  }
+
+  void shareToWechatFavorite(BuildContext context) {
+    SSDKMap params = SSDKMap()
+      ..setWechat("text", "title", "www.baidu.com", null, null, null, null,
+          "http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg", null,
+      null, null, null, null, SSDKContentTypes.webpage, ShareSDKPlatforms.weChatFavorites);
+
+    SharesdkPlugin.share(ShareSDKPlatforms.weChatFavorites, params,
+            (SSDKResponseState state, Map userdata, Map contentEntity,
+            SSDKError error) {
+          showAlert(state, error.rawData, context);
+        });
   }
 
   void authToWechat(BuildContext context) {
@@ -586,8 +581,7 @@ class _HomePageState extends State<HomePage> {
           _creatRow("ShareSDK版本号", "ShareSDK版本号", shareSdkVersion, context),
           _creatRow("获取隐私协议内容", "", getPrivacyPolicyUrl, context),
           _creatRow("设置同意隐私政策", "", submitPrivacyGrantResult, context),
-          _creatRow("隐私二次确认框开关设置", "", setAllowDialog, context),
-          _creatRow("开发者自定义弹窗样式", "", setPrivacyUI, context),
+          _creatRow("分享到微信收藏", "分享网页类型到微信收藏", shareToWechatFavorite, context),
           _creatRow("分享到微信", "分享图片到微信", shareToWechat, context),
           _creatRow("分享到抖音", "需要传入当前图片到抖音", shareToDouyin, context),
           _creatRow("微信授权", "微信授权(不返回用户数据)", authToWechat, context),
