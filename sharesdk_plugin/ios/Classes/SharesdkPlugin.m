@@ -31,6 +31,8 @@ typedef NS_ENUM(NSUInteger, PluginMethod) {
 // 事件回调
 @property (nonatomic, copy) void (^callBack) (id _Nullable event);
 
+@property (nonatomic, strong) NSMutableDictionary *sceneData;
+
 @end
 
 @implementation SharesdkPlugin
@@ -541,6 +543,10 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
 - (FlutterError *)onListenWithArguments:(id)arguments eventSink:(FlutterEventSink)events
 {
     self.callBack = events;
+    if (self.sceneData) {
+        events(self.sceneData);
+    }
+    self.sceneData = nil;
     return nil;
 }
 
@@ -579,6 +585,8 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
     if (self.callBack)
     {
         self.callBack(resultDict);
+    }else{
+        self.sceneData = resultDict;
     }
 }
 
