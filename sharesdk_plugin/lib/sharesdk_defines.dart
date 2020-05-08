@@ -154,6 +154,8 @@ class ShareSDKPlatforms {
       ShareSDKPlatform(name: 'apple',id: 61);
   static final ShareSDKPlatform oasis =
   ShareSDKPlatform(name: 'oasis',id: 64);
+  static final ShareSDKPlatform snapchat =
+  ShareSDKPlatform(name: 'oasis',id: 66);
   static final ShareSDKPlatform yixinSeries =
       ShareSDKPlatform(name: "yixinSeries", id: 994);
   static final ShareSDKPlatform kakaoSeries =

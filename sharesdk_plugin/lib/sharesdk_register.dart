@@ -19,6 +19,7 @@ class ShareSDKRegister {
   static const String _ssdkDisplayName = "display_name";
   static const String _ssdkSandbox = "sandbox_mode";
   static const String _ssdkAppUniversalLink = "app_universalLink";
+  static const String _ssdkclientIdUnsafe = "client_id_unsafe";
 
   final Map platformsInfo = {};
 
@@ -66,6 +67,16 @@ class ShareSDKRegister {
     };
 
     platformsInfo[ShareSDKPlatforms.facebook.id] = info;
+  }
+
+  void setupSnapchat(String appkey, String appSecret, String redirectUrl) {
+    Map info = {
+    _ssdkclientIdUnsafe: appkey,
+      _ssdkAppSecret: appSecret,
+      _ssdkRedirectUrl:redirectUrl
+    };
+
+    platformsInfo[ShareSDKPlatforms.snapchat.id] = info;
   }
 
   /// set up TencentWeibo platform info

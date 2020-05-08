@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
   /// POLICY_TYPE_URL = 1
   /// POLICY_TYPE_TXT = 2
   getPrivacyPolicyUrl(BuildContext context) {
-    SharesdkPlugin.getPrivacyPolicy("1", (Map data, Map error) {
+    SharesdkPlugin.getPrivacyPolicy("1","en-CN", (Map data, Map error) {
       String policyData, errorStr;
       if (data != null) {
         policyData = data["data"];
@@ -67,25 +67,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  ///隐私二次确认框开关设置
-  /// 1 ===> 同意
-  /// 0 ===> 不同意
-  setAllowDialog(BuildContext context) {
-    SharesdkPlugin.setAllowShowPrivacyWindow(1);
-  }
 
-  /// 自定义隐私二次确认框UI
-  setPrivacyUI(BuildContext context) {
-    int BackgroundColorId = 1001;
-    int PositiveBtnColorId = 1002;
-    int setNegativeBtnColorId = 1003;
-
-    List<int> operationButtonColors = new List<int>();
-    operationButtonColors.add(PositiveBtnColorId);
-    operationButtonColors.add(setNegativeBtnColorId);
-
-    SharesdkPlugin.setPrivacyUI(BackgroundColorId, operationButtonColors);
-  }
 
   //微信分享文件示例
 /* void shareToWechat(BuildContext context) {
@@ -161,6 +143,19 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void shareToWechatFavorite(BuildContext context) {
+    SSDKMap params = SSDKMap()
+      ..setWechat("text", "title", "www.baidu.com", null, null, null, null,
+          "http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg", null,
+      null, null, null, null, SSDKContentTypes.webpage, ShareSDKPlatforms.weChatFavorites);
+
+    SharesdkPlugin.share(ShareSDKPlatforms.weChatFavorites, params,
+            (SSDKResponseState state, Map userdata, Map contentEntity,
+            SSDKError error) {
+          showAlert(state, error.rawData, context);
+        });
+  }
+
   void authToWechat(BuildContext context) {
     SharesdkPlugin.auth(ShareSDKPlatforms.wechatSession, null,
         (SSDKResponseState state, Map user, SSDKError error) {
@@ -214,7 +209,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void authToSina(BuildContext context) {
-    SharesdkPlugin.getUserInfo(ShareSDKPlatforms.qq,
+    SharesdkPlugin.getUserInfo(ShareSDKPlatforms.sina,
         (SSDKResponseState state, Map userdata, SSDKError error) {
       print("--------------------------> authToSina:");
       showAlert(state, userdata, context);
@@ -373,7 +368,8 @@ class _HomePageState extends State<HomePage> {
           "Mob官网 - 全球领先的移动开发者服务平台",
           SSDKFacebookShareTypes.native,
           SSDKContentTypes.image);
-    print(params);
+    params
+    ..setFacebookAssetLocalIdentifier("73EC5698-20CF-4030-8FB2-CC0C80EF8156/L0/001,B2A42CA3-FA0F-45EC-92B2-F0F94A8A5A2B/L0/001,AA97F2F3-D2E4-43BB-8C2A-06D77480D7CA/L0/001,B220D191-2D5F-43E1-BF97-E3D7E61E86DB/L0/001,F064C692-79A1-4768-9530-1EFEA8360843/L0/001", "asdf");
     SharesdkPlugin.share(ShareSDKPlatforms.facebook, params,
         (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
@@ -426,6 +422,27 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void shareSnapchatCustom(BuildContext context){
+    SSDKMap params = SSDKMap()
+      ..setSnapchat(
+          "title",
+          "http://m.93lj.com/sharelink?mobid=ziqMNf",
+          "http://wx4.sinaimg.cn/large/006tkBCzly1fy8hfqdoy6j30dw0dw759.jpg",
+          "",
+          "",
+          false,
+          0.3,
+          true,
+          SSDKContentTypes.image
+      );
+
+    SharesdkPlugin.share(
+        ShareSDKPlatforms.snapchat, params, (SSDKResponseState state, Map userdata,
+        Map contentEntity, SSDKError error) {
+      showAlert(state, error.rawData, context);
+
+    });
+  }
 
   void isClientInstalledQQ(BuildContext context) {
     SharesdkPlugin.isClientInstalled(ShareSDKPlatforms.qq)
@@ -525,7 +542,33 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void _onEvent(Object event) {
+    print('>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+    Map resMap_t = event;
+    Map<String, dynamic> resMap = Map<String, dynamic>.from(resMap_t);
+    String path = resMap['path'];
+    Map<String, dynamic> params = Map<String, dynamic>.from(resMap['params']);
+    print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onSuccess:' + resMap.toString());
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => CupertinoAlertDialog(
+            title: new Text(path),
+            content: new Text(resMap.toString()),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ]));
+  }
 
+  void _onError(Object event) {
+    setState(() {
+      print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onError:' + event.toString());
+    });
+  }
   @override
   void initState() {
     super.initState();
@@ -542,8 +585,10 @@ class _HomePageState extends State<HomePage> {
     register.setupTwitter("viOnkeLpHBKs6KXV7MPpeGyzE",
         "NJEglQUy2rqZ9Io9FcAU9p17omFqbORknUpRrCDOK46aAbIiey", "http://mob.com");
     register.setupOasis("568898243");
+    register.setupSnapchat("dc8e6068-0578-41b8-8392-4da009519725", "", "ssdkmoba0b0c0d0://mob");
     SharesdkPlugin.regist(register);
     //SharesdkPlugin.uploadPrivacyPermissionStatus(0, getPrivacyPolicy);
+    SharesdkPlugin.addRestoreReceiver(_onEvent, _onError);
   }
 
   @override
@@ -556,10 +601,9 @@ class _HomePageState extends State<HomePage> {
         padding: EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
         children: <Widget>[
           _creatRow("ShareSDK版本号", "ShareSDK版本号", shareSdkVersion, context),
-          _creatRow("获取隐私协议内容", "android only", getPrivacyPolicyUrl, context),
-          _creatRow("设置同意隐私政策", "android only", submitPrivacyGrantResult, context),
-          _creatRow("隐私二次确认框开关设置", "android only", setAllowDialog, context),
-          _creatRow("开发者自定义弹窗样式", "android only", setPrivacyUI, context),
+          _creatRow("获取隐私协议内容", "", getPrivacyPolicyUrl, context),
+          _creatRow("设置同意隐私政策", "", submitPrivacyGrantResult, context),
+          _creatRow("分享到微信收藏", "分享网页类型到微信收藏", shareToWechatFavorite, context),
           _creatRow("分享到微信", "分享图片到微信", shareToWechat, context),
           _creatRow("分享到抖音", "需要传入当前图片到抖音", shareToDouyin, context),
           _creatRow("微信授权", "微信授权(不返回用户数据)", authToWechat, context),
@@ -576,6 +620,7 @@ class _HomePageState extends State<HomePage> {
           _creatRow(
               "分享到新浪微博LinkCard", "分享到LinkCard", shareSinaLinkCard, context),
           _creatRow("分享到QQ", "测试自定义参数", shareQQCustom, context),
+          _creatRow("分享到Snapchat", "测试自定义参数", shareSnapchatCustom, context),
           _creatRow("分享到Twitter", "测试自定义参数", shareTwitterCustom, context),
           _creatRow("分享到Facebook", "测试自定义参数", shareFacebookCustom, context),
           _creatRow("判断客户端安装", "是否安装了QQ客户端", isClientInstalledQQ, context),

@@ -14,9 +14,10 @@
          additional functionality it is fine to subclass or reimplement
          FlutterApplication and put your custom class here. -->
     <application
-        android:name="io.flutter.app.FlutterApplication"
+        android:name=".App"
         android:label="sharesdk_plugin_example"
         android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true"
         tools:replace="android:name">
         <activity
             android:name=".MainActivity"

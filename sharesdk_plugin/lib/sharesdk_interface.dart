@@ -9,27 +9,9 @@ typedef void EventHandler(Object event);
 class SharesdkPlugin {
   static const MethodChannel _channel =
       const MethodChannel('com.yoozoo.mob/sharesdk');
-  static const EventChannel java_to_flutter =
-      const EventChannel("JAVA_TO_FLUTTER");
 
   static EventChannel _channelReciever = const EventChannel('SSDKRestoreReceiver');
 
-  // static Future<dynamic> listenNativeEvent() {
-  //   java_to_flutter
-  //       .receiveBroadcastStream()
-  //       .listen(_onEvent, onError: _onError);
-  //   return null;
-  // }
-
-  static Future<dynamic> _onEvent(Object event) {
-    print("onEvent: $event ");
-    return null;
-  }
-
-  static Future<dynamic> _onError(Object error) {
-    print(error);
-    return null;
-  }
 
   /// 注册方法：
   /// 1. 创建register对象，
@@ -169,9 +151,13 @@ class SharesdkPlugin {
 
     return callback;
   }
-  //get ShareSDK PrivacyPolicy
-  static Future<dynamic> getPrivacyPolicy(String type,Function(Map data,Map error) result){
+  //get ShareSDK PrivacyPolicy, language forExample en-CN,zh-Hans-CN,zh,en. null will be zh
+  static Future<dynamic> getPrivacyPolicy(String type, String language,Function(Map data,Map error) result){
     Map args = {"type": type};
+    if (language != null){
+
+      args["language"] = language;
+    }
     Future<dynamic> callback =
     _channel.invokeMethod(ShareSDKMethods.getPrivacyPolicy.name, args);
     callback.then((dynamic response) {
@@ -196,18 +182,6 @@ class SharesdkPlugin {
     return callback;
   }
 
-  ///setPrivacyWindow Show
-  static Future<dynamic> setAllowShowPrivacyWindow(int show) {
-    Map args = {"show": show};
-    return _channel.invokeMethod(ShareSDKMethods.setAllowShowPrivacyWindow.name, args);
-  }
-
-
-
-  static Future<dynamic> setPrivacyUI(int backColor,List<int> operationButtonColors){
-    Map args = {"backColor": backColor,"oprationButtonColors":operationButtonColors};
-   return _channel.invokeMethod(ShareSDKMethods.setPrivacyUI.name, args);
-  }
 
   /// 已集成的平台
   static Future<dynamic> activePlatforms() async {
@@ -252,11 +226,11 @@ class SharesdkPlugin {
     return state;
   }
 
+
   /*
    * 添加闭环分享回调监听
    */
   static addRestoreReceiver(EventHandler onEvent, EventHandler onError) {
       _channelReciever.receiveBroadcastStream().listen(onEvent, onError: onError);
   }
-
 }

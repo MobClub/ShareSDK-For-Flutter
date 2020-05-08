@@ -4,6 +4,7 @@
 #import <MOBFoundation/MOBFoundation.h>import 'package:flutter/services.dart';
 #import <objc/message.h>
 #import <MOBFoundation/MobSDK+Privacy.h>
+
 typedef NS_ENUM(NSUInteger, PluginMethod) {
     PluginMethodGetVersion          = 0,
     PluginMethodShare               = 1,
@@ -29,6 +30,8 @@ typedef NS_ENUM(NSUInteger, PluginMethod) {
 
 // 事件回调
 @property (nonatomic, copy) void (^callBack) (id _Nullable event);
+
+@property (nonatomic, strong) NSMutableDictionary *sceneData;
 
 @end
 
@@ -164,13 +167,24 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
             }
         }
     }
+    NSArray *imageIdentifier = nil;
+    if ([params[@"facebookAssetLocalIdentifierKey_image"] isKindOfClass:[NSString class]])  {
+        imageIdentifier = [params[@"facebookAssetLocalIdentifierKey_image"] componentsSeparatedByString:@","];
+    }
+    id videoIdentifier = nil;
+    if ([params[@"facebookAssetLocalIdentifierKey_video"] isKindOfClass:[NSString class]])  {
+        videoIdentifier = params[@"facebookAssetLocalIdentifierKey_video"];
+    }
+    if (imageIdentifier || videoIdentifier) {
+        [params SSDKSetupFacebookParamsByImagePHAsset:imageIdentifier videoPHAsset:videoIdentifier];
+    }
     [ShareSDK share:type parameters:params.mutableCopy onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
         if (state != SSDKResponseStateBegin)
         {
             NSDictionary *dic = @{
                                   @"state":@(state),
                                   @"userData":userData?:[NSNull null],
-                                  @"contentEntity":contentEntity.dictionaryValue?:[NSNull null],
+                                  @"contentEntity":[self _ssdkGetDictionaryWithObject:contentEntity.dictionaryValue]?:[NSNull null],
                                   @"error":[self _covertError:error]
                                   };
             result(dic);
@@ -213,6 +227,7 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
 
 - (void)_cancelAuthWithArgs:(NSNumber *)args result:(FlutterResult)result
 {
+    
     [ShareSDK cancelAuthorize:args.integerValue result:^(NSError *error) {
         NSInteger state = SSDKResponseStateFail;
         if (error == nil)
@@ -270,6 +285,17 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
             }
         }
     }
+    NSArray *imageIdentifier = nil;
+    if ([params[@"facebookAssetLocalIdentifierKey_image"] isKindOfClass:[NSString class]])  {
+        imageIdentifier = [params[@"facebookAssetLocalIdentifierKey_image"] componentsSeparatedByString:@","];
+    }
+    id videoIdentifier = nil;
+    if ([params[@"facebookAssetLocalIdentifierKey_video"] isKindOfClass:[NSString class]])  {
+        videoIdentifier = params[@"facebookAssetLocalIdentifierKey_video"];
+    }
+    if (imageIdentifier || videoIdentifier) {
+        [params SSDKSetupFacebookParamsByImagePHAsset:imageIdentifier videoPHAsset:videoIdentifier];
+    }
     SEL showEditorSEL = NSSelectorFromString(@"showShareEditor:otherPlatforms:shareParams:editorConfiguration:onStateChanged:");
     NSAssert([ShareSDK.class respondsToSelector:showEditorSEL], @"Need to import ShareSDKUI.framework");
     ((id(*)(id,
@@ -299,7 +325,7 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
                                    @"platform":@(platformType),
                                    @"error":[self _covertError:error],
                                    @"userData":userData?:[NSNull null],
-                                   @"contentEntity":contentEntity.dictionaryValue?:[NSNull null],
+                                   @"contentEntity":[self _ssdkGetDictionaryWithObject:contentEntity.dictionaryValue]?:[NSNull null],
                                    };
              result(dic);
          }
@@ -310,7 +336,20 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
 - (void)_showMenuWithArgs:(NSDictionary *)args result:(FlutterResult)result
 {
     NSArray *types = [args[@"platforms"] isKindOfClass:NSArray.class] ?args[@"platforms"]:nil;
-    NSDictionary *params = [self _covertParams:args[@"params"]].mutableCopy;
+    NSMutableDictionary *params = [self _covertParams:args[@"params"]].mutableCopy;
+    
+    NSArray *imageIdentifier = nil;
+    if ([params[@"facebookAssetLocalIdentifierKey_image"] isKindOfClass:[NSString class]])  {
+        imageIdentifier = [params[@"facebookAssetLocalIdentifierKey_image"] componentsSeparatedByString:@","];
+    }
+    id videoIdentifier = nil;
+    if ([params[@"facebookAssetLocalIdentifierKey_video"] isKindOfClass:[NSString class]])  {
+        videoIdentifier = params[@"facebookAssetLocalIdentifierKey_video"];
+    }
+    if (imageIdentifier || videoIdentifier) {
+        [params SSDKSetupFacebookParamsByImagePHAsset:imageIdentifier videoPHAsset:videoIdentifier];
+    }
+
     
     SEL showMenuSEL = NSSelectorFromString(@"showShareActionSheet:customItems:shareParams:sheetConfiguration:onStateChanged:");
     NSAssert([ShareSDK.class respondsToSelector:showMenuSEL], @"Need to import ShareSDKUI.framework");
@@ -342,7 +381,7 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
                                    @"platform":@(platformType),
                                    @"error":[self _covertError:error],
                                    @"userData":userData?:[NSNull null],
-                                   @"contentEntity":contentEntity.dictionaryValue?:[NSNull null],
+                                   @"contentEntity":[self _ssdkGetDictionaryWithObject:contentEntity.dictionaryValue]?:[NSNull null],
                                    };
              result(dic);
          }
@@ -353,10 +392,54 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
 {
     if (error)
     {
-        return @{@"code":@(error.code),@"userInfo":error.userInfo?:@{}};
+        NSDictionary *errorInfo = [self _ssdkGetDictionaryWithObject:error.userInfo];
+        return @{@"code":@(error.code),@"userInfo":errorInfo?:@{}};
     }
     
     return [NSNull null];
+}
+
+- (id)_getObjectWithObject:(id)obj{
+    id basicData = nil;
+    if ([obj isKindOfClass:[NSString class]]) {
+        basicData = obj;
+    }else if([obj isKindOfClass:[NSNumber class]]){
+        basicData = [obj stringValue];
+    }else if([obj isKindOfClass:[NSURL class]]){
+        basicData = [obj absoluteString];
+    }else if([obj isKindOfClass:[SSDKImage class]]){
+        basicData = [[obj URL] absoluteString];
+    }else if([obj isKindOfClass:[NSArray class]]){
+        NSMutableArray *array = [NSMutableArray array];
+        for (id sigleObject in obj) {
+            if ([sigleObject isKindOfClass:[NSDictionary class]]) {
+                id sigdic = [self _ssdkGetDictionaryWithObject:sigleObject];
+                if (sigdic) {
+                    [array addObject:sigdic];
+                }
+            }else{
+                id sigData = [self _getObjectWithObject:sigleObject];
+                if (sigData) {
+                    [array addObject:sigData];
+                }
+            }
+        }
+        basicData = array.count > 0?array:nil;
+    }else if([obj isKindOfClass:[NSDictionary class]]){
+        basicData = [self _ssdkGetDictionaryWithObject:obj];
+    }
+    return basicData;
+}
+
+- (NSDictionary *)_ssdkGetDictionaryWithObject:(NSDictionary *)object{
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [object enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        id data = [self _getObjectWithObject:obj];
+        if (data) {
+            dic[key] = data;
+        }
+    }];
+    return dic.count > 0 ?dic:nil;
 }
 
 - (NSMutableDictionary *)_covertParams:(NSDictionary *)params
@@ -389,6 +472,11 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
             tmp[key] = ((NSArray *(*)(id, SEL, id))objc_msgSend)(params.mutableCopy,NSSelectorFromString(@"_convertToImages:"),params[key]);
         }
         
+        if ([key isEqualToString:@"Sticker"])
+        {
+            tmp[key] = ((NSArray *(*)(id, SEL, id))objc_msgSend)(params.mutableCopy,NSSelectorFromString(@"_convertToImages:"),params[key]);
+        }
+        
         if ([params[key] isKindOfClass:NSDictionary.class])
         {
             tmp[key] = [self _covertParams:params[key]];
@@ -411,9 +499,12 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
 {
     Class connector = NSClassFromString(@"WeChatConnector");
     NSAssert(connector != NULL, @"Need to import WechatConnector.framework !");
-    SEL openMiniProgramSEL = NSSelectorFromString(@"openMiniProgramWithUserName:path:miniProgramType:");
-    BOOL opened = ((BOOL(*)(id,SEL,NSString *,NSString *,int))objc_msgSend)(connector,openMiniProgramSEL,args[@"userName"],args[@"path"],[args[@"type"] intValue]);
-    result(@(opened));
+    
+    void(^ complete)(BOOL) = ^(BOOL success) {
+        result(@(success));
+    };
+    SEL openMiniProgramSEL = NSSelectorFromString(@"openMiniProgramWithUserName:path:miniProgramType:complete:");
+    ((void(*)(id,SEL,NSString *,NSString *,int,id))objc_msgSend)(connector,openMiniProgramSEL,args[@"userName"],args[@"path"],[args[@"type"] intValue],complete);
 }
 
 - (void)_isClientInstalledWithArgs:(NSDictionary *)args result:(FlutterResult)result
@@ -429,12 +520,12 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
 }
 
 - (void)_setAllowShowPrivacyWindow:(NSDictionary *)args result:(FlutterResult)result{
-    [MobSDK setAllowShowPrivacyWindow:[args[@"show"]boolValue]];
+    
     result(@1);
 }
 
 - (void)_getPrivacyPolicy:(NSDictionary *)args result:(FlutterResult)result{
-    [MobSDK getPrivacyPolicy:args[@"type"] compeletion:^(NSDictionary * _Nullable data, NSError * _Nullable error) {
+    [MobSDK getPrivacyPolicy:args[@"type"] language:args[@"language"]  compeletion:^(NSDictionary * _Nullable data, NSError * _Nullable error) {
         result(@{
             @"data":@{@"data":(data[@"content"]?:[NSNull null])},
             @"error":error?@{@"error":@"获取失败"}:[NSNull null]
@@ -443,23 +534,7 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
 }
 
 - (void)_setPrivacyUI:(NSDictionary *)args result:(FlutterResult)result{
-    UIColor *color = nil;
-    NSMutableArray *colors = [NSMutableArray array];
-    NSString *colorString = args[@"backColor"];
-    if ([colorString isKindOfClass:[NSNumber class]]) {
-        color = [MOBFColor colorWithRGB:[colorString integerValue]];
-    }
     
-    NSArray *colorsNumber = args[@"oprationButtonColors"];
-    if ([colorsNumber isKindOfClass:[NSArray class]]) {
-        for (NSNumber *number in colorsNumber) {
-            id colorElement = [MOBFColor colorWithRGB:[number integerValue]];
-            if (colorElement) {
-                [colors addObject:colorElement];
-            }
-        }
-    }
-    [MobSDK setPrivacyBackgroundColor:color operationButtonColor:colors];
     result(nil);
 }
 
@@ -468,11 +543,16 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
 - (FlutterError *)onListenWithArguments:(id)arguments eventSink:(FlutterEventSink)events
 {
     self.callBack = events;
+    if (self.sceneData) {
+        events(self.sceneData);
+    }
+    self.sceneData = nil;
     return nil;
 }
 
 - (FlutterError * _Nullable)onCancelWithArguments:(id _Nullable)arguments
 {
+    self.callBack = nil;
     return nil;
 }
 
@@ -502,15 +582,11 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
     {
         resultDict[@"params"] = scene.params;
     }
-       
-    NSString *resultStr  = @"";
-    if (resultDict.count > 0)
-    {
-        resultStr = [MOBFJson jsonStringFromObject:resultDict];
-    }
     if (self.callBack)
     {
         self.callBack(resultDict);
+    }else{
+        self.sceneData = resultDict;
     }
 }
 
