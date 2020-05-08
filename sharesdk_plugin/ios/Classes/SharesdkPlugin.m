@@ -182,7 +182,7 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
             NSDictionary *dic = @{
                                   @"state":@(state),
                                   @"userData":userData?:[NSNull null],
-                                  @"contentEntity":contentEntity.dictionaryValue?:[NSNull null],
+                                  @"contentEntity":[self _ssdkGetDictionaryWithObject:contentEntity.dictionaryValue]?:[NSNull null],
                                   @"error":[self _covertError:error]
                                   };
             result(dic);
@@ -323,7 +323,7 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
                                    @"platform":@(platformType),
                                    @"error":[self _covertError:error],
                                    @"userData":userData?:[NSNull null],
-                                   @"contentEntity":contentEntity.dictionaryValue?:[NSNull null],
+                                   @"contentEntity":[self _ssdkGetDictionaryWithObject:contentEntity.dictionaryValue]?:[NSNull null],
                                    };
              result(dic);
          }
@@ -379,7 +379,7 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
                                    @"platform":@(platformType),
                                    @"error":[self _covertError:error],
                                    @"userData":userData?:[NSNull null],
-                                   @"contentEntity":contentEntity.dictionaryValue?:[NSNull null],
+                                   @"contentEntity":[self _ssdkGetDictionaryWithObject:contentEntity.dictionaryValue]?:[NSNull null],
                                    };
              result(dic);
          }
@@ -390,10 +390,54 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
 {
     if (error)
     {
-        return @{@"code":@(error.code),@"userInfo":error.userInfo?:@{}};
+        NSDictionary *errorInfo = [self _ssdkGetDictionaryWithObject:error.userInfo];
+        return @{@"code":@(error.code),@"userInfo":errorInfo?:@{}};
     }
     
     return [NSNull null];
+}
+
+- (id)_getObjectWithObject:(id)obj{
+    id basicData = nil;
+    if ([obj isKindOfClass:[NSString class]]) {
+        basicData = obj;
+    }else if([obj isKindOfClass:[NSNumber class]]){
+        basicData = [obj stringValue];
+    }else if([obj isKindOfClass:[NSURL class]]){
+        basicData = [obj absoluteString];
+    }else if([obj isKindOfClass:[SSDKImage class]]){
+        basicData = [[obj URL] absoluteString];
+    }else if([obj isKindOfClass:[NSArray class]]){
+        NSMutableArray *array = [NSMutableArray array];
+        for (id sigleObject in obj) {
+            if ([sigleObject isKindOfClass:[NSDictionary class]]) {
+                id sigdic = [self _ssdkGetDictionaryWithObject:sigleObject];
+                if (sigdic) {
+                    [array addObject:sigdic];
+                }
+            }else{
+                id sigData = [self _getObjectWithObject:sigleObject];
+                if (sigData) {
+                    [array addObject:sigData];
+                }
+            }
+        }
+        basicData = array.count > 0?array:nil;
+    }else if([obj isKindOfClass:[NSDictionary class]]){
+        basicData = [self _ssdkGetDictionaryWithObject:obj];
+    }
+    return basicData;
+}
+
+- (NSDictionary *)_ssdkGetDictionaryWithObject:(NSDictionary *)object{
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [object enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        id data = [self _getObjectWithObject:obj];
+        if (data) {
+            dic[key] = data;
+        }
+    }];
+    return dic.count > 0 ?dic:nil;
 }
 
 - (NSMutableDictionary *)_covertParams:(NSDictionary *)params
@@ -422,6 +466,11 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
         }
         
         if ([key isEqualToString:@"images"])
+        {
+            tmp[key] = ((NSArray *(*)(id, SEL, id))objc_msgSend)(params.mutableCopy,NSSelectorFromString(@"_convertToImages:"),params[key]);
+        }
+        
+        if ([key isEqualToString:@"Sticker"])
         {
             tmp[key] = ((NSArray *(*)(id, SEL, id))objc_msgSend)(params.mutableCopy,NSSelectorFromString(@"_convertToImages:"),params[key]);
         }
@@ -469,7 +518,7 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
 }
 
 - (void)_setAllowShowPrivacyWindow:(NSDictionary *)args result:(FlutterResult)result{
-    [MobSDK setAllowShowPrivacyWindow:[args[@"show"]boolValue]];
+    
     result(@1);
 }
 

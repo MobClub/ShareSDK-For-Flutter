@@ -241,7 +241,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>line3rdp.$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+				<string>ssdkmoba0b0c0d0</string>
 			</array>
 		</dict>
 	</array>
@@ -251,6 +251,7 @@
 	<string>1412473428822331</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>snapchat</string>
 		<string>lineauth</string>
 		<string>line</string>
 		<string>lineauth2</string>

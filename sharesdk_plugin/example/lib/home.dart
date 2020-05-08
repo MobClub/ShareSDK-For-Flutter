@@ -422,6 +422,27 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void shareSnapchatCustom(BuildContext context){
+    SSDKMap params = SSDKMap()
+      ..setSnapchat(
+          "title",
+          "http://m.93lj.com/sharelink?mobid=ziqMNf",
+          "http://wx4.sinaimg.cn/large/006tkBCzly1fy8hfqdoy6j30dw0dw759.jpg",
+          "",
+          "",
+          false,
+          0.3,
+          true,
+          SSDKContentTypes.image
+      );
+
+    SharesdkPlugin.share(
+        ShareSDKPlatforms.snapchat, params, (SSDKResponseState state, Map userdata,
+        Map contentEntity, SSDKError error) {
+      showAlert(state, error.rawData, context);
+
+    });
+  }
 
   void isClientInstalledQQ(BuildContext context) {
     SharesdkPlugin.isClientInstalled(ShareSDKPlatforms.qq)
@@ -564,6 +585,7 @@ class _HomePageState extends State<HomePage> {
     register.setupTwitter("viOnkeLpHBKs6KXV7MPpeGyzE",
         "NJEglQUy2rqZ9Io9FcAU9p17omFqbORknUpRrCDOK46aAbIiey", "http://mob.com");
     register.setupOasis("568898243");
+    register.setupSnapchat("dc8e6068-0578-41b8-8392-4da009519725", "", "ssdkmoba0b0c0d0://mob");
     SharesdkPlugin.regist(register);
     //SharesdkPlugin.uploadPrivacyPermissionStatus(0, getPrivacyPolicy);
     SharesdkPlugin.addRestoreReceiver(_onEvent, _onError);
@@ -598,6 +620,7 @@ class _HomePageState extends State<HomePage> {
           _creatRow(
               "分享到新浪微博LinkCard", "分享到LinkCard", shareSinaLinkCard, context),
           _creatRow("分享到QQ", "测试自定义参数", shareQQCustom, context),
+          _creatRow("分享到Snapchat", "测试自定义参数", shareSnapchatCustom, context),
           _creatRow("分享到Twitter", "测试自定义参数", shareTwitterCustom, context),
           _creatRow("分享到Facebook", "测试自定义参数", shareFacebookCustom, context),
           _creatRow("判断客户端安装", "是否安装了QQ客户端", isClientInstalledQQ, context),

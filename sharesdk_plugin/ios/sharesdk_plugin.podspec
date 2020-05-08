@@ -26,6 +26,7 @@ Pod::Spec.new do |s|
   s.dependency 'mob_sharesdk/ShareSDKPlatforms/Douyin'
   s.dependency 'mob_sharesdk/ShareSDKPlatforms/Oasis'
   s.dependency 'mob_sharesdk/ShareSDKPlatforms/Line'
+   s.dependency 'mob_sharesdk/ShareSDKPlatforms/SnapChat'
   #分享闭环
   s.dependency 'mob_sharesdk/ShareSDKRestoreScene'
   s.static_framework = true

@@ -366,4 +366,31 @@ class SSDKMap {
       int id = ShareSDKPlatforms.oasis.id;
       map["@platform($id)"] = params;
   }
+  void setSnapchat(
+      String title,
+      String attachmentUrl,
+      String image,
+      String video,
+      String sticker,
+      bool stickerAnimated,
+      double stickerRotation,
+      bool cameraViewState,
+      SSDKContentType type
+      ){
+    Map params = {};
+    params[kType] = type.value;
+
+    params[kImages] = image;
+    params[kTitle] = title;
+    params["Sticker"] = sticker;
+    params[kAttachments] = attachmentUrl;
+    params["Sticker_animated"] = stickerAnimated;
+    params["Sticker_rotation"] = stickerRotation;
+    params["Sticker_cameraviewstate"] = cameraViewState;
+    if (video!=null) {
+      params[kVideo] = video;
+    }
+    int id = ShareSDKPlatforms.snapchat.id;
+    map["@platform($id)"] = params;
+  }
 }
