@@ -48,6 +48,12 @@
 ## 1.2.1
 * Android fix bug that release in Flutter_v1.12.13+hotfix.8 is ok
 * iOS fix bug
+
 ## 1.2.4
 
 * iOS add snapchat
+
+## 1.2.5
+
+* iOS add KuaiShou/WatermelonVideo
+* iOS fix bug
