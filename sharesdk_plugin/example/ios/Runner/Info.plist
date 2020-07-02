@@ -251,8 +251,9 @@
 	<string>1412473428822331</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>xiguaalipayshare</string>
+		<string>KwaiAuth2</string>
 		<string>snapchat</string>
-		<string>lineauth</string>
 		<string>line</string>
 		<string>lineauth2</string>
 		<string>oasis</string>
