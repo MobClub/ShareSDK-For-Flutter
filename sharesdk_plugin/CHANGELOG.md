@@ -57,3 +57,6 @@
 
 * iOS add KuaiShou/WatermelonVideo
 * iOS fix bug
+
+## 1.2.6
+* iOS fix bug

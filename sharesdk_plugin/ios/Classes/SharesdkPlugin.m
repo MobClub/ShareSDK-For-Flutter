@@ -183,7 +183,7 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
         {
             NSDictionary *dic = @{
                                   @"state":@(state),
-                                  @"userData":userData?:[NSNull null],
+                                  @"userData":[self _ssdkGetDictionaryWithObject:userData]?:[NSNull null],
                                   @"contentEntity":[self _ssdkGetDictionaryWithObject:contentEntity.dictionaryValue]?:[NSNull null],
                                   @"error":[self _covertError:error]
                                   };
