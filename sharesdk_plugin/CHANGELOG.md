@@ -63,3 +63,6 @@
 
 ## 1.2.7
 * iOS fix  bug
+
+## 1.2.8
+* iOS fix  bug

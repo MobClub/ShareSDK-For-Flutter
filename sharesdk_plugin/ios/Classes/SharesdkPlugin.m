@@ -406,7 +406,7 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
     if ([obj isKindOfClass:[NSString class]]) {
         basicData = obj;
     }else if([obj isKindOfClass:[NSNumber class]]){
-        basicData = [obj stringValue];
+        basicData = obj;
     }else if([obj isKindOfClass:[NSURL class]]){
         basicData = [obj absoluteString];
     }else if([obj isKindOfClass:[SSDKImage class]]){
