@@ -187,7 +187,8 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
                                   @"contentEntity":[self _ssdkGetDictionaryWithObject:contentEntity.dictionaryValue]?:[NSNull null],
                                   @"error":[self _covertError:error]
                                   };
-            result(dic);
+            
+            result([self _ssdkGetDictionaryWithObject:dic]);
         }
     }];
 }
@@ -204,7 +205,7 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
                                   @"user":user.dictionaryValue?:[NSNull null],
                                   @"error":[self _covertError:error]
                                   };
-            result(dic);
+            result([self _ssdkGetDictionaryWithObject:dic]);
         }
     }];
 }
@@ -222,7 +223,7 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
                           @"user":[NSNull null],
                           @"error":[NSNull null]
                           };
-    result(dic);
+    result([self _ssdkGetDictionaryWithObject:dic]);
 }
 
 - (void)_cancelAuthWithArgs:(NSNumber *)args result:(FlutterResult)result
@@ -239,7 +240,7 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
                               @"user":[NSNull null],
                               @"error":[self _covertError:error]
                               };
-        result(dic);
+        result([self _ssdkGetDictionaryWithObject:dic]);
     }];
 }
 
@@ -254,7 +255,7 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
                                   @"user":user.dictionaryValue?:[NSNull null],
                                   @"error":[self _covertError:error],
                                   };
-            result(dic);
+            result([self _ssdkGetDictionaryWithObject:dic]);
         }
     }];
 }
@@ -327,7 +328,7 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
                                    @"userData":userData?:[NSNull null],
                                    @"contentEntity":[self _ssdkGetDictionaryWithObject:contentEntity.dictionaryValue]?:[NSNull null],
                                    };
-             result(dic);
+             result([self _ssdkGetDictionaryWithObject:dic]);
          }
      });
     
@@ -383,6 +384,7 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
                                    @"userData":userData?:[NSNull null],
                                    @"contentEntity":[self _ssdkGetDictionaryWithObject:contentEntity.dictionaryValue]?:[NSNull null],
                                    };
+             dic = [self _ssdkGetDictionaryWithObject:dic];
              result(dic);
          }
      });

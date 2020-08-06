@@ -60,3 +60,6 @@
 
 ## 1.2.6
 * iOS fix bug
+
+## 1.2.7
+* iOS fix  bug
