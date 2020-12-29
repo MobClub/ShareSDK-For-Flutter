@@ -605,7 +605,7 @@ class _HomePageState extends State<HomePage> {
     register.setupWechat("wx617c77c82218ea2c",
         "c7253e5289986cf4c4c74d1ccc185fb1", "https://bj2ks.share2dlink.com/");
     register.setupSinaWeibo("568898243", "38a4f8204cc784f81f9f0daaf31e02e3",
-        "http://www.sharesdk.cn", "http://www.sharesdk.cn");
+        "http://www.sharesdk.cn", "https://bj2ks.share2dlink.com/");
     register.setupQQ("100371282", "aed9b0303e3ed1e27bae87c33761161d");
     register.setupDouyin(
         "aw9ivykfjvi4hpwo", "42b4caa6bda60bd49f05f06d0a4956e1");
