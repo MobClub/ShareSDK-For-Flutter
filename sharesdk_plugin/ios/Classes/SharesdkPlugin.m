@@ -599,8 +599,6 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
 - (void)addObserver
 {
     [ShareSDK setRestoreSceneDelegate:self];
-    //是否启用
-    [ShareSDK setShareVideoEnable:YES];
 }
 
 #pragma mark - ISSERestoreSceneDelegate
