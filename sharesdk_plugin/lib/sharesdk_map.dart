@@ -27,6 +27,7 @@ const String kRecipients = "recipients";
 const String kCCRecipients = "cc_recipients";
 const String kBCCRecipients = "bcc_recipients";
 const String kDesc = "desc";
+const String kLinkURL = "linkURL";
 const String kAlbumId = "album_id";
 const String kTags = "tags";
 const String kTweetId = "tweet_id";
@@ -334,38 +335,29 @@ class SSDKMap {
     int id = ShareSDKPlatforms.facebook.id;
     map["@platform($id)"] = params;
   }
+
   //setFacebookAssetImagesOrVideo，设置相册中的image或者video的localIdentifier
   void setFacebookAssetLocalIdentifier(
-      String imageLocalIdentifiers,
-      String videoLocalIdentifier
-      ){
-
+      String imageLocalIdentifiers, String videoLocalIdentifier) {
     map["facebookAssetLocalIdentifierKey_image"] = imageLocalIdentifiers;
     map["facebookAssetLocalIdentifierKey_video"] = videoLocalIdentifier;
   }
 
-
-  void setOasis(
-      String title,
-      String text,
-      assetLoacalIds,
-      image,
-      String video,
-      String fileExtension,
-      SSDKContentType type
-      ){
-      Map params = {};
-      params[kType] = type.value;
-      params[kText] = text;
-      params[kImages] = image;
-      params[kTitle] = title;
-      params[kWeChatFileExtension] = fileExtension;
-      if (video!=null) {
-        params[kVideo] = video;
-      }
-      int id = ShareSDKPlatforms.oasis.id;
-      map["@platform($id)"] = params;
+  void setOasis(String title, String text, assetLoacalIds, image, String video,
+      String fileExtension, SSDKContentType type) {
+    Map params = {};
+    params[kType] = type.value;
+    params[kText] = text;
+    params[kImages] = image;
+    params[kTitle] = title;
+    params[kWeChatFileExtension] = fileExtension;
+    if (video != null) {
+      params[kVideo] = video;
+    }
+    int id = ShareSDKPlatforms.oasis.id;
+    map["@platform($id)"] = params;
   }
+
   void setSnapchat(
       String title,
       String attachmentUrl,
@@ -375,11 +367,9 @@ class SSDKMap {
       bool stickerAnimated,
       double stickerRotation,
       bool cameraViewState,
-      SSDKContentType type
-      ){
+      SSDKContentType type) {
     Map params = {};
     params[kType] = type.value;
-
     params[kImages] = image;
     params[kTitle] = title;
     params["Sticker"] = sticker;
@@ -387,10 +377,50 @@ class SSDKMap {
     params["Sticker_animated"] = stickerAnimated;
     params["Sticker_rotation"] = stickerRotation;
     params["Sticker_cameraviewstate"] = cameraViewState;
-    if (video!=null) {
+    if (video != null) {
       params[kVideo] = video;
     }
+
     int id = ShareSDKPlatforms.snapchat.id;
+    map["@platform($id)"] = params;
+  }
+
+  void setKuaiShou(
+      String title,
+      String desc,
+      String linkURL,
+      String thumbImage,
+      String openID,
+      String receiverOpenID,
+      String localIdentifier,
+      List tags,
+      String extraInfo,
+      SSDKContentType type) {
+    Map params = {};
+    params[kType] = type.value;
+    params[kTitle] = title;
+    params[kDesc] = desc;
+    params[kLinkURL] = linkURL;
+    params["thumbImage"] = thumbImage;
+    params["openID"] = openID;
+    params["receiverOpenID"] = receiverOpenID;
+    params["localIdentifier"] = localIdentifier;
+    params["tags"] = tags;
+    params["extraInfo"] = extraInfo;
+
+    int id = ShareSDKPlatforms.kuaishou.id;
+    map["@platform($id)"] = params;
+  }
+
+  void setTikTok(
+      List assetLocalIds, String hashtag, Map extraInfo, SSDKContentType type) {
+    Map params = {};
+    params["asset_localIds"] = assetLocalIds;
+    params["tiktok_hashtag"] = hashtag;
+    params["tiktok_extraInfo"] = extraInfo;
+    params[kType] = type.value;
+
+    int id = ShareSDKPlatforms.tiktok.id;
     map["@platform($id)"] = params;
   }
 }

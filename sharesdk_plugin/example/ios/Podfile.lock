@@ -1,53 +1,53 @@
 PODS:
   - Flutter (1.0.0)
-  - mob_sharesdk (4.3.9.1):
-    - mob_sharesdk/ShareSDK (= 4.3.9.1)
+  - mob_sharesdk (4.3.16):
+    - mob_sharesdk/ShareSDK (= 4.3.16)
     - MOBFoundation (>= 3.2.9)
-  - mob_sharesdk/ShareSDK (4.3.9.1):
+  - mob_sharesdk/ShareSDK (4.3.16):
     - MOBFoundation (>= 3.2.9)
-  - mob_sharesdk/ShareSDKExtension (4.3.9.1):
+  - mob_sharesdk/ShareSDKExtension (4.3.16):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
-  - mob_sharesdk/ShareSDKPlatforms/Douyin (4.3.9.1):
+  - mob_sharesdk/ShareSDKPlatforms/Douyin (4.3.16):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
-  - mob_sharesdk/ShareSDKPlatforms/Facebook (4.3.9.1):
+  - mob_sharesdk/ShareSDKPlatforms/Facebook (4.3.16):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
-  - mob_sharesdk/ShareSDKPlatforms/KuaiShou (4.3.9.1):
+  - mob_sharesdk/ShareSDKPlatforms/KuaiShou (4.3.16):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
-  - mob_sharesdk/ShareSDKPlatforms/Line (4.3.9.1):
+  - mob_sharesdk/ShareSDKPlatforms/Line (4.3.16):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
-  - mob_sharesdk/ShareSDKPlatforms/Oasis (4.3.9.1):
+  - mob_sharesdk/ShareSDKPlatforms/Oasis (4.3.16):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
-  - mob_sharesdk/ShareSDKPlatforms/QQ (4.3.9.1):
+  - mob_sharesdk/ShareSDKPlatforms/QQ (4.3.16):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
-  - mob_sharesdk/ShareSDKPlatforms/SinaWeibo (4.3.9.1):
+  - mob_sharesdk/ShareSDKPlatforms/SinaWeibo (4.3.16):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
-  - mob_sharesdk/ShareSDKPlatforms/SnapChat (4.3.9.1):
+  - mob_sharesdk/ShareSDKPlatforms/SnapChat (4.3.16):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
-  - mob_sharesdk/ShareSDKPlatforms/Twitter (4.3.9.1):
+  - mob_sharesdk/ShareSDKPlatforms/Twitter (4.3.16):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
-  - mob_sharesdk/ShareSDKPlatforms/WatermelonVideo (4.3.9.1):
+  - mob_sharesdk/ShareSDKPlatforms/WatermelonVideo (4.3.16):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
-  - mob_sharesdk/ShareSDKPlatforms/WeChat (4.3.9.1):
+  - mob_sharesdk/ShareSDKPlatforms/WeChat (4.3.16):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
-  - mob_sharesdk/ShareSDKRestoreScene (4.3.9.1):
+  - mob_sharesdk/ShareSDKRestoreScene (4.3.16):
     - mob_sharesdk/ShareSDKExtension
     - MOBFoundation (>= 3.2.9)
-  - mob_sharesdk/ShareSDKUI (4.3.9.1):
+  - mob_sharesdk/ShareSDKUI (4.3.16):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
-  - MOBFoundation (3.2.17)
+  - MOBFoundation (3.2.24)
   - sharesdk_plugin (1.1.2):
     - Flutter
     - mob_sharesdk
@@ -83,10 +83,10 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  mob_sharesdk: 954db91c66f5460bc57940ac3fb144cc0304b6a4
-  MOBFoundation: 37e2c100051fd710976b1f8d00643d28f31fcaca
+  mob_sharesdk: 17bdc1de49d9bca2919485dfacf28d9080dc21d1
+  MOBFoundation: 934ee1a43aed452d51942b416bc3dc4d0813ac82
   sharesdk_plugin: de8d8b87c50d60017472c5da425db1acd2911e0a
 
 PODFILE CHECKSUM: 3dbe063e9c90a5d7c9e4e76e70a821b9e2c1d271
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.0

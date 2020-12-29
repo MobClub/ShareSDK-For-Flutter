@@ -10,8 +10,8 @@ class SharesdkPlugin {
   static const MethodChannel _channel =
       const MethodChannel('com.yoozoo.mob/sharesdk');
 
-  static EventChannel _channelReciever = const EventChannel('SSDKRestoreReceiver');
-
+  static EventChannel _channelReciever =
+      const EventChannel('SSDKRestoreReceiver');
 
   /// 注册方法：
   /// 1. 创建register对象，
@@ -28,6 +28,22 @@ class SharesdkPlugin {
     Map args = {"platform": platform.id, "params": params.map};
     Future<dynamic> callback =
         _channel.invokeMethod(ShareSDKMethods.share.name, args);
+    callback.then((dynamic response) {
+      if (result != null) {
+        result(_state(response), response["userData"],
+            response["contentEntity"], SSDKError(rawData: response["error"]));
+      }
+    });
+
+    return callback;
+  }
+
+  /// 系统分享
+  static Future<dynamic> shareWithActivity(ShareSDKPlatform platform,
+      SSDKMap params, Function(SSDKResponseState, Map, Map, SSDKError) result) {
+    Map args = {"platform": platform.id, "params": params.map};
+    Future<dynamic> callback =
+        _channel.invokeMethod(ShareSDKMethods.shareWithActivity.name, args);
     callback.then((dynamic response) {
       if (result != null) {
         result(_state(response), response["userData"],
@@ -58,12 +74,12 @@ class SharesdkPlugin {
   /// 判断是否授权
   static Future<dynamic> hasAuthed(ShareSDKPlatform platform,
       Function(SSDKResponseState, Map, SSDKError) result) {
-    Future<dynamic> callback = _channel.invokeMethod(
-        ShareSDKMethods.hasAuthed.name, platform.id);
+    Future<dynamic> callback =
+        _channel.invokeMethod(ShareSDKMethods.hasAuthed.name, platform.id);
     callback.then((dynamic response) {
-      if(result != null) {
+      if (result != null) {
         result(_state(response), response["user"],
-                SSDKError(rawData: response["error"]));
+            SSDKError(rawData: response["error"]));
       }
     });
     return callback;
@@ -72,12 +88,12 @@ class SharesdkPlugin {
   /// 取消授权
   static Future<dynamic> cancelAuth(ShareSDKPlatform platform,
       Function(SSDKResponseState, Map, SSDKError) result) {
-    Future<dynamic> callback = _channel.invokeMethod(
-        ShareSDKMethods.cancelAuth.name, platform.id);
+    Future<dynamic> callback =
+        _channel.invokeMethod(ShareSDKMethods.cancelAuth.name, platform.id);
     callback.then((dynamic response) {
-      if(result != null) {
+      if (result != null) {
         result(_state(response), response["user"],
-              SSDKError(rawData: response["error"]));
+            SSDKError(rawData: response["error"]));
       }
     });
     return callback;
@@ -151,28 +167,31 @@ class SharesdkPlugin {
 
     return callback;
   }
-  //get ShareSDK PrivacyPolicy, language forExample en-CN,zh-Hans-CN,zh,en. null will be zh
-  static Future<dynamic> getPrivacyPolicy(String type, String language,Function(Map data,Map error) result){
-    Map args = {"type": type};
-    if (language != null){
 
+  //get ShareSDK PrivacyPolicy, language forExample en-CN,zh-Hans-CN,zh,en. null will be zh
+  static Future<dynamic> getPrivacyPolicy(
+      String type, String language, Function(Map data, Map error) result) {
+    Map args = {"type": type};
+    if (language != null) {
       args["language"] = language;
     }
     Future<dynamic> callback =
-    _channel.invokeMethod(ShareSDKMethods.getPrivacyPolicy.name, args);
+        _channel.invokeMethod(ShareSDKMethods.getPrivacyPolicy.name, args);
     callback.then((dynamic response) {
-    print(response);
-    if (result != null) {
-        result(response["data"],response["error"]);
-    }
+      print(response);
+      if (result != null) {
+        result(response["data"], response["error"]);
+      }
     });
     return callback;
   }
+
   ///upload user permissionStatus to Share
-  static Future<dynamic> uploadPrivacyPermissionStatus(int status,Function(bool success) result){
+  static Future<dynamic> uploadPrivacyPermissionStatus(
+      int status, Function(bool success) result) {
     Map args = {"status": status};
-    Future<dynamic> callback =
-    _channel.invokeMethod(ShareSDKMethods.uploadPrivacyPermissionStatus.name, args);
+    Future<dynamic> callback = _channel.invokeMethod(
+        ShareSDKMethods.uploadPrivacyPermissionStatus.name, args);
     callback.then((dynamic response) {
       print(response);
       if (result != null) {
@@ -181,7 +200,6 @@ class SharesdkPlugin {
     });
     return callback;
   }
-
 
   /// 已集成的平台
   static Future<dynamic> activePlatforms() async {
@@ -204,10 +222,9 @@ class SharesdkPlugin {
   /// 判断是否安装了客户端
   static Future<dynamic> isClientInstalled(ShareSDKPlatform platform) async {
     Map args = {"platform": platform.id};
-    return await _channel.invokeMethod(ShareSDKMethods.isClientInstalled.name, args);
+    return await _channel.invokeMethod(
+        ShareSDKMethods.isClientInstalled.name, args);
   }
-
-
 
   static SSDKResponseState _state(Map response) {
     SSDKResponseState state = SSDKResponseState.Unknown;
@@ -226,11 +243,10 @@ class SharesdkPlugin {
     return state;
   }
 
-
   /*
    * 添加闭环分享回调监听
    */
   static addRestoreReceiver(EventHandler onEvent, EventHandler onError) {
-      _channelReciever.receiveBroadcastStream().listen(onEvent, onError: onError);
+    _channelReciever.receiveBroadcastStream().listen(onEvent, onError: onError);
   }
 }

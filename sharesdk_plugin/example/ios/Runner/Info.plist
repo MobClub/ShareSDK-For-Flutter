@@ -244,6 +244,26 @@
 				<string>ssdkmoba0b0c0d0</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>tiktok</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>aw3vqar8qg1oy91q</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>kuaishou</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>ks705657770555308030</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>20190815</string>
@@ -251,12 +271,42 @@
 	<string>1412473428822331</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-		<string>xiguaalipayshare</string>
+		<string>db-auth</string>
+		<string>tumblr</string>
+		<string>mingdao</string>
+		<string>vk</string>
+		<string>pocket</string>
+		<string>youdaonote</string>
+		<string>instapaper</string>
+		<string>linkedin</string>
+		<string>flickr</string>
+		<string>pinterest</string>
+		<string>weibosdk3.3</string>
+		<string>ksnebula</string>
+		<string>KwaiSDKMediaV2</string>
+		<string>kwai.clip.multi</string>
+		<string>KwaiBundleToken</string>
+		<string>kwaiopenapi</string>
+		<string>kwai</string>
+		<string>kakao3rdauth</string>
+		<string>kakaostory-2.9.0</string>
+		<string>instagram-capture</string>
+		<string>instagram</string>
+		<string>instagram-stories</string>
 		<string>KwaiAuth2</string>
+		<string>snssdk32</string>
+		<string>bitmoji-sdk</string>
+		<string>sharesdk</string>
+		<string>itms-apps</string>
 		<string>snapchat</string>
-		<string>line</string>
 		<string>lineauth2</string>
 		<string>oasis</string>
+		<string>fbshareextension</string>
+		<string>fbapi20160328</string>
+		<string>fbapi20150629</string>
+		<string>snssdk1180</string>
+		<string>snssdk1233</string>
+		<string>snssdk1128</string>
 		<string>weixinULAPI</string>
 		<string>kakaotalk-5.9.7</string>
 		<string>pinterestsdk.v1</string>
@@ -308,6 +358,7 @@
 		<string>mqqwpa</string>
 		<string>wtloginmqq2</string>
 		<string>mqzoneopensdkapiV2</string>
+		<string>mqqopensdkminiapp</string>
 		<string>mqzoneopensdkapi19</string>
 		<string>mqzoneopensdkapi</string>
 		<string>mqzoneopensdk</string>
@@ -322,18 +373,22 @@
 		<string>instagram</string>
 		<string>fbauth</string>
 		<string>fb-messenger-platform-20150714</string>
+		<string>fb-messenger-api20140430</string>
+		<string>fb-messenger-share-api</string>
 		<string>fb-messenger</string>
 		<string>fbauth2</string>
-		<string>fbapi20130214</string>
 		<string>fbapi</string>
+		<string>fbapi20130214</string>
 		<string>twitterauth</string>
 		<string>tg</string>
 		<string>telegram</string>
-		<string>renrenapi</string>
-		<string>renrenios</string>
-		<string>renreniphone</string>
 		<string>douyinsharesdk</string>
 		<string>douyinopensdk</string>
+		<string>tiktokopensdk</string>
+		<string>tiktoksharesdk</string>
+		<string>wxwork</string>
+		<string>wxworkrdm</string>
+		<string>wechat</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -357,6 +412,16 @@
 	<string>写入相册视频</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>从手机相册中选择</string>
+	<key>SCSDKClientId</key>
+	<string>dbe54b15-1939-4bfc-b6a0-c30a4af426a6</string>
+	<key>SCSDKRedirectUrl</key>
+	<string>ssdk2c574691c6986://mob</string>
+	<key>SCSDKScopes</key>
+	<array>
+		<string>https://auth.snapchat.com/oauth2/api/user.external_id</string>
+		<string>https://auth.snapchat.com/oauth2/api/user.display_name</string>
+		<string>https://auth.snapchat.com/oauth2/api/user.bitmoji.avatar</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
