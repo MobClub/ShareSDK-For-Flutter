@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:sharesdk_plugin_example/home.dart';
 import 'package:sharesdk_plugin/sharesdk_plugin.dart';
 import 'package:flutter/cupertino.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
@@ -22,12 +23,8 @@ class _MyAppState extends State<MyApp> {
     //}
   }
 
-
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: HomePage()
-    );
+    return MaterialApp(home: HomePage());
   }
 }

@@ -24,11 +24,13 @@ class ShareSDKRegister {
   final Map platformsInfo = {};
 
   /// set up sina platform info
-  void setupSinaWeibo(String appkey, String appSecret, String redirectUrl) {
+  void setupSinaWeibo(String appkey, String appSecret, String redirectUrl,
+      String universalLink) {
     Map info = {
       _ssdkAppkey: appkey,
       _ssdkAppSecret: appSecret,
-      _ssdkRedirectUrl: redirectUrl
+      _ssdkRedirectUrl: redirectUrl,
+      _ssdkAppUniversalLink: universalLink
     };
 
     platformsInfo[ShareSDKPlatforms.sina.id] = info;
@@ -36,7 +38,11 @@ class ShareSDKRegister {
 
   /// set up wechat platform info
   void setupWechat(String appId, String appSecret, String appUniversalLink) {
-    Map info = {_ssdkAppId: appId, _ssdkAppSecret: appSecret, _ssdkAppUniversalLink: appUniversalLink};
+    Map info = {
+      _ssdkAppId: appId,
+      _ssdkAppSecret: appSecret,
+      _ssdkAppUniversalLink: appUniversalLink
+    };
     platformsInfo[ShareSDKPlatforms.wechatSeries.id] = info;
   }
 
@@ -71,9 +77,9 @@ class ShareSDKRegister {
 
   void setupSnapchat(String appkey, String appSecret, String redirectUrl) {
     Map info = {
-    _ssdkclientIdUnsafe: appkey,
+      _ssdkclientIdUnsafe: appkey,
       _ssdkAppSecret: appSecret,
-      _ssdkRedirectUrl:redirectUrl
+      _ssdkRedirectUrl: redirectUrl
     };
 
     platformsInfo[ShareSDKPlatforms.snapchat.id] = info;
@@ -326,6 +332,28 @@ class ShareSDKRegister {
 
     platformsInfo[ShareSDKPlatforms.douyin.id] = info;
   }
+
+  /// set up KuaiShou platform info
+  void setupKuaiShou(String appkey, String appSecret, String appUniversalLink) {
+    Map info = {
+      _ssdkAppId: appkey,
+      _ssdkAppSecret: appSecret,
+      _ssdkAppUniversalLink: appUniversalLink
+    };
+
+    platformsInfo[ShareSDKPlatforms.kuaishou.id] = info;
+  }
+
+  /// set up TikTok platform info
+  void setupTikTok(String appkey, String appSecret) {
+    Map info = {
+      _ssdkAppkey: appkey,
+      _ssdkAppSecret: appSecret,
+    };
+
+    platformsInfo[ShareSDKPlatforms.tiktok.id] = info;
+  }
+
   /// set up oasis platform info
   void setupOasis(String appkey) {
     Map info = {

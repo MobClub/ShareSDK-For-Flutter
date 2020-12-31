@@ -66,3 +66,9 @@
 
 ## 1.2.8
 * iOS fix  bug
+
+## 1.2.9
+* iOS fix  bug
+* iOS add TikTok
+* iOS add ShareWithActivity
+

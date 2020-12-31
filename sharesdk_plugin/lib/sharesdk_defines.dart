@@ -46,13 +46,15 @@ class ShareSDKMethods {
   static final ShareSDKMethod isClientInstalled =
       ShareSDKMethod(name: "isClientInstalled", id: 11);
   static final ShareSDKMethod uploadPrivacyPermissionStatus =
-  ShareSDKMethod(name: "uploadPrivacyPermissionStatus", id: 12);
+      ShareSDKMethod(name: "uploadPrivacyPermissionStatus", id: 12);
   static final ShareSDKMethod setAllowShowPrivacyWindow =
-  ShareSDKMethod(name: "setAllowShowPrivacyWindow", id: 13);
+      ShareSDKMethod(name: "setAllowShowPrivacyWindow", id: 13);
   static final ShareSDKMethod getPrivacyPolicy =
-  ShareSDKMethod(name: "getPrivacyPolicy", id: 14);
+      ShareSDKMethod(name: "getPrivacyPolicy", id: 14);
   static final ShareSDKMethod setPrivacyUI =
-  ShareSDKMethod(name: "setPrivacyUI", id: 15);
+      ShareSDKMethod(name: "setPrivacyUI", id: 15);
+  static final ShareSDKMethod shareWithActivity =
+      ShareSDKMethod(name: "shareWithActivity", id: 16);
 }
 
 class ShareSDKPlatform {
@@ -150,16 +152,16 @@ class ShareSDKPlatforms {
       ShareSDKPlatform(name: "reddit", id: 56);
   static final ShareSDKPlatform douyin =
       ShareSDKPlatform(name: "douyin", id: 59);
-  static final ShareSDKPlatform apple =
-      ShareSDKPlatform(name: 'apple',id: 61);
-  static final ShareSDKPlatform oasis =
-  ShareSDKPlatform(name: 'oasis',id: 64);
+  static final ShareSDKPlatform apple = ShareSDKPlatform(name: 'apple', id: 61);
+  static final ShareSDKPlatform oasis = ShareSDKPlatform(name: 'oasis', id: 64);
   static final ShareSDKPlatform snapchat =
-  ShareSDKPlatform(name: 'oasis',id: 66);
+      ShareSDKPlatform(name: 'oasis', id: 66);
   static final ShareSDKPlatform kuaishou =
-  ShareSDKPlatform(name: 'kuaishou',id: 68);
+      ShareSDKPlatform(name: 'kuaishou', id: 68);
   static final ShareSDKPlatform watermelonvideo =
-  ShareSDKPlatform(name: 'watermelonvideo',id: 69);
+      ShareSDKPlatform(name: 'watermelonvideo', id: 69);
+  static final ShareSDKPlatform tiktok =
+      ShareSDKPlatform(name: 'tiktok', id: 70);
   static final ShareSDKPlatform yixinSeries =
       ShareSDKPlatform(name: "yixinSeries", id: 994);
   static final ShareSDKPlatform kakaoSeries =
@@ -188,6 +190,7 @@ class SSDKContentType {
   SSDKContentType({this.value}) : super();
   final int value;
 }
+
 /// supported share content types
 class SSDKContentTypes extends Object {
   static SSDKContentType get auto => SSDKContentType(value: 0);
@@ -199,4 +202,5 @@ class SSDKContentTypes extends Object {
   static SSDKContentType get video => SSDKContentType(value: 6);
   static SSDKContentType get file => SSDKContentType(value: 7);
   static SSDKContentType get miniProgram => SSDKContentType(value: 10);
+  static SSDKContentType get message => SSDKContentType(value: 11);
 }

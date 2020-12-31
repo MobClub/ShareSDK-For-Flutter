@@ -21,7 +21,9 @@ typedef NS_ENUM(NSUInteger, PluginMethod) {
     PluginMethodUploadPrivacyPermissionStatus = 12,
     PluginMethodSetAllowShowPrivacyWindow = 13,
     PluginMethodGetPrivacyPolicy = 14,
-    PluginMethodSetPrivacyUI = 15
+    PluginMethodSetPrivacyUI = 15,
+    PluginMethodShareWithActivity = 16
+
 };
 
 @interface SharesdkPlugin()<FlutterStreamHandler,ISSERestoreSceneDelegate>
@@ -71,7 +73,8 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
                            @"uploadPrivacyPermissionStatus":@(PluginMethodUploadPrivacyPermissionStatus),
                            @"setAllowShowPrivacyWindow":@(PluginMethodSetAllowShowPrivacyWindow),
                            @"setPrivacyUI":@(PluginMethodSetPrivacyUI),
-                           @"getPrivacyPolicy":@(PluginMethodGetPrivacyPolicy)
+                           @"getPrivacyPolicy":@(PluginMethodGetPrivacyPolicy),
+                           @"shareWithActivity":@(PluginMethodShareWithActivity)
                            };
     [registrar addMethodCallDelegate:instance channel:channel];
     
@@ -140,6 +143,10 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
                 [self _uploadPrivacyPermissionStatus:call.arguments result:result];
             }
                 break;
+            case PluginMethodShareWithActivity:{
+                [self _shareActivityWithArgs:call.arguments result:result];
+            }
+                break;
             default:
                 NSAssert(NO, @"The method requires an implementation ！");
                 break;
@@ -179,6 +186,26 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
         [params SSDKSetupFacebookParamsByImagePHAsset:imageIdentifier videoPHAsset:videoIdentifier];
     }
     [ShareSDK share:type parameters:params.mutableCopy onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
+        if (state != SSDKResponseStateBegin)
+        {
+            NSDictionary *dic = @{
+                                  @"state":@(state),
+                                  @"userData":[self _ssdkGetDictionaryWithObject:userData]?:[NSNull null],
+                                  @"contentEntity":[self _ssdkGetDictionaryWithObject:contentEntity.dictionaryValue]?:[NSNull null],
+                                  @"error":[self _covertError:error]
+                                  };
+            
+            result([self _ssdkGetDictionaryWithObject:dic]);
+        }
+    }];
+}
+
+- (void)_shareActivityWithArgs:(NSDictionary *)args result:(FlutterResult)result
+{
+    NSInteger type = [args[@"platform"] integerValue];
+    NSMutableDictionary *params = [self _covertParams:args[@"params"]].mutableCopy;
+
+    [ShareSDK shareByActivityViewController:type parameters:params.mutableCopy onStateChanged:^(SSDKResponseState state, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error) {
         if (state != SSDKResponseStateBegin)
         {
             NSDictionary *dic = @{
@@ -450,8 +477,8 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
     
     NSArray *urlKeys = @[@"url",@"audio_url",@"audio_flash_url",@"video_flash_url",@"video_asset_url"];
     NSArray *thumbImageKeys = @[@"thumb_image",@"wxmp_hdthumbimage"];
-    NSArray *dataKeys = @[@"emoticon_data",@"file_data",@"source_file"];
-    
+    NSArray *dataKeys = @[@"emoticon_data",@"file_data",@"source_file",@"video"];
+    SSDKImage *img = nil;
     for (id key in params.allKeys)
     {
         if ([urlKeys containsObject:key])
@@ -467,6 +494,15 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
         if ([dataKeys containsObject:key])
         {
             tmp[key] = ((id(*)(id,SEL,id))objc_msgSend)(NSClassFromString(@"SSDKData"),NSSelectorFromString(@"dataWithObject:"),params[key]);
+        }
+
+        if ([key isEqualToString:@"thumbImage"])
+        {
+            img = (((NSArray *(*)(id, SEL, id))objc_msgSend)(params.mutableCopy,NSSelectorFromString(@"_convertToImages:"),params[key]))[0];
+            void(^ handler)(UIImage *) = ^(UIImage *image) {
+                [tmp setObject:image forKey:@"thumbImage"];
+            };
+            ((void(*)(id, SEL, id))objc_msgSend)(img,NSSelectorFromString(@"getNativeImage:"),handler);
         }
         
         if ([key isEqualToString:@"images"])
