@@ -57,7 +57,7 @@
 			<string>qq</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>tencent100371282</string>
+				<string>tencent1110451818</string>
 				<string>QQ05FB8B52</string>
 			</array>
 		</dict>
@@ -65,11 +65,9 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>meipai</string>
+			<string></string>
 			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>mp1089867639</string>
-			</array>
+			<array/>
 		</dict>
 		<dict>
 			<key>CFBundleTypeRole</key>
@@ -195,11 +193,9 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>renren</string>
+			<string></string>
 			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>rm226427$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-			</array>
+			<array/>
 		</dict>
 		<dict>
 			<key>CFBundleTypeRole</key>
@@ -216,7 +212,7 @@
 			<string>douyin</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>aw9ivykfjvi4hpwo</string>
+				<string>awycvl19mldccyso</string>
 			</array>
 		</dict>
 		<dict/>
@@ -241,7 +237,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>ssdkmoba0b0c0d0</string>
+				<string>ssdk2c574691c6986</string>
 			</array>
 		</dict>
 		<dict>
@@ -397,12 +393,12 @@
 		<key>ChannelID</key>
 		<string>1639219273</string>
 		<key>UniversalLink</key>
-		<string>https://ybpre.share2dlink.com/line-auth/</string>
+		<string>https://70imc.share2dlink.com/line-auth/</string>
 	</dict>
 	<key>MOBAppKey</key>
-	<string>moba0b0c0d0</string>
+	<string>3276d3e413040</string>
 	<key>MOBAppSecret</key>
-	<string>5713f0d88511f9f4cf100cade0610a34</string>
+	<string>4280a3a6df667cfce37528dec03fd9c3</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

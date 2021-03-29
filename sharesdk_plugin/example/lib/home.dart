@@ -200,7 +200,7 @@ class _HomePageState extends State<HomePage> {
           "title",
           "text",
           [
-            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541565611543&di=4615c8072e155090a2b833059f19ed5b&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201501%2F06%2F20150106003502_Ajcte.jpeg"
+            "http://download.sdk.mob.com/web/images/2019/07/30/14/1564468183056/750_750_65.12.png"
           ],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
           null,
@@ -277,7 +277,7 @@ class _HomePageState extends State<HomePage> {
           "title",
           "text",
           [
-            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541565611543&di=4615c8072e155090a2b833059f19ed5b&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201501%2F06%2F20150106003502_Ajcte.jpeg"
+            "http://download.sdk.mob.com/web/images/2019/07/30/14/1564468183056/750_750_65.12.png"
           ],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
           null,
@@ -314,7 +314,7 @@ class _HomePageState extends State<HomePage> {
           "http://www.mob.com",
           "pages/index/index",
           null,
-          "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522154322305&di=7f4bf3d0803fe8c2c66c140f0a6ea0b4&imgtype=0&src=http%3A%2F%2Fa4.topitme.com%2Fo%2F201007%2F29%2F12803876734174.jpg",
+          "http://download.sdk.mob.com/web/images/2019/07/30/14/1564468183056/750_750_65.12.png",
           "http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg",
           "gh_afb25ac019c9",
           true,
@@ -333,8 +333,7 @@ class _HomePageState extends State<HomePage> {
           "text",
           "title",
           [
-            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541659481198&di=80760a9d745a78dab3ed3d5577286682&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fbaike%2Fpic%2Fitem%2Fd1a20cf431adcbef011db9bba6af2edda3cc9f66.jpg",
-            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541659494384&di=ad32f8ac8c75f51612a90d6b7c1d8db8&imgtype=0&src=http%3A%2F%2Fimg3.duitang.com%2Fuploads%2Fitem%2F201609%2F14%2F20160914232743_hwnCt.thumb.700_0.jpeg"
+            "http://download.sdk.mob.com/web/images/2019/07/30/14/1564468183056/750_750_65.12.png"
           ],
           null,
           "http://www.mob.com/",
@@ -373,7 +372,7 @@ class _HomePageState extends State<HomePage> {
     SSDKMap params = SSDKMap()
       ..setTwitter(
           "text",
-          "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1541659481198&di=80760a9d745a78dab3ed3d5577286682&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fbaike%2Fpic%2Fitem%2Fd1a20cf431adcbef011db9bba6af2edda3cc9f66.jpg",
+          "http://download.sdk.mob.com/web/images/2019/07/30/14/1564468183056/750_750_65.12.png",
           null,
           0.0,
           0.0,
@@ -602,24 +601,52 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     ShareSDKRegister register = ShareSDKRegister();
-    register.setupWechat("wx617c77c82218ea2c",
-        "c7253e5289986cf4c4c74d1ccc185fb1", "https://bj2ks.share2dlink.com/");
-    register.setupSinaWeibo("568898243", "38a4f8204cc784f81f9f0daaf31e02e3",
-        "http://www.sharesdk.cn", "https://bj2ks.share2dlink.com/");
-    register.setupQQ("100371282", "aed9b0303e3ed1e27bae87c33761161d");
-    register.setupDouyin(
-        "aw9ivykfjvi4hpwo", "42b4caa6bda60bd49f05f06d0a4956e1");
-    register.setupTikTok(
-        "aw3vqar8qg1oy91q", "18cf1714c53e9f9c64aec484ca4f2e29");
-    register.setupFacebook(
-        "1412473428822331", "a42f4f3f867dc947b9ed6020c2e93558", "shareSDK");
-    register.setupTwitter("viOnkeLpHBKs6KXV7MPpeGyzE",
-        "NJEglQUy2rqZ9Io9FcAU9p17omFqbORknUpRrCDOK46aAbIiey", "http://mob.com");
-    register.setupOasis("568898243");
-    register.setupSnapchat(
-        "dbe54b15-1939-4bfc-b6a0-c30a4af426a6", "", "ssdkmoba0b0c0d0://mob");
-    register.setupKuaiShou("ks705657770555308030", "RQ17enXUOioeoDMrwk3j2Q",
-        "https://bj2ks.share2dlink.com/");
+
+    if (Platform.isIOS) {
+      //ios相关代码
+      register.setupWechat("wx617c77c82218ea2c",
+          "c7253e5289986cf4c4c74d1ccc185fb1", "https://70imc.share2dlink.com/");
+      register.setupSinaWeibo("568898243", "38a4f8204cc784f81f9f0daaf31e02e3",
+          "http://www.sharesdk.cn", "https://70imc.share2dlink.com/");
+      register.setupQQ("1110451818", "OlbzvuSP3Hgj5yNS");
+      register.setupDouyin(
+          "awycvl19mldccyso", "8793a4dfdc3636cbda0924a3cfbc8424");
+      register.setupTikTok(
+          "aw3vqar8qg1oy91q", "18cf1714c53e9f9c64aec484ca4f2e29");
+      register.setupFacebook(
+          "1412473428822331", "a42f4f3f867dc947b9ed6020c2e93558", "shareSDK");
+      register.setupTwitter(
+          "viOnkeLpHBKs6KXV7MPpeGyzE",
+          "NJEglQUy2rqZ9Io9FcAU9p17omFqbORknUpRrCDOK46aAbIiey",
+          "http://mob.com");
+      register.setupOasis("568898243");
+      register.setupSnapchat("dbe54b15-1939-4bfc-b6a0-c30a4af426a6", "",
+          "ssdk2c574691c6986://mob");
+      register.setupKuaiShou("ks705657770555308030", "RQ17enXUOioeoDMrwk3j2Q",
+          "https://70imc.share2dlink.com/");
+    } else if (Platform.isAndroid) {
+      //android相关代码
+      register.setupWechat("wx617c77c82218ea2c",
+          "c7253e5289986cf4c4c74d1ccc185fb1", "https://bj2ks.share2dlink.com/");
+      register.setupSinaWeibo("568898243", "38a4f8204cc784f81f9f0daaf31e02e3",
+          "http://www.sharesdk.cn", "https://bj2ks.share2dlink.com/");
+      register.setupQQ("100371282", "aed9b0303e3ed1e27bae87c33761161d");
+      register.setupDouyin(
+          "aw9ivykfjvi4hpwo", "42b4caa6bda60bd49f05f06d0a4956e1");
+      register.setupTikTok(
+          "aw3vqar8qg1oy91q", "18cf1714c53e9f9c64aec484ca4f2e29");
+      register.setupFacebook(
+          "1412473428822331", "a42f4f3f867dc947b9ed6020c2e93558", "shareSDK");
+      register.setupTwitter(
+          "viOnkeLpHBKs6KXV7MPpeGyzE",
+          "NJEglQUy2rqZ9Io9FcAU9p17omFqbORknUpRrCDOK46aAbIiey",
+          "http://mob.com");
+      register.setupOasis("568898243");
+      register.setupSnapchat(
+          "dbe54b15-1939-4bfc-b6a0-c30a4af426a6", "", "ssdkmoba0b0c0d0://mob");
+      register.setupKuaiShou("ks705657770555308030", "RQ17enXUOioeoDMrwk3j2Q",
+          "https://bj2ks.share2dlink.com/");
+    }
     SharesdkPlugin.regist(register);
     //SharesdkPlugin.uploadPrivacyPermissionStatus(0, getPrivacyPolicy);
     SharesdkPlugin.addRestoreReceiver(_onEvent, _onError);
@@ -651,8 +678,8 @@ class _HomePageState extends State<HomePage> {
           _creatRow("打开微信小程序", "需要导入WechatConnector", openMiniProgram, context),
           _creatRow("分享小程序到微信", "测试自定义参数", shareMiniProgram, context),
           _creatRow("分享到新浪微博", "测试自定义参数", shareSinaCustom, context),
-          _creatRow(
-              "分享到新浪微博LinkCard", "分享到LinkCard", shareSinaLinkCard, context),
+          // _creatRow(
+          //     "分享到新浪微博LinkCard", "分享到LinkCard", shareSinaLinkCard, context),
           _creatRow("分享到QQ", "测试自定义参数", shareQQCustom, context),
           _creatRow("分享到Snapchat", "测试自定义参数", shareSnapchatCustom, context),
           _creatRow("分享到Twitter", "测试自定义参数", shareTwitterCustom, context),
