@@ -20,6 +20,8 @@ class ShareSDKRegister {
   static const String _ssdkSandbox = "sandbox_mode";
   static const String _ssdkAppUniversalLink = "app_universalLink";
   static const String _ssdkclientIdUnsafe = "client_id_unsafe";
+  static const String _ssdkOpen_countryList = "open_countryList";
+
 
   final Map platformsInfo = {};
 
@@ -94,6 +96,17 @@ class ShareSDKRegister {
     };
 
     platformsInfo[ShareSDKPlatforms.tencentWeibo.id] = info;
+  }
+
+  /// set up MingDao platform info
+  void setupMingDao(String appKey, String appSecret, String redirectUrl) {
+    Map info = {
+      _ssdkAppkey: appKey,
+      _ssdkAppSecret: appSecret,
+      _ssdkRedirectUrl: redirectUrl
+    };
+
+    platformsInfo[ShareSDKPlatforms.mingDao.id] = info;
   }
 
   /// set up yixin platform info
@@ -244,11 +257,11 @@ class ShareSDKRegister {
   }
 
   /// set up dropbox platform info
-  void setupDropbox(String appkey, String appSecret, String redirectUrl) {
+  void setupDropbox(String appkey, String appSecret, String oauthCallback) {
     Map info = {
       _ssdkAppkey: appkey,
       _ssdkAppSecret: appSecret,
-      _ssdkRedirectUrl: redirectUrl
+      _ssdkOAuthCallback: oauthCallback
     };
 
     platformsInfo[ShareSDKPlatforms.dropbox.id] = info;
@@ -282,6 +295,22 @@ class ShareSDKRegister {
 
     platformsInfo[ShareSDKPlatforms.dingding.id] = info;
   }
+
+  void setupDingTalkAuth(String appId, String appSecret, String redirectUr) {
+    Map info = {
+      _ssdkAppId: "auth"+appId,
+      _ssdkAppSecret: "auth"+appSecret,
+      _ssdkRedirectUrl: "auth"+redirectUr,
+    };
+    if(platformsInfo[ShareSDKPlatforms.dingding.id] == null){
+      platformsInfo[ShareSDKPlatforms.dingding.id] = info;
+    }else{
+      Map param = platformsInfo[ShareSDKPlatforms.dingding.id];
+      info.addEntries(param.entries);
+      platformsInfo[ShareSDKPlatforms.dingding.id] = info;
+    }
+  }
+
 
   /// set up meipai platform info
   void setupMeiPai(String appkey) {
@@ -361,5 +390,14 @@ class ShareSDKRegister {
     };
 
     platformsInfo[ShareSDKPlatforms.oasis.id] = info;
+  }
+
+  /// set up SMS platform info
+  void setupSMS(bool openCountryList) {
+    Map info = {
+      _ssdkOpen_countryList: openCountryList,
+    };
+
+    platformsInfo[ShareSDKPlatforms.sms.id] = info;
   }
 }

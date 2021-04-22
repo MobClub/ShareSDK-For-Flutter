@@ -92,6 +92,14 @@ const String ksite = "site";
 const String ksiteUrl = "siteUrl";
 
 const String kFilePath = "filePath";
+const String kAsset_localIds = "asset_localIds";
+
+const String kYXLowBandUrl = "yx_lowBand";
+const String kYXLowBandDataUrl  = "yx_lowBandData";
+const String kYXDataUrl = "yx_Data";
+const String kYXVideoLowBandDataUrl = "yx_lowvideoBandData";
+
+
 
 /// Set sharing parameters map
 class SSDKMap {
@@ -121,6 +129,14 @@ class SSDKMap {
     map[kImageUrlAndroid] = imageUrlAndroid;
     map[kImagePathAndroid] = imagePathAndroid;
     map[kFilePath] = filePath;
+  }
+
+  //相册选择图片/视频的通用参数设置
+  void setImageAndVideoAssets(
+      String imageAssets,
+      Map videoAsset) {
+    map["imageAssets"] = imageAssets;
+    map["videoAsset"] = videoAsset;
   }
 
   /// Set wechat platform share parameters
@@ -343,6 +359,24 @@ class SSDKMap {
     map["facebookAssetLocalIdentifierKey_video"] = videoLocalIdentifier;
   }
 
+  void setFacebookMessenger(
+      String title,
+      String url,
+      dynamic images,
+      dynamic video,
+      SSDKContentType type) {
+    Map params = {};
+    params[kType] = type.value;
+    params[kImages] = images;
+    params[kTitle] = title;
+    params[kUrl] = url;
+    if (video != null) {
+      params[kVideo] = video;
+    }
+    int id = ShareSDKPlatforms.messenger.id;
+    map["@platform($id)"] = params;
+  }
+
   void setOasis(String title, String text, assetLoacalIds, image, String video,
       String fileExtension, SSDKContentType type) {
     Map params = {};
@@ -350,6 +384,9 @@ class SSDKMap {
     params[kText] = text;
     params[kImages] = image;
     params[kTitle] = title;
+    if (assetLoacalIds != null) {
+      params[kAsset_localIds] = assetLoacalIds;
+    }
     params[kWeChatFileExtension] = fileExtension;
     if (video != null) {
       params[kVideo] = video;
@@ -412,10 +449,28 @@ class SSDKMap {
     map["@platform($id)"] = params;
   }
 
-  void setTikTok(
-      List assetLocalIds, String hashtag, Map extraInfo, SSDKContentType type) {
+  void setDouYin(
+      List assetLocalIds,
+      String hashtag,
+      Map extraInfo,
+      SSDKContentType type) {
     Map params = {};
-    params["asset_localIds"] = assetLocalIds;
+    params[kAsset_localIds] = assetLocalIds;
+    params["douyin_hashtag"] = hashtag;
+    params["douyin_extraInfo"] = extraInfo;
+    params[kType] = type.value;
+
+    int id = ShareSDKPlatforms.douyin.id;
+    map["@platform($id)"] = params;
+  }
+
+  void setTikTok(
+      List assetLocalIds,
+      String hashtag,
+      Map extraInfo,
+      SSDKContentType type) {
+    Map params = {};
+    params[kAsset_localIds] = assetLocalIds;
     params["tiktok_hashtag"] = hashtag;
     params["tiktok_extraInfo"] = extraInfo;
     params[kType] = type.value;
@@ -423,4 +478,200 @@ class SSDKMap {
     int id = ShareSDKPlatforms.tiktok.id;
     map["@platform($id)"] = params;
   }
+
+  void setKakaoTalk(
+      String url,
+      String templateId,
+      Map templateArgs) {
+    Map params = {};
+    params[kUrl] = url;
+    params["templateId"] = templateId;
+    params["templateArgs"] = templateArgs;
+    int id = ShareSDKPlatforms.kakaoTalk.id;
+    map["@platform($id)"] = params;
+  }
+
+  void setKakaoStory(
+      String text,
+      dynamic images,
+      String title,
+      String url,
+      int permission,
+      int enableShare,
+      Map androidExecParam,
+      Map iOSExecParams,
+      SSDKContentType type) {
+    Map params = {};
+    params[kText] = text;
+    params[kImages] = images;
+    params[kTitle] = title;
+    params[kUrl] = url;
+    params[kPermission] = permission;
+    params[kEnableShare] = enableShare;
+    params[kAndroidExecParam] = androidExecParam;
+    params[kIPhoneExecParam] = iOSExecParams;
+    int id = ShareSDKPlatforms.kakaoStory.id;
+    map["@platform($id)"] = params;
+  }
+
+  void setInstagram(
+      dynamic images,
+      dynamic x,
+      dynamic y) {
+    Map params = {};
+    params[kImages] = images;
+    params[kMenuDisplayX] = x;
+    params[kMenuDisplayY] = y;
+    int id = ShareSDKPlatforms.instagram.id;
+    map["@platform($id)"] = params;
+  }
+
+  void setWhatsApp(
+      String text,
+      dynamic images,
+      dynamic audio,
+      dynamic video,
+      dynamic x,
+      dynamic y,
+      SSDKContentType type) {
+    Map params = {};
+    params[kType] = type.value;
+    params[kImages] = images;
+    params[kText] = text;
+    if (audio != null) {
+      params[kAudio] = audio;
+    }
+    if (video != null) {
+      params[kVideo] = video;
+    }
+    params[kMenuDisplayX] = x;
+    params[kMenuDisplayY] = y;
+    int id = ShareSDKPlatforms.whatsApp.id;
+    map["@platform($id)"] = params;
+  }
+
+  void setLinkedIn(
+      String text,
+      dynamic images,
+      String url,
+      String title,
+      String urlDesc,
+      String visibility,
+      SSDKContentType type) {
+    Map params = {};
+    params[kType] = type.value;
+    params[kImages] = images;
+    params[kText] = text;
+    params[kTitle] = title;
+    params[kUrl] = url;
+    params[kDesc] = urlDesc;
+    params[kVisibility] = visibility;
+    int id = ShareSDKPlatforms.linkedIn.id;
+    map["@platform($id)"] = params;
+  }
+
+  void setTelegram(
+      String text,
+      dynamic images,
+      dynamic audio,
+      dynamic video,
+      dynamic file,
+      dynamic x,
+      dynamic y,
+      SSDKContentType type) {
+    Map params = {};
+    params[kType] = type.value;
+    params[kText] = text;
+    params[kImages] = images;
+    if (audio != null) {
+      params[kAudio] = audio;
+    }
+    if (video != null) {
+      params[kVideo] = video;
+    }
+    if (file != null) {
+      params[kFile] = file;
+    }
+    int id = ShareSDKPlatforms.telegram.id;
+    map["@platform($id)"] = params;
+  }
+
+  void setDropbox(
+      dynamic attachment) {
+    Map params = {};
+    params[kAttachments] = attachment;
+    int id = ShareSDKPlatforms.dropbox.id;
+    map["@platform($id)"] = params;
+  }
+
+  void setPinterest(
+      String image,
+      String desc,
+      String url,
+      String boardName) {
+    Map params = {};
+    params[kImages] = image;
+    params[kText] = desc;
+    params[kUrl] = url;
+    params[kBoard] = boardName;
+    int id = ShareSDKPlatforms.pinterest.id;
+    map["@platform($id)"] = params;
+  }
+
+  void setYouDaoNote(
+      String text,
+      dynamic images,
+      String title,
+      String source,
+      String author,
+      String notebook) {
+    Map params = {};
+    params[kText] = text;
+    params[kImages] = images;
+    params[kTitle] = title;
+    params[kSource] = source;
+    params[kAuthor] = author;
+    params[kNoteBook] = notebook;
+    int id = ShareSDKPlatforms.youdaoNote.id;
+    map["@platform($id)"] = params;
+  }
+
+  void setYiXin(
+      String text,
+      String title,
+      String url,
+      dynamic thumbImage,
+      dynamic images,
+      String musicFileURL,
+      String musicLowBandUrl,
+      String musicDataUrl,
+      String musicLowBandDataUrl,
+      String extInfo,
+      String fileData,
+      String videoLowBandUrl,
+      String comment,
+      String userId,
+      SSDKContentType type,
+      int platformSubType) {
+    Map params = {};
+    params[kText] = text;
+    params[kTitle] = title;
+    params[kUrl] = url;
+    params[kThumbImage] = thumbImage;
+    params[kImages] = images;
+    params[kAudio] = musicFileURL;
+    params[kYXLowBandUrl] = musicLowBandUrl;
+    params[kYXDataUrl] = musicDataUrl;
+    params[kYXLowBandDataUrl] = musicLowBandDataUrl;
+    params[kExtension] = extInfo;
+    params[kFile] = fileData;
+    params[kYXVideoLowBandDataUrl] = videoLowBandUrl;
+    params[kComment] = comment;
+    params[kUid] = userId;
+    params[kType] = type;
+
+    int id = platformSubType;
+    map["@platform($id)"] = params;
+  }
 }
+

@@ -106,7 +106,7 @@
 			<string>yixin</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>yx0d9a9f9088ea44d78680f3274da1765f</string>
+				<string>yxfddfe3934340436da964fd20885fe2a4</string>
 			</array>
 		</dict>
 		<dict>
@@ -116,7 +116,7 @@
 			<string>pin</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>pdk4987008320438021391</string>
+				<string>pdk5057854497590653616</string>
 			</array>
 		</dict>
 		<dict>
@@ -237,7 +237,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>ssdk2c574691c6986</string>
+				<string>ssdkmoba0b0c0d0</string>
 			</array>
 		</dict>
 		<dict>
@@ -263,8 +263,12 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>20190815</string>
+	<key>FacebookAdvertiserIDCollectionEnabled</key>
+	<true/>
 	<key>FacebookAppID</key>
 	<string>1412473428822331</string>
+	<key>KAKAO_APP_KEY</key>
+	<string>9c17eb03317e0e627ec95a400f5785fb</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>db-auth</string>
@@ -409,9 +413,9 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>从手机相册中选择</string>
 	<key>SCSDKClientId</key>
-	<string>dbe54b15-1939-4bfc-b6a0-c30a4af426a6</string>
+	<string>dc8e6068-0578-41b8-8392-4da009519725</string>
 	<key>SCSDKRedirectUrl</key>
-	<string>ssdk2c574691c6986://mob</string>
+	<string>ssdkmoba0b0c0d0://mob</string>
 	<key>SCSDKScopes</key>
 	<array>
 		<string>https://auth.snapchat.com/oauth2/api/user.external_id</string>

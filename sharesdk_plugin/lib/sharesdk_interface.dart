@@ -117,6 +117,7 @@ class SharesdkPlugin {
 
   /// 弹出分享菜单
   static Future<dynamic> showMenu(
+      dynamic view,
       List<ShareSDKPlatform> platforms,
       SSDKMap params,
       Function(SSDKResponseState, ShareSDKPlatform, Map, Map, SSDKError)
@@ -127,7 +128,7 @@ class SharesdkPlugin {
       types = List.from(ids);
     }
 
-    Map args = {"platforms": types, "params": params.map};
+    Map args = {"platforms": types, "params": params.map, "view":view};
     Future<dynamic> callback =
         _channel.invokeMethod(ShareSDKMethods.showMenu.name, args);
     callback.then((dynamic response) {

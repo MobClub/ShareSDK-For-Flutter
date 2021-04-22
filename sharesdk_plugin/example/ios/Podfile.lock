@@ -8,10 +8,34 @@ PODS:
   - mob_sharesdk/ShareSDKExtension (4.3.17):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
+  - mob_sharesdk/ShareSDKPlatforms/DingTalk (4.3.17):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation (>= 3.2.9)
   - mob_sharesdk/ShareSDKPlatforms/Douyin (4.3.17):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
+  - mob_sharesdk/ShareSDKPlatforms/Dropbox (4.3.17):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation (>= 3.2.9)
+  - mob_sharesdk/ShareSDKPlatforms/Evernote (4.3.17):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation (>= 3.2.9)
   - mob_sharesdk/ShareSDKPlatforms/Facebook (4.3.17):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation (>= 3.2.9)
+  - mob_sharesdk/ShareSDKPlatforms/Flickr (4.3.17):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation (>= 3.2.9)
+  - mob_sharesdk/ShareSDKPlatforms/GooglePlus (4.3.17):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation (>= 3.2.9)
+  - mob_sharesdk/ShareSDKPlatforms/Instagram (4.3.17):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation (>= 3.2.9)
+  - mob_sharesdk/ShareSDKPlatforms/Instapaper (4.3.17):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation (>= 3.2.9)
+  - mob_sharesdk/ShareSDKPlatforms/Kakao (4.3.17):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
   - mob_sharesdk/ShareSDKPlatforms/KuaiShou (4.3.17):
@@ -20,25 +44,64 @@ PODS:
   - mob_sharesdk/ShareSDKPlatforms/Line (4.3.17):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
+  - mob_sharesdk/ShareSDKPlatforms/LinkedIn (4.3.17):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation (>= 3.2.9)
+  - mob_sharesdk/ShareSDKPlatforms/Messenger (4.3.17):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation (>= 3.2.9)
+  - mob_sharesdk/ShareSDKPlatforms/MingDao (4.3.17):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation (>= 3.2.9)
   - mob_sharesdk/ShareSDKPlatforms/Oasis (4.3.17):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation (>= 3.2.9)
+  - mob_sharesdk/ShareSDKPlatforms/Pinterest (4.3.17):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation (>= 3.2.9)
+  - mob_sharesdk/ShareSDKPlatforms/Pocket (4.3.17):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
   - mob_sharesdk/ShareSDKPlatforms/QQ (4.3.17):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
+  - mob_sharesdk/ShareSDKPlatforms/Reddit (4.3.17):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation (>= 3.2.9)
   - mob_sharesdk/ShareSDKPlatforms/SinaWeibo (4.3.17):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation (>= 3.2.9)
+  - mob_sharesdk/ShareSDKPlatforms/SMS (4.3.17):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
   - mob_sharesdk/ShareSDKPlatforms/SnapChat (4.3.17):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
+  - mob_sharesdk/ShareSDKPlatforms/Telegram (4.3.17):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation (>= 3.2.9)
+  - mob_sharesdk/ShareSDKPlatforms/TikTok (4.3.17):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation (>= 3.2.9)
   - mob_sharesdk/ShareSDKPlatforms/Twitter (4.3.17):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation (>= 3.2.9)
+  - mob_sharesdk/ShareSDKPlatforms/VKontakte (4.3.17):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
   - mob_sharesdk/ShareSDKPlatforms/WatermelonVideo (4.3.17):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
   - mob_sharesdk/ShareSDKPlatforms/WeChat (4.3.17):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation (>= 3.2.9)
+  - mob_sharesdk/ShareSDKPlatforms/WhatsApp (4.3.17):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation (>= 3.2.9)
+  - mob_sharesdk/ShareSDKPlatforms/Yixin (4.3.17):
+    - mob_sharesdk/ShareSDK
+    - MOBFoundation (>= 3.2.9)
+  - mob_sharesdk/ShareSDKPlatforms/YouDaoNote (4.3.17):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
   - mob_sharesdk/ShareSDKRestoreScene (4.3.17):
@@ -52,17 +115,38 @@ PODS:
     - Flutter
     - mob_sharesdk
     - mob_sharesdk/ShareSDKExtension
+    - mob_sharesdk/ShareSDKPlatforms/DingTalk
     - mob_sharesdk/ShareSDKPlatforms/Douyin
+    - mob_sharesdk/ShareSDKPlatforms/Dropbox
+    - mob_sharesdk/ShareSDKPlatforms/Evernote
     - mob_sharesdk/ShareSDKPlatforms/Facebook
+    - mob_sharesdk/ShareSDKPlatforms/Flickr
+    - mob_sharesdk/ShareSDKPlatforms/GooglePlus
+    - mob_sharesdk/ShareSDKPlatforms/Instagram
+    - mob_sharesdk/ShareSDKPlatforms/Instapaper
+    - mob_sharesdk/ShareSDKPlatforms/Kakao
     - mob_sharesdk/ShareSDKPlatforms/KuaiShou
     - mob_sharesdk/ShareSDKPlatforms/Line
+    - mob_sharesdk/ShareSDKPlatforms/LinkedIn
+    - mob_sharesdk/ShareSDKPlatforms/Messenger
+    - mob_sharesdk/ShareSDKPlatforms/MingDao
     - mob_sharesdk/ShareSDKPlatforms/Oasis
+    - mob_sharesdk/ShareSDKPlatforms/Pinterest
+    - mob_sharesdk/ShareSDKPlatforms/Pocket
     - mob_sharesdk/ShareSDKPlatforms/QQ
+    - mob_sharesdk/ShareSDKPlatforms/Reddit
     - mob_sharesdk/ShareSDKPlatforms/SinaWeibo
+    - mob_sharesdk/ShareSDKPlatforms/SMS
     - mob_sharesdk/ShareSDKPlatforms/SnapChat
+    - mob_sharesdk/ShareSDKPlatforms/Telegram
+    - mob_sharesdk/ShareSDKPlatforms/TikTok
     - mob_sharesdk/ShareSDKPlatforms/Twitter
+    - mob_sharesdk/ShareSDKPlatforms/VKontakte
     - mob_sharesdk/ShareSDKPlatforms/WatermelonVideo
     - mob_sharesdk/ShareSDKPlatforms/WeChat
+    - mob_sharesdk/ShareSDKPlatforms/WhatsApp
+    - mob_sharesdk/ShareSDKPlatforms/Yixin
+    - mob_sharesdk/ShareSDKPlatforms/YouDaoNote
     - mob_sharesdk/ShareSDKRestoreScene
     - mob_sharesdk/ShareSDKUI
 
@@ -85,7 +169,7 @@ SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   mob_sharesdk: 38b0e445a0a40d69d4646149b0381aa1c5f87e61
   MOBFoundation: eaeb2e9e26a4155fa931020fb275d83445da0e09
-  sharesdk_plugin: de8d8b87c50d60017472c5da425db1acd2911e0a
+  sharesdk_plugin: eb1060eb8c5ded0a5eec5e09e83eee986b139cfe
 
 PODFILE CHECKSUM: 3dbe063e9c90a5d7c9e4e76e70a821b9e2c1d271
 
