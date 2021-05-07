@@ -403,6 +403,8 @@
 	<string>3276d3e413040</string>
 	<key>MOBAppSecret</key>
 	<string>4280a3a6df667cfce37528dec03fd9c3</string>
+	<key>MOBNetLater</key>
+	<integer>2</integer>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
