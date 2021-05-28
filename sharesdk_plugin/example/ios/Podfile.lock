@@ -110,7 +110,7 @@ PODS:
   - mob_sharesdk/ShareSDKUI (4.3.17):
     - mob_sharesdk/ShareSDK
     - MOBFoundation (>= 3.2.9)
-  - MOBFoundation (3.2.25)
+  - MOBFoundation (3.2.26)
   - sharesdk_plugin (1.1.2):
     - Flutter
     - mob_sharesdk
@@ -166,11 +166,11 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/sharesdk_plugin/ios"
 
 SPEC CHECKSUMS:
-  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   mob_sharesdk: 38b0e445a0a40d69d4646149b0381aa1c5f87e61
-  MOBFoundation: eaeb2e9e26a4155fa931020fb275d83445da0e09
+  MOBFoundation: 2abd23c80c33d1337d30dc4b0018ed914cef8f8e
   sharesdk_plugin: eb1060eb8c5ded0a5eec5e09e83eee986b139cfe
 
-PODFILE CHECKSUM: 3dbe063e9c90a5d7c9e4e76e70a821b9e2c1d271
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
 
 COCOAPODS: 1.10.0
