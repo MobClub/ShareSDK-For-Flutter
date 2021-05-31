@@ -4,8 +4,12 @@ version: 1.2.9
 author: lishuzhi1121 <lishuzhi1121@163.com>
 homepage: http://www.mob.com/mobService/sharesdk
 
+analyzer:
+  enable-experiment:
+    - non-nullable
+
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
   flutter: ">=1.12.0 <2.3.0"
 dependencies:
   flutter:

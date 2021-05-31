@@ -1,10 +1,5 @@
-import 'dart:io';
-import 'dart:async';
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:sharesdk_plugin_example/home.dart';
-import 'package:sharesdk_plugin/sharesdk_plugin.dart';
 import 'package:flutter/cupertino.dart';
 
 void main() => runApp(MyApp());
