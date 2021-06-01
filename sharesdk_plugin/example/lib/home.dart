@@ -1,13 +1,11 @@
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sharesdk_plugin/sharesdk_plugin.dart';
 import 'dart:io';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
-  final String title;
+  HomePage({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   _HomePageState createState() => new _HomePageState();
@@ -32,16 +30,16 @@ class _HomePageState extends State<HomePage> {
   /// POLICY_TYPE_URL = 1
   /// POLICY_TYPE_TXT = 2
   getPrivacyPolicyUrl(BuildContext context) {
-    SharesdkPlugin.getPrivacyPolicy("1", "en-CN", (Map data, Map error) {
-      String policyData, errorStr;
+    SharesdkPlugin.getPrivacyPolicy("1", "en-CN", (Map? data, Map? error) {
+      String? policyData, errorStr;
       if (data != null) {
         policyData = data["data"];
-        print("==============>policyData " + policyData);
+        print("==============>policyData " + policyData!);
       }
 
       if (error != null) {
         errorStr = error["error"];
-        print("==============>errorStr " + errorStr);
+        print("==============>errorStr " + errorStr!);
       }
 
       if (policyData != null) {
@@ -103,18 +101,18 @@ class _HomePageState extends State<HomePage> {
             "http://download.sdk.mob.com/web/images/2019/07/30/14/1564468183056/750_750_65.12.png"
           ],
           "http://download.sdk.mob.com/web/images/2019/07/30/14/1564468183056/750_750_65.12.png",
-          null,
+          "",
           "http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg",
           "http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
-          null,
+          "",
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.wechatSession, params,
         (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-      showAlert(state, error.rawData, context);
+      showAlert(state, error.rawData!, context);
     });
   }
 
@@ -124,51 +122,51 @@ class _HomePageState extends State<HomePage> {
           "text",
           "title",
           "www.baidu.com",
+          "",
           null,
-          null,
-          null,
-          null,
+          "",
+          "",
           "http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg",
           null,
-          null,
-          null,
-          null,
-          null,
+          "",
+          "",
+          "",
+          "",
           SSDKContentTypes.webpage,
           ShareSDKPlatforms.weChatFavorites);
 
     SharesdkPlugin.share(ShareSDKPlatforms.weChatFavorites, params,
         (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-      showAlert(state, error.rawData, context);
+      showAlert(state, error.rawData!, context);
     });
   }
 
   void authToWechat(BuildContext context) {
-    SharesdkPlugin.auth(ShareSDKPlatforms.wechatSession, null,
-        (SSDKResponseState state, Map user, SSDKError error) {
-      showAlert(state, user != null ? user : error.rawData, context);
+    SharesdkPlugin.auth(ShareSDKPlatforms.wechatSession, Map(),
+        (SSDKResponseState state, Map? user, SSDKError error) {
+      showAlert(state, user != null ? user : error.rawData!, context);
     });
   }
 
   void getUserInfoToWechat(BuildContext context) {
     SharesdkPlugin.getUserInfo(ShareSDKPlatforms.wechatSession,
-        (SSDKResponseState state, Map user, SSDKError error) {
-      showAlert(state, user != null ? user : error.rawData, context);
+        (SSDKResponseState state, Map? user, SSDKError error) {
+      showAlert(state, user != null ? user : error.rawData!, context);
     });
   }
 
   void cancelAuth(BuildContext context) {
     SharesdkPlugin.cancelAuth(ShareSDKPlatforms.wechatSession,
-        (SSDKResponseState state, Map user, SSDKError error) {
-      showAlert(state, error.rawData, context);
+        (SSDKResponseState state, Map? user, SSDKError error) {
+      showAlert(state, error.rawData!, context);
     });
   }
 
   void hasAuthed(BuildContext context) {
     SharesdkPlugin.hasAuthed(ShareSDKPlatforms.wechatSession,
-        (SSDKResponseState state, Map user, SSDKError error) {
-      showAlert(state, error.rawData, context);
+        (SSDKResponseState state, Map? user, SSDKError error) {
+      showAlert(state, error.rawData!, context);
     });
   }
 
@@ -181,18 +179,18 @@ class _HomePageState extends State<HomePage> {
             "http://download.sdk.mob.com/web/images/2019/07/30/14/1564468183056/750_750_65.12.png"
           ],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
-          null,
+          "",
           "http://www.mob.com/",
           "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
           "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
-          null,
+          "",
           SSDKContentTypes.auto);
 
     SharesdkPlugin.share(ShareSDKPlatforms.sina, params,
         (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-      showAlert(state, error.rawData, context);
+      showAlert(state, error.rawData!, context);
     });
   }
 
@@ -202,19 +200,19 @@ class _HomePageState extends State<HomePage> {
           "title",
           "闭环分享重磅上线！一键实现闭环分享！错过它，就错过了全世界~ahmn.t4m.cn/ziqMNf点击立即使用",
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
           SSDKContentTypes.text);
 
     SharesdkPlugin.shareWithActivity(ShareSDKPlatforms.twitter, params,
         (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-      showAlert(state, error.rawData, context);
+      showAlert(state, error.rawData!, context);
     });
   }
 
@@ -233,19 +231,19 @@ class _HomePageState extends State<HomePage> {
           "text",
           ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
-          null,
+          "",
           "http://www.mob.com/",
           "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
           "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
-          null,
+          "",
           SSDKContentTypes.image);
     SharesdkPlugin.showMenu(null, null, params, (SSDKResponseState state,
         ShareSDKPlatform platform,
         Map userData,
         Map contentEntity,
         SSDKError error) {
-      showAlert(state, error.rawData, context);
+      showAlert(state, error.rawData!, context);
     });
   }
 
@@ -258,17 +256,17 @@ class _HomePageState extends State<HomePage> {
             "http://download.sdk.mob.com/web/images/2019/07/30/14/1564468183056/750_750_65.12.png"
           ],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
-          null,
+          "",
           "http://www.mob.com/",
           "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
           "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
-          null,
+          "",
           SSDKContentTypes.auto);
     SharesdkPlugin.showEditor(ShareSDKPlatforms.sina, params,
         (SSDKResponseState state, ShareSDKPlatform platform, Map userData,
             Map contentEntity, SSDKError error) {
-      showAlert(state, error.rawData, context);
+      showAlert(state, error.rawData!, context);
     });
   }
 
@@ -277,9 +275,9 @@ class _HomePageState extends State<HomePage> {
             "gh_52568203455c", "pages/index/index", 0)
         .then((dynamic open) {
       if (open) {
-        showAlert(SSDKResponseState.Success, null, context);
+        showAlert(SSDKResponseState.Success, Map(), context);
       } else {
-        showAlert(SSDKResponseState.Fail, null, context);
+        showAlert(SSDKResponseState.Fail, Map(), context);
       }
     });
   }
@@ -291,7 +289,7 @@ class _HomePageState extends State<HomePage> {
           "test MiniProgram",
           "http://www.mob.com",
           "pages/index/index",
-          null,
+          "",
           "http://download.sdk.mob.com/web/images/2019/07/30/14/1564468183056/750_750_65.12.png",
           "http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg",
           "gh_afb25ac019c9",
@@ -301,7 +299,7 @@ class _HomePageState extends State<HomePage> {
     SharesdkPlugin.share(ShareSDKPlatforms.wechatSession, params,
         (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-      showAlert(state, error.rawData, context);
+      showAlert(state, error.rawData!, context);
     });
   }
 
@@ -313,19 +311,19 @@ class _HomePageState extends State<HomePage> {
           [
             "http://download.sdk.mob.com/web/images/2019/07/30/14/1564468183056/750_750_65.12.png"
           ],
-          null,
+          "",
           "http://www.mob.com/",
           0.0,
           0.0,
-          null,
+          "",
           false,
           "http://wx4.sinaimg.cn/large/006WfoFPly1fq0jo9svnaj30dw0dwdhv.jpg",
-          null,
+          "",
           SSDKContentTypes.auto);
     SharesdkPlugin.share(ShareSDKPlatforms.sina, params,
         (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-      showAlert(state, error.rawData, context);
+      showAlert(state, error.rawData!, context);
     });
   }
 
@@ -342,7 +340,7 @@ class _HomePageState extends State<HomePage> {
     SharesdkPlugin.share(ShareSDKPlatforms.sina, params,
         (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-      showAlert(state, error.rawData, context);
+      showAlert(state, error.rawData!, context);
     });
   }
 
@@ -351,14 +349,14 @@ class _HomePageState extends State<HomePage> {
       ..setTwitter(
           "text",
           "http://download.sdk.mob.com/web/images/2019/07/30/14/1564468183056/750_750_65.12.png",
-          null,
+          "",
           0.0,
           0.0,
           SSDKContentTypes.auto);
     SharesdkPlugin.share(ShareSDKPlatforms.twitter, params,
         (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-      showAlert(state, error.rawData, context);
+      showAlert(state, error.rawData!, context);
     });
   }
 
@@ -369,8 +367,8 @@ class _HomePageState extends State<HomePage> {
           "http://ww4.sinaimg.cn/bmiddle/005Q8xv4gw1evlkov50xuj30go0a6mz3.jpg",
           "http://www.mob.com",
           "Share SDK",
-          null,
-          null,
+          "",
+          "",
           "#MobData",
           "Mob官网 - 全球领先的移动开发者服务平台",
           SSDKFacebookShareTypes.native,
@@ -382,7 +380,7 @@ class _HomePageState extends State<HomePage> {
     SharesdkPlugin.share(ShareSDKPlatforms.facebook, params,
         (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-      showAlert(state, error.rawData, context);
+      showAlert(state, error.rawData!, context);
     });
   }
 
@@ -395,7 +393,7 @@ class _HomePageState extends State<HomePage> {
     SharesdkPlugin.share(ShareSDKPlatforms.messenger, params,
             (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
+          showAlert(state, error.rawData!, context);
         });
   }
   
@@ -406,22 +404,22 @@ class _HomePageState extends State<HomePage> {
           "text",
           "title",
           "http://m.93lj.com/sharelink?mobid=ziqMNf",
-          null,
-          null,
-          null,
-          null,
+          "",
+          "",
+          "",
+          "",
           "",
           "http://wx4.sinaimg.cn/large/006tkBCzly1fy8hfqdoy6j30dw0dw759.jpg",
-          null,
-          null,
+          "",
+          "",
           "http://m.93lj.com/sharelink?mobid=ziqMNf",
-          null,
-          null,
+          "",
+          "",
           SSDKContentTypes.webpage,
           ShareSDKPlatforms.qq);
     SharesdkPlugin.share(ShareSDKPlatforms.qq, params, (SSDKResponseState state,
         Map userdata, Map contentEntity, SSDKError error) {
-      showAlert(state, error.rawData, context);
+      showAlert(state, error.rawData!, context);
     });
   }
 
@@ -439,7 +437,7 @@ class _HomePageState extends State<HomePage> {
     SharesdkPlugin.share(ShareSDKPlatforms.oasis, params,
         (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-      showAlert(state, error.rawData, context);
+      showAlert(state, error.rawData!, context);
     });
   }
 
@@ -459,7 +457,7 @@ class _HomePageState extends State<HomePage> {
     SharesdkPlugin.share(ShareSDKPlatforms.snapchat, params,
         (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-      showAlert(state, error.rawData, context);
+      showAlert(state, error.rawData!, context);
     });
   }
 
@@ -471,17 +469,17 @@ class _HomePageState extends State<HomePage> {
           "desc",
           "https://www.mob.com",
           "http://wx4.sinaimg.cn/large/006tkBCzly1fy8hfqdoy6j30dw0dw759.jpg",
-          null,
-          null,
+          "",
+          "",
           "57C6BB71-7A69-49F3-AA05-C04F5D2829B2/L0/001",
-          null,
+          List .filled(0, 0, growable: true),
           "message",
           SSDKContentTypes.message);
 
     SharesdkPlugin.share(ShareSDKPlatforms.kuaishou, params,
             (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
+          showAlert(state, error.rawData!, context);
         });
   }
 
@@ -492,18 +490,18 @@ class _HomePageState extends State<HomePage> {
           "text",
           ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
-          null,
+          "",
           "http://www.mob.com/",
           "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
           "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
-          null,
+          "",
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.douyin, params,
             (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
+          showAlert(state, error.rawData!, context);
         });
   }
 
@@ -514,18 +512,18 @@ class _HomePageState extends State<HomePage> {
           "text",
           ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
-          null,
+          "",
           "http://www.mob.com/",
           "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
           "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
-          null,
+          "",
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.tiktok, params,
             (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
+          showAlert(state, error.rawData!, context);
         });
   }
 
@@ -536,7 +534,7 @@ class _HomePageState extends State<HomePage> {
     SharesdkPlugin.share(ShareSDKPlatforms.kakaoTalk, params,
             (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
+          showAlert(state, error.rawData!, context);
         });
   }
 
@@ -556,7 +554,7 @@ class _HomePageState extends State<HomePage> {
     SharesdkPlugin.share(ShareSDKPlatforms.kakaoStory, params,
             (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
+          showAlert(state, error.rawData!, context);
         });
   }
 
@@ -570,7 +568,7 @@ class _HomePageState extends State<HomePage> {
     SharesdkPlugin.share(ShareSDKPlatforms.instagram, params,
             (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
+          showAlert(state, error.rawData!, context);
         });
   }
 
@@ -588,7 +586,7 @@ class _HomePageState extends State<HomePage> {
     SharesdkPlugin.share(ShareSDKPlatforms.whatsApp, params,
             (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
+          showAlert(state, error.rawData!, context);
         });
   }
 
@@ -599,18 +597,18 @@ class _HomePageState extends State<HomePage> {
           "text",
           ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
-          null,
+          "",
           "http://www.mob.com/",
           "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
           "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
-          null,
+          "",
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.line, params,
             (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
+          showAlert(state, error.rawData!, context);
         });
   }
 
@@ -621,13 +619,13 @@ class _HomePageState extends State<HomePage> {
           "http://www.mob.com/",
           "title",
           "Mob",
-          null,
+          "",
           SSDKContentTypes.webpage);
 
     SharesdkPlugin.share(ShareSDKPlatforms.linkedIn, params,
             (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
+          showAlert(state, error.rawData!, context);
         });
   }
 
@@ -639,18 +637,18 @@ class _HomePageState extends State<HomePage> {
           "text",
           ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
-          null,
+          "",
           "http://www.mob.com/",
           "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
           "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
-          null,
+          "",
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.vKontakte, params,
             (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
+          showAlert(state, error.rawData!, context);
         });
   }
 
@@ -668,7 +666,7 @@ class _HomePageState extends State<HomePage> {
     SharesdkPlugin.share(ShareSDKPlatforms.telegram, params,
             (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
+          showAlert(state, error.rawData!, context);
         });
   }
 
@@ -679,18 +677,18 @@ class _HomePageState extends State<HomePage> {
           "text",
           ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
-          null,
+          "",
           "http://www.mob.com/",
           "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
           "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
-          null,
+          "",
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.flickr, params,
             (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
+          showAlert(state, error.rawData!, context);
         });
   }
 
@@ -701,18 +699,18 @@ class _HomePageState extends State<HomePage> {
           "text",
           ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
-          null,
+          "",
           "http://www.mob.com/",
           "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
           "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
-          null,
+          "",
           SSDKContentTypes.webpage);
 
     SharesdkPlugin.share(ShareSDKPlatforms.pocket, params,
             (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
+          showAlert(state, error.rawData!, context);
         });
   }
 
@@ -723,7 +721,7 @@ class _HomePageState extends State<HomePage> {
     SharesdkPlugin.share(ShareSDKPlatforms.dropbox, params,
             (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
+          showAlert(state, error.rawData!, context);
         });
   }
 
@@ -732,13 +730,13 @@ class _HomePageState extends State<HomePage> {
       ..setPinterest(
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
           "desc",
-          null,
+          "",
           "ShareSDK");
 
     SharesdkPlugin.share(ShareSDKPlatforms.pinterest, params,
             (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
+          showAlert(state, error.rawData!, context);
         });
   }
 
@@ -749,18 +747,18 @@ class _HomePageState extends State<HomePage> {
           "text",
           ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
-          null,
+          "",
           "http://www.mob.com/",
           "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
           "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
-          null,
+          "",
           SSDKContentTypes.webpage);
 
     SharesdkPlugin.share(ShareSDKPlatforms.reddit, params,
             (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
+          showAlert(state, error.rawData!, context);
         });
   }
 
@@ -771,18 +769,18 @@ class _HomePageState extends State<HomePage> {
           "text",
           ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
-          null,
+          "",
           "http://www.mob.com/",
           "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
           "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
-          null,
+          "",
           SSDKContentTypes.webpage);
 
     SharesdkPlugin.share(ShareSDKPlatforms.instapaper, params,
             (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
+          showAlert(state, error.rawData!, context);
         });
   }
 
@@ -793,18 +791,18 @@ class _HomePageState extends State<HomePage> {
           "text",
           ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
-          null,
+          "",
           "http://www.mob.com/",
           "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
           "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
-          null,
+          "",
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.dingding, params,
             (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
+          showAlert(state, error.rawData!, context);
         });
   }
 
@@ -816,12 +814,12 @@ class _HomePageState extends State<HomePage> {
           "title",
           "MOB",
           "mob",
-          null);
+          "");
 
     SharesdkPlugin.share(ShareSDKPlatforms.youdaoNote, params,
             (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
+          showAlert(state, error.rawData!, context);
         });
   }
 
@@ -832,18 +830,18 @@ class _HomePageState extends State<HomePage> {
           "text",
           ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
-          null,
+          "",
           "http://www.mob.com/",
           "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
           "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
-          null,
+          "",
           SSDKContentTypes.webpage);
 
     SharesdkPlugin.share(ShareSDKPlatforms.mingDao, params,
             (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
+          showAlert(state, error.rawData!, context);
         });
   }
 
@@ -854,18 +852,18 @@ class _HomePageState extends State<HomePage> {
           "text",
           ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
-          null,
+          "",
           "http://www.mob.com/",
           "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
           "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
-          null,
+          "",
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.yinXiang, params,
             (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
+          showAlert(state, error.rawData!, context);
         });
   }
 
@@ -876,18 +874,18 @@ class _HomePageState extends State<HomePage> {
           "text",
           ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
-          null,
+          "",
           "http://www.mob.com/",
           "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
           "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
-          null,
+          "",
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.evernote, params,
             (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
+          showAlert(state, error.rawData!, context);
         });
   }
 
@@ -898,18 +896,18 @@ class _HomePageState extends State<HomePage> {
           "text",
           ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
-          null,
+          "",
           "http://www.mob.com/",
           "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
           "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
-          null,
+          "",
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.yixinSession, params,
             (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
+          showAlert(state, error.rawData!, context);
         });
   }
 
@@ -920,18 +918,18 @@ class _HomePageState extends State<HomePage> {
           "text",
           ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
-          null,
+          "",
           "http://www.mob.com/",
           "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
           "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
-          null,
+          "",
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.yixinTimeline, params,
             (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
+          showAlert(state, error.rawData!, context);
         });
   }
 
@@ -942,18 +940,18 @@ class _HomePageState extends State<HomePage> {
           "text",
           ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
-          null,
+          "",
           "http://www.mob.com/",
           "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
           "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
-          null,
+          "",
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.yiXinFav, params,
             (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
+          showAlert(state, error.rawData!, context);
         });
   }
 
@@ -964,18 +962,18 @@ class _HomePageState extends State<HomePage> {
           "text",
           ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
-          null,
+          "",
           "http://www.mob.com/",
           "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
           "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
-          null,
+          "",
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.sms, params,
             (SSDKResponseState state, Map userdata, Map contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
+          showAlert(state, error.rawData!, context);
         });
   }
 
@@ -987,7 +985,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void showAlert(SSDKResponseState state, Map content, BuildContext context) {
+  void showAlert(SSDKResponseState state, Map? content, BuildContext context) {
     print("--------------------------> state:" + state.toString());
     String title = "失败";
     switch (state) {
@@ -1011,7 +1009,7 @@ class _HomePageState extends State<HomePage> {
                 title: new Text(title),
                 content: new Text(content != null ? content.toString() : ""),
                 actions: <Widget>[
-                  new FlatButton(
+                  new TextButton(
                     child: new Text("OK"),
                     onPressed: () {
                       Navigator.of(context).pop();
@@ -1020,14 +1018,14 @@ class _HomePageState extends State<HomePage> {
                 ]));
   }
 
-  void showAlertText(String title, String content, BuildContext context) {
+  void showAlertText(String title, String? content, BuildContext context) {
     showDialog(
         context: context,
         builder: (BuildContext context) => CupertinoAlertDialog(
                 title: new Text(title),
                 content: new Text(content != null ? content : ""),
                 actions: <Widget>[
-                  new FlatButton(
+                  new TextButton(
                     child: new Text("OK"),
                     onPressed: () {
                       Navigator.of(context).pop();
@@ -1078,12 +1076,12 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _onEvent(Object event) {
+  void _onEvent(dynamic event) {
     print('>>>>>>>>>>>>>>>>>>>>>>>>>>>');
-    Map resMap_t = event;
-    Map<String, dynamic> resMap = Map<String, dynamic>.from(resMap_t);
+    Map resMapT = event;
+    Map<String, dynamic> resMap = Map<String, dynamic>.from(resMapT);
     String path = resMap['path'];
-    Map<String, dynamic> params = Map<String, dynamic>.from(resMap['params']);
+    // Map<String, dynamic> params = Map<String, dynamic>.from(resMap['params']);
     print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onSuccess:' + resMap.toString());
     showDialog(
         context: context,
@@ -1091,7 +1089,7 @@ class _HomePageState extends State<HomePage> {
                 title: new Text(path),
                 content: new Text(resMap.toString()),
                 actions: <Widget>[
-                  new FlatButton(
+                  new TextButton(
                     child: new Text("OK"),
                     onPressed: () {
                       Navigator.of(context).pop();
@@ -1100,7 +1098,7 @@ class _HomePageState extends State<HomePage> {
                 ]));
   }
 
-  void _onError(Object event) {
+  void _onError(dynamic event) {
     setState(() {
       print('>>>>>>>>>>>>>>>>>>>>>>>>>>>onError:' + event.toString());
     });

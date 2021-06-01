@@ -8,9 +8,9 @@ class SSDKError extends Error {
       : code = rawData != null ? rawData["code"] : 0,
         userInfo = rawData != null ? rawData["userInfo"] : {},
         super();
-  final Map rawData;
-  final int code;
-  final Map userInfo;
+  final Map? rawData;
+  final int? code;
+  final Map? userInfo;
 }
 
 /// model for method
@@ -18,8 +18,8 @@ class ShareSDKMethod {
   ShareSDKMethod({@required this.name, @required this.id})
       : assert(name != null && id != null),
         super();
-  final String name;
-  final int id;
+  final String? name;
+  final int? id;
 }
 
 /// method defines
@@ -61,8 +61,8 @@ class ShareSDKPlatform {
   ShareSDKPlatform({@required this.id, @required this.name})
       : assert(id != null && name != null),
         super();
-  final int id;
-  final String name;
+  final int? id;
+  final String? name;
 }
 
 /// supported platform defines
@@ -177,7 +177,7 @@ class ShareSDKPlatforms {
 /// model for FacebookShareType
 class SSDKFacebookShareType {
   SSDKFacebookShareType({this.value}) : super();
-  final int value;
+  final int? value;
 }
 
 /// supported Facebook share types
@@ -188,7 +188,7 @@ class SSDKFacebookShareTypes extends Object {
 
 class SSDKContentType {
   SSDKContentType({this.value}) : super();
-  final int value;
+  final int? value;
 }
 
 /// supported share content types

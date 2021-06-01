@@ -171,7 +171,7 @@ class SSDKMap {
     params[kEmoticon] = emoticonData;
     params[kImageUrlAndroid] = imageUrl;
     params[kImageDataAndroid] = imageData;
-    int id = subPlatform.id;
+    int? id = subPlatform.id;
     map["@platform($id)"] = params;
   }
 
@@ -200,7 +200,7 @@ class SSDKMap {
     params[kWXMPWithTicket] = withShareTicket;
     params[kImageUrlAndroid] = imageUrlAndroid;
 
-    int id = subPlatform.id;
+    int? id = subPlatform.id;
     map["@platform($id)"] = params;
   }
 
@@ -240,7 +240,7 @@ class SSDKMap {
     params[ksite] = siteAndroid;
     params[ksiteUrl] = siteUrlAndroid;
 
-    int id = subPlatform.id;
+    int? id = subPlatform.id;
     map["@platform($id)"] = params;
   }
 
@@ -273,7 +273,7 @@ class SSDKMap {
     params[kImagePathAndroid] = imagePath;
     params[kImageUrlAndroid] = imageUrl;
 
-    int id = ShareSDKPlatforms.sina.id;
+    int? id = ShareSDKPlatforms.sina.id;
     map["@platform($id)"] = params;
   }
 
@@ -299,7 +299,7 @@ class SSDKMap {
     params[kimage_y] = imageY;
     params[kType] = SSDKContentTypes.webpage.value;
 
-    int id = ShareSDKPlatforms.sina.id;
+    int? id = ShareSDKPlatforms.sina.id;
     map["@platform($id)"] = params;
   }
 
@@ -315,7 +315,7 @@ class SSDKMap {
     params[kLong] = longitude;
     params[kVideo] = video;
 
-    int id = ShareSDKPlatforms.twitter.id;
+    int? id = ShareSDKPlatforms.twitter.id;
     map["@platform($id)"] = params;
   }
 
@@ -348,7 +348,7 @@ class SSDKMap {
     params[kFacebookHashtag] = hasTag;
     params[kFacebookQuote] = quote;
     params[kFacebookShareType] = shareType.value;
-    int id = ShareSDKPlatforms.facebook.id;
+    int? id = ShareSDKPlatforms.facebook.id;
     map["@platform($id)"] = params;
   }
 
@@ -373,11 +373,11 @@ class SSDKMap {
     if (video != null) {
       params[kVideo] = video;
     }
-    int id = ShareSDKPlatforms.messenger.id;
+    int? id = ShareSDKPlatforms.messenger.id;
     map["@platform($id)"] = params;
   }
 
-  void setOasis(String title, String text, assetLoacalIds, image, String video,
+  void setOasis(String title, String text, assetLoacalIds, image, String? video,
       String fileExtension, SSDKContentType type) {
     Map params = {};
     params[kType] = type.value;
@@ -391,7 +391,7 @@ class SSDKMap {
     if (video != null) {
       params[kVideo] = video;
     }
-    int id = ShareSDKPlatforms.oasis.id;
+    int? id = ShareSDKPlatforms.oasis.id;
     map["@platform($id)"] = params;
   }
 
@@ -399,7 +399,7 @@ class SSDKMap {
       String title,
       String attachmentUrl,
       String image,
-      String video,
+      String? video,
       String sticker,
       bool stickerAnimated,
       double stickerRotation,
@@ -418,7 +418,7 @@ class SSDKMap {
       params[kVideo] = video;
     }
 
-    int id = ShareSDKPlatforms.snapchat.id;
+    int? id = ShareSDKPlatforms.snapchat.id;
     map["@platform($id)"] = params;
   }
 
@@ -445,7 +445,7 @@ class SSDKMap {
     params["tags"] = tags;
     params["extraInfo"] = extraInfo;
 
-    int id = ShareSDKPlatforms.kuaishou.id;
+    int? id = ShareSDKPlatforms.kuaishou.id;
     map["@platform($id)"] = params;
   }
 
@@ -460,7 +460,7 @@ class SSDKMap {
     params["douyin_extraInfo"] = extraInfo;
     params[kType] = type.value;
 
-    int id = ShareSDKPlatforms.douyin.id;
+    int? id = ShareSDKPlatforms.douyin.id;
     map["@platform($id)"] = params;
   }
 
@@ -475,7 +475,7 @@ class SSDKMap {
     params["tiktok_extraInfo"] = extraInfo;
     params[kType] = type.value;
 
-    int id = ShareSDKPlatforms.tiktok.id;
+    int? id = ShareSDKPlatforms.tiktok.id;
     map["@platform($id)"] = params;
   }
 
@@ -487,7 +487,7 @@ class SSDKMap {
     params[kUrl] = url;
     params["templateId"] = templateId;
     params["templateArgs"] = templateArgs;
-    int id = ShareSDKPlatforms.kakaoTalk.id;
+    int? id = ShareSDKPlatforms.kakaoTalk.id;
     map["@platform($id)"] = params;
   }
 
@@ -510,7 +510,7 @@ class SSDKMap {
     params[kEnableShare] = enableShare;
     params[kAndroidExecParam] = androidExecParam;
     params[kIPhoneExecParam] = iOSExecParams;
-    int id = ShareSDKPlatforms.kakaoStory.id;
+    int? id = ShareSDKPlatforms.kakaoStory.id;
     map["@platform($id)"] = params;
   }
 
@@ -522,7 +522,7 @@ class SSDKMap {
     params[kImages] = images;
     params[kMenuDisplayX] = x;
     params[kMenuDisplayY] = y;
-    int id = ShareSDKPlatforms.instagram.id;
+    int? id = ShareSDKPlatforms.instagram.id;
     map["@platform($id)"] = params;
   }
 
@@ -546,7 +546,7 @@ class SSDKMap {
     }
     params[kMenuDisplayX] = x;
     params[kMenuDisplayY] = y;
-    int id = ShareSDKPlatforms.whatsApp.id;
+    int? id = ShareSDKPlatforms.whatsApp.id;
     map["@platform($id)"] = params;
   }
 
@@ -566,7 +566,7 @@ class SSDKMap {
     params[kUrl] = url;
     params[kDesc] = urlDesc;
     params[kVisibility] = visibility;
-    int id = ShareSDKPlatforms.linkedIn.id;
+    int? id = ShareSDKPlatforms.linkedIn.id;
     map["@platform($id)"] = params;
   }
 
@@ -592,7 +592,7 @@ class SSDKMap {
     if (file != null) {
       params[kFile] = file;
     }
-    int id = ShareSDKPlatforms.telegram.id;
+    int? id = ShareSDKPlatforms.telegram.id;
     map["@platform($id)"] = params;
   }
 
@@ -600,7 +600,7 @@ class SSDKMap {
       dynamic attachment) {
     Map params = {};
     params[kAttachments] = attachment;
-    int id = ShareSDKPlatforms.dropbox.id;
+    int? id = ShareSDKPlatforms.dropbox.id;
     map["@platform($id)"] = params;
   }
 
@@ -614,7 +614,7 @@ class SSDKMap {
     params[kText] = desc;
     params[kUrl] = url;
     params[kBoard] = boardName;
-    int id = ShareSDKPlatforms.pinterest.id;
+    int? id = ShareSDKPlatforms.pinterest.id;
     map["@platform($id)"] = params;
   }
 
@@ -632,7 +632,7 @@ class SSDKMap {
     params[kSource] = source;
     params[kAuthor] = author;
     params[kNoteBook] = notebook;
-    int id = ShareSDKPlatforms.youdaoNote.id;
+    int? id = ShareSDKPlatforms.youdaoNote.id;
     map["@platform($id)"] = params;
   }
 
@@ -670,7 +670,7 @@ class SSDKMap {
     params[kUid] = userId;
     params[kType] = type;
 
-    int id = platformSubType;
+    int? id = platformSubType;
     map["@platform($id)"] = params;
   }
 }
