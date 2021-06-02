@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
   /// POLICY_TYPE_URL = 1
   /// POLICY_TYPE_TXT = 2
   getPrivacyPolicyUrl(BuildContext context) {
-    SharesdkPlugin.getPrivacyPolicy("1", "en-CN", (Map? data, Map? error) {
+    SharesdkPlugin.getPrivacyPolicy("1", "en-CN", (dynamic data, dynamic error) {
       String? policyData, errorStr;
       if (data != null) {
         policyData = data["data"];
@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
 
    SharesdkPlugin.share(
        ShareSDKPlatforms.wechatSession, params, (SSDKResponseState state,
-       Map userdata, Map contentEntity, SSDKError error) {
+       dynamic userdata, dynamic contentEntity, SSDKError error) {
      showAlert(state, error.rawData, context);
    });
  }*/
@@ -110,9 +110,9 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.wechatSession, params,
-        (SSDKResponseState state, Map userdata, Map contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-      showAlert(state, error.rawData!, context);
+      showAlert(state, error.rawData, context);
     });
   }
 
@@ -136,37 +136,37 @@ class _HomePageState extends State<HomePage> {
           ShareSDKPlatforms.weChatFavorites);
 
     SharesdkPlugin.share(ShareSDKPlatforms.weChatFavorites, params,
-        (SSDKResponseState state, Map userdata, Map contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-      showAlert(state, error.rawData!, context);
+      showAlert(state, error.rawData, context);
     });
   }
 
   void authToWechat(BuildContext context) {
     SharesdkPlugin.auth(ShareSDKPlatforms.wechatSession, Map(),
-        (SSDKResponseState state, Map? user, SSDKError error) {
-      showAlert(state, user != null ? user : error.rawData!, context);
+        (SSDKResponseState state, dynamic user, SSDKError error) {
+      showAlert(state, user != null ? user : error.rawData, context);
     });
   }
 
   void getUserInfoToWechat(BuildContext context) {
     SharesdkPlugin.getUserInfo(ShareSDKPlatforms.wechatSession,
-        (SSDKResponseState state, Map? user, SSDKError error) {
-      showAlert(state, user != null ? user : error.rawData!, context);
+        (SSDKResponseState state, dynamic user, SSDKError error) {
+      showAlert(state, user != null ? user : error.rawData, context);
     });
   }
 
   void cancelAuth(BuildContext context) {
     SharesdkPlugin.cancelAuth(ShareSDKPlatforms.wechatSession,
-        (SSDKResponseState state, Map? user, SSDKError error) {
-      showAlert(state, error.rawData!, context);
+        (SSDKResponseState state, dynamic user, SSDKError error) {
+      showAlert(state, error.rawData, context);
     });
   }
 
   void hasAuthed(BuildContext context) {
     SharesdkPlugin.hasAuthed(ShareSDKPlatforms.wechatSession,
-        (SSDKResponseState state, Map? user, SSDKError error) {
-      showAlert(state, error.rawData!, context);
+        (SSDKResponseState state, dynamic user, SSDKError error) {
+      showAlert(state, error.rawData , context);
     });
   }
 
@@ -188,9 +188,9 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.auto);
 
     SharesdkPlugin.share(ShareSDKPlatforms.sina, params,
-        (SSDKResponseState state, Map userdata, Map contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-      showAlert(state, error.rawData!, context);
+      showAlert(state, error.rawData, context);
     });
   }
 
@@ -210,15 +210,15 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.text);
 
     SharesdkPlugin.shareWithActivity(ShareSDKPlatforms.twitter, params,
-        (SSDKResponseState state, Map userdata, Map contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-      showAlert(state, error.rawData!, context);
+      showAlert(state, error.rawData, context);
     });
   }
 
   void authToSina(BuildContext context) {
     SharesdkPlugin.getUserInfo(ShareSDKPlatforms.sina,
-        (SSDKResponseState state, Map userdata, SSDKError error) {
+        (SSDKResponseState state, dynamic userdata, SSDKError error) {
       print("--------------------------> authToSina:");
       showAlert(state, userdata, context);
     });
@@ -240,10 +240,10 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
     SharesdkPlugin.showMenu(null, null, params, (SSDKResponseState state,
         ShareSDKPlatform platform,
-        Map userData,
-        Map contentEntity,
+        dynamic userData,
+        dynamic contentEntity,
         SSDKError error) {
-      showAlert(state, error.rawData!, context);
+      showAlert(state, error.rawData, context);
     });
   }
 
@@ -264,9 +264,9 @@ class _HomePageState extends State<HomePage> {
           "",
           SSDKContentTypes.auto);
     SharesdkPlugin.showEditor(ShareSDKPlatforms.sina, params,
-        (SSDKResponseState state, ShareSDKPlatform platform, Map userData,
-            Map contentEntity, SSDKError error) {
-      showAlert(state, error.rawData!, context);
+        (SSDKResponseState state, ShareSDKPlatform platform, dynamic userData,
+            dynamic contentEntity, SSDKError error) {
+      showAlert(state, error.rawData, context);
     });
   }
 
@@ -297,9 +297,9 @@ class _HomePageState extends State<HomePage> {
           0,
           ShareSDKPlatforms.wechatSession);
     SharesdkPlugin.share(ShareSDKPlatforms.wechatSession, params,
-        (SSDKResponseState state, Map userdata, Map contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-      showAlert(state, error.rawData!, context);
+      showAlert(state, error.rawData, context);
     });
   }
 
@@ -321,9 +321,9 @@ class _HomePageState extends State<HomePage> {
           "",
           SSDKContentTypes.auto);
     SharesdkPlugin.share(ShareSDKPlatforms.sina, params,
-        (SSDKResponseState state, Map userdata, Map contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-      showAlert(state, error.rawData!, context);
+      showAlert(state, error.rawData, context);
     });
   }
 
@@ -338,9 +338,9 @@ class _HomePageState extends State<HomePage> {
           "120",
           "120");
     SharesdkPlugin.share(ShareSDKPlatforms.sina, params,
-        (SSDKResponseState state, Map userdata, Map contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-      showAlert(state, error.rawData!, context);
+      showAlert(state, error.rawData, context);
     });
   }
 
@@ -354,9 +354,9 @@ class _HomePageState extends State<HomePage> {
           0.0,
           SSDKContentTypes.auto);
     SharesdkPlugin.share(ShareSDKPlatforms.twitter, params,
-        (SSDKResponseState state, Map userdata, Map contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-      showAlert(state, error.rawData!, context);
+      showAlert(state, error.rawData, context);
     });
   }
 
@@ -378,9 +378,9 @@ class _HomePageState extends State<HomePage> {
           "57C6BB71-7A69-49F3-AA05-C04F5D2829B2/L0/001",
           "asdf");
     SharesdkPlugin.share(ShareSDKPlatforms.facebook, params,
-        (SSDKResponseState state, Map userdata, Map contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-      showAlert(state, error.rawData!, context);
+      showAlert(state, error.rawData, context);
     });
   }
 
@@ -391,9 +391,9 @@ class _HomePageState extends State<HomePage> {
         "http://ww4.sinaimg.cn/bmiddle/005Q8xv4gw1evlkov50xuj30go0a6mz3.jpg",
         null, SSDKContentTypes.image);
     SharesdkPlugin.share(ShareSDKPlatforms.messenger, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData!, context);
+          showAlert(state, error.rawData, context);
         });
   }
   
@@ -418,8 +418,8 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.webpage,
           ShareSDKPlatforms.qq);
     SharesdkPlugin.share(ShareSDKPlatforms.qq, params, (SSDKResponseState state,
-        Map userdata, Map contentEntity, SSDKError error) {
-      showAlert(state, error.rawData!, context);
+        dynamic userdata, dynamic contentEntity, SSDKError error) {
+      showAlert(state, error.rawData, context);
     });
   }
 
@@ -435,9 +435,9 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.oasis, params,
-        (SSDKResponseState state, Map userdata, Map contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-      showAlert(state, error.rawData!, context);
+      showAlert(state, error.rawData, context);
     });
   }
 
@@ -455,9 +455,9 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.snapchat, params,
-        (SSDKResponseState state, Map userdata, Map contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-      showAlert(state, error.rawData!, context);
+      showAlert(state, error.rawData, context);
     });
   }
 
@@ -477,9 +477,9 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.message);
 
     SharesdkPlugin.share(ShareSDKPlatforms.kuaishou, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData!, context);
+          showAlert(state, error.rawData, context);
         });
   }
 
@@ -499,9 +499,9 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.douyin, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData!, context);
+          showAlert(state, error.rawData, context);
         });
   }
 
@@ -521,9 +521,9 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.tiktok, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData!, context);
+          showAlert(state, error.rawData, context);
         });
   }
 
@@ -532,9 +532,9 @@ class _HomePageState extends State<HomePage> {
       ..setKakaoTalk("http://www.mob.com/", "11820", {});
 
     SharesdkPlugin.share(ShareSDKPlatforms.kakaoTalk, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData!, context);
+          showAlert(state, error.rawData, context);
         });
   }
 
@@ -552,9 +552,9 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.kakaoStory, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData!, context);
+          showAlert(state, error.rawData, context);
         });
   }
 
@@ -566,9 +566,9 @@ class _HomePageState extends State<HomePage> {
           0);
 
     SharesdkPlugin.share(ShareSDKPlatforms.instagram, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData!, context);
+          showAlert(state, error.rawData, context);
         });
   }
 
@@ -584,9 +584,9 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.whatsApp, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData!, context);
+          showAlert(state, error.rawData, context);
         });
   }
 
@@ -606,9 +606,9 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.line, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData!, context);
+          showAlert(state, error.rawData, context);
         });
   }
 
@@ -623,9 +623,9 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.webpage);
 
     SharesdkPlugin.share(ShareSDKPlatforms.linkedIn, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData!, context);
+          showAlert(state, error.rawData, context);
         });
   }
 
@@ -646,9 +646,9 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.vKontakte, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData!, context);
+          showAlert(state, error.rawData, context);
         });
   }
 
@@ -664,9 +664,9 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.telegram, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData!, context);
+          showAlert(state, error.rawData, context);
         });
   }
 
@@ -686,9 +686,9 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.flickr, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData!, context);
+          showAlert(state, error.rawData, context);
         });
   }
 
@@ -708,9 +708,9 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.webpage);
 
     SharesdkPlugin.share(ShareSDKPlatforms.pocket, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData!, context);
+          showAlert(state, error.rawData, context);
         });
   }
 
@@ -719,9 +719,9 @@ class _HomePageState extends State<HomePage> {
       ..setDropbox("http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg");
 
     SharesdkPlugin.share(ShareSDKPlatforms.dropbox, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData!, context);
+          showAlert(state, error.rawData, context);
         });
   }
 
@@ -734,9 +734,9 @@ class _HomePageState extends State<HomePage> {
           "ShareSDK");
 
     SharesdkPlugin.share(ShareSDKPlatforms.pinterest, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData!, context);
+          showAlert(state, error.rawData, context);
         });
   }
 
@@ -756,9 +756,9 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.webpage);
 
     SharesdkPlugin.share(ShareSDKPlatforms.reddit, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData!, context);
+          showAlert(state, error.rawData, context);
         });
   }
 
@@ -778,9 +778,9 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.webpage);
 
     SharesdkPlugin.share(ShareSDKPlatforms.instapaper, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData!, context);
+          showAlert(state, error.rawData, context);
         });
   }
 
@@ -800,9 +800,9 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.dingding, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData!, context);
+          showAlert(state, error.rawData, context);
         });
   }
 
@@ -817,9 +817,9 @@ class _HomePageState extends State<HomePage> {
           "");
 
     SharesdkPlugin.share(ShareSDKPlatforms.youdaoNote, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData!, context);
+          showAlert(state, error.rawData, context);
         });
   }
 
@@ -839,9 +839,9 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.webpage);
 
     SharesdkPlugin.share(ShareSDKPlatforms.mingDao, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData!, context);
+          showAlert(state, error.rawData, context);
         });
   }
 
@@ -861,9 +861,9 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.yinXiang, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData!, context);
+          showAlert(state, error.rawData, context);
         });
   }
 
@@ -883,9 +883,9 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.evernote, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData!, context);
+          showAlert(state, error.rawData, context);
         });
   }
 
@@ -905,9 +905,9 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.yixinSession, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData!, context);
+          showAlert(state, error.rawData, context);
         });
   }
 
@@ -927,9 +927,9 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.yixinTimeline, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData!, context);
+          showAlert(state, error.rawData, context);
         });
   }
 
@@ -949,9 +949,9 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.yiXinFav, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData!, context);
+          showAlert(state, error.rawData, context);
         });
   }
 
@@ -971,9 +971,9 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.sms, params,
-            (SSDKResponseState state, Map userdata, Map contentEntity,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData!, context);
+          showAlert(state, error.rawData, context);
         });
   }
 
@@ -985,7 +985,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void showAlert(SSDKResponseState state, Map? content, BuildContext context) {
+  void showAlert(SSDKResponseState state, dynamic content, BuildContext context) {
     print("--------------------------> state:" + state.toString());
     String title = "失败";
     switch (state) {
@@ -1018,7 +1018,7 @@ class _HomePageState extends State<HomePage> {
                 ]));
   }
 
-  void showAlertText(String title, String? content, BuildContext context) {
+  void showAlertText(String title, String content, BuildContext context) {
     showDialog(
         context: context,
         builder: (BuildContext context) => CupertinoAlertDialog(
