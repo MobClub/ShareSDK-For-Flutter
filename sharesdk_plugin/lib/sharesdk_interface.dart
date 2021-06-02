@@ -24,7 +24,7 @@ class SharesdkPlugin {
 
   /// 分享
   static Future<dynamic> share(ShareSDKPlatform platform, SSDKMap params,
-      Function(SSDKResponseState, Map, Map, SSDKError)? result) {
+      Function(SSDKResponseState, dynamic, dynamic, SSDKError) result) {
     Map args = {"platform": platform.id, "params": params.map};
     Future<dynamic> callback =
         _channel.invokeMethod(ShareSDKMethods.share.name!, args);
@@ -40,14 +40,13 @@ class SharesdkPlugin {
 
   /// 系统分享
   static Future<dynamic> shareWithActivity(ShareSDKPlatform platform,
-      SSDKMap params, Function(SSDKResponseState, Map, Map, SSDKError)? result) {
+      SSDKMap params, Function(SSDKResponseState, dynamic, dynamic, SSDKError) result) {
     Map args = {"platform": platform.id, "params": params.map};
     Future<dynamic> callback =
         _channel.invokeMethod(ShareSDKMethods.shareWithActivity.name!, args);
     callback.then((dynamic response) {
       if (result != null) {
-        result(_state(response), response["userData"],
-            response["contentEntity"], SSDKError(rawData: response["error"]));
+        result(_state(response), response["userData"], response["contentEntity"], SSDKError(rawData: response["error"]));
       }
     });
 
@@ -56,15 +55,14 @@ class SharesdkPlugin {
 
   /// 授权
   static Future<dynamic> auth(ShareSDKPlatform platform, Map settings,
-      Function(SSDKResponseState, Map, SSDKError)? result) {
+      Function(SSDKResponseState, dynamic, SSDKError) result) {
     Map args = {"platform": platform.id, "settings": settings};
     Future<dynamic> callback =
         _channel.invokeMethod(ShareSDKMethods.auth.name!, args);
     callback.then((dynamic response) {
       print('======> $callback !' + '~~~~~> $response');
       if (result != null) {
-        result(_state(response), response["user"],
-            SSDKError(rawData: response["error"]));
+        result(_state(response), response["user"], SSDKError(rawData: response["error"]));
       }
     });
 
@@ -73,13 +71,12 @@ class SharesdkPlugin {
 
   /// 判断是否授权
   static Future<dynamic> hasAuthed(ShareSDKPlatform platform,
-      Function(SSDKResponseState, Map, SSDKError)? result) {
+      Function(SSDKResponseState, dynamic, SSDKError) result) {
     Future<dynamic> callback =
         _channel.invokeMethod(ShareSDKMethods.hasAuthed.name!, platform.id);
     callback.then((dynamic response) {
       if (result != null) {
-        result(_state(response), response["user"],
-            SSDKError(rawData: response["error"]));
+        result(_state(response), response["user"], SSDKError(rawData: response["error"]));
       }
     });
     return callback;
@@ -87,13 +84,12 @@ class SharesdkPlugin {
 
   /// 取消授权
   static Future<dynamic> cancelAuth(ShareSDKPlatform platform,
-      Function(SSDKResponseState, Map, SSDKError)? result) {
+      Function(SSDKResponseState, dynamic, SSDKError) result) {
     Future<dynamic> callback =
         _channel.invokeMethod(ShareSDKMethods.cancelAuth.name!, platform.id);
     callback.then((dynamic response) {
       if (result != null) {
-        result(_state(response), response["user"],
-            SSDKError(rawData: response["error"]));
+        result(_state(response), response["user"], SSDKError(rawData: response["error"]));
       }
     });
     return callback;
@@ -101,14 +97,13 @@ class SharesdkPlugin {
 
   /// 获取用户信息
   static Future<dynamic> getUserInfo(ShareSDKPlatform platform,
-      Function(SSDKResponseState, Map, SSDKError)? result) {
+      Function(SSDKResponseState, dynamic, SSDKError) result) {
     Map args = {"platform": platform.id};
     Future<dynamic> callback =
         _channel.invokeMethod(ShareSDKMethods.getUserInfo.name!, args);
     callback.then((dynamic response) {
       if (result != null) {
-        result(_state(response), response["user"],
-            SSDKError(rawData: response["error"]));
+        result(_state(response), response["user"], SSDKError(rawData: response["error"]));
       }
     });
 
@@ -120,7 +115,7 @@ class SharesdkPlugin {
       dynamic view,
       List<ShareSDKPlatform>? platforms,
       SSDKMap params,
-      Function(SSDKResponseState, ShareSDKPlatform, Map, Map, SSDKError)?
+      Function(SSDKResponseState, ShareSDKPlatform, dynamic, dynamic, SSDKError)?
           result) {
     List? types;
     if (platforms != null) {
@@ -133,12 +128,7 @@ class SharesdkPlugin {
         _channel.invokeMethod(ShareSDKMethods.showMenu.name!, args);
     callback.then((dynamic response) {
       if (result != null) {
-        result(
-            _state(response),
-            ShareSDKPlatform(id: response["platform"], name: "null"),
-            response["userData"],
-            response["contentEntity"],
-            SSDKError(rawData: response["error"]));
+        result(_state(response), ShareSDKPlatform(id: response["platform"], name: "null"), response["userData"], response["contentEntity"], SSDKError(rawData: response["error"]));
       }
     });
 
@@ -149,7 +139,7 @@ class SharesdkPlugin {
   static Future<dynamic> showEditor(
       ShareSDKPlatform platform,
       SSDKMap params,
-      Function(SSDKResponseState, ShareSDKPlatform, Map, Map, SSDKError)?
+      Function(SSDKResponseState, ShareSDKPlatform, dynamic, dynamic, SSDKError)?
           result) {
     Map args = {"platform": platform.id, "params": params.map};
     Future<dynamic> callback =
@@ -157,12 +147,7 @@ class SharesdkPlugin {
     callback.then((dynamic response) {
       print(response);
       if (result != null) {
-        result(
-            _state(response),
-            ShareSDKPlatform(id: response["platform"], name: "null"),
-            response["userData"],
-            response["contentEntity"],
-            SSDKError(rawData: response["error"]));
+        result(_state(response), ShareSDKPlatform(id: response["platform"], name: "null"), response["userData"], response["contentEntity"], SSDKError(rawData: response["error"]));
       }
     });
 
@@ -171,7 +156,7 @@ class SharesdkPlugin {
 
   //get ShareSDK PrivacyPolicy, language forExample en-CN,zh-Hans-CN,zh,en. null will be zh
   static Future<dynamic> getPrivacyPolicy(
-      String type, String? language, Function(Map data, Map error)? result) {
+      String type, String? language, Function(dynamic? data, dynamic error) result) {
     Map args = {"type": type};
     if (language != null) {
       args["language"] = language;
@@ -189,14 +174,13 @@ class SharesdkPlugin {
 
   ///upload user permissionStatus to Share
   static Future<dynamic> uploadPrivacyPermissionStatus(
-      int status, Function(bool success)? result) {
+      int status, Function(bool success) result) {
     Map args = {"status": status};
     Future<dynamic> callback = _channel.invokeMethod(
         ShareSDKMethods.uploadPrivacyPermissionStatus.name!, args);
     callback.then((dynamic response) {
       print(response);
-      if (result != null) {
-        result(response["success"]);
+      if (result != null) {result(response["success"]);
       }
     });
     return callback;

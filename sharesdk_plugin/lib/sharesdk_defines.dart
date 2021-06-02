@@ -8,9 +8,9 @@ class SSDKError extends Error {
       : code = rawData != null ? rawData["code"] : 0,
         userInfo = rawData != null ? rawData["userInfo"] : {},
         super();
-  final Map? rawData;
+  final dynamic? rawData;
   final int? code;
-  final Map? userInfo;
+  final dynamic? userInfo;
 }
 
 /// model for method
