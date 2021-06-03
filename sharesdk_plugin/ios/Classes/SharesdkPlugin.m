@@ -215,7 +215,7 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
         attachments = platformParams[@"attachments"];
     }
     if (attachments) {
-        [params SSDKSetupDropboxParamsByAttachment:[SSDKImage imageWithObject:attachments]];
+        [params SSDKSetupDropboxParamsByAttachment:[NSURL URLWithString:attachments]];
     }
     
     //通用相册分享参数设置
@@ -453,7 +453,7 @@ static NSString *const receiverStr = @"SSDKRestoreReceiver";
     //dropbox
     NSString *attachments = nil;
     if ([platformParams[@"attachments"] isKindOfClass:[NSString class]])  {
-        attachments = platformParams[@"templattachmentsateArgs"];
+        attachments = platformParams[@"attachments"];
     }
     if (attachments) {
         [params SSDKSetupDropboxParamsByAttachment:attachments];

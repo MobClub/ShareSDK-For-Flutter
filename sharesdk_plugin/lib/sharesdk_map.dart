@@ -556,7 +556,7 @@ class SSDKMap {
       String url,
       String title,
       String urlDesc,
-      String visibility,
+      dynamic visibility,
       SSDKContentType type) {
     Map params = {};
     params[kType] = type.value;
