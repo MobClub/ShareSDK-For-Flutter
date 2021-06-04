@@ -730,6 +730,29 @@ class _HomePageState extends State<HomePage> {
         });
   }
 
+  void shareReddit(BuildContext context) {
+    SSDKMap params = SSDKMap()
+      ..setGeneral(
+          "title",
+          "text",
+          ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
+          "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
+          "",
+          "http://www.mob.com/",
+          "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
+          "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
+          "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
+          "",
+          SSDKContentTypes.webpage);
+
+    SharesdkPlugin.share(ShareSDKPlatforms.reddit, params,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+            SSDKError error) {
+          showAlert(state, error.rawData, context);
+        });
+  }
+
+
   void shareInstapaper(BuildContext context) {
     SSDKMap params = SSDKMap()
       ..setGeneral(
@@ -1112,6 +1135,8 @@ class _HomePageState extends State<HomePage> {
       register.setupFlick(
           "cbed81d4a1bc7417693ab7865e354717", "4c490343869091f2");
       register.setupPinterest("5057854497590653616");
+      register.setupReddit(
+          "ObzXn50T7Cg0Xw", "https://www.mob.com/reddit_callback");
       register.setupInstapaper(
           "4rDJORmcOcSAZL1YpqGHRI605xUvrLbOhkJ07yO0wWrYrc61FA", "GNr1GespOQbrm8nvd7rlUsyRQsIo3boIbMguAl9gfpdL0aKZWe");
       register.setupDingTalk("dingoabcwtuab76wy0kyzo");
@@ -1205,6 +1230,7 @@ class _HomePageState extends State<HomePage> {
           _creatRow("分享图片到Flickr", "测试自定义参数", shareFlickr, context),
           _creatRow("分享链接到Pocket", "测试自定义参数", sharePocket, context),
           _creatRow("分享图片到Pinterest", "测试自定义参数", sharePinterest, context),
+          _creatRow("分享链接到Reddit", "测试自定义参数", shareReddit, context),
           _creatRow("分享链接到Instapaper", "测试自定义参数", shareInstapaper, context),
           _creatRow("分享图片到DingTalk", "测试自定义参数", shareDingTalk, context),
           _creatRow("分享图片到YouDaoNote", "测试自定义参数", shareYouDaoNote, context),
