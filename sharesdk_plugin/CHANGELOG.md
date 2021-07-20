@@ -72,3 +72,10 @@
 * iOS add TikTok
 * iOS add ShareWithActivity
 
+
+
+## 1.3.0
+
+* iOS fix  bug
+* Android fix bug
+
