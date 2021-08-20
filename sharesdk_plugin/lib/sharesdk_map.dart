@@ -449,15 +449,22 @@ class SSDKMap {
     map["@platform($id)"] = params;
   }
 
+  void setDouYinShareActionMode(
+      int shareActionMode){
+      map["kSSDKDouYinShareAction"] = shareActionMode;
+  }
+
   void setDouYin(
       List assetLocalIds,
       String hashtag,
       Map extraInfo,
+      int shareActionMode,
       SSDKContentType type) {
     Map params = {};
     params[kAsset_localIds] = assetLocalIds;
     params["douyin_hashtag"] = hashtag;
     params["douyin_extraInfo"] = extraInfo;
+    params["kSSDKDouYinShareAction"] = shareActionMode;
     params[kType] = type.value;
 
     int? id = ShareSDKPlatforms.douyin.id;
