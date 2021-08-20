@@ -137,6 +137,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>dingoabcwtuab76wy0kyzo</string>
+				<string>dingoax9s2mdekb7a6748n</string>
 			</array>
 		</dict>
 		<dict>
@@ -319,10 +320,9 @@
 		<string>storykompassauth</string>
 		<string>kakaokompassauth</string>
 		<string>yixinfav</string>
-		<string>yixinoauth</string>
 		<string>yixinopenapi</string>
-		<string>yixin</string>
 		<string>pocket-oauth-v1</string>
+		<string>dingtalk-sso</string>
 		<string>dingtalk-open</string>
 		<string>dingtalk</string>
 		<string>alipayshare</string>
@@ -338,7 +338,6 @@
 		<string>wtlogintim</string>
 		<string>timopensdkgrouptribeshare</string>
 		<string>timopensdkapiV4</string>
-		<string>timgamebindinggroup</string>
 		<string>timopensdkdataline</string>
 		<string>wtlogintimV1</string>
 		<string>timapiV1</string>
@@ -352,8 +351,6 @@
 		<string>sinaweibosso</string>
 		<string>weixin</string>
 		<string>youtube</string>
-		<string>mpsharesdk11</string>
-		<string>mpsharesdk10</string>
 		<string>mtmv</string>
 		<string>mqqopensdkapiV4</string>
 		<string>mqzone</string>

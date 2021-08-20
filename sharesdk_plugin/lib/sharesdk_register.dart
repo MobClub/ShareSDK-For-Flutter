@@ -292,15 +292,20 @@ class ShareSDKRegister {
     Map info = {
       _ssdkAppId: appId,
     };
-
-    platformsInfo[ShareSDKPlatforms.dingding.id] = info;
+    if(platformsInfo[ShareSDKPlatforms.dingding.id] == null){
+      platformsInfo[ShareSDKPlatforms.dingding.id] = info;
+    }else{
+      Map param = platformsInfo[ShareSDKPlatforms.dingding.id];
+      info.addEntries(param.entries);
+      platformsInfo[ShareSDKPlatforms.dingding.id] = info;
+    }
   }
 
-  void setupDingTalkAuth(String appId, String appSecret, String redirectUr) {
+  void setupDingTalkAuth(String appId, String appSecret, String redirectUrl) {
     Map info = {
-      _ssdkAppId: "auth"+appId,
-      _ssdkAppSecret: "auth"+appSecret,
-      _ssdkRedirectUrl: "auth"+redirectUr,
+      "auth"+_ssdkAppId: appId,
+      "auth"+_ssdkAppSecret: appSecret,
+      "auth"+_ssdkRedirectUrl: redirectUrl,
     };
     if(platformsInfo[ShareSDKPlatforms.dingding.id] == null){
       platformsInfo[ShareSDKPlatforms.dingding.id] = info;

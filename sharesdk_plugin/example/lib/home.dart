@@ -505,6 +505,31 @@ class _HomePageState extends State<HomePage> {
         });
   }
 
+  void shareToDouyinIMCustom(BuildContext context) {
+    SSDKMap params = SSDKMap()
+      ..setGeneral(
+          "title",
+          "text",
+          ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
+          "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
+          "",
+          "http://www.mob.com/",
+          "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
+          "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
+          "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
+          "",
+          SSDKContentTypes.image);
+      params
+        ..setDouYinShareActionMode(1);
+
+    SharesdkPlugin.share(ShareSDKPlatforms.douyin, params,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+            SSDKError error) {
+          showAlert(state, error.rawData, context);
+        });
+  }
+
+
   void shareTikTokCustom(BuildContext context) {
     SSDKMap params = SSDKMap()
       ..setGeneral(
@@ -1141,7 +1166,7 @@ class _HomePageState extends State<HomePage> {
           "4rDJORmcOcSAZL1YpqGHRI605xUvrLbOhkJ07yO0wWrYrc61FA", "GNr1GespOQbrm8nvd7rlUsyRQsIo3boIbMguAl9gfpdL0aKZWe");
       register.setupDingTalk("dingoabcwtuab76wy0kyzo");
       register.setupDingTalkAuth(
-          "dingoacafcjgm0etysbv6r", "AMDCSN0sgQt2Gzx_xFU0og9cE_P9fDTumRUg3nYdxKrqL-2bgVIlM6Xj4sRzZMTC", "https://www.mob.com/sharesdk/dingding");
+          "dingoax9s2mdekb7a6748n", "dxx9KwP4BYN975umF6Mi2QW3jL7O3k3qHCSvcCbes5Y5R7mFF1ocd19p4NdzOKD4", "https://www.mob.com/sharesdk/dingding");
       register.setupYouDao(
           "dcde25dca105bcc36884ed4534dab940", "d98217b4020e7f1874263795f44838fe", "http://www.sharesdk.cn/");
       register.setupMingDao(
@@ -1218,6 +1243,8 @@ class _HomePageState extends State<HomePage> {
           _creatRow("分享图片到绿洲", "测试自定义参数", shareOassisCustom, context),
           _creatRow("分享图片到快手", "测试自定义参数", shareKuaiShouCustom, context),
           _creatRow("分享图片到抖音", "需要传入当前图片到抖音", shareToDouyinCustom, context),
+          _creatRow("分享图片到抖音IM", "需要传入当前图片到抖音", shareToDouyinIMCustom, context),
+
           _creatRow("分享图片到TikTok", "测试自定义参数", shareTikTokCustom, context),
           _creatRow("分享链接到KakaoTalk", "测试自定义参数", shareKakaoTalkCustom, context),
           _creatRow("分享图片到KakaoStory", "测试自定义参数", shareKakaoStoryCustom, context),
