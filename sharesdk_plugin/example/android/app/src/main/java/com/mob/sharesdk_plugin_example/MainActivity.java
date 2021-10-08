@@ -1,9 +1,7 @@
 package com.mob.sharesdk_plugin_example;
 
-import android.os.Bundle;
-import android.util.Log;
-
-import io.flutter.app.FlutterActivity;
+import io.flutter.embedding.android.FlutterActivity;
+import io.flutter.embedding.engine.FlutterEngine;
 import io.flutter.plugins.GeneratedPluginRegistrant;
 
 public class MainActivity extends FlutterActivity {

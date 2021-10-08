@@ -1,17 +1,11 @@
 package com.yoozoo.sharesdk;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
 
 import com.mob.tools.utils.Hashon;
 
-
 import java.util.HashMap;
-import java.util.Observable;
 
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.framework.loopshare.LoopShareResultListener;
