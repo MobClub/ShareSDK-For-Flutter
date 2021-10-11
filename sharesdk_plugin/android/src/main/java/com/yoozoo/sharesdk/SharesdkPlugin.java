@@ -508,59 +508,7 @@ public class SharesdkPlugin implements MethodCallHandler {
     } else if (type.equals("10")) {
       shareParams.setShareType(Platform.SHARE_WXMINIPROGRAM);
     }
-    platform.setPlatformActionListener(new PlatformActionListener() {
-      @Override
-      public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
-        final Map<String, Object> map = new HashMap<>();
-        map.put("state", 1);
-
-        ThreadManager.getMainHandler().post(new Runnable() {
-          @Override
-          public void run() {
-            result.success(map);
-            Log.e(TAG, " onComplete===> " + map);
-          }
-        });
-      }
-
-      @Override
-      public void onError(Platform platform, int i, Throwable throwable) {
-        final Map<String, Object> map = new HashMap<>();
-        map.put("state", 2);
-
-        HashMap<String, Object> errorMap = new HashMap<>();
-        if (throwable.getMessage() != null) {
-          errorMap.put("error", String.valueOf(throwable.getMessage()));
-        } else if (throwable.getCause() != null) {
-          errorMap.put("error", String.valueOf(throwable.getCause()));
-        } else if (throwable != null) {
-          errorMap.put("error", String.valueOf(throwable));
-        }
-        map.put("error", errorMap);
-
-        ThreadManager.getMainHandler().post(new Runnable() {
-          @Override
-          public void run() {
-            result.success(map);
-            Log.e(TAG, " onError===> " + map);
-          }
-        });
-      }
-
-      @Override
-      public void onCancel(Platform platform, int i) {
-        final Map<String, Object> map = new HashMap<>();
-        map.put("state", 3);
-
-        ThreadManager.getMainHandler().post(new Runnable() {
-          @Override
-          public void run() {
-            result.success(map);
-            Log.e(TAG, " onCancel===> " + map);
-          }
-        });
-      }
-    });
+    registerShareCallBack(platform,result);
     platform.share(shareParams);
   }
 
@@ -847,6 +795,7 @@ public class SharesdkPlugin implements MethodCallHandler {
     if ((!TextUtils.isEmpty(videoUrl)) && !(videoUrl.equals("null"))) {
       oks.setVideoUrl(videoUrl);
     }
+    registerShareCallBack(oks,result);
     oks.show(MobSDK.getContext());
     Log.e("SharesdkPlugin", call.arguments.toString());
   }
@@ -1001,5 +950,98 @@ public class SharesdkPlugin implements MethodCallHandler {
       Log.e("", e.getMessage());
     }
     return null;
+  }
+
+  /**
+   * 注册分享回调
+   * @param platform
+   * @param result
+   */
+  private void registerShareCallBack(Object platform, final Result result) {
+    if (ObjectUtils.isNull(platform) || ObjectUtils.isNull(result)) {
+      return;
+    }
+    //flutter 一键分享回调，有需要平台信息
+    final boolean fillPlatformInfo = (platform instanceof OnekeyShare);
+
+    PlatformActionListener listener = new PlatformActionListener() {
+      @Override
+      public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+        final Map<String, Object> map = new HashMap<>();
+        try {
+          map.put("state", 1);
+          if (fillPlatformInfo) {
+            map.put("platform", platform.getId());
+            map.put("name", platform.getName());
+          }
+        } catch (Exception e) {
+          Log.e("",e.getMessage());
+        }
+        ThreadManager.getMainHandler().post(new ThreadManager.SafeRunnable() {
+          @Override
+          public void safeRun(){
+            result.success(map);
+            Log.e(TAG, " onComplete===> " + map);
+          }
+        });
+      }
+
+      @Override
+      public void onError(Platform platform, int i, Throwable throwable) {
+        final Map<String, Object> map = new HashMap<>();;
+        try {
+          map.put("state", 2);
+          if (fillPlatformInfo) {
+            map.put("platform", platform.getId());
+            map.put("name", platform.getName());
+          }
+          HashMap<String, Object> errorMap = new HashMap<>();
+          if (throwable.getMessage() != null) {
+            errorMap.put("error", String.valueOf(throwable.getMessage()));
+          } else if (throwable.getCause() != null) {
+            errorMap.put("error", String.valueOf(throwable.getCause()));
+          } else if (throwable != null) {
+            errorMap.put("error", String.valueOf(throwable));
+          }
+          map.put("error", errorMap);
+        } catch (Exception e) {
+          Log.e("",e.getMessage());
+        }
+
+        ThreadManager.getMainHandler().post(new ThreadManager.SafeRunnable() {
+          @Override
+          public void safeRun() {
+            result.success(map);
+            Log.e(TAG, " onError===> " + map);
+          }
+        });
+      }
+
+      @Override
+      public void onCancel(Platform platform, int i) {
+        final Map<String, Object> map = new HashMap<>();
+        try {
+          map.put("state", 3);
+          if (fillPlatformInfo) {
+            map.put("platform", platform.getId());
+            map.put("name", platform.getName());
+          }
+        } catch (Exception e) {
+          Log.e("",e.getMessage());
+        }
+        ThreadManager.getMainHandler().post(new ThreadManager.SafeRunnable() {
+          @Override
+          public void safeRun() {
+            result.success(map);
+            Log.e(TAG, " onCancel===> " + map);
+          }
+        });
+      }
+    };
+    if (platform instanceof Platform) {
+      ((Platform) platform).setPlatformActionListener(listener);
+    } else if (platform instanceof OnekeyShare) {
+      ((OnekeyShare) platform).setCallback(listener);
+    }
   }
 }
