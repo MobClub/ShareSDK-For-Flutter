@@ -364,8 +364,10 @@ public class SharesdkPlugin implements MethodCallHandler {
     wxmpWithTicket = parseParam(dataMap,Const.Key.WXMP_WITH_TICKET);
     wxmpPath =  parseParam(dataMap,Const.Key.WXMP_PATH);
     videoUrl =parseParam(dataMap,Const.Key.VIDEO_URL_ANDROID);
-    int tempType = parseParam(dataMap,Const.Key.TYPE);
-    type = String.valueOf(tempType);
+    Object tempType = parseParam(dataMap,Const.Key.TYPE);
+    if (ObjectUtils.notNull(tempType)) {
+      type = String.valueOf(tempType);
+    }
     //linkcard
     sina_summary = parseParam(dataMap,Const.Key.SINA_CARD_SUMMARY);
     image_url = parseParam(dataMap,Const.Key.IMAGE_URL);
@@ -385,6 +387,8 @@ public class SharesdkPlugin implements MethodCallHandler {
           if (!ObjectUtils.isEmpty(list)) {
             imageArray = list.toArray(new String[]{});
           }
+        }else if (images instanceof String && TextUtils.isEmpty(imageUrl)){
+          imageUrl = (String) images;
         }
       }
     }
