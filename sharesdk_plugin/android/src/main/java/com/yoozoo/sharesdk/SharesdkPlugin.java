@@ -14,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -152,52 +153,56 @@ public class SharesdkPlugin implements MethodCallHandler {
 
   @Override
   public void onMethodCall(MethodCall call, Result result) {
-    switch (call.method) {
-      case PluginMethodGetVersion:
-        getVersion(call, result);
-        break;
-      case PluginMethodShare:
-        shareWithArgs(call, result);
-        break;
-      case PluginMethodAuth:
-        authWithArgs(call, result);
-        break;
-      case PluginMethodHasAuthed:
-        hasAuthed(call, result);
-        break;
-      case PluginMethodCancelAuth:
-        cancelAuth(call, result);
-        Log.e("SharesdkPlugin", " PluginMethodCancelAuth IOS platform only");
-        break;
-      case PluginMethodGetUserInfo:
-        getUserInfoWithArgs(call, result);
-        break;
-      case PluginMethodRegist:
-        break;
-      case PluginMethodActivePlatforms:
-        //IOS only
-        break;
-      case PluginMethodShowEditor:
-        //IOS only
-        break;
-      case PluginMethodShowMenu:
-        showMenuWithArgs(call, result);
-        break;
-      case PluginMethodOpenMiniProgram:
-        //shareMiniProgramWithArgs(call, result);
-        openMinProgramWithArgs(call, result);
-        break;
-      case PluginMethodIsClientInstalled:
-        isClientInstalled(call, result);
-        break;
-      case PluginMethodGetPrivacyPolicy: //隐私协议
-        getPrivacyPolicy(call, result);
-        break;
-      case PluginMethodUploadPrivacyPermissionStatus:
-        submitPrivacyGrantResult(call, result);
-        break;
-      default:
-        break;
+    try {
+      switch (call.method) {
+        case PluginMethodGetVersion:
+          getVersion(call, result);
+          break;
+        case PluginMethodShare:
+          shareWithArgs(call, result);
+          break;
+        case PluginMethodAuth:
+          authWithArgs(call, result);
+          break;
+        case PluginMethodHasAuthed:
+          hasAuthed(call, result);
+          break;
+        case PluginMethodCancelAuth:
+          cancelAuth(call, result);
+          Log.e("SharesdkPlugin", " PluginMethodCancelAuth IOS platform only");
+          break;
+        case PluginMethodGetUserInfo:
+          getUserInfoWithArgs(call, result);
+          break;
+        case PluginMethodRegist:
+          break;
+        case PluginMethodActivePlatforms:
+          //IOS only
+          break;
+        case PluginMethodShowEditor:
+          //IOS only
+          break;
+        case PluginMethodShowMenu:
+          showMenuWithArgs(call, result);
+          break;
+        case PluginMethodOpenMiniProgram:
+          //shareMiniProgramWithArgs(call, result);
+          openMinProgramWithArgs(call, result);
+          break;
+        case PluginMethodIsClientInstalled:
+          isClientInstalled(call, result);
+          break;
+        case PluginMethodGetPrivacyPolicy: //隐私协议
+          getPrivacyPolicy(call, result);
+          break;
+        case PluginMethodUploadPrivacyPermissionStatus:
+          submitPrivacyGrantResult(call, result);
+          break;
+        default:
+          break;
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
     }
   }
 
@@ -335,82 +340,60 @@ public class SharesdkPlugin implements MethodCallHandler {
     String siteUrl;
 
     String filePath;
+    String[]imageArray = null;
 
     HashMap<String, Object> map = call.arguments();
     final String num = String.valueOf(map.get("platform"));
 
     final HashMap<String, Object> params = (HashMap<String, Object>) map.get("params");
-
     HashMap<String, Object> platMap = (HashMap<String, Object>) params
         .get("@platform(" + num + ")");
-    if (platMap == null) {
-      imageUrl = String.valueOf(params.get("imageUrl_android"));
-      imagePath = String.valueOf(params.get("imagePath_android"));
-      title = String.valueOf(params.get("title"));
-      titleUrl = String.valueOf(params.get("titleUrl_android"));
-      text = String.valueOf(params.get("text"));
-      url = String.valueOf(params.get("url"));
-      video = String.valueOf(params.get("video"));
-      musicUrl = String.valueOf(params.get("audio_flash_url"));
-      fileData = String.valueOf(params.get("file_data"));
-      wxmpUserName = String.valueOf(params.get("wxmp_user_name"));
-      wxmpType = String.valueOf(params.get("wxmp_type"));
-      wxmpWithTicket = String.valueOf(params.get("wxmp_with_ticket"));
-      wxmpPath = String.valueOf(params.get("wxmp_path"));
-      videoUrl = String.valueOf(params.get("videoUrl_android"));
-      type = String.valueOf(params.get("type"));
-      //todo
-      Log.e("QQQ", " type===> " + type);
-
-      //linkcard
-      sina_summary = String.valueOf(params.get("sina_cardSummary"));
-      image_url = String.valueOf(params.get("image_url"));
-      image_data = (Bitmap) params.get("imageData");
-
-      imageX = String.valueOf(params.get("image_x"));
-      imageY = String.valueOf(params.get("image_y"));
-      sina_displayname = String.valueOf(params.get("sina_displayname"));
-      site = String.valueOf(params.get("site"));
-      siteUrl = String.valueOf(params.get("siteUrl"));
-
-      filePath = String.valueOf(params.get("filePath"));
-
-    } else {
-      imageUrl = String.valueOf(platMap.get("imageUrl_android"));
-      imagePath = String.valueOf(platMap.get("imagePath_android"));
-      title = String.valueOf(platMap.get("title"));
-      titleUrl = String.valueOf(platMap.get("titleUrl_android"));
-      text = String.valueOf(platMap.get("text"));
-      url = String.valueOf(platMap.get("url"));
-      video = String.valueOf(platMap.get("video"));
-      musicUrl = String.valueOf(platMap.get("audio_flash_url"));
-      fileData = String.valueOf(platMap.get("file_data"));
-      wxmpUserName = String.valueOf(platMap.get("wxmp_user_name"));
-      wxmpType = String.valueOf(platMap.get("wxmp_type"));
-      wxmpWithTicket = String.valueOf(platMap.get("wxmp_with_ticket"));
-      wxmpPath = String.valueOf(platMap.get("wxmp_path"));
-      videoUrl = String.valueOf(platMap.get("videoUrl_android"));
-      type = String.valueOf(platMap.get("type"));
-      //linkcard
-      sina_summary = String.valueOf(platMap.get("sina_cardSummary"));
-      image_url = String.valueOf(platMap.get("image_url"));
-      image_data = (Bitmap) platMap.get("imageData");
-
-      sina_displayname = String.valueOf(platMap.get("sina_displayname"));
-      imageX = String.valueOf(platMap.get("image_x"));
-      imageY = String.valueOf(platMap.get("image_y"));
-      site = String.valueOf(platMap.get("site"));
-      siteUrl = String.valueOf(platMap.get("siteUrl"));
-
-      filePath = String.valueOf(platMap.get("filePath"));
-
+    HashMap<String, Object> dataMap = !ObjectUtils.isEmpty(platMap) ? platMap : params;
+    /*读取参数，封装分享数据*/
+    imageUrl = parseParam(dataMap,Const.Key.IMAGE_URL_ANDROID);
+    imagePath = parseParam(dataMap,Const.Key.IMAGE_PATH_ANDROID);
+    title = parseParam(dataMap,Const.Key.TITLE);
+    titleUrl = parseParam(dataMap,Const.Key.TITLE_URL_ANDROID);
+    text = parseParam(dataMap,Const.Key.TEXT);;
+    url = parseParam(dataMap,Const.Key.URL);
+    video = parseParam(dataMap,Const.Key.VIDEO);
+    musicUrl = parseParam(dataMap,Const.Key.AUDIO_FLASH_URL);
+    fileData = parseParam(dataMap,Const.Key.FILE_DATA);
+    wxmpUserName = parseParam(dataMap,Const.Key.WXMP_USER_NAME);
+    wxmpType = parseParam(dataMap,Const.Key.WXMP_TYPE);
+    wxmpWithTicket = parseParam(dataMap,Const.Key.WXMP_WITH_TICKET);
+    wxmpPath =  parseParam(dataMap,Const.Key.WXMP_PATH);
+    videoUrl =parseParam(dataMap,Const.Key.VIDEO_URL_ANDROID);
+    int tempType = parseParam(dataMap,Const.Key.TYPE);
+    type = String.valueOf(tempType);
+    //linkcard
+    sina_summary = parseParam(dataMap,Const.Key.SINA_CARD_SUMMARY);
+    image_url = parseParam(dataMap,Const.Key.IMAGE_URL);
+    image_data = parseParam(dataMap,Const.Key.IMAGE_DATA);;
+    sina_displayname = parseParam(dataMap,Const.Key.SINA_DISPLAY_NAME);
+    imageX = parseParam(dataMap,Const.Key.IMAGE_X);
+    imageY =parseParam(dataMap,Const.Key.IMAGE_Y);
+    site = parseParam(dataMap,Const.Key.SITE);
+    siteUrl = parseParam(dataMap,Const.Key.SITE_URL);
+    filePath =parseParam(dataMap,Const.Key.FILE_PATH);
+    //获取分享图片数组
+    if (dataMap.containsKey(Const.Key.IMAGES)) {
+      Object images = dataMap.get(Const.Key.IMAGES);
+      if (ObjectUtils.notNull(images)) {
+        if (images instanceof ArrayList) {
+          ArrayList<String> list = (ArrayList<String>) images;
+          if (!ObjectUtils.isEmpty(list)) {
+            imageArray = list.toArray(new String[]{});
+          }
+        }
+      }
     }
 
+    //获取分享平台
     String platName = Utils.platName(num);
-
     Platform platform = ShareSDK.getPlatform(platName);
     Platform.ShareParams shareParams = new Platform.ShareParams();
-
+    //抖音分享需要参数activity
     if (platName.equals("Douyin")) {
       if (activity != null) {
         shareParams.setActivity(activity);
@@ -419,78 +402,77 @@ public class SharesdkPlugin implements MethodCallHandler {
       }
     }
 
-    if (!(title.equals("null") || title == null)) {
+    if (!TextUtils.isEmpty(title)) {
       shareParams.setTitle(title);
     }
-    if (!(titleUrl.equals("null") || titleUrl == null)) {
+    if (!TextUtils.isEmpty(titleUrl)) {
       shareParams.setTitleUrl(titleUrl);
     }
-    if (!(text.equals("null") || text == null)) {
+    if (!TextUtils.isEmpty(text)) {
       shareParams.setText(text);
     }
-    if (!(imageUrl.equals("null") || imageUrl == null)) {
+    if (!TextUtils.isEmpty(imageUrl)) {
       shareParams.setImageUrl(imageUrl);
     }
 
     if (image_data != null) {
-      if (!(image_data.equals("null"))) {
         shareParams.setImageData(image_data);
-      }
     }
 
-    if (!(imagePath.equals("null") || imagePath == null)) {
+    if (!TextUtils.isEmpty(imagePath)) {
       shareParams.setImagePath(imagePath);
     }
-    if (!(url.equals("null") || url == null)) {
+    if (!TextUtils.isEmpty(url)) {
       shareParams.setUrl(url);
     }
-    if (!(wxmpUserName.equals("null") || wxmpUserName == null)) {
+    if (!TextUtils.isEmpty(wxmpUserName)) {
       shareParams.setWxUserName(wxmpUserName);
     }
-    if (!(musicUrl.equals("null") || musicUrl == null)) {
+    if (!TextUtils.isEmpty(musicUrl)) {
       shareParams.setMusicUrl(musicUrl);
     }
-    if (!(fileData.equals("null") || fileData == null)) {
+    if (!TextUtils.isEmpty(fileData)) {
       shareParams.setFilePath(fileData);
     }
-    if (!(filePath.equals("null") || filePath == null)) {
+    if (!TextUtils.isEmpty(filePath)) {
       shareParams.setFilePath(filePath);
       Log.e("WWW", " filePath===》 " + filePath);
     }
 
-    if (!(wxmpType == null || wxmpType.isEmpty() || wxmpType.equals("null"))) {
+    if (!TextUtils.isEmpty(wxmpType)) {
       shareParams.setWxMiniProgramType(Integer.valueOf(wxmpType));
     }
-    if (!(wxmpWithTicket == null || wxmpWithTicket.equals("null"))) {
+    if (!TextUtils.isEmpty(wxmpWithTicket)) {
       shareParams.setWxWithShareTicket(Boolean.valueOf(wxmpWithTicket));
     }
-    if (!(wxmpPath == null || wxmpPath.equals("null"))) {
+    if (!TextUtils.isEmpty(wxmpPath)) {
       shareParams.setWxPath(wxmpPath);
     }
+    if (!ObjectUtils.isEmpty(imageArray)){
+      shareParams.setImageArray(imageArray);
+    }
     //linkcard
-    if (!(sina_summary == null || sina_summary.equals("null"))) {
+    if (!TextUtils.isEmpty(sina_summary)) {
       shareParams.setLcSummary(sina_summary);
       //此参数不为空，说明用户是想分享linkcard，顺带把其他几个不需要用户输入的参数带进去
       Date date = new Date();
       SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
       String dateStr = simpleDateFormat.format(date);
-      if (dateStr != null) {
+      if (!TextUtils.isEmpty(dateStr)) {
         shareParams.setLcCreateAt(dateStr);
       }
 
     }
-    if (!(sina_displayname == null || sina_displayname.equals("null"))) {
+    if (!TextUtils.isEmpty(sina_displayname)) {
       shareParams.setLcDisplayName(sina_displayname);
     }
-    if (!(url.equals("null") || url == null)) {
+    if (!TextUtils.isEmpty(url)) {
       shareParams.setLcUrl(url);
     }
-    if (!(type.equals("null") || type == null)) {
+    if (!TextUtils.isEmpty(type)) {
       shareParams.setLcObjectType(type);
     }
-    if (!(image_url == null || image_url.equals("null"))) {
-      if (!(imageX == null || imageX.equals("null"))) {
-        if (!(imageY == null || imageY.equals("null"))) {
+    if (!TextUtils.isEmpty(image_url) && !TextUtils.isEmpty(imageX) && !TextUtils.isEmpty(imageY)) {
           JSONObject jsonObject = new JSONObject();
           try {
             jsonObject.put("url", image_url);
@@ -500,14 +482,12 @@ public class SharesdkPlugin implements MethodCallHandler {
           } catch (JSONException e) {
             e.printStackTrace();
           }
-        }
-      }
     }
 
-    if (!(site.equals("null") || site == null)) {
+    if (!TextUtils.isEmpty(site)) {
       shareParams.setSite(site);
     }
-    if (!(siteUrl.equals("null") || siteUrl == null)) {
+    if (!TextUtils.isEmpty(siteUrl)) {
       shareParams.setSiteUrl(siteUrl);
     }
 
@@ -1009,4 +989,17 @@ public class SharesdkPlugin implements MethodCallHandler {
   //         Log.e("FFF", " ===== FlutterEventChannel.eventSink 为空 需要检查一下 ===== ");
   //     }
   // }
+  private final <Return> Return parseParam(Map<String, Object> paramMap, String key) {
+    if (ObjectUtils.isEmpty(paramMap) || TextUtils.isEmpty(key)) {
+      return null;
+    }
+    try {
+      if (paramMap.containsKey(key)) {
+        return (Return) paramMap.get(key);
+      }
+    } catch (Exception e) {
+      Log.e("", e.getMessage());
+    }
+    return null;
+  }
 }
