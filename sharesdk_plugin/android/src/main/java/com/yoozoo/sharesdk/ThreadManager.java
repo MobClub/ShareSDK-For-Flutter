@@ -4,9 +4,13 @@ import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import cn.sharesdk.framework.utils.SSDKLog;
 
 public final class ThreadManager {
+    private static final ExecutorService service = Executors.newSingleThreadExecutor();
 
     // UI线程
     private static Handler mManinHandler;
@@ -26,6 +30,12 @@ public final class ThreadManager {
             }
         }
         return mManinHandler;
+    }
+    public static final void execute(SafeRunnable runnable){
+        if (null == service){
+            return;
+        }
+        service.execute(runnable);
     }
     public static abstract class SafeRunnable implements Runnable {
 

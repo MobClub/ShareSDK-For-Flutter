@@ -395,8 +395,8 @@ public class SharesdkPlugin implements MethodCallHandler {
 
     //获取分享平台
     String platName = Utils.platName(num);
-    Platform platform = ShareSDK.getPlatform(platName);
-    Platform.ShareParams shareParams = new Platform.ShareParams();
+    final Platform platform = ShareSDK.getPlatform(platName);
+    final Platform.ShareParams shareParams = new Platform.ShareParams();
     //抖音分享需要参数activity
     if (platName.equals("Douyin")) {
       if (activity != null) {
@@ -513,7 +513,12 @@ public class SharesdkPlugin implements MethodCallHandler {
       shareParams.setShareType(Platform.SHARE_WXMINIPROGRAM);
     }
     registerShareCallBack(platform,result);
-    platform.share(shareParams);
+    ThreadManager.execute(new ThreadManager.SafeRunnable() {
+      @Override
+      public void safeRun() throws Throwable {
+        platform.share(shareParams);
+      }
+    });
   }
 
   /**
@@ -581,6 +586,13 @@ public class SharesdkPlugin implements MethodCallHandler {
 
     String platStr = Utils.platName(num);
     Platform platName = ShareSDK.getPlatform(platStr);
+    if ("XMAccount".equals(platStr)) {
+      if (activity != null) {
+        ShareSDK.setActivity(activity);
+      } else {
+        Log.e(TAG, "SharesdkPlugin that activity is null");
+      }
+    }
     doAuthorize(platName, result);
   }
 
@@ -812,6 +824,13 @@ public class SharesdkPlugin implements MethodCallHandler {
     String num = String.valueOf(params.get("platform"));
     String platStr = Utils.platName(num);
     Platform platName = ShareSDK.getPlatform(platStr);
+    if ("XMAccount".equals(platStr)) {
+      if (activity != null) {
+        ShareSDK.setActivity(activity);
+      } else {
+        Log.e(TAG, "SharesdkPlugin that activity is null");
+      }
+    }
     doUserInfo(platName, result);
     Log.e("SharesdkPlugin", " platName " + platName + " ====> " + call.arguments.toString());
   }
