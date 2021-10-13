@@ -153,7 +153,11 @@ class ShareSDKPlatforms {
   static final ShareSDKPlatform douyin =
       ShareSDKPlatform(name: "douyin", id: 59);
   static final ShareSDKPlatform apple = ShareSDKPlatform(name: 'apple', id: 61);
+  static final ShareSDKPlatform hwaccount =
+      ShareSDKPlatform(name: 'HWAccount', id: 63);
   static final ShareSDKPlatform oasis = ShareSDKPlatform(name: 'oasis', id: 64);
+  static final ShareSDKPlatform xmaccount =
+      ShareSDKPlatform(name: 'XMAccount', id: 65);
   static final ShareSDKPlatform snapchat =
       ShareSDKPlatform(name: 'snapchat', id: 66);
   static final ShareSDKPlatform kuaishou =

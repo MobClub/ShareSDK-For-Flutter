@@ -445,7 +445,19 @@ MobSDK {
                 callbackAct "cn.sharesdk.demo.MainActivity"
                 enable true
             }
-
+            HWAccount {
+                id 63
+                sortId 63
+                appId "101353159"
+                enable true
+            }
+            XMAccount {
+                id 65
+                sortId 65
+                appId "2882303761518333605"
+                callbackUri "http://www.mob.com"
+                enable true
+            }
         }
     }
 }

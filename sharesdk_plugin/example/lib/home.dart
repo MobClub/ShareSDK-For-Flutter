@@ -155,21 +155,60 @@ class _HomePageState extends State<HomePage> {
       showAlert(state, user != null ? user : error.rawData, context);
     });
   }
+  void getUserInfoToHw(BuildContext context) {
+    getUserInfoByPlatform(context, ShareSDKPlatforms.hwaccount);
+  }
 
+  void getUserInfoToXm(BuildContext context) {
+    getUserInfoByPlatform(context, ShareSDKPlatforms.xmaccount);
+  }
+
+  void getUserInfoByPlatform(BuildContext context, ShareSDKPlatform platform) {
+    SharesdkPlugin.getUserInfo(platform,
+        (SSDKResponseState state, dynamic user, SSDKError error) {
+      showAlert(state, user != null ? user : error.rawData, context);
+    });
+  }
   void cancelAuth(BuildContext context) {
     SharesdkPlugin.cancelAuth(ShareSDKPlatforms.wechatSession,
         (SSDKResponseState state, dynamic user, SSDKError error) {
       showAlert(state, error.rawData, context);
     });
   }
+  void cancelAuthXm(BuildContext context) {
+    cancelAuthByPlatform(context, ShareSDKPlatforms.xmaccount);
+  }
 
+  void cancelAuthHw(BuildContext context) {
+    cancelAuthByPlatform(context, ShareSDKPlatforms.hwaccount);
+  }
+
+  void cancelAuthByPlatform(BuildContext context, ShareSDKPlatform platform) {
+    SharesdkPlugin.cancelAuth(platform,
+        (SSDKResponseState state, dynamic user, SSDKError error) {
+      showAlert(state, error.rawData, context);
+    });
+  }
   void hasAuthed(BuildContext context) {
     SharesdkPlugin.hasAuthed(ShareSDKPlatforms.wechatSession,
         (SSDKResponseState state, dynamic user, SSDKError error) {
       showAlert(state, error.rawData , context);
     });
   }
+ void hasAuthedHw(BuildContext context) {
+    hasAuthedByPlatform(context, ShareSDKPlatforms.hwaccount);
+  }
 
+  void hasAuthedXm(BuildContext context) {
+    hasAuthedByPlatform(context, ShareSDKPlatforms.xmaccount);
+  }
+
+  void hasAuthedByPlatform(BuildContext context, ShareSDKPlatform platform) {
+    SharesdkPlugin.hasAuthed(platform,
+        (SSDKResponseState state, dynamic user, SSDKError error) {
+      showAlert(state, error.rawData, context);
+    });
+  }
   void shareToSina(BuildContext context) {
     SSDKMap params = SSDKMap()
       ..setGeneral(
@@ -1000,7 +1039,19 @@ class _HomePageState extends State<HomePage> {
       showAlertText("是否安装了QQ客户端", hasClient.toString(), context);
     });
   }
+  void authToHWAccount(BuildContext context) {
+    SharesdkPlugin.auth(ShareSDKPlatforms.hwaccount, Map(),
+        (SSDKResponseState state, dynamic user, SSDKError error) {
+      showAlert(state, user != null ? user : error.rawData, context);
+    });
+  }
 
+  void authToXMAccount(BuildContext context) {
+    SharesdkPlugin.auth(ShareSDKPlatforms.xmaccount, Map(),
+        (SSDKResponseState state, dynamic user, SSDKError error) {
+      showAlert(state, user != null ? user : error.rawData, context);
+    });
+  }
   void showAlert(SSDKResponseState state, dynamic content, BuildContext context) {
     print("--------------------------> state:" + state.toString());
     String title = "失败";
@@ -1223,6 +1274,12 @@ class _HomePageState extends State<HomePage> {
           _creatRow("微信用户信息", "获取微信用户信息", getUserInfoToWechat, context),
           _creatRow("微信授权", "微信授权(不返回用户数据)", authToWechat, context),
           _creatRow("取消微信授权", "取消微信平台的授权", cancelAuth, context),
+          _creatRow("华为用户信息", "获取华为用户信息", getUserInfoToHw, context),
+          _creatRow("华为授权", "华为授权(不返回用户数据)", authToHWAccount, context),
+          _creatRow("取消华为授权", "取消华为平台的授权", cancelAuthHw, context),
+          _creatRow("小米用户信息", "获取小米用户信息", getUserInfoToXm, context),
+          _creatRow("小米授权", "小米授权(不返回用户数据)", authToXMAccount, context),
+          _creatRow("取消小米授权", "取消小米平台的授权", cancelAuthXm, context),
           _creatRow("新浪/QQ授权", "新浪/QQ授权(返回用户数据)", authToSina, context),
           _creatRow("弹出分享菜单", "弹出分享菜单", showShareMenu, context),
           _creatRow("弹出编辑界面", "分享直接进行内容编辑(IOS)", showEditor, context),
