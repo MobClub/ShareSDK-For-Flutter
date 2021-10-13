@@ -64,12 +64,11 @@ android {
 
     buildTypes {
         release {
-            ndk{
-                //这里其实我觉可以直接是用"armeabi-v7a"，但国内几个大哥之前使用的都是"armeabi"
-                abiFilters "armeabi"
-            }
+//            ndk{
+//                //这里其实我觉可以直接是用"armeabi-v7a"，但国内几个大哥之前使用的都是"armeabi"
+//                abiFilters "armeabi"
+//            }
             shrinkResources false
-            debuggable true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             //signingConfig signingConfigs.release
