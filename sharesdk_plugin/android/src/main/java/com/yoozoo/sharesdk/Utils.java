@@ -98,6 +98,8 @@ public class Utils {
                 return "Cmcc";
             case "56":
                 return "Reddit";
+            case "59":
+                return "Douyin";
             case "63":
                 return "HWAccount";
             case "65":
