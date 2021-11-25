@@ -27,5 +27,7 @@ final class Const {
 		public static final String SITE_URL = "siteUrl";
 		public static final String FILE_PATH = "filePath";
 		public static final String IMAGE_DATA = "imageData";
+		public static final String VIDEO_ARRAY = "videoArray";
+		public static final String HASHTAGS = "HASHTAGS";	//话题
 	}
 }

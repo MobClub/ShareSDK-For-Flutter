@@ -98,6 +98,8 @@ const String kYXLowBandUrl = "yx_lowBand";
 const String kYXLowBandDataUrl  = "yx_lowBandData";
 const String kYXDataUrl = "yx_Data";
 const String kYXVideoLowBandDataUrl = "yx_lowvideoBandData";
+const String KHASHTAGS = "HASHTAGS";
+const String KVIDEO_ARRAY = "videoArray";
 
 
 
