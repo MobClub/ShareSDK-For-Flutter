@@ -306,7 +306,7 @@ public class SharesdkPlugin implements MethodCallHandler {
    **/
   private void getVersion(MethodCall call, Result result) {
     Map<String, Object> map = new HashMap<>();
-    map.put("版本号", "3.7.3");
+    map.put("版本号", ShareSDK.SDK_VERSION_NAME);
     result.success(map);
   }
 
