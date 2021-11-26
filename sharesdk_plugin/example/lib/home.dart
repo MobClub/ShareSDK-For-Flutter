@@ -567,7 +567,30 @@ class _HomePageState extends State<HomePage> {
           showAlert(state, error.rawData, context);
         });
   }
+  ///抖音分享图片
+  void shareToDouyinImages(BuildContext context) {
+    Map params = {KHASHTAGS: ["我的图片"], 
+    kImages: ["/sdcard/Android/data/cn.sharesdk.demo/image.jpg"], 
+    kType: SSDKContentTypes.image.value};
 
+    SharesdkPlugin.shareByMap(ShareSDKPlatforms.douyin, params,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+            SSDKError error) {
+      showAlert(state, error.rawData, context);
+    });
+  }
+  ///抖音分享视频
+ void shareToDouyinVideo(BuildContext context) {
+    Map params = {KHASHTAGS: ["我的视频"], 
+    KVIDEO_ARRAY: ["/sdcard/Android/data/cn.sharesdk.demo/video.mp4"], 
+    kType: SSDKContentTypes.video.value};
+
+    SharesdkPlugin.shareByMap(ShareSDKPlatforms.douyin, params,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+            SSDKError error) {
+      showAlert(state, error.rawData, context);
+    });
+  }
 
   void shareTikTokCustom(BuildContext context) {
     SSDKMap params = SSDKMap()
