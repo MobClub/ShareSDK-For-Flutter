@@ -77,3 +77,7 @@
 
 ## 1.3.1
 * iOS fix  bug
+
+## 1.3.2
+* android fix bug
+* android add douyin
