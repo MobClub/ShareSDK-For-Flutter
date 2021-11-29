@@ -100,6 +100,10 @@ public class Utils {
                 return "Reddit";
             case "59":
                 return "Douyin";
+            case "63":
+                return "HWAccount";
+            case "65":
+                return "XMAccount";
            /* case "994":
                 return "yixinSeries";
             case "995":

@@ -72,10 +72,12 @@
 * iOS add TikTok
 * iOS add ShareWithActivity
 
-
-
 ## 1.3.0
-
 * iOS fix  bug
-* Android fix bug
 
+## 1.3.1
+* iOS fix  bug
+
+## 1.3.2
+* android fix bug
+* android add douyin

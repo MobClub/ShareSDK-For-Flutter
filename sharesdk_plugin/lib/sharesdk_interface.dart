@@ -37,7 +37,20 @@ class SharesdkPlugin {
 
     return callback;
   }
+  static Future<dynamic> shareByMap(ShareSDKPlatform platform, Map params,
+      Function(SSDKResponseState, dynamic, dynamic, SSDKError) result) {
+    Map args = {"platform": platform.id, "params": params};
+    Future<dynamic> callback =
+        _channel.invokeMethod(ShareSDKMethods.share.name!, args);
+    callback.then((dynamic response) {
+      if (result != null) {
+        result(_state(response), response["userData"],
+            response["contentEntity"], SSDKError(rawData: response["error"]));
+      }
+    });
 
+    return callback;
+  }
   /// 系统分享
   static Future<dynamic> shareWithActivity(ShareSDKPlatform platform,
       SSDKMap params, Function(SSDKResponseState, dynamic, dynamic, SSDKError) result) {

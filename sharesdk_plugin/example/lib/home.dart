@@ -155,21 +155,60 @@ class _HomePageState extends State<HomePage> {
       showAlert(state, user != null ? user : error.rawData, context);
     });
   }
+  void getUserInfoToHw(BuildContext context) {
+    getUserInfoByPlatform(context, ShareSDKPlatforms.hwaccount);
+  }
 
+  void getUserInfoToXm(BuildContext context) {
+    getUserInfoByPlatform(context, ShareSDKPlatforms.xmaccount);
+  }
+
+  void getUserInfoByPlatform(BuildContext context, ShareSDKPlatform platform) {
+    SharesdkPlugin.getUserInfo(platform,
+        (SSDKResponseState state, dynamic user, SSDKError error) {
+      showAlert(state, user != null ? user : error.rawData, context);
+    });
+  }
   void cancelAuth(BuildContext context) {
     SharesdkPlugin.cancelAuth(ShareSDKPlatforms.wechatSession,
         (SSDKResponseState state, dynamic user, SSDKError error) {
       showAlert(state, error.rawData, context);
     });
   }
+  void cancelAuthXm(BuildContext context) {
+    cancelAuthByPlatform(context, ShareSDKPlatforms.xmaccount);
+  }
 
+  void cancelAuthHw(BuildContext context) {
+    cancelAuthByPlatform(context, ShareSDKPlatforms.hwaccount);
+  }
+
+  void cancelAuthByPlatform(BuildContext context, ShareSDKPlatform platform) {
+    SharesdkPlugin.cancelAuth(platform,
+        (SSDKResponseState state, dynamic user, SSDKError error) {
+      showAlert(state, error.rawData, context);
+    });
+  }
   void hasAuthed(BuildContext context) {
     SharesdkPlugin.hasAuthed(ShareSDKPlatforms.wechatSession,
         (SSDKResponseState state, dynamic user, SSDKError error) {
       showAlert(state, error.rawData , context);
     });
   }
+ void hasAuthedHw(BuildContext context) {
+    hasAuthedByPlatform(context, ShareSDKPlatforms.hwaccount);
+  }
 
+  void hasAuthedXm(BuildContext context) {
+    hasAuthedByPlatform(context, ShareSDKPlatforms.xmaccount);
+  }
+
+  void hasAuthedByPlatform(BuildContext context, ShareSDKPlatform platform) {
+    SharesdkPlugin.hasAuthed(platform,
+        (SSDKResponseState state, dynamic user, SSDKError error) {
+      showAlert(state, error.rawData, context);
+    });
+  }
   void shareToSina(BuildContext context) {
     SSDKMap params = SSDKMap()
       ..setGeneral(
@@ -503,6 +542,54 @@ class _HomePageState extends State<HomePage> {
             SSDKError error) {
           showAlert(state, error.rawData, context);
         });
+  }
+
+  void shareToDouyinIMCustom(BuildContext context) {
+    SSDKMap params = SSDKMap()
+      ..setGeneral(
+          "title",
+          "text",
+          ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
+          "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
+          "",
+          "http://www.mob.com/",
+          "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
+          "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
+          "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
+          "",
+          SSDKContentTypes.image);
+      params
+        ..setDouYinShareActionMode(1);
+
+    SharesdkPlugin.share(ShareSDKPlatforms.douyin, params,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+            SSDKError error) {
+          showAlert(state, error.rawData, context);
+        });
+  }
+  ///抖音分享图片
+  void shareToDouyinImages(BuildContext context) {
+    Map params = {KHASHTAGS: ["我的图片"], 
+    kImages: ["/sdcard/Android/data/cn.sharesdk.demo/image.jpg"], 
+    kType: SSDKContentTypes.image.value};
+
+    SharesdkPlugin.shareByMap(ShareSDKPlatforms.douyin, params,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+            SSDKError error) {
+      showAlert(state, error.rawData, context);
+    });
+  }
+  ///抖音分享视频
+ void shareToDouyinVideo(BuildContext context) {
+    Map params = {KHASHTAGS: ["我的视频"], 
+    KVIDEO_ARRAY: ["/sdcard/Android/data/cn.sharesdk.demo/video.mp4"], 
+    kType: SSDKContentTypes.video.value};
+
+    SharesdkPlugin.shareByMap(ShareSDKPlatforms.douyin, params,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+            SSDKError error) {
+      showAlert(state, error.rawData, context);
+    });
   }
 
   void shareTikTokCustom(BuildContext context) {
@@ -975,7 +1062,19 @@ class _HomePageState extends State<HomePage> {
       showAlertText("是否安装了QQ客户端", hasClient.toString(), context);
     });
   }
+  void authToHWAccount(BuildContext context) {
+    SharesdkPlugin.auth(ShareSDKPlatforms.hwaccount, Map(),
+        (SSDKResponseState state, dynamic user, SSDKError error) {
+      showAlert(state, user != null ? user : error.rawData, context);
+    });
+  }
 
+  void authToXMAccount(BuildContext context) {
+    SharesdkPlugin.auth(ShareSDKPlatforms.xmaccount, Map(),
+        (SSDKResponseState state, dynamic user, SSDKError error) {
+      showAlert(state, user != null ? user : error.rawData, context);
+    });
+  }
   void showAlert(SSDKResponseState state, dynamic content, BuildContext context) {
     print("--------------------------> state:" + state.toString());
     String title = "失败";
@@ -1141,7 +1240,7 @@ class _HomePageState extends State<HomePage> {
           "4rDJORmcOcSAZL1YpqGHRI605xUvrLbOhkJ07yO0wWrYrc61FA", "GNr1GespOQbrm8nvd7rlUsyRQsIo3boIbMguAl9gfpdL0aKZWe");
       register.setupDingTalk("dingoabcwtuab76wy0kyzo");
       register.setupDingTalkAuth(
-          "dingoacafcjgm0etysbv6r", "AMDCSN0sgQt2Gzx_xFU0og9cE_P9fDTumRUg3nYdxKrqL-2bgVIlM6Xj4sRzZMTC", "https://www.mob.com/sharesdk/dingding");
+          "dingoax9s2mdekb7a6748n", "dxx9KwP4BYN975umF6Mi2QW3jL7O3k3qHCSvcCbes5Y5R7mFF1ocd19p4NdzOKD4", "https://www.mob.com/sharesdk/dingding");
       register.setupYouDao(
           "dcde25dca105bcc36884ed4534dab940", "d98217b4020e7f1874263795f44838fe", "http://www.sharesdk.cn/");
       register.setupMingDao(
@@ -1198,6 +1297,12 @@ class _HomePageState extends State<HomePage> {
           _creatRow("微信用户信息", "获取微信用户信息", getUserInfoToWechat, context),
           _creatRow("微信授权", "微信授权(不返回用户数据)", authToWechat, context),
           _creatRow("取消微信授权", "取消微信平台的授权", cancelAuth, context),
+          _creatRow("华为用户信息", "获取华为用户信息", getUserInfoToHw, context),
+          _creatRow("华为授权", "华为授权(不返回用户数据)", authToHWAccount, context),
+          _creatRow("取消华为授权", "取消华为平台的授权", cancelAuthHw, context),
+          _creatRow("小米用户信息", "获取小米用户信息", getUserInfoToXm, context),
+          _creatRow("小米授权", "小米授权(不返回用户数据)", authToXMAccount, context),
+          _creatRow("取消小米授权", "取消小米平台的授权", cancelAuthXm, context),
           _creatRow("新浪/QQ授权", "新浪/QQ授权(返回用户数据)", authToSina, context),
           _creatRow("弹出分享菜单", "弹出分享菜单", showShareMenu, context),
           _creatRow("弹出编辑界面", "分享直接进行内容编辑(IOS)", showEditor, context),
@@ -1218,6 +1323,8 @@ class _HomePageState extends State<HomePage> {
           _creatRow("分享图片到绿洲", "测试自定义参数", shareOassisCustom, context),
           _creatRow("分享图片到快手", "测试自定义参数", shareKuaiShouCustom, context),
           _creatRow("分享图片到抖音", "需要传入当前图片到抖音", shareToDouyinCustom, context),
+          _creatRow("分享图片到抖音IM", "需要传入当前图片到抖音", shareToDouyinIMCustom, context),
+
           _creatRow("分享图片到TikTok", "测试自定义参数", shareTikTokCustom, context),
           _creatRow("分享链接到KakaoTalk", "测试自定义参数", shareKakaoTalkCustom, context),
           _creatRow("分享图片到KakaoStory", "测试自定义参数", shareKakaoStoryCustom, context),
