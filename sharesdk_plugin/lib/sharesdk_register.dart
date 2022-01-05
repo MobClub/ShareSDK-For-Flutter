@@ -21,6 +21,10 @@ class ShareSDKRegister {
   static const String _ssdkAppUniversalLink = "app_universalLink";
   static const String _ssdkclientIdUnsafe = "client_id_unsafe";
   static const String _ssdkOpen_countryList = "open_countryList";
+  static const String _ssdkCorp_id = "corp_id";
+  static const String _ssdkAgent_id = "agent_id";
+
+
 
 
   final Map platformsInfo = {};
@@ -50,8 +54,22 @@ class ShareSDKRegister {
 
   /// set up qq platform info
   void setupQQ(String appId, String appkey) {
-    Map info = {_ssdkAppId: appId, _ssdkAppkey: appkey};
+    Map info = {
+      _ssdkAppId: appId,
+      _ssdkAppkey: appkey
+    };
     platformsInfo[ShareSDKPlatforms.qqSeries.id] = info;
+  }
+
+  /// set up wework platform info
+  void setupWework(String schema, String appKey, String agentId, String appSecret) {
+    Map info = {
+      _ssdkAppkey: schema,
+      _ssdkCorp_id: appKey,
+      _ssdkAgent_id: agentId,
+      _ssdkAppSecret: appSecret
+    };
+    platformsInfo[ShareSDKPlatforms.wework.id] = info;
   }
 
   /// set up twitter platform info

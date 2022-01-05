@@ -261,6 +261,16 @@
 				<string>ks705657770555308030</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>wework</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wwautha21eaecf93f0e3ba000012</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>

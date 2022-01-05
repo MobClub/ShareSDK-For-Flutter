@@ -52,7 +52,8 @@ Pod::Spec.new do |s|
   s.dependency 'mob_sharesdk/ShareSDKPlatforms/Evernote'
   s.dependency 'mob_sharesdk/ShareSDKPlatforms/Yixin'
   s.dependency 'mob_sharesdk/ShareSDKPlatforms/SMS'
-  
+  s.dependency 'mob_sharesdk/ShareSDKPlatforms/WeWork'
+
   #分享闭环
   s.dependency 'mob_sharesdk/ShareSDKRestoreScene'
   s.static_framework = true

@@ -152,6 +152,8 @@ class ShareSDKPlatforms {
       ShareSDKPlatform(name: "reddit", id: 56);
   static final ShareSDKPlatform douyin =
       ShareSDKPlatform(name: "douyin", id: 59);
+  static final ShareSDKPlatform wework =
+      ShareSDKPlatform(name: "wework", id: 60);
   static final ShareSDKPlatform apple = ShareSDKPlatform(name: 'apple', id: 61);
   static final ShareSDKPlatform hwaccount =
       ShareSDKPlatform(name: 'HWAccount', id: 63);

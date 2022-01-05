@@ -1055,7 +1055,6 @@ class _HomePageState extends State<HomePage> {
         });
   }
 
-
   void isClientInstalledQQ(BuildContext context) {
     SharesdkPlugin.isClientInstalled(ShareSDKPlatforms.qq)
         .then((dynamic hasClient) {
@@ -1216,6 +1215,7 @@ class _HomePageState extends State<HomePage> {
       register.setupTwitter(
           "viOnkeLpHBKs6KXV7MPpeGyzE", "NJEglQUy2rqZ9Io9FcAU9p17omFqbORknUpRrCDOK46aAbIiey", "http://mob.com");
       register.setupOasis("568898243");
+      register.setupWework("wwautha21eaecf93f0e3ba000012", "wwa21eaecf93f0e3ba", "1000012", "dW7e27P7Hc8NiYdRxnbTeOLgfI1ugR72e-PM8uusq2s");
       register.setupSnapchat("dc8e6068-0578-41b8-8392-4da009519725", "", "ssdkmoba0b0c0d0://mob");
       register.setupKuaiShou(
           "ks705657770555308030", "RQ17enXUOioeoDMrwk3j2Q", "https://70imc.share2dlink.com/");
