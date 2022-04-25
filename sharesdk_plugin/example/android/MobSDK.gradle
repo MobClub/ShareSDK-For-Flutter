@@ -350,6 +350,7 @@ MobSDK {
                 id 39
                 sortId 39
                 appId "107704292745179"
+                bypassApproval true
                 enable true
             }
 

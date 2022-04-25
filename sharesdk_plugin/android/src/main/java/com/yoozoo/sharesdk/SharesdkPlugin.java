@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.text.TextUtils;
 
+import androidx.annotation.NonNull;
 import com.mob.MobSDK;
 import com.mob.OperationCallback;
 import com.mob.PrivacyPolicy;
@@ -24,6 +25,9 @@ import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.framework.loopshare.LoopShareResultListener;
 import cn.sharesdk.onekeyshare.OnekeyShare;
+import io.flutter.embedding.engine.plugins.FlutterPlugin;
+import io.flutter.embedding.engine.plugins.activity.ActivityAware;
+import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
 import io.flutter.plugin.common.EventChannel;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
@@ -34,7 +38,7 @@ import io.flutter.plugin.common.PluginRegistry;
 /**
  * SharesdkPlugin
  */
-public class SharesdkPlugin implements MethodCallHandler {
+public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, ActivityAware {
 
   private static final String PluginMethodGetVersion = "getVersion";
   private static final String PluginMethodShare = "share";
@@ -53,6 +57,7 @@ public class SharesdkPlugin implements MethodCallHandler {
   private static final String PluginMethodUploadPrivacyPermissionStatus = "uploadPrivacyPermissionStatus";
 
   private static final String EVENTCHANNEL = "SSDKRestoreReceiver";
+  private static MethodChannel channel;
   private static EventChannel eventChannel;
   private static EventChannel.EventSink outerEventSink;
 
@@ -61,95 +66,6 @@ public class SharesdkPlugin implements MethodCallHandler {
   public static int IS_ALIVE = 123;
 
   private static final String TAG = "SHARESDK";
-
-
-  /**
-   * Plugin registration.
-   */
-  public static void registerWith(PluginRegistry.Registrar registrar) {
-    activity = registrar.activity();
-
-    final MethodChannel channel = new MethodChannel(registrar.messenger(),
-        "com.yoozoo.mob/sharesdk");
-    channel.setMethodCallHandler(new SharesdkPlugin());
-
-    eventChannel = new EventChannel(registrar.messenger(), EVENTCHANNEL);
-    eventChannel.setStreamHandler(new EventChannel.StreamHandler() {
-
-      @Override
-      public void onListen(Object o, EventChannel.EventSink eventSink) {
-        if (eventSink != null) {
-          outerEventSink = eventSink;
-          if (IS_ALIVE != 123) {
-            try {
-              HashMap<String, Object> resMap = ShareSDK.getCustomDataFromLoopShare();
-
-              HashMap<String, Object> fedbackMap = new HashMap<>();
-              if (resMap.containsKey("path")) {
-                fedbackMap.put("path", resMap.get("path"));
-              }
-              fedbackMap.put("params", resMap);
-              outerEventSink.success(fedbackMap);
-            } catch (Throwable t) {
-              Log.e("www", " catch====> " + t);
-            }
-
-            IS_ALIVE = 123;
-          }
-          Log.e("WWW", "onListen ===> outerEventSink " + outerEventSink);
-        } else {
-          Log.e("WWW", "onListen ===> eventSink is null ");
-        }
-
-      }
-
-      @Override
-      public void onCancel(Object o) {
-        Log.e("WWW", " onCancel " + " Object " + o);
-      }
-    });
-
-    //setChannelId
-    MobSDK.setChannel(new SHARESDK(), MobSDK.CHANNEL_FLUTTER);
-
-    /**
-     * loopshare init and set Listener
-     * **/
-    ShareSDK.prepareLoopShare(new LoopShareResultListener() {
-      @Override
-      public void onResult(Object var1) {
-        String test = new Hashon().fromHashMap((HashMap<String, Object>) var1);
-        Log.e("WWW", "LoopShareResultListener onResult " + test);
-
-        if (outerEventSink != null) {
-
-          try {
-            HashMap<String, Object> resMap = (HashMap<String, Object>) var1;
-
-            HashMap<String, Object> fedbackMap = new HashMap<>();
-            if (resMap.containsKey("path")) {
-              fedbackMap.put("path", resMap.get("path"));
-            }
-            fedbackMap.put("params", resMap);
-            outerEventSink.success(fedbackMap);
-          } catch (Throwable t) {
-            Log.e("www", " catch====> " + t);
-          }
-
-          Log.e("WWW", "LoopShareResultListener onResult outerEventSink.success is ok");
-        } else {
-          Log.e("WWW", "LoopShareResultListener onResult outerEventSink is null");
-        }
-      }
-
-      @Override
-      public void onError(Throwable t) {
-        Log.e("WWW", "LoopShareResultListener onError " + t);
-      }
-    });
-    Log.e("WWW", " ShareSDK.prepareLoopShare() successed ");
-
-  }
 
   @Override
   public void onMethodCall(MethodCall call, Result result) {
@@ -260,39 +176,42 @@ public class SharesdkPlugin implements MethodCallHandler {
   //隐私协议的方法
   private void getPrivacyPolicy(MethodCall call, final Result result) {
     try {
-      HashMap<String, Object> map = call.arguments();
-      String type = String.valueOf(map.get("type"));
-      int Type = Integer.valueOf(type);
+//      HashMap<String, Object> map = call.arguments();
+//      String type = String.valueOf(map.get("type"));
+//      int Type = Integer.valueOf(type);
       //String respValue = MobSDK.getPrivacyPolicy(Type);
 
-      // 异步方法
-      MobSDK.getPrivacyPolicyAsync(Type, new PrivacyPolicy.OnPolicyListener() {
-        @Override
-        public void onComplete(PrivacyPolicy data) {
-          if (data != null) {
-            Map<String, Object> map = new HashMap<>();
-            HashMap<String, Object> valueMap = new HashMap<>();
-            String resp = String.valueOf(data.getContent());
-
-            valueMap.put("data", resp);
-            map.put("data", valueMap);
-            result.success(map);
-          }
-        }
-
-        @Override
-        public void onFailure(Throwable t) {
-          // 请求失败
-          Map<String, Object> map = new HashMap<>();
-          HashMap<String, Object> valueMap = new HashMap<>();
-          String resp = String.valueOf(t.getMessage());
-
-          valueMap.put("error", resp);
-          map.put("error", valueMap);
-          result.success(map);
-          Log.e(TAG, "隐私协议查询结果：失败 " + t);
-        }
-      });
+      // 此方法已废弃
+//      MobSDK.getPrivacyPolicyAsync(Type, new PrivacyPolicy.OnPolicyListener() {
+//        @Override
+//        public void onComplete(PrivacyPolicy data) {
+//          if (data != null) {
+//            Map<String, Object> map = new HashMap<>();
+//            HashMap<String, Object> valueMap = new HashMap<>();
+//            String resp = String.valueOf(data.getContent());
+//
+//            valueMap.put("data", resp);
+//            map.put("data", valueMap);
+//            result.success(map);
+//          }
+//        }
+//
+//        @Override
+//        public void onFailure(Throwable t) {
+//          // 请求失败
+//          Map<String, Object> map = new HashMap<>();
+//          HashMap<String, Object> valueMap = new HashMap<>();
+//          String resp = String.valueOf(t.getMessage());
+//
+//          valueMap.put("error", resp);
+//          map.put("error", valueMap);
+//          result.success(map);
+//          Log.e(TAG, "隐私协议查询结果：失败 " + t);
+//        }
+//      });
+      Map<String, Object> map = new HashMap<>();
+      map.put("", "此方法已废弃");
+      result.success(map);
 
     } catch (Throwable t) {
       Log.e("qqq", "getPrivacyPolicy catch===> " + t);
@@ -882,6 +801,9 @@ public class SharesdkPlugin implements MethodCallHandler {
     String imageY;
     String site;
     String siteUrl;
+    //facebook
+    String hashTag;
+    String quote;
 
     String filePath;
     String[]imageArray = null;
@@ -917,6 +839,9 @@ public class SharesdkPlugin implements MethodCallHandler {
     site = parseParam(dataMap,Const.Key.SITE);
     siteUrl = parseParam(dataMap,Const.Key.SITE_URL);
     filePath =parseParam(dataMap,Const.Key.FILE_PATH);
+    hashTag = parseParam(dataMap,Const.Key.HASHTAG);
+    quote = parseParam(dataMap,Const.Key.QUOTE);
+
     //获取分享图片数组
     if (dataMap.containsKey(Const.Key.IMAGES)) {
       Object images = dataMap.get(Const.Key.IMAGES);
@@ -1128,6 +1053,17 @@ public class SharesdkPlugin implements MethodCallHandler {
       shareParams.setSiteUrl(siteUrl);
     }
 
+    if (!TextUtils.isEmpty(hashTag)) {
+      if (ObjectUtils.notNull(shareParams)){
+        shareParams.setHashtag(hashTag);
+      }
+    }
+    if (!TextUtils.isEmpty(quote)) {
+      if (ObjectUtils.notNull(shareParams)){
+        shareParams.setQuote(quote);
+      }
+    }
+
     if (ObjectUtils.notNull(shareParams)) {
       if (type.equals("1")) {
         shareParams.setShareType(Platform.SHARE_TEXT);
@@ -1163,5 +1099,116 @@ public class SharesdkPlugin implements MethodCallHandler {
       return (RETURN) shareParams;
     }
     return null;
+  }
+
+  @Override
+  public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
+    channel = new MethodChannel(binding.getBinaryMessenger(),
+            "com.yoozoo.mob/sharesdk");
+    channel.setMethodCallHandler(new SharesdkPlugin());
+
+    eventChannel = new EventChannel(binding.getBinaryMessenger(), EVENTCHANNEL);
+    eventChannel.setStreamHandler(new EventChannel.StreamHandler() {
+
+      @Override
+      public void onListen(Object o, EventChannel.EventSink eventSink) {
+        if (eventSink != null) {
+          outerEventSink = eventSink;
+          if (IS_ALIVE != 123) {
+            try {
+              HashMap<String, Object> resMap = ShareSDK.getCustomDataFromLoopShare();
+
+              HashMap<String, Object> fedbackMap = new HashMap<>();
+              if (resMap.containsKey("path")) {
+                fedbackMap.put("path", resMap.get("path"));
+              }
+              fedbackMap.put("params", resMap);
+              outerEventSink.success(fedbackMap);
+            } catch (Throwable t) {
+              Log.e("www", " catch====> " + t);
+            }
+
+            IS_ALIVE = 123;
+          }
+          Log.e("WWW", "onListen ===> outerEventSink " + outerEventSink);
+        } else {
+          Log.e("WWW", "onListen ===> eventSink is null ");
+        }
+
+      }
+
+      @Override
+      public void onCancel(Object o) {
+        Log.e("WWW", " onCancel " + " Object " + o);
+      }
+    });
+
+    //setChannelId
+    MobSDK.setChannel(new SHARESDK(), MobSDK.CHANNEL_FLUTTER);
+
+    /**
+     * loopshare init and set Listener
+     * **/
+    ShareSDK.prepareLoopShare(new LoopShareResultListener() {
+      @Override
+      public void onResult(Object var1) {
+        String test = new Hashon().fromHashMap((HashMap<String, Object>) var1);
+        Log.e("WWW", "LoopShareResultListener onResult " + test);
+
+        if (outerEventSink != null) {
+
+          try {
+            HashMap<String, Object> resMap = (HashMap<String, Object>) var1;
+
+            HashMap<String, Object> fedbackMap = new HashMap<>();
+            if (resMap.containsKey("path")) {
+              fedbackMap.put("path", resMap.get("path"));
+            }
+            fedbackMap.put("params", resMap);
+            outerEventSink.success(fedbackMap);
+          } catch (Throwable t) {
+            Log.e("www", " catch====> " + t);
+          }
+
+          Log.e("WWW", "LoopShareResultListener onResult outerEventSink.success is ok");
+        } else {
+          Log.e("WWW", "LoopShareResultListener onResult outerEventSink is null");
+        }
+      }
+
+      @Override
+      public void onError(Throwable t) {
+        Log.e("WWW", "LoopShareResultListener onError " + t);
+      }
+    });
+    Log.e("WWW", " ShareSDK.prepareLoopShare() successed ");
+  }
+
+  @Override
+  public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
+    try {
+      channel.setMethodCallHandler(null);
+      eventChannel.setStreamHandler(null);
+    }catch (Throwable e){}
+  }
+
+  @Override
+  public void onAttachedToActivity(@NonNull ActivityPluginBinding binding) {
+    activity = binding.getActivity();
+  }
+
+  @Override
+  public void onDetachedFromActivityForConfigChanges() {
+
+  }
+
+  @Override
+  public void onReattachedToActivityForConfigChanges(@NonNull ActivityPluginBinding binding) {
+
+  }
+
+  @Override
+  public void onDetachedFromActivity() {
+
   }
 }

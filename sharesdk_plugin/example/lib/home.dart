@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
       } else if (errorStr != null) {
         showAlertText("隐私协议", errorStr, context);
       } else {
-        showAlertText("隐私协议", "获取隐私协议失败", context);
+        showAlertText("隐私协议", "获取隐私协议失败:此接口已废弃", context);
       }
     });
   }
