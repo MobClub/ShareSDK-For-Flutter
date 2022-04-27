@@ -29,5 +29,7 @@ final class Const {
 		public static final String IMAGE_DATA = "imageData";
 		public static final String VIDEO_ARRAY = "videoArray";
 		public static final String HASHTAGS = "HASHTAGS";	//话题
+		public static final String HASHTAG = "facebook_hashtag";
+		public static final String QUOTE = "facebook_quote";
 	}
 }
