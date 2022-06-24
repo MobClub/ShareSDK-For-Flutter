@@ -84,3 +84,6 @@
 
 ## 1.3.3
 * upgrade Android embedding from v1 to v2
+* 
+## 1.3.4
+* Code formatting optimization
