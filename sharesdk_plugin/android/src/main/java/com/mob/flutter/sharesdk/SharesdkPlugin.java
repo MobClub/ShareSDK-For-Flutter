@@ -1,4 +1,4 @@
-package com.yoozoo.sharesdk;
+package com.mob.flutter.sharesdk;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -9,6 +9,11 @@ import com.mob.MobSDK;
 import com.mob.OperationCallback;
 import com.mob.PrivacyPolicy;
 import com.mob.commons.SHARESDK;
+import com.mob.flutter.sharesdk.impl.Const;
+import com.mob.flutter.sharesdk.impl.Log;
+import com.mob.flutter.sharesdk.impl.ObjectUtils;
+import com.mob.flutter.sharesdk.impl.ThreadManager;
+import com.mob.flutter.sharesdk.impl.Utils;
 import com.mob.tools.utils.Hashon;
 
 import org.json.JSONException;

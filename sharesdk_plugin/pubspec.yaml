@@ -30,7 +30,7 @@ flutter:
 
     platforms:
       android:
-        package: com.yoozoo.sharesdk
+        package: com.mob.flutter.sharesdk
         pluginClass: SharesdkPlugin
       ios:
         pluginClass: SharesdkPlugin

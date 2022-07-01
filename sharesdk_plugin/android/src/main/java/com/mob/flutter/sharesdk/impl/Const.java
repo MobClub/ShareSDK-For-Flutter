@@ -1,7 +1,7 @@
-package com.yoozoo.sharesdk;
+package com.mob.flutter.sharesdk.impl;
 
-final class Const {
-	static final class Key {
+public final class Const {
+	public static final class Key {
 		public static final String IMAGES = "images";
 		public static final String IMAGE_URL_ANDROID = "imageUrl_android";
 		public static final String IMAGE_PATH_ANDROID = "imagePath_android";

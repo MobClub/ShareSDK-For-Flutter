@@ -1,6 +1,6 @@
 package com.mob.sharesdk_plugin_example;
 
-import com.yoozoo.sharesdk.FlutterLoopSharePrepare;
+import com.mob.flutter.sharesdk.impl.FlutterLoopSharePrepare;
 import io.flutter.app.FlutterApplication;
 
 public class App extends FlutterApplication  {

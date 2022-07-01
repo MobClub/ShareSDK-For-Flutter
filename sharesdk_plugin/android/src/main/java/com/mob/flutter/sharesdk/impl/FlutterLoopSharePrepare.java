@@ -1,4 +1,4 @@
-package com.yoozoo.sharesdk;
+package com.mob.flutter.sharesdk.impl;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import java.util.HashMap;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.framework.loopshare.LoopShareResultListener;
 
-import static com.yoozoo.sharesdk.SharesdkPlugin.IS_ALIVE;
+import static com.mob.flutter.sharesdk.SharesdkPlugin.IS_ALIVE;
 
 public class FlutterLoopSharePrepare {
 

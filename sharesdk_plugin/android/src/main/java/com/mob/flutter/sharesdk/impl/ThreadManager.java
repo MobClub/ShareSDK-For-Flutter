@@ -1,4 +1,4 @@
-package com.yoozoo.sharesdk;
+package com.mob.flutter.sharesdk.impl;
 
 import android.os.Handler;
 import android.os.Looper;

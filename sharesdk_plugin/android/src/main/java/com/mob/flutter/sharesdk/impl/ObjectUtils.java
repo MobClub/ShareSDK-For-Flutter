@@ -1,4 +1,4 @@
-package com.yoozoo.sharesdk;
+package com.mob.flutter.sharesdk.impl;
 
 import java.util.Collection;
 import java.util.Map;
