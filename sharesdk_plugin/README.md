@@ -1,27 +1,27 @@
-**Document Language:** **English** | **[中文](https://github.com/MobClub/ShareSDK-For-Flutter/blob/master/README_CN.md)**
 
 # ShareSDK For Flutter
-### ShareSDK is a social sharing component that provides social functions for apps, like authorization and share, and has social statistical analysis management background.
+### 这是一个基于ShareSDK功能的扩展的Flutter插件。使用此插件能够帮助您在使用Flutter开发应用时,快速地实现社会化功能,例如第三方授权登录,获取用户信息以及社交平台的分享等功能。
 
-**supported original ShareSDK minimum version:**
+**原生SDK支持的最低版本:**
 
 - [Android](https://github.com/MobClub/ShareSDK-for-Android) - V3.4.0
 - [iOS](https://github.com/MobClub/ShareSDK-for-iOS) - V4.3.2
 
-**introduce:** http://www.mob.com/product/sharesdk
+**简介：** http://www.mob.com/product/sharesdk
 
-**plugin homepage:** https://pub.dartlang.org/packages/sharesdk_plugin
+**插件主页：** https://pub.dartlang.org/packages/sharesdk_plugin
 
-**official document:** http://wiki.mob.com/快速集成/
+**官网文档：** http://wiki.mob.com/快速集成/
 
-## Getting Started
+**Demo例子：** https://github.com/MobClub/ShareSDK-For-Flutter/sharesdk_plugin
 
-Refer to [the official document](https://pub.dartlang.org/packages/sharesdk#-installing-tab-)
+## 开始集成
 
-If you need to customize the platforms:
+参考[官方插件集成文档](https://pub.dartlang.org/packages/sharesdk#-installing-tab-)
 
-### iOS
-You need to editor *sharesdk.podspec* , please refer to [official website document](http://wiki.mob.com/cocoapods%E9%9B%86%E6%88%90/) for supported platforms.
+自定义需要导入的分享平台:
+### iOS 
+ 你需要重新编辑 *sharesdk.podspec* 文件设置 dependency，具体支持的平台可以参阅`pod search mob_sharesdk` 或者参考[官网文档](https://www.mob.com/wiki/detailed?wiki=4&id=14)
 
 ```
 #
@@ -51,12 +51,10 @@ s.ios.deployment_target = '8.0'
 end
 ```
 
-Then you need to configure Appkey and AppSecret in info.plist according to [the official document](http://wiki.mob.com/快速集成/), as well as the whitelist and urlScheme of each platform.
+然后你需要根据[官方文档](https://www.mob.com/wiki/detailed?wiki=484&id=14)在Xcode工程的info.plist里面配置Appkey 和 AppSecret, 以及各平台的白名单和urlScheme。
 
 ### Android
-You need to edit build.gradle, mobsdk.gradle file again to select the platform you need to use,
-For specific supported platforms, please refer to [official website technical documentation](http://wiki.mob.com/%E5%AE%8C%E6%95%B4%E9%9B%86%E6%88%90%E6%96%87%E6%A1%A3%EF%BC%88gradle%EF%BC%89/)
-To meet the requirements of the example project, you need to configure at least the following platforms:
+你需要重新编辑build.gradle, mobsdk.gradle文件来选择你需要使用的平台，具体支持的平台可以参阅[官网技术文档](https://www.mob.com/wiki/detailed?wiki=485&id=14)
 
 #### build.gradle
 
@@ -145,3 +143,18 @@ MobSDK {
 }
 ```
 
+## 接口方法说明
+接口详情：[API接口调用](https://www.mob.com/wiki/detailed?wiki=31&id=14)
+
+## 技术支持
+如有问题请联系技术支持:
+
+```
+服务电话:   400-685-2216
+QQ:        4006852216
+节假日值班电话:
+    iOS：185-1664-1951
+Android: 185-1664-1950
+电子邮箱:   support@mob.com
+市场合作:   021-54623100
+```
