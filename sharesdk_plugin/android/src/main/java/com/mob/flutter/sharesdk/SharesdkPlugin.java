@@ -61,7 +61,7 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
   private static final String PluginMethodGetPrivacyPolicy = "getPrivacyPolicy";
   private static final String PluginMethodUploadPrivacyPermissionStatus = "uploadPrivacyPermissionStatus";
 
-  private static final String EVENTCHANNEL = "SSDKRestoreReceiver";
+  private static final String EVENTCHANNEL = "com.mob.sharesdk.restorereceiver";
   private static MethodChannel channel;
   private static EventChannel eventChannel;
   private static EventChannel.EventSink outerEventSink;
@@ -1109,7 +1109,7 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
     channel = new MethodChannel(binding.getBinaryMessenger(),
-            "com.yoozoo.mob/sharesdk");
+            "com.mob.sharesdk.methodchannel");
     channel.setMethodCallHandler(new SharesdkPlugin());
 
     eventChannel = new EventChannel(binding.getBinaryMessenger(), EVENTCHANNEL);
