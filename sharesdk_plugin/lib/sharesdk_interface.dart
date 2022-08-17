@@ -7,8 +7,8 @@ import './sharesdk_map.dart';
 typedef void EventHandler(dynamic event);
 
 class SharesdkPlugin {
-	static const MethodChannel _channel = const MethodChannel('com.yoozoo.mob/sharesdk');
-	static const EventChannel _channelReciever = const EventChannel('SSDKRestoreReceiver');
+	static const MethodChannel _channel = const MethodChannel('com.mob.sharesdk.methodchannel');
+	static const EventChannel _channelReciever = const EventChannel('com.mob.sharesdk.restorereceiver');
 
 	static Future<dynamic> regist(ShareSDKRegister register) async {
 		return await _channel.invokeMethod(ShareSDKMethods.regist.name!, register.platformsInfo);

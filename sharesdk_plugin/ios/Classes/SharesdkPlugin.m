@@ -51,11 +51,11 @@ typedef NS_ENUM(NSUInteger, PluginMethod) {
     });
 }
 
-static NSString *const receiverStr = @"SSDKRestoreReceiver";
+static NSString *const receiverStr = @"com.mob.sharesdk.restorereceiver";
 
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
     FlutterMethodChannel* channel = [FlutterMethodChannel
-                                     methodChannelWithName:@"com.yoozoo.mob/sharesdk"
+                                     methodChannelWithName:@"com.mob.sharesdk.methodchannel"
                                      binaryMessenger:[registrar messenger]];
     SharesdkPlugin* instance = [[SharesdkPlugin alloc] init];
     instance.methodMap = @{

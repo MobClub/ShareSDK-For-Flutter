@@ -1,5 +1,7 @@
-**Document Language:** **English** | **[中文](https://github.com/MobClub/ShareSDK-For-Flutter/blob/master/README_CN.md)**
 
-# ShareSDK For Flutter
-### See detail in sharesdk_plugin folder
 
+# ShareSDK-For-Flutter
+
+### 注意：
+#### 请使用最新插件sharesdk_plugin([https://pub.dartlang.org/packages/sharesdk_plugin](https://pub.dartlang.org/packages/sharesdk_plugin))
+>
