@@ -1149,7 +1149,17 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
     });
 
     //setChannelId
-    MobSDK.setChannel(new SHARESDK(), MobSDK.CHANNEL_FLUTTER);
+    new Thread(){
+      @Override
+      public void run() {
+        super.run();
+        try {
+          MobSDK.setChannel(new SHARESDK(), MobSDK.CHANNEL_FLUTTER);
+        } catch (Throwable throwable){
+        }
+      }
+    }.start();
+
 
     /**
      * loopshare init and set Listener
