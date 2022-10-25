@@ -38,7 +38,7 @@ Pod::Spec.new do |s|
   s.dependency 'mob_sharesdk_spec2/ShareSDKPlatforms/GooglePlus'
   s.dependency 'mob_sharesdk_spec2/ShareSDKPlatforms/LinkedIn'
   s.dependency 'mob_sharesdk_spec2/ShareSDKPlatforms/VKontakte'
-  s.dependency 'mob_shamob_sharesdk_spec2resdk/ShareSDKPlatforms/Telegram'
+  s.dependency 'mob_sharesdk_spec2/ShareSDKPlatforms/Telegram'
   s.dependency 'mob_sharesdk_spec2/ShareSDKPlatforms/Reddit'
   s.dependency 'mob_sharesdk_spec2/ShareSDKPlatforms/Pocket'
   s.dependency 'mob_sharesdk_spec2/ShareSDKPlatforms/Flickr'
