@@ -1,6 +1,6 @@
 name: sharesdk_plugin
 description: ShareSDK is a social sharing component that provides social functions for apps, like authorization and share, and has social statistical analysis management background.
-version: 1.3.5
+version: 1.3.6
 homepage: http://www.mob.com/mobService/sharesdk
 
 environment:
