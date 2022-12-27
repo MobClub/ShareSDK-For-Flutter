@@ -792,8 +792,8 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
     String musicUrl = "";
     String fileData = "";
     String wxmpUserName = "";
-    String wxmpType = "";
-    String wxmpWithTicket = "";
+    int wxmpType ;
+    boolean wxmpWithTicket ;
     String wxmpPath = "";
     String videoUrl = "";
     String type = "";
@@ -979,14 +979,14 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
       Log.e("WWW", " filePath===》 " + filePath);
     }
 
-    if (!TextUtils.isEmpty(wxmpType)) {
+    if (!TextUtils.isEmpty(String.valueOf(wxmpType))) {
       if (ObjectUtils.notNull(shareParams)){
-        shareParams.setWxMiniProgramType(Integer.valueOf(wxmpType));
+        shareParams.setWxMiniProgramType(wxmpType);
       }
     }
-    if (!TextUtils.isEmpty(wxmpWithTicket)) {
+    if (!TextUtils.isEmpty(String.valueOf(wxmpWithTicket))) {
       if (ObjectUtils.notNull(shareParams)){
-        shareParams.setWxWithShareTicket(Boolean.valueOf(wxmpWithTicket));
+        shareParams.setWxWithShareTicket(wxmpWithTicket);
       }
     }
     if (!TextUtils.isEmpty(wxmpPath)) {
