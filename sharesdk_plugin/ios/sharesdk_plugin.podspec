@@ -54,8 +54,6 @@ Pod::Spec.new do |s|
   s.dependency 'mob_sharesdk_spec2/ShareSDKPlatforms/SMS'
   s.dependency 'mob_sharesdk_spec2/ShareSDKPlatforms/WeWork'
 
-  #分享闭环
-  s.dependency 'mob_sharesdk_spec2/ShareSDKRestoreScene'
   s.static_framework = true
 
   s.ios.deployment_target = '8.0'
