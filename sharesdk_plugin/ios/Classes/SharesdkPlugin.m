@@ -2,7 +2,7 @@
 #import <ShareSDK/ShareSDKHeader.h>
 #import <ShareSDKUI/ShareSDKUI.h>
 #import <ShareSDKExtension/ShareSDK+Extension.h>
-#import <MOBFoundation/MOBFoundation.h>import 'package:flutter/services.dart';
+#import <MOBFoundation/MOBFoundation.h>
 #import <objc/message.h>
 #import <MOBFoundation/MobSDK+Privacy.h>
 
@@ -27,7 +27,7 @@ typedef NS_ENUM(NSUInteger, PluginMethod) {
 
 };
 
-@interface SharesdkPlugin()<FlutterStreamHandler,ISSERestoreSceneDelegate>
+@interface SharesdkPlugin()<FlutterStreamHandler>
 
 @property (strong, nonatomic) NSDictionary *methodMap;
 
@@ -82,7 +82,6 @@ static NSString *const receiverStr = @"com.mob.sharesdk.restorereceiver";
     FlutterEventChannel* e_channel = [FlutterEventChannel eventChannelWithName:receiverStr binaryMessenger:[registrar messenger]];
     [e_channel setStreamHandler:instance];
     
-    [instance addObserver];
 }
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
@@ -777,40 +776,6 @@ static NSString *const receiverStr = @"com.mob.sharesdk.restorereceiver";
 {
     self.callBack = nil;
     return nil;
-}
-
-
-#pragma mark - 场景还原 添加监听
-- (void)addObserver
-{
-    [ShareSDK setRestoreSceneDelegate:self];
-}
-
-#pragma mark - ISSERestoreSceneDelegate
-
-/**
- 闭环分享代理回调
- 
- */
-- (void)ISSEWillRestoreScene:(SSERestoreScene *)scene error:(NSError *)error
-{
-    NSMutableDictionary *resultDict = [NSMutableDictionary dictionary];
-       
-    if (scene.path.length > 0)
-    {
-        resultDict[@"path"] = scene.path;
-    }
-       
-    if (scene.params && scene.params.count > 0)
-    {
-        resultDict[@"params"] = scene.params;
-    }
-    if (self.callBack)
-    {
-        self.callBack(resultDict);
-    }else{
-        self.sceneData = resultDict;
-    }
 }
 
 
