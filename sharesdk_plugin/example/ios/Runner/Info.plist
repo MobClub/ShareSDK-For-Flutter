@@ -187,7 +187,7 @@
 			<string>twitter</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>twitterkit-viOnkeLpHBKs6KXV7MPpeGyzE</string>
+				<string>twitterkit-WjmQNOqQB5YwPTs3AcZXVXYn3</string>
 			</array>
 		</dict>
 		<dict>
@@ -452,5 +452,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
 </dict>
 </plist>

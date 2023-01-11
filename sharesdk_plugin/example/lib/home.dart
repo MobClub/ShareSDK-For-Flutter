@@ -1213,7 +1213,7 @@ class _HomePageState extends State<HomePage> {
       register.setupFacebook(
           "1412473428822331", "a42f4f3f867dc947b9ed6020c2e93558", "shareSDK");
       register.setupTwitter(
-          "viOnkeLpHBKs6KXV7MPpeGyzE", "NJEglQUy2rqZ9Io9FcAU9p17omFqbORknUpRrCDOK46aAbIiey", "http://mob.com");
+          "WjmQNOqQB5YwPTs3AcZXVXYn3", "CWEkJUeq1sTMt4OzKMo08iRe1OlK468NAVh0XBxNtFgvvjbRl4", "https://www.mob.com");
       register.setupOasis("568898243");
       register.setupWework("wwautha21eaecf93f0e3ba000012", "wwa21eaecf93f0e3ba", "1000012", "dW7e27P7Hc8NiYdRxnbTeOLgfI1ugR72e-PM8uusq2s");
       register.setupSnapchat("dc8e6068-0578-41b8-8392-4da009519725", "", "ssdkmoba0b0c0d0://mob");
