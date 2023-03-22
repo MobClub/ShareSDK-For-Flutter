@@ -410,7 +410,7 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
    * 取消授权
    **/
   private void cancelAuth(MethodCall call, final Result result) {
-    String platStr = Utils.platName(String.valueOf(call.arguments()));
+    String platStr = Utils.platName(String.valueOf(call.arguments));
     Platform platform = ShareSDK.getPlatform(platStr);
 
     if (platform != null) {
