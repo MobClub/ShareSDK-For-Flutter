@@ -459,6 +459,14 @@ MobSDK {
                 callbackUri "http://www.mob.com"
                 enable true
             }
+            Wework {
+                id 60
+                sortId 60
+                appKey "wwdc4a362d31d88beb"
+                appSecret "vhwRyxZRvXhIOCIjC6fZayRk1xwlGaPmGnBQdhrWoNc"
+                agentId "1000002"
+                schema "wwauthdc4a362d31d88beb000002"
+            }
         }
     }
 }

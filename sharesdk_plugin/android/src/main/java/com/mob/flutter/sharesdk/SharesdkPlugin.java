@@ -792,8 +792,8 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
     String musicUrl = "";
     String fileData = "";
     String wxmpUserName = "";
-    int wxmpType ;
-    boolean wxmpWithTicket ;
+    String wxmpType = "";
+    String wxmpWithTicket = "";
     String wxmpPath = "";
     String videoUrl = "";
     String type = "";
@@ -826,8 +826,14 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
     musicUrl = parseParam(dataMap,Const.Key.AUDIO_FLASH_URL);
     fileData = parseParam(dataMap,Const.Key.FILE_DATA);
     wxmpUserName = parseParam(dataMap,Const.Key.WXMP_USER_NAME);
-    wxmpType = parseParam(dataMap,Const.Key.WXMP_TYPE);
-    wxmpWithTicket = parseParam(dataMap,Const.Key.WXMP_WITH_TICKET);
+    Object wxType = parseParam(dataMap, Const.Key.WXMP_TYPE);
+    if (wxType != null) {
+      wxmpType = wxType.toString();
+    }
+    Object wxTicket = parseParam(dataMap, Const.Key.WXMP_WITH_TICKET);
+    if (wxTicket != null) {
+      wxmpWithTicket = wxTicket.toString();
+    }
     wxmpPath =  parseParam(dataMap,Const.Key.WXMP_PATH);
     videoUrl =parseParam(dataMap,Const.Key.VIDEO_URL_ANDROID);
     Object tempType = parseParam(dataMap,Const.Key.TYPE);
@@ -979,14 +985,14 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
       Log.e("WWW", " filePath===》 " + filePath);
     }
 
-    if (!TextUtils.isEmpty(String.valueOf(wxmpType))) {
+    if (!TextUtils.isEmpty(wxmpType)) {
       if (ObjectUtils.notNull(shareParams)){
-        shareParams.setWxMiniProgramType(wxmpType);
+        shareParams.setWxMiniProgramType(Integer.parseInt(wxmpType));
       }
     }
-    if (!TextUtils.isEmpty(String.valueOf(wxmpWithTicket))) {
+    if (!TextUtils.isEmpty(wxmpWithTicket)) {
       if (ObjectUtils.notNull(shareParams)){
-        shareParams.setWxWithShareTicket(wxmpWithTicket);
+        shareParams.setWxWithShareTicket(Boolean.parseBoolean(wxmpWithTicket));
       }
     }
     if (!TextUtils.isEmpty(wxmpPath)) {
