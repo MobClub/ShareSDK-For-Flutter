@@ -96,6 +96,7 @@
 
 ## 1.3.7
 * 1.android fix bug
-* 
+
 ## 1.3.8
 * 1.android fix bug
+* 2.ios fix bug
