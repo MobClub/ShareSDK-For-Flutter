@@ -1055,6 +1055,38 @@ class _HomePageState extends State<HomePage> {
         });
   }
 
+  void shareWework(BuildContext context) {
+    SSDKMap params = SSDKMap()
+      ..setGeneral(
+          "title",
+          "text",
+          [
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"
+          ],
+          "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
+          "",
+          "http://www.mob.com/",
+          "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
+          "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
+          "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
+          "",
+          SSDKContentTypes.image);
+
+    SharesdkPlugin.share(ShareSDKPlatforms.wework, params,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+            SSDKError error) {
+      showAlert(state, error.rawData, context);
+    });
+  }
+
+  void authWework(BuildContext context) {
+    SharesdkPlugin.getUserInfo(ShareSDKPlatforms.wework,
+        (SSDKResponseState state, dynamic userdata, SSDKError error) {
+      showAlert(state, userdata, context);
+    });
+  }
+
   void isClientInstalledQQ(BuildContext context) {
     SharesdkPlugin.isClientInstalled(ShareSDKPlatforms.qq)
         .then((dynamic hasClient) {
@@ -1203,7 +1235,7 @@ class _HomePageState extends State<HomePage> {
       register.setupWechat(
           "wx617c77c82218ea2c", "c7253e5289986cf4c4c74d1ccc185fb1", "https://70imc.share2dlink.com/");
       register.setupSinaWeibo(
-          "568898243", "38a4f8204cc784f81f9f0daaf31e02e3", "http://www.sharesdk.cn", "https://70imc.share2dlink.com/");
+          "1556465402", "d40c0a5436156e2604a30851df6434bf", "https://www.mob.com/", "https://70imc.share2dlink.com/");
       register.setupQQ(
           "1110451818", "OlbzvuSP3Hgj5yNS");
       register.setupDouyin(
@@ -1213,10 +1245,10 @@ class _HomePageState extends State<HomePage> {
       register.setupFacebook(
           "1412473428822331", "a42f4f3f867dc947b9ed6020c2e93558", "shareSDK");
       register.setupTwitter(
-          "viOnkeLpHBKs6KXV7MPpeGyzE", "NJEglQUy2rqZ9Io9FcAU9p17omFqbORknUpRrCDOK46aAbIiey", "http://mob.com");
+          "YUJMMTFOcE93MGI4Zi1aRTlHQnM6MTpjaQ", "ppuG1yR5Sb7PXn2IZAu-4nJwbhh1mLq3ieJXOkC5wOJpVxmWli", "https://www.mob.com");
       register.setupOasis("568898243");
       register.setupWework("wwautha21eaecf93f0e3ba000012", "wwa21eaecf93f0e3ba", "1000012", "dW7e27P7Hc8NiYdRxnbTeOLgfI1ugR72e-PM8uusq2s");
-      register.setupSnapchat("dc8e6068-0578-41b8-8392-4da009519725", "", "ssdkmoba0b0c0d0://mob");
+      register.setupSnapchat("d8f03743-ce0c-433b-a49b-50b4fb0dbd55", "", "ssdkmoba0b0c0d0://mob");
       register.setupKuaiShou(
           "ks705657770555308030", "RQ17enXUOioeoDMrwk3j2Q", "https://70imc.share2dlink.com/");
       register.setupKakao(
@@ -1226,7 +1258,7 @@ class _HomePageState extends State<HomePage> {
       register.setupVKontakte(
           "5312801", "ZHG2wGymmNUCRLG2r6CY");
       register.setupTelegram(
-          "792340449:AAE9EZeQaXU9wq_r6X7Jalg8jITUEKYr9vw", "https://www.mob.com");
+          "2126389848:AAHdytrU4NgnxlUDrV6OeszZXsuoPgNezgg", "https://www.mob.com");
       register.setupLinkedIn(
           "75x5xdhllzno44", "uiS3nlE7XBGmTL3P", "http://mob.com");
       register.setupPocket(
@@ -1348,7 +1380,8 @@ class _HomePageState extends State<HomePage> {
           _creatRow("分享图片到易信朋友圈", "测试自定义参数", shareYiXinMoments, context),
           _creatRow("分享图片到易信收藏", "测试自定义参数", shareYiXinFavorite, context),
           _creatRow("分享图片到SMS", "测试自定义参数", shareSMS, context),
-
+          _creatRow("分享图片企业微信", "分享图片到企业微信", shareWework, context),
+          _creatRow("企业微信授权", "企业微信授权", authWework, context),
         ],
       ),
     );

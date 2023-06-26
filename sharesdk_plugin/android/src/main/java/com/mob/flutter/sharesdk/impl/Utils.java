@@ -104,6 +104,10 @@ public class Utils {
                 return "HWAccount";
             case "65":
                 return "XMAccount";
+            case "60":
+                return "Wework";
+            case "68":
+                return "Kuaishou";
            /* case "994":
                 return "yixinSeries";
             case "995":

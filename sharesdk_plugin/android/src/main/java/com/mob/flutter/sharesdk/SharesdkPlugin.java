@@ -410,7 +410,7 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
    * 取消授权
    **/
   private void cancelAuth(MethodCall call, final Result result) {
-    String platStr = Utils.platName(String.valueOf(call.arguments()));
+    String platStr = Utils.platName(String.valueOf(call.arguments));
     Platform platform = ShareSDK.getPlatform(platStr);
 
     if (platform != null) {
@@ -826,8 +826,14 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
     musicUrl = parseParam(dataMap,Const.Key.AUDIO_FLASH_URL);
     fileData = parseParam(dataMap,Const.Key.FILE_DATA);
     wxmpUserName = parseParam(dataMap,Const.Key.WXMP_USER_NAME);
-    wxmpType = parseParam(dataMap,Const.Key.WXMP_TYPE);
-    wxmpWithTicket = parseParam(dataMap,Const.Key.WXMP_WITH_TICKET);
+    Object wxType = parseParam(dataMap, Const.Key.WXMP_TYPE);
+    if (wxType != null) {
+      wxmpType = wxType.toString();
+    }
+    Object wxTicket = parseParam(dataMap, Const.Key.WXMP_WITH_TICKET);
+    if (wxTicket != null) {
+      wxmpWithTicket = wxTicket.toString();
+    }
     wxmpPath =  parseParam(dataMap,Const.Key.WXMP_PATH);
     videoUrl =parseParam(dataMap,Const.Key.VIDEO_URL_ANDROID);
     Object tempType = parseParam(dataMap,Const.Key.TYPE);
@@ -981,12 +987,12 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
 
     if (!TextUtils.isEmpty(wxmpType)) {
       if (ObjectUtils.notNull(shareParams)){
-        shareParams.setWxMiniProgramType(Integer.valueOf(wxmpType));
+        shareParams.setWxMiniProgramType(Integer.parseInt(wxmpType));
       }
     }
     if (!TextUtils.isEmpty(wxmpWithTicket)) {
       if (ObjectUtils.notNull(shareParams)){
-        shareParams.setWxWithShareTicket(Boolean.valueOf(wxmpWithTicket));
+        shareParams.setWxWithShareTicket(Boolean.parseBoolean(wxmpWithTicket));
       }
     }
     if (!TextUtils.isEmpty(wxmpPath)) {
