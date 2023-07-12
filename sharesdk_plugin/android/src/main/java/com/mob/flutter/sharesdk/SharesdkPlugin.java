@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import com.mob.MobSDK;
 import com.mob.OperationCallback;
-import com.mob.PrivacyPolicy;
 import com.mob.commons.SHARESDK;
 import com.mob.flutter.sharesdk.impl.Const;
 import com.mob.flutter.sharesdk.impl.Log;
@@ -39,7 +38,6 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
-import io.flutter.plugin.common.PluginRegistry;
 
 /**
  * SharesdkPlugin
@@ -619,18 +617,18 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
     Platform platform = ShareSDK.getPlatform(platName);
     try {
       boolean clientValid = platform.isClientValid();
-      installedCallabck(clientValid, result);
+      installedCallback(clientValid, result);
     } catch (Throwable t) {
       platform.isClientValid(new ShareSDKCallback<Boolean>() {
         @Override
         public void onCallback(Boolean aBoolean) {
-          installedCallabck(aBoolean, result);
+          installedCallback(aBoolean, result);
         }
       });
     }
   }
 
-  private static void installedCallabck(boolean isInstalled, Result result) {
+  private static void installedCallback(boolean isInstalled, final Result result) {
     final Map<String, Object> resMapFail = new HashMap<>();
     String msg = isInstalled ? "installed" : "uninstalled";
     resMapFail.put("state", msg);

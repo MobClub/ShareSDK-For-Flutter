@@ -103,3 +103,6 @@
 
 ## 1.3.9
 * 1.android fix bug
+
+## 1.3.10
+* 1.android fix bug
