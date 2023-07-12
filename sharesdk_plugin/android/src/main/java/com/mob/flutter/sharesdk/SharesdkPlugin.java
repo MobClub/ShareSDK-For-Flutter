@@ -28,6 +28,7 @@ import java.util.Map;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.framework.ShareSDKCallback;
 import cn.sharesdk.framework.loopshare.LoopShareResultListener;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
@@ -616,26 +617,31 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
     String num = String.valueOf(map.get("platform"));
     String platName = Utils.platName(num);
     Platform platform = ShareSDK.getPlatform(platName);
-    boolean clientValid = platform.isClientValid();
-    if (clientValid) {
-      final Map<String, Object> resMapSucceed = new HashMap<>();
-      resMapSucceed.put("state", "installed");
-      ThreadManager.getMainHandler().post(new Runnable() {
+    try {
+      boolean clientValid = platform.isClientValid();
+      installedCallabck(clientValid, result);
+    } catch (Throwable t) {
+      platform.isClientValid(new ShareSDKCallback<Boolean>() {
         @Override
-        public void run() {
-          result.success(resMapSucceed);
-        }
-      });
-    } else {
-      final Map<String, Object> resMapFail = new HashMap<>();
-      resMapFail.put("state", "uninstalled");
-      ThreadManager.getMainHandler().post(new Runnable() {
-        @Override
-        public void run() {
-          result.success(resMapFail);
+        public void onCallback(Boolean aBoolean) {
+          installedCallabck(aBoolean, result);
         }
       });
     }
+  }
+
+  private static void installedCallabck(boolean isInstalled, Result result) {
+    final Map<String, Object> resMapFail = new HashMap<>();
+    String msg = isInstalled ? "installed" : "uninstalled";
+    resMapFail.put("state", msg);
+    ThreadManager.getMainHandler().post(new Runnable() {
+      @Override
+      public void run() {
+        if (result != null) {
+          result.success(resMapFail);
+        }
+      }
+    });
   }
 
   /**
