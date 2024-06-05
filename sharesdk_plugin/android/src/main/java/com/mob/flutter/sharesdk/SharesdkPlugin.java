@@ -31,6 +31,7 @@ import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.framework.ShareSDKCallback;
 import cn.sharesdk.framework.loopshare.LoopShareResultListener;
 import cn.sharesdk.onekeyshare.OnekeyShare;
+import cn.sharesdk.onekeyshare.ShareContentCustomizeCallback;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.embedding.engine.plugins.activity.ActivityAware;
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
@@ -1127,6 +1128,25 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
       }else if (ObjectUtils.notNull(onekeyShare)){
         onekeyShare.setHashtags(hashTags);
       }
+    }
+    try {
+      if (dataMap.containsKey("disableNewTask")) {
+        final boolean disableNewTask = (Boolean) dataMap.get("disableNewTask");
+        if (ObjectUtils.notNull(shareParams)) {
+          shareParams.setDisableNewTask(disableNewTask);
+        } else if (ObjectUtils.notNull(onekeyShare)) {
+          onekeyShare.setShareContentCustomizeCallback(new ShareContentCustomizeCallback() {
+            @Override
+            public void onShare(Platform platform, Platform.ShareParams shareParams) {
+              if (platform.getName().equals("QZone")) {
+                shareParams.setDisableNewTask(disableNewTask);
+              }
+            }
+          });
+        }
+      }
+    } catch (Throwable throwable) {
+
     }
     if (ObjectUtils.notNull(shareParams)) {
       return (RETURN) shareParams;

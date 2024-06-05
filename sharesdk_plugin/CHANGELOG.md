@@ -109,3 +109,6 @@
 
 ## 1.3.11
 * 1.android fix bug
+
+## 1.3.12
+* 1.Qzone add config DISABLE_NEW_TASK

@@ -93,6 +93,7 @@ const String kYXDataUrl = "yx_Data";
 const String kYXVideoLowBandDataUrl = "yx_lowvideoBandData";
 const String KHASHTAGS = "HASHTAGS";
 const String KVIDEO_ARRAY = "videoArray";
+const String KDISABLE_NEW_TASK = "disableNewTask";
 
 class SSDKMap {
 	final Map map = Map();

@@ -277,6 +277,7 @@ class _HomePageState extends State<HomePage> {
           "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
           "",
           SSDKContentTypes.image);
+    params.map[KDISABLE_NEW_TASK] = true;
     SharesdkPlugin.showMenu(null, null, params, (SSDKResponseState state,
         ShareSDKPlatform platform,
         dynamic userData,
@@ -458,6 +459,22 @@ class _HomePageState extends State<HomePage> {
           ShareSDKPlatforms.qq);
     SharesdkPlugin.share(ShareSDKPlatforms.qq, params, (SSDKResponseState state,
         dynamic userdata, dynamic contentEntity, SSDKError error) {
+      showAlert(state, error.rawData, context);
+    });
+  }
+
+  void shareQzoneCustom(BuildContext context) {
+    Map params = {
+      kText: "测试text",
+      kTitle: "测试title",
+      kTitleUrlAndroid: "www.mob.com",
+      kimage_url: "http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg",
+      KDISABLE_NEW_TASK: true,
+      kType: SSDKContentTypes.webpage.value
+    };
+    SharesdkPlugin.shareByMap(ShareSDKPlatforms.qZone, params,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+            SSDKError error) {
       showAlert(state, error.rawData, context);
     });
   }
@@ -1343,6 +1360,7 @@ class _HomePageState extends State<HomePage> {
           _creatRow("分享小程序到微信", "测试自定义参数", shareMiniProgram, context),
           _creatRow("打开微信小程序", "需要导入WechatConnector", openMiniProgram, context),
           _creatRow("分享到QQ", "测试自定义参数", shareQQCustom, context),
+          _creatRow("分享到QQ空间", "测试自定义参数(安卓)", shareQzoneCustom, context),
           _creatRow("分享到新浪微博", "测试通用参数", shareToSina, context),
           _creatRow("分享到新浪微博", "测试自定义参数", shareSinaCustom, context),
           // _creatRow(
