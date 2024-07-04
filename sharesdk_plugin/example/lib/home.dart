@@ -30,7 +30,8 @@ class _HomePageState extends State<HomePage> {
   /// POLICY_TYPE_URL = 1
   /// POLICY_TYPE_TXT = 2
   getPrivacyPolicyUrl(BuildContext context) {
-    SharesdkPlugin.getPrivacyPolicy("1", "en-CN", (dynamic data, dynamic error) {
+    SharesdkPlugin.getPrivacyPolicy("1", "en-CN",
+        (dynamic data, dynamic error) {
       String? policyData, errorStr;
       if (data != null) {
         policyData = data["data"];
@@ -155,6 +156,7 @@ class _HomePageState extends State<HomePage> {
       showAlert(state, user != null ? user : error.rawData, context);
     });
   }
+
   void getUserInfoToHw(BuildContext context) {
     getUserInfoByPlatform(context, ShareSDKPlatforms.hwaccount);
   }
@@ -169,12 +171,14 @@ class _HomePageState extends State<HomePage> {
       showAlert(state, user != null ? user : error.rawData, context);
     });
   }
+
   void cancelAuth(BuildContext context) {
     SharesdkPlugin.cancelAuth(ShareSDKPlatforms.wechatSession,
         (SSDKResponseState state, dynamic user, SSDKError error) {
       showAlert(state, error.rawData, context);
     });
   }
+
   void cancelAuthXm(BuildContext context) {
     cancelAuthByPlatform(context, ShareSDKPlatforms.xmaccount);
   }
@@ -189,13 +193,15 @@ class _HomePageState extends State<HomePage> {
       showAlert(state, error.rawData, context);
     });
   }
+
   void hasAuthed(BuildContext context) {
     SharesdkPlugin.hasAuthed(ShareSDKPlatforms.wechatSession,
         (SSDKResponseState state, dynamic user, SSDKError error) {
-      showAlert(state, error.rawData , context);
+      showAlert(state, error.rawData, context);
     });
   }
- void hasAuthedHw(BuildContext context) {
+
+  void hasAuthedHw(BuildContext context) {
     hasAuthedByPlatform(context, ShareSDKPlatforms.hwaccount);
   }
 
@@ -209,6 +215,7 @@ class _HomePageState extends State<HomePage> {
       showAlert(state, error.rawData, context);
     });
   }
+
   void shareToSina(BuildContext context) {
     SSDKMap params = SSDKMap()
       ..setGeneral(
@@ -400,6 +407,81 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void shareXHSImage(BuildContext context) {
+    SSDKMap params = SSDKMap()
+      ..setXHS(
+          title: "小红书分享",
+          text: "小红书图片分享测试",
+          desc: "分享单图",
+          images:
+              "http://ww4.sinaimg.cn/bmiddle/005Q8xv4gw1evlkov50xuj30go0a6mz3.jpg",
+          contentType: SSDKContentTypes.image);
+
+    SharesdkPlugin.share(ShareSDKPlatforms.xhs, params,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+            SSDKError error) {
+      showAlert(state, error.rawData, context);
+    });
+  }
+
+  void shareXHSImageWithSystem(BuildContext context) {
+    SSDKMap params = SSDKMap()
+      ..setXHS(
+          title: "小红书分享",
+          text: "小红书图片分享测试",
+          images:
+              "http://ww4.sinaimg.cn/bmiddle/005Q8xv4gw1evlkov50xuj30go0a6mz3.jpg",
+          contentType: SSDKContentTypes.image);
+
+    SharesdkPlugin.shareWithActivity(ShareSDKPlatforms.xhs, params,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+            SSDKError error) {
+      showAlert(state, error.rawData, context);
+    });
+  }
+
+  void shareXHSVideo(BuildContext context) {
+    SharesdkPlugin.targetFilePath("cat", "mp4", (String path) {
+      print("Target Video Path: " + path);
+
+      SSDKMap params = SSDKMap()
+        ..setXHS(
+            title: "小红书分享",
+            desc: "小红书视频分享测试",
+            videos: [
+              {
+                "videoObj": path,
+                "coverObj":
+                    "http://ww4.sinaimg.cn/bmiddle/005Q8xv4gw1evlkov50xuj30go0a6mz3.jpg"
+              }
+            ],
+            contentType: SSDKContentTypes.video);
+
+      SharesdkPlugin.share(ShareSDKPlatforms.xhs, params,
+          (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+              SSDKError error) {
+        showAlert(state, error.rawData, context);
+      });
+    });
+  }
+
+  void shareXHSVideoWithSystem(BuildContext context) {
+    SharesdkPlugin.targetFilePath("cat", "mp4", (String path) {
+      SSDKMap params = SSDKMap()
+        ..setXHS(
+            title: "小红书分享",
+            text: "小红书视频分享测试",
+            url: path,
+            contentType: SSDKContentTypes.video);
+
+      SharesdkPlugin.shareWithActivity(ShareSDKPlatforms.xhs, params,
+          (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+              SSDKError error) {
+        showAlert(state, error.rawData, context);
+      });
+    });
+  }
+
   void shareFacebookCustom(BuildContext context) {
     SSDKMap params = SSDKMap()
       ..setFacebook(
@@ -415,8 +497,7 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
     params
       ..setFacebookAssetLocalIdentifier(
-          "57C6BB71-7A69-49F3-AA05-C04F5D2829B2/L0/001",
-          "asdf");
+          "57C6BB71-7A69-49F3-AA05-C04F5D2829B2/L0/001", "asdf");
     SharesdkPlugin.share(ShareSDKPlatforms.facebook, params,
         (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
@@ -426,17 +507,18 @@ class _HomePageState extends State<HomePage> {
 
   void shareFacebookMessengerCustom(BuildContext context) {
     SSDKMap params = SSDKMap()
-    ..setFacebookMessenger("Share SDK",
-        "http://www.mob.com",
-        "http://ww4.sinaimg.cn/bmiddle/005Q8xv4gw1evlkov50xuj30go0a6mz3.jpg",
-        null, SSDKContentTypes.image);
+      ..setFacebookMessenger(
+          "Share SDK",
+          "http://www.mob.com",
+          "http://ww4.sinaimg.cn/bmiddle/005Q8xv4gw1evlkov50xuj30go0a6mz3.jpg",
+          null,
+          SSDKContentTypes.image);
     SharesdkPlugin.share(ShareSDKPlatforms.messenger, params,
-            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
-        });
+      showAlert(state, error.rawData, context);
+    });
   }
-  
 
   void shareQQCustom(BuildContext context) {
     SSDKMap params = SSDKMap()
@@ -517,7 +599,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-
   void shareKuaiShouCustom(BuildContext context) {
     SSDKMap params = SSDKMap()
       ..setKuaiShou(
@@ -528,15 +609,15 @@ class _HomePageState extends State<HomePage> {
           "",
           "",
           "57C6BB71-7A69-49F3-AA05-C04F5D2829B2/L0/001",
-          List .filled(0, 0, growable: true),
+          List.filled(0, 0, growable: true),
           "message",
           SSDKContentTypes.message);
 
     SharesdkPlugin.share(ShareSDKPlatforms.kuaishou, params,
-            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
-        });
+      showAlert(state, error.rawData, context);
+    });
   }
 
   void shareToDouyinCustom(BuildContext context) {
@@ -555,10 +636,10 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.douyin, params,
-            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
-        });
+      showAlert(state, error.rawData, context);
+    });
   }
 
   void shareToDouyinIMCustom(BuildContext context) {
@@ -575,20 +656,22 @@ class _HomePageState extends State<HomePage> {
           "http://f1.webshare.mob.com/dvideo/demovideos.mp4",
           "",
           SSDKContentTypes.image);
-      params
-        ..setDouYinShareActionMode(1);
+    params..setDouYinShareActionMode(1);
 
     SharesdkPlugin.share(ShareSDKPlatforms.douyin, params,
-            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
-        });
+      showAlert(state, error.rawData, context);
+    });
   }
+
   ///抖音分享图片
   void shareToDouyinImages(BuildContext context) {
-    Map params = {KHASHTAGS: ["我的图片"], 
-    kImages: ["/sdcard/Android/data/cn.sharesdk.demo/image.jpg"], 
-    kType: SSDKContentTypes.image.value};
+    Map params = {
+      KHASHTAGS: ["我的图片"],
+      kImages: ["/sdcard/Android/data/cn.sharesdk.demo/image.jpg"],
+      kType: SSDKContentTypes.image.value
+    };
 
     SharesdkPlugin.shareByMap(ShareSDKPlatforms.douyin, params,
         (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
@@ -596,11 +679,14 @@ class _HomePageState extends State<HomePage> {
       showAlert(state, error.rawData, context);
     });
   }
+
   ///抖音分享视频
- void shareToDouyinVideo(BuildContext context) {
-    Map params = {KHASHTAGS: ["我的视频"], 
-    KVIDEO_ARRAY: ["/sdcard/Android/data/cn.sharesdk.demo/video.mp4"], 
-    kType: SSDKContentTypes.video.value};
+  void shareToDouyinVideo(BuildContext context) {
+    Map params = {
+      KHASHTAGS: ["我的视频"],
+      KVIDEO_ARRAY: ["/sdcard/Android/data/cn.sharesdk.demo/video.mp4"],
+      kType: SSDKContentTypes.video.value
+    };
 
     SharesdkPlugin.shareByMap(ShareSDKPlatforms.douyin, params,
         (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
@@ -614,7 +700,10 @@ class _HomePageState extends State<HomePage> {
       ..setGeneral(
           "title",
           "text",
-          ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
+          [
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"
+          ],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
           "",
           "http://www.mob.com/",
@@ -625,10 +714,10 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.tiktok, params,
-            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
-        });
+      showAlert(state, error.rawData, context);
+    });
   }
 
   void shareKakaoTalkCustom(BuildContext context) {
@@ -636,10 +725,10 @@ class _HomePageState extends State<HomePage> {
       ..setKakaoTalk("http://www.mob.com/", "11820", {});
 
     SharesdkPlugin.share(ShareSDKPlatforms.kakaoTalk, params,
-            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
-        });
+      showAlert(state, error.rawData, context);
+    });
   }
 
   void shareKakaoStoryCustom(BuildContext context) {
@@ -651,15 +740,15 @@ class _HomePageState extends State<HomePage> {
           "",
           0,
           1,
-          {"andParam1":"value1","andParam2":"value2"},
-          {"andParam1":"value1","andParam2":"value2"},
+          {"andParam1": "value1", "andParam2": "value2"},
+          {"andParam1": "value1", "andParam2": "value2"},
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.kakaoStory, params,
-            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
-        });
+      showAlert(state, error.rawData, context);
+    });
   }
 
   void shareInstagramCustom(BuildContext context) {
@@ -670,10 +759,10 @@ class _HomePageState extends State<HomePage> {
           0);
 
     SharesdkPlugin.share(ShareSDKPlatforms.instagram, params,
-            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
-        });
+      showAlert(state, error.rawData, context);
+    });
   }
 
   void shareWhatsAppCustom(BuildContext context) {
@@ -688,10 +777,10 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.whatsApp, params,
-            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
-        });
+      showAlert(state, error.rawData, context);
+    });
   }
 
   void shareLineCustom(BuildContext context) {
@@ -699,7 +788,10 @@ class _HomePageState extends State<HomePage> {
       ..setGeneral(
           "title",
           "text",
-          ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
+          [
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"
+          ],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
           "",
           "http://www.mob.com/",
@@ -710,10 +802,10 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.line, params,
-            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
-        });
+      showAlert(state, error.rawData, context);
+    });
   }
 
   void shareLinkedIn(BuildContext context) {
@@ -728,19 +820,21 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.webpage);
 
     SharesdkPlugin.share(ShareSDKPlatforms.linkedIn, params,
-            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
-        });
+      showAlert(state, error.rawData, context);
+    });
   }
-
 
   void shareVK(BuildContext context) {
     SSDKMap params = SSDKMap()
       ..setGeneral(
           "title",
           "text",
-          ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
+          [
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"
+          ],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
           "",
           "http://www.mob.com/",
@@ -751,15 +845,16 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.vKontakte, params,
-            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
-        });
+      showAlert(state, error.rawData, context);
+    });
   }
 
   void shareTelegram(BuildContext context) {
     SSDKMap params = SSDKMap()
-      ..setTelegram("text",
+      ..setTelegram(
+          "text",
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
           null,
           null,
@@ -769,10 +864,10 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.telegram, params,
-            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
-        });
+      showAlert(state, error.rawData, context);
+    });
   }
 
   void shareFlickr(BuildContext context) {
@@ -780,7 +875,10 @@ class _HomePageState extends State<HomePage> {
       ..setGeneral(
           "title",
           "text",
-          ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
+          [
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"
+          ],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
           "",
           "http://www.mob.com/",
@@ -791,10 +889,10 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.flickr, params,
-            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
-        });
+      showAlert(state, error.rawData, context);
+    });
   }
 
   void sharePocket(BuildContext context) {
@@ -802,7 +900,10 @@ class _HomePageState extends State<HomePage> {
       ..setGeneral(
           "title",
           "text",
-          ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
+          [
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"
+          ],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
           "",
           "http://www.mob.com/",
@@ -813,10 +914,10 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.webpage);
 
     SharesdkPlugin.share(ShareSDKPlatforms.pocket, params,
-            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
-        });
+      showAlert(state, error.rawData, context);
+    });
   }
 
   void sharePinterest(BuildContext context) {
@@ -828,10 +929,10 @@ class _HomePageState extends State<HomePage> {
           "ShareSDK");
 
     SharesdkPlugin.share(ShareSDKPlatforms.pinterest, params,
-            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
-        });
+      showAlert(state, error.rawData, context);
+    });
   }
 
   void shareReddit(BuildContext context) {
@@ -839,7 +940,10 @@ class _HomePageState extends State<HomePage> {
       ..setGeneral(
           "title",
           "text",
-          ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
+          [
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"
+          ],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
           "",
           "http://www.mob.com/",
@@ -850,19 +954,21 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.webpage);
 
     SharesdkPlugin.share(ShareSDKPlatforms.reddit, params,
-            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
-        });
+      showAlert(state, error.rawData, context);
+    });
   }
-
 
   void shareInstapaper(BuildContext context) {
     SSDKMap params = SSDKMap()
       ..setGeneral(
           "title",
           "text",
-          ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
+          [
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"
+          ],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
           "",
           "http://www.mob.com/",
@@ -873,10 +979,10 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.webpage);
 
     SharesdkPlugin.share(ShareSDKPlatforms.instapaper, params,
-            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
-        });
+      showAlert(state, error.rawData, context);
+    });
   }
 
   void shareDingTalk(BuildContext context) {
@@ -884,7 +990,10 @@ class _HomePageState extends State<HomePage> {
       ..setGeneral(
           "title",
           "text",
-          ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
+          [
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"
+          ],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
           "",
           "http://www.mob.com/",
@@ -895,10 +1004,10 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.dingding, params,
-            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
-        });
+      showAlert(state, error.rawData, context);
+    });
   }
 
   void shareYouDaoNote(BuildContext context) {
@@ -912,10 +1021,10 @@ class _HomePageState extends State<HomePage> {
           "");
 
     SharesdkPlugin.share(ShareSDKPlatforms.youdaoNote, params,
-            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
-        });
+      showAlert(state, error.rawData, context);
+    });
   }
 
   void shareMingDao(BuildContext context) {
@@ -923,7 +1032,10 @@ class _HomePageState extends State<HomePage> {
       ..setGeneral(
           "title",
           "text",
-          ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
+          [
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"
+          ],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
           "",
           "http://www.mob.com/",
@@ -934,10 +1046,10 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.webpage);
 
     SharesdkPlugin.share(ShareSDKPlatforms.mingDao, params,
-            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
-        });
+      showAlert(state, error.rawData, context);
+    });
   }
 
   void shareYinXiang(BuildContext context) {
@@ -945,7 +1057,10 @@ class _HomePageState extends State<HomePage> {
       ..setGeneral(
           "title",
           "text",
-          ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
+          [
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"
+          ],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
           "",
           "http://www.mob.com/",
@@ -956,10 +1071,10 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.yinXiang, params,
-            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
-        });
+      showAlert(state, error.rawData, context);
+    });
   }
 
   void shareEvernote(BuildContext context) {
@@ -967,7 +1082,10 @@ class _HomePageState extends State<HomePage> {
       ..setGeneral(
           "title",
           "text",
-          ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
+          [
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"
+          ],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
           "",
           "http://www.mob.com/",
@@ -978,10 +1096,10 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.evernote, params,
-            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
-        });
+      showAlert(state, error.rawData, context);
+    });
   }
 
   void shareYiXinSession(BuildContext context) {
@@ -989,7 +1107,10 @@ class _HomePageState extends State<HomePage> {
       ..setGeneral(
           "title",
           "text",
-          ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
+          [
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"
+          ],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
           "",
           "http://www.mob.com/",
@@ -1000,10 +1121,10 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.yixinSession, params,
-            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
-        });
+      showAlert(state, error.rawData, context);
+    });
   }
 
   void shareYiXinMoments(BuildContext context) {
@@ -1011,7 +1132,10 @@ class _HomePageState extends State<HomePage> {
       ..setGeneral(
           "title",
           "text",
-          ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
+          [
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"
+          ],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
           "",
           "http://www.mob.com/",
@@ -1022,10 +1146,10 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.yixinTimeline, params,
-            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
-        });
+      showAlert(state, error.rawData, context);
+    });
   }
 
   void shareYiXinFavorite(BuildContext context) {
@@ -1033,7 +1157,10 @@ class _HomePageState extends State<HomePage> {
       ..setGeneral(
           "title",
           "text",
-          ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
+          [
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"
+          ],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
           "",
           "http://www.mob.com/",
@@ -1044,10 +1171,10 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.yiXinFav, params,
-            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
-        });
+      showAlert(state, error.rawData, context);
+    });
   }
 
   void shareSMS(BuildContext context) {
@@ -1055,7 +1182,10 @@ class _HomePageState extends State<HomePage> {
       ..setGeneral(
           "title",
           "text",
-          ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg","http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
+          [
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
+            "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"
+          ],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
           "",
           "http://www.mob.com/",
@@ -1066,10 +1196,10 @@ class _HomePageState extends State<HomePage> {
           SSDKContentTypes.image);
 
     SharesdkPlugin.share(ShareSDKPlatforms.sms, params,
-            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+        (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {
-          showAlert(state, error.rawData, context);
-        });
+      showAlert(state, error.rawData, context);
+    });
   }
 
   void shareWework(BuildContext context) {
@@ -1110,6 +1240,7 @@ class _HomePageState extends State<HomePage> {
       showAlertText("是否安装了QQ客户端", hasClient.toString(), context);
     });
   }
+
   void authToHWAccount(BuildContext context) {
     SharesdkPlugin.auth(ShareSDKPlatforms.hwaccount, Map(),
         (SSDKResponseState state, dynamic user, SSDKError error) {
@@ -1123,7 +1254,9 @@ class _HomePageState extends State<HomePage> {
       showAlert(state, user != null ? user : error.rawData, context);
     });
   }
-  void showAlert(SSDKResponseState state, dynamic content, BuildContext context) {
+
+  void showAlert(
+      SSDKResponseState state, dynamic content, BuildContext context) {
     print("--------------------------> state:" + state.toString());
     String title = "失败";
     switch (state) {
@@ -1249,12 +1382,13 @@ class _HomePageState extends State<HomePage> {
 
     if (Platform.isIOS) {
       //ios相关代码
-      register.setupWechat(
-          "wx617c77c82218ea2c", "c7253e5289986cf4c4c74d1ccc185fb1", "https://70imc.share2dlink.com/");
-      register.setupSinaWeibo(
-          "1556465402", "d40c0a5436156e2604a30851df6434bf", "https://www.mob.com/", "https://70imc.share2dlink.com/");
-      register.setupQQ(
-          "1110451818", "OlbzvuSP3Hgj5yNS");
+      register.setupWechat("wx617c77c82218ea2c",
+          "c7253e5289986cf4c4c74d1ccc185fb1", "https://70imc.share2dlink.com/");
+      register.setupXHS(
+          "7bf2d19af55b56259a4c6984ecf9445c", "https://70imc.share2dlink.com/");
+      register.setupSinaWeibo("1556465402", "d40c0a5436156e2604a30851df6434bf",
+          "https://www.mob.com/", "https://70imc.share2dlink.com/");
+      register.setupQQ("1110451818", "OlbzvuSP3Hgj5yNS");
       register.setupDouyin(
           "awycvl19mldccyso", "8793a4dfdc3636cbda0924a3cfbc8424");
       register.setupTikTok(
@@ -1262,45 +1396,47 @@ class _HomePageState extends State<HomePage> {
       register.setupFacebook(
           "1412473428822331", "a42f4f3f867dc947b9ed6020c2e93558", "shareSDK");
       register.setupTwitter(
-          "YUJMMTFOcE93MGI4Zi1aRTlHQnM6MTpjaQ", "ppuG1yR5Sb7PXn2IZAu-4nJwbhh1mLq3ieJXOkC5wOJpVxmWli", "https://www.mob.com");
+          "YUJMMTFOcE93MGI4Zi1aRTlHQnM6MTpjaQ",
+          "ppuG1yR5Sb7PXn2IZAu-4nJwbhh1mLq3ieJXOkC5wOJpVxmWli",
+          "https://www.mob.com");
       register.setupOasis("568898243");
-      register.setupWework("wwautha21eaecf93f0e3ba000012", "wwa21eaecf93f0e3ba", "1000012", "dW7e27P7Hc8NiYdRxnbTeOLgfI1ugR72e-PM8uusq2s");
-      register.setupSnapchat("d8f03743-ce0c-433b-a49b-50b4fb0dbd55", "", "ssdkmoba0b0c0d0://mob");
-      register.setupKuaiShou(
-          "ks705657770555308030", "RQ17enXUOioeoDMrwk3j2Q", "https://70imc.share2dlink.com/");
-      register.setupKakao(
-          "9c17eb03317e0e627ec95a400f5785fb", "802e551a5048c3172fc1dedaaf40fcf1", "http://www.mob.com/oauth");
-      register.setupInstagram(
-          "1145188725813939", "256191f3abb381a9d481f6f9bbaef179", "https://www.mob.com/");
-      register.setupVKontakte(
-          "5312801", "ZHG2wGymmNUCRLG2r6CY");
-      register.setupTelegram(
-          "2126389848:AAHdytrU4NgnxlUDrV6OeszZXsuoPgNezgg", "https://www.mob.com");
+      register.setupWework("wwautha21eaecf93f0e3ba000012", "wwa21eaecf93f0e3ba",
+          "1000012", "dW7e27P7Hc8NiYdRxnbTeOLgfI1ugR72e-PM8uusq2s");
+      register.setupSnapchat(
+          "d8f03743-ce0c-433b-a49b-50b4fb0dbd55", "", "ssdkmoba0b0c0d0://mob");
+      register.setupKuaiShou("ks705657770555308030", "RQ17enXUOioeoDMrwk3j2Q",
+          "https://70imc.share2dlink.com/");
+      register.setupKakao("9c17eb03317e0e627ec95a400f5785fb",
+          "802e551a5048c3172fc1dedaaf40fcf1", "http://www.mob.com/oauth");
+      register.setupInstagram("1145188725813939",
+          "256191f3abb381a9d481f6f9bbaef179", "https://www.mob.com/");
+      register.setupVKontakte("5312801", "ZHG2wGymmNUCRLG2r6CY");
+      register.setupTelegram("2126389848:AAHdytrU4NgnxlUDrV6OeszZXsuoPgNezgg",
+          "https://www.mob.com");
       register.setupLinkedIn(
           "75x5xdhllzno44", "uiS3nlE7XBGmTL3P", "http://mob.com");
-      register.setupPocket(
-          "11496-de7c8c5eb25b2c9fcdc2b627", "pocketapp1234");
+      register.setupPocket("11496-de7c8c5eb25b2c9fcdc2b627", "pocketapp1234");
       register.setupFlick(
           "cbed81d4a1bc7417693ab7865e354717", "4c490343869091f2");
       register.setupPinterest("5057854497590653616");
       register.setupReddit(
           "ObzXn50T7Cg0Xw", "https://www.mob.com/reddit_callback");
       register.setupInstapaper(
-          "4rDJORmcOcSAZL1YpqGHRI605xUvrLbOhkJ07yO0wWrYrc61FA", "GNr1GespOQbrm8nvd7rlUsyRQsIo3boIbMguAl9gfpdL0aKZWe");
+          "4rDJORmcOcSAZL1YpqGHRI605xUvrLbOhkJ07yO0wWrYrc61FA",
+          "GNr1GespOQbrm8nvd7rlUsyRQsIo3boIbMguAl9gfpdL0aKZWe");
       register.setupDingTalk("dingoabcwtuab76wy0kyzo");
       register.setupDingTalkAuth(
-          "dingoax9s2mdekb7a6748n", "dxx9KwP4BYN975umF6Mi2QW3jL7O3k3qHCSvcCbes5Y5R7mFF1ocd19p4NdzOKD4", "https://www.mob.com/sharesdk/dingding");
-      register.setupYouDao(
-          "dcde25dca105bcc36884ed4534dab940", "d98217b4020e7f1874263795f44838fe", "http://www.sharesdk.cn/");
+          "dingoax9s2mdekb7a6748n",
+          "dxx9KwP4BYN975umF6Mi2QW3jL7O3k3qHCSvcCbes5Y5R7mFF1ocd19p4NdzOKD4",
+          "https://www.mob.com/sharesdk/dingding");
+      register.setupYouDao("dcde25dca105bcc36884ed4534dab940",
+          "d98217b4020e7f1874263795f44838fe", "http://www.sharesdk.cn/");
       register.setupMingDao(
           "97230F25CA5C", "A5DC29AF7C5A5851F28E903AE9EAC0", "http://mob.com");
-      register.setupEvernote(
-          "46131514-6903", "08d7a6f3afcc888a", true);
-      register.setupYiXin(
-          "yxfddfe3934340436da964fd20885fe2a4", "574471e102e1e5d2a", "http://www.mob.com");
+      register.setupEvernote("46131514-6903", "08d7a6f3afcc888a", true);
+      register.setupYiXin("yxfddfe3934340436da964fd20885fe2a4",
+          "574471e102e1e5d2a", "http://www.mob.com");
       register.setupSMS(false);
-
-
     } else if (Platform.isAndroid) {
       //android相关代码
       register.setupWechat("wx617c77c82218ea2c",
@@ -1363,10 +1499,15 @@ class _HomePageState extends State<HomePage> {
           _creatRow("分享到QQ空间", "测试自定义参数(安卓)", shareQzoneCustom, context),
           _creatRow("分享到新浪微博", "测试通用参数", shareToSina, context),
           _creatRow("分享到新浪微博", "测试自定义参数", shareSinaCustom, context),
+          _creatRow("分享图片到小红书", "分享图片", shareXHSImage, context),
+          _creatRow("分享图片到小红书", "系统分享图片", shareXHSImageWithSystem, context),
+          _creatRow("分享视频到小红书", "分享视频", shareXHSVideo, context),
+          _creatRow("分享视频到小红书", "系统分享视频", shareXHSVideoWithSystem, context),
           // _creatRow(
           //     "分享到新浪微博LinkCard", "分享到LinkCard", shareSinaLinkCard, context),
           _creatRow("分享图片到Facebook", "测试自定义参数", shareFacebookCustom, context),
-          _creatRow("分享图片到FacebookMessenger", "测试自定义参数", shareFacebookMessengerCustom, context),
+          _creatRow("分享图片到FacebookMessenger", "测试自定义参数",
+              shareFacebookMessengerCustom, context),
           _creatRow("分享图片到Twitter", "测试自定义参数", shareTwitterCustom, context),
           _creatRow("系统分享图片到Twitter", "测试系统分享", showActivityCustom, context),
           _creatRow("分享图片到Snapchat", "测试自定义参数", shareSnapchatCustom, context),
@@ -1377,7 +1518,8 @@ class _HomePageState extends State<HomePage> {
 
           _creatRow("分享图片到TikTok", "测试自定义参数", shareTikTokCustom, context),
           _creatRow("分享链接到KakaoTalk", "测试自定义参数", shareKakaoTalkCustom, context),
-          _creatRow("分享图片到KakaoStory", "测试自定义参数", shareKakaoStoryCustom, context),
+          _creatRow(
+              "分享图片到KakaoStory", "测试自定义参数", shareKakaoStoryCustom, context),
           _creatRow("分享图片到Instagram", "测试自定义参数", shareInstagramCustom, context),
           _creatRow("分享图片到WhatsApp", "测试自定义参数", shareWhatsAppCustom, context),
           _creatRow("分享图片到Line", "测试自定义参数", shareLineCustom, context),
