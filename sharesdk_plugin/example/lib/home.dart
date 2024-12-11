@@ -399,7 +399,7 @@ class _HomePageState extends State<HomePage> {
           "",
           0.0,
           0.0,
-          SSDKContentTypes.auto);
+          SSDKContentTypes.image);
     SharesdkPlugin.share(ShareSDKPlatforms.twitter, params,
         (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
             SSDKError error) {

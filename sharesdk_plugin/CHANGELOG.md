@@ -112,3 +112,6 @@
 
 ## 1.3.12
 * 1.Qzone add config DISABLE_NEW_TASK
+
+## 1.3.14
+* 1. Update Kakao SDK
