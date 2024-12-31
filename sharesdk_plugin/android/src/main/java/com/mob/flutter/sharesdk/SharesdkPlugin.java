@@ -13,6 +13,7 @@ import com.mob.flutter.sharesdk.impl.Log;
 import com.mob.flutter.sharesdk.impl.ObjectUtils;
 import com.mob.flutter.sharesdk.impl.ThreadManager;
 import com.mob.flutter.sharesdk.impl.Utils;
+import com.mob.tools.MobLog;
 import com.mob.tools.utils.Hashon;
 
 import org.json.JSONException;
@@ -30,6 +31,7 @@ import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.framework.ShareSDKCallback;
 import cn.sharesdk.framework.loopshare.LoopShareResultListener;
 import cn.sharesdk.onekeyshare.OnekeyShare;
+import cn.sharesdk.onekeyshare.ShareContentCustomizeCallback;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.embedding.engine.plugins.activity.ActivityAware;
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
@@ -76,52 +78,66 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
     try {
       switch (call.method) {
         case PluginMethodGetVersion:
+          Log.e("SharesdkPlugin", "PluginMethodGetVersion");
           getVersion(call, result);
           break;
         case PluginMethodShare:
+          Log.e("SharesdkPlugin", "PluginMethodShare");
           shareWithArgs(call, result);
           break;
         case PluginMethodAuth:
+          Log.e("SharesdkPlugin", "PluginMethodAuth");
           authWithArgs(call, result);
           break;
         case PluginMethodHasAuthed:
+          Log.e("SharesdkPlugin", "PluginMethodHasAuthed");
           hasAuthed(call, result);
           break;
         case PluginMethodCancelAuth:
+          Log.e("SharesdkPlugin", "PluginMethodCancelAuth");
           cancelAuth(call, result);
-          Log.e("SharesdkPlugin", " PluginMethodCancelAuth IOS platform only");
           break;
         case PluginMethodGetUserInfo:
+          Log.e("SharesdkPlugin", "PluginMethodGetUserInfo");
           getUserInfoWithArgs(call, result);
           break;
         case PluginMethodRegist:
+          Log.e("SharesdkPlugin", "PluginMethodRegist");
           break;
         case PluginMethodActivePlatforms:
           //IOS only
+          Log.e("SharesdkPlugin", "PluginMethodActivePlatforms IOS only");
           break;
         case PluginMethodShowEditor:
           //IOS only
+          Log.e("SharesdkPlugin", "PluginMethodShowEditor IOS only");
           break;
         case PluginMethodShowMenu:
+          Log.e("SharesdkPlugin", "PluginMethodShowMenu");
           showMenuWithArgs(call, result);
           break;
         case PluginMethodOpenMiniProgram:
-          //shareMiniProgramWithArgs(call, result);
+          Log.e("SharesdkPlugin", "PluginMethodOpenMiniProgram");
           openMinProgramWithArgs(call, result);
           break;
         case PluginMethodIsClientInstalled:
+          Log.e("SharesdkPlugin", "PluginMethodIsClientInstalled");
           isClientInstalled(call, result);
           break;
         case PluginMethodGetPrivacyPolicy: //隐私协议
+          Log.e("SharesdkPlugin", "PluginMethodGetPrivacyPolicy");
           getPrivacyPolicy(call, result);
           break;
         case PluginMethodUploadPrivacyPermissionStatus:
+          Log.e("SharesdkPlugin", "PluginMethodUploadPrivacyPermissionStatus");
           submitPrivacyGrantResult(call, result);
           break;
         default:
+          Log.e("SharesdkPlugin", "default");
           break;
       }
     } catch (Exception e) {
+      Log.e("SharesdkPlugin","Error" + e);
       e.printStackTrace();
     }
   }
@@ -129,7 +145,7 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
 
 
   private void submitPrivacyGrantResult(MethodCall call, final Result result) {
-    Log.e("qqq", "====> submitPrivacyGrantResult");
+    Log.e(TAG, "====> submitPrivacyGrantResult");
     HashMap<String, Object> map = call.arguments();
     String boolStr = String.valueOf(map.get("status"));
     boolean granted;
@@ -145,14 +161,14 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
         //success
         final Map<String, Object> map = new HashMap<>();
         String resp = String.valueOf(data);
-        Log.d("qqq", "隐私协议授权结果提交：成功 " + resp);
+        Log.d(TAG, "隐私协议授权结果提交：成功 " + resp);
         boolean success = true;
         map.put("success", success);
 
         ThreadManager.getMainHandler().post(new Runnable() {
           @Override
           public void run() {
-            result.success(map);
+            onResultSuccess(result, map);
             Log.e(TAG, "MobSDK.submitPolicyGrantResult onComplete===> " + map);
           }
         });
@@ -168,7 +184,7 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
         ThreadManager.getMainHandler().post(new Runnable() {
           @Override
           public void run() {
-            result.success(map);
+            onResultSuccess(result, map);
             Log.e(TAG, "MobSDK.submitPolicyGrantResult onFailure===> " + map);
           }
         });
@@ -215,10 +231,10 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
 //      });
       Map<String, Object> map = new HashMap<>();
       map.put("", "此方法已废弃");
-      result.success(map);
+      onResultSuccess(result, map);
 
     } catch (Throwable t) {
-      Log.e("qqq", "getPrivacyPolicy catch===> " + t);
+      Log.e(TAG, "getPrivacyPolicy catch===> " + t);
     }
 
 
@@ -230,7 +246,7 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
   private void getVersion(MethodCall call, Result result) {
     Map<String, Object> map = new HashMap<>();
     map.put("版本号", ShareSDK.SDK_VERSION_NAME);
-    result.success(map);
+    onResultSuccess(result, map);
   }
 
   /**
@@ -246,12 +262,14 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
     HashMap<String, Object> dataMap = !ObjectUtils.isEmpty(platMap) ? platMap : params;
     //获取分享平台
     String platName = Utils.platName(num);
+    MobLog.getInstance().i("Start Share:" + platName);
     final Platform platform = ShareSDK.getPlatform(platName);
     final Platform.ShareParams shareParams = parseParamsAndFillShareParams(dataMap,platform);
     registerShareCallBack(platform,result);
     ThreadManager.execute(new ThreadManager.SafeRunnable() {
       @Override
-      public void safeRun() throws Throwable {
+      public void safeRun() {
+        MobLog.getInstance().i("Real Start Share");
         platform.share(shareParams);
       }
     });
@@ -350,7 +368,7 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
               try {
                 Map<String, Object> map = new HashMap<>();
                 map.put("state", 1);
-                result.success(map);
+                onResultSuccess(result, map);
                 Log.e(TAG, "doAuthorize onComplete()===> " + map);
               } catch (Throwable t) {
                 Log.e(TAG, "doAuthorize onComplete() catch===> " + t);
@@ -379,7 +397,7 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
           ThreadManager.getMainHandler().post(new Runnable() {
             @Override
             public void run() {
-              result.success(map);
+              onResultSuccess(result, map);
               Log.e(TAG, "doAuthorize onError()===> " + map);
             }
           });
@@ -394,7 +412,7 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
           ThreadManager.getMainHandler().post(new Runnable() {
             @Override
             public void run() {
-              result.success(map);
+              onResultSuccess(result, map);
               Log.e(TAG, "doAuthorize onCancel()===> " + map);
             }
           });
@@ -422,7 +440,7 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
         ThreadManager.getMainHandler().post(new Runnable() {
           @Override
           public void run() {
-            result.success(map);
+			  onResultSuccess(result,map);
           }
         });
       } else {
@@ -436,7 +454,7 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
         ThreadManager.getMainHandler().post(new Runnable() {
           @Override
           public void run() {
-            result.success(map);
+	          onResultSuccess(result,map);
           }
         });
 
@@ -463,7 +481,7 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
         ThreadManager.getMainHandler().post(new Runnable() {
           @Override
           public void run() {
-            result.success(map);
+            onResultSuccess(result, map);
           }
         });
 
@@ -477,12 +495,12 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
         ThreadManager.getMainHandler().post(new Runnable() {
           @Override
           public void run() {
-            result.success(map);
+            onResultSuccess(result, map);
           }
         });
       }
     } else {
-      final HashMap<String, Object> map = new HashMap<>();
+      final Map<String, Object> map = new HashMap<>();
       map.put("state", 2);
       HashMap<String, Object> errorMap = new HashMap<>();
       errorMap.put("error", "平台为空");
@@ -491,7 +509,7 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
       ThreadManager.getMainHandler().post(new Runnable() {
         @Override
         public void run() {
-          result.success(map);
+          onResultSuccess(result, map);
         }
       });
     }
@@ -541,7 +559,7 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
       platform.setPlatformActionListener(new PlatformActionListener() {
         @Override
         public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
-          final HashMap<String, Object> userMap = new HashMap<>();
+          final Map<String, Object> userMap = new HashMap<>();
           if (ObjectUtils.isNull(hashMap)) {
             hashMap = new HashMap<>();
           }
@@ -557,7 +575,7 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
           ThreadManager.getMainHandler().post(new Runnable() {
             @Override
             public void run() {
-              result.success(userMap);
+              onResultSuccess(result, userMap);
               Log.e(TAG, "doUserInfo onComplete" + userMap);
             }
           });
@@ -566,7 +584,7 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
 
         @Override
         public void onError(Platform platform, int i, Throwable throwable) {
-          final HashMap<String, Object> map = new HashMap<>();
+          final Map<String, Object> map = new HashMap<>();
           map.put("state", 2);
 
           HashMap<String, Object> errorMap = new HashMap<>();
@@ -583,7 +601,7 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
           ThreadManager.getMainHandler().post(new Runnable() {
             @Override
             public void run() {
-              result.success(map);
+              onResultSuccess(result, map);
               Log.e(TAG, "doUserInfo onError" + map);
             }
           });
@@ -597,7 +615,7 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
           ThreadManager.getMainHandler().post(new Runnable() {
             @Override
             public void run() {
-              result.success(map);
+              onResultSuccess(result, map);
               //result.error(null, null, map);
               Log.e(TAG, "doUserInfo onCancel" + map);
             }
@@ -628,16 +646,14 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
     }
   }
 
-  private static void installedCallback(boolean isInstalled, final Result result) {
+  private void installedCallback(boolean isInstalled, final Result result) {
     final Map<String, Object> resMapFail = new HashMap<>();
     String msg = isInstalled ? "installed" : "uninstalled";
     resMapFail.put("state", msg);
     ThreadManager.getMainHandler().post(new Runnable() {
       @Override
       public void run() {
-        if (result != null) {
-          result.success(resMapFail);
-        }
+	      onResultSuccess(result, resMapFail);
       }
     });
   }
@@ -683,6 +699,7 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
    */
   private void registerShareCallBack(Object platform, final Result result) {
     if (ObjectUtils.isNull(platform) || ObjectUtils.isNull(result)) {
+      Log.e(TAG, "no plat");
       return;
     }
     //flutter 一键分享回调，有需要平台信息
@@ -699,12 +716,12 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
             map.put("name", platform.getName());
           }
         } catch (Exception e) {
-          Log.e("",e.getMessage());
+          Log.e(TAG, e.getMessage());
         }
         ThreadManager.getMainHandler().post(new ThreadManager.SafeRunnable() {
           @Override
           public void safeRun(){
-            result.success(map);
+            onResultSuccess(result, map);
             Log.e(TAG, " onComplete===> " + map);
           }
         });
@@ -735,7 +752,7 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
         ThreadManager.getMainHandler().post(new ThreadManager.SafeRunnable() {
           @Override
           public void safeRun() {
-            result.success(map);
+            onResultSuccess(result, map);
             Log.e(TAG, " onError===> " + map);
           }
         });
@@ -751,20 +768,22 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
             map.put("name", platform.getName());
           }
         } catch (Exception e) {
-          Log.e("",e.getMessage());
+          Log.e(TAG,e.getMessage());
         }
         ThreadManager.getMainHandler().post(new ThreadManager.SafeRunnable() {
           @Override
           public void safeRun() {
-            result.success(map);
+            onResultSuccess(result, map);
             Log.e(TAG, " onCancel===> " + map);
           }
         });
       }
     };
     if (platform instanceof Platform) {
+      MobLog.getInstance().i("setPlatformActionListener");
       ((Platform) platform).setPlatformActionListener(listener);
     } else if (platform instanceof OnekeyShare) {
+      MobLog.getInstance().i("setOKSCallback");
       ((OnekeyShare) platform).setCallback(listener);
     }
   }
@@ -1110,6 +1129,25 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
         onekeyShare.setHashtags(hashTags);
       }
     }
+    try {
+      if (dataMap.containsKey("disableNewTask")) {
+        final boolean disableNewTask = (Boolean) dataMap.get("disableNewTask");
+        if (ObjectUtils.notNull(shareParams)) {
+          shareParams.setDisableNewTask(disableNewTask);
+        } else if (ObjectUtils.notNull(onekeyShare)) {
+          onekeyShare.setShareContentCustomizeCallback(new ShareContentCustomizeCallback() {
+            @Override
+            public void onShare(Platform platform, Platform.ShareParams shareParams) {
+              if (platform.getName().equals("QZone")) {
+                shareParams.setDisableNewTask(disableNewTask);
+              }
+            }
+          });
+        }
+      }
+    } catch (Throwable throwable) {
+
+    }
     if (ObjectUtils.notNull(shareParams)) {
       return (RETURN) shareParams;
     }
@@ -1235,5 +1273,15 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
   @Override
   public void onDetachedFromActivity() {
 
+  }
+
+  private void onResultSuccess(Result result, Map<String, Object> map) {
+    try {
+      if (result != null) {
+        result.success(map);
+      }
+    } catch (Throwable throwable) {
+      Log.e(TAG, "onResultSuccess:" + throwable);
+    }
   }
 }
