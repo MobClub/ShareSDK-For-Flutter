@@ -94,6 +94,7 @@ const String kYXVideoLowBandDataUrl = "yx_lowvideoBandData";
 const String KHASHTAGS = "HASHTAGS";
 const String KVIDEO_ARRAY = "videoArray";
 const String KDISABLE_NEW_TASK = "disableNewTask";
+const String DOUYIN_MIX_FILE = "douyin_mix_file";
 
 class SSDKMap {
   final Map map = Map();
@@ -657,5 +658,14 @@ class SSDKMap {
     params[kNoteBook] = notebook;
     int? id = ShareSDKPlatforms.youdaoNote.id;
     map["@platform($id)"] = params;
+  }
+
+
+  void setDouyinMixFile(dynamic mixFiles) {
+      Map params = {};
+      params[DOUYIN_MIX_FILE] = mixFiles;
+      params[kType] = SSDKContentTypes.dy_mixFile.value;
+      int? id = ShareSDKPlatforms.douyin.id;
+      map["@platform($id)"] = params;
   }
 }

@@ -1098,23 +1098,32 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
       }
     }
 
-    if (ObjectUtils.notNull(shareParams)) {
-      if (type.equals("1")) {
-        shareParams.setShareType(Platform.SHARE_TEXT);
-      } else if (type.equals("2")) {
-        shareParams.setShareType(Platform.SHARE_IMAGE);
-      } else if (type.equals("3")) {
-        shareParams.setShareType(Platform.SHARE_WEBPAGE);
-      } else if (type.equals("4")) {
-        shareParams.setShareType(Platform.SHARE_APPS);
-      } else if (type.equals("5")) {
-        shareParams.setShareType(Platform.SHARE_MUSIC);
-      } else if (type.equals("6")) {
-        shareParams.setShareType(Platform.SHARE_VIDEO);
-      } else if (type.equals("7")) {
-        shareParams.setShareType(platform.SHARE_FILE);
-      } else if (type.equals("10")) {
-        shareParams.setShareType(Platform.SHARE_WXMINIPROGRAM);
+    if (ObjectUtils.notNull(shareParams) && !TextUtils.isEmpty(type)) {
+      int shareAction = 0;
+      try {
+        Object action = parseParam(dataMap, Const.Key.DOUYIN_SHARE_ACTION);
+        if (action != null) {
+          shareAction = Integer.parseInt(action.toString());
+        }
+      } catch (Throwable throwable) {
+      }
+      shareParams.setShareType(Utils.getShareType(type, shareAction));
+    }
+
+    //获取分享混合文件数组
+    if (dataMap.containsKey(Const.Key.DOUYIN_MIX_FILE)) {
+      Object mixFile = dataMap.get(Const.Key.DOUYIN_MIX_FILE);
+      if (ObjectUtils.notNull(mixFile)) {
+        if (mixFile instanceof ArrayList) {
+          ArrayList<String> list = (ArrayList<String>) mixFile;
+          if (!ObjectUtils.isEmpty(list) && !list.isEmpty()) {
+            if (ObjectUtils.notNull(shareParams)) {
+              shareParams.setDYMixFileArray(list.toArray(new String[]{}));
+            } else if (ObjectUtils.notNull(onekeyShare)) {
+              onekeyShare.setHashtags(list.toArray(new String[]{}));
+            }
+          }
+        }
       }
     }
     if (!ObjectUtils.isEmpty(videoArray)) {

@@ -2,6 +2,8 @@ package com.mob.flutter.sharesdk.impl;
 
 import java.util.HashMap;
 
+import cn.sharesdk.framework.Platform;
+
 /**
  * Created by xiangli on 2018/11/29.
  */
@@ -92,6 +94,8 @@ public class Utils {
                 return "AlipayMoments";
             case "52":
                 return "Dingding";
+            case "53":
+                return "Youtube";
             case "54":
                 return "Meipai";
             case "55":
@@ -100,14 +104,28 @@ public class Utils {
                 return "Reddit";
             case "59":
                 return "Douyin";
-            case "63":
-                return "HWAccount";
-            case "65":
-                return "XMAccount";
             case "60":
                 return "Wework";
+            case "63":
+                return "HWAccount";
+            case "64":
+                return "Oasis";
+            case "65":
+                return "XMAccount";
+            case "66":
+                return "Snapchat";
+            case "67":
+                return "Littleredbook";
             case "68":
                 return "Kuaishou";
+            case "69":
+                return "Watermelonvideo";
+            case "70":
+                return "Tiktok";
+            case "71":
+                return "Taptap";
+            case "72":
+                return "HonorAccount";
            /* case "994":
                 return "yixinSeries";
             case "995":
@@ -118,6 +136,74 @@ public class Utils {
                 return "qqSeries";*/
         }
         return null;
+    }
+
+
+    public static int getShareType(String type,int shareAction) {
+        int shareType = 0;
+        switch (type) {
+            case "1":
+                shareType = Platform.SHARE_TEXT;
+                break;
+            case "2":
+                shareType = Platform.SHARE_IMAGE;
+                if (1 == shareAction) {
+                    shareType = Platform.SHARE_DYIM_IMG;
+                }
+                break;
+            case "3":
+                shareType = Platform.SHARE_WEBPAGE;
+                if (1 == shareAction) {
+                    shareType = Platform.SHARE_DYIM_WEBPAGE;
+                }
+                break;
+            case "4":
+                shareType = Platform.SHARE_APPS;
+                break;
+            case "5":
+                shareType = Platform.SHARE_MUSIC;
+                break;
+            case "6":
+                shareType = Platform.SHARE_VIDEO;
+                break;
+            case "7":
+                shareType = Platform.SHARE_FILE;
+                break;
+            case "10":
+                shareType = Platform.SHARE_WXMINIPROGRAM;
+                break;
+            case "12":
+                shareType = Platform.OPEN_WXMINIPROGRAM;
+                break;
+	        case "13":
+		        shareType = Platform.INSTAGRAM_FRIEND;
+		        break;
+	        case "14":
+		        shareType = Platform.QQ_MINI_PROGRAM;
+		        break;
+	        case "15":
+		        shareType = Platform.KAKAO_FEED_TEMPLATE;
+		        break;
+	        case "16":
+		        shareType = Platform.KAKAO_URL_TEMPLATE;
+		        break;
+	        case "17":
+		        shareType = Platform.KAKAO_COMMERCE_TEMPLATE;
+		        break;
+	        case "18":
+		        shareType = Platform.KAKAO_TEXT_TEMPLATE;
+		        break;
+	        case "19":
+		        shareType = Platform.KAKAO_CUSTOM_TEMPLATE;
+		        break;
+	        case "20":
+		        shareType = Platform.OPEN_QQMINIPROGRAM;
+		        break;
+	        case "21":
+		        shareType = Platform.DY_MIXFILE;
+		        break;
+        }
+        return shareType;
     }
 
     private void initPlat(String platId, String  platName) {

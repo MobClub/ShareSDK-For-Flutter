@@ -31,5 +31,7 @@ public final class Const {
 		public static final String HASHTAGS = "HASHTAGS";	//话题
 		public static final String HASHTAG = "facebook_hashtag";
 		public static final String QUOTE = "facebook_quote";
+		public static final String DOUYIN_MIX_FILE = "douyin_mix_file";
+		public static final String DOUYIN_SHARE_ACTION = "kSSDKDouYinShareAction";
 	}
 }
