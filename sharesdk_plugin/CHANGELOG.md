@@ -115,3 +115,9 @@
 
 ## 1.3.14
 * 1. Update Kakao SDK
+
+## 1.3.15
+* 1. support douyin IM 
+
+## 1.3.16
+* 1. support nameSpace
