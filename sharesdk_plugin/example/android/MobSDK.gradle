@@ -190,10 +190,10 @@ MobSDK {
             LinkedIn {
                 id 20
                 sortId 20
-                appKey "ejo5ibkye3vo"
-                appSecret "cC7B2jpxITqPLZ5M"
-                callbackUri "http://sharesdk.cn"
-                shareByAppClient true
+                appKey "75x5xdhllzno44"
+                appSecret "uiS3nlE7XBGmTL3P"
+                callbackUri "https://www.mob.com/"
+                shareByAppClient false
                 enable true
             }
 
@@ -441,9 +441,8 @@ MobSDK {
             Douyin {
                 id 59
                 sortId 1
-                appKey "aw9ivykfjvi4hpwo"
-                appSecret "42b4caa6bda60bd49f05f06d0a4956e1"
-                callbackAct "cn.sharesdk.demo.MainActivity"
+                appKey "awycvl19mldccyso"
+                appSecret "8793a4dfdc3636cbda0924a3cfbc8424"
                 enable true
             }
             HWAccount {

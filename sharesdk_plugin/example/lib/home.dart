@@ -649,7 +649,7 @@ class _HomePageState extends State<HomePage> {
           "text",
           ["http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg"],
           "http://wx3.sinaimg.cn/large/006nLajtly1fpi9ikmj1kj30dw0dwwfq.jpg",
-          "",
+          "/sdcard/Android/data/cn.sharesdk.demo/image.jpg",
           "http://www.mob.com/",
           "http://wx4.sinaimg.cn/large/006WfoFPly1fw9612f17sj30dw0dwgnd.jpg",
           "http://i.y.qq.com/v8/playsong.html?hostuin=0&songid=&songmid=002x5Jje3eUkXT&_wv=1&source=qq&appshare=iphone&media_mid=002x5Jje3eUkXT",
@@ -664,6 +664,40 @@ class _HomePageState extends State<HomePage> {
       showAlert(state, error.rawData, context);
     });
   }
+
+  void shareWebPageToDouyinIMCustom(BuildContext context) {
+      SSDKMap params = SSDKMap()
+        ..setGeneral(
+            "title",
+            "text",
+            [""],
+            "http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg",
+            "",
+            "https://www.mob.com",
+            "",
+            "",
+            "",
+            "",
+            SSDKContentTypes.webpage);
+      params..setDouYinShareActionMode(1);
+
+      SharesdkPlugin.share(ShareSDKPlatforms.douyin, params,
+          (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+              SSDKError error) {
+        showAlert(state, error.rawData, context);
+      });
+    }
+
+    void shareMixFileToDouyin(BuildContext context) {
+      SSDKMap params = SSDKMap()
+          ..setDouyinMixFile(["/sdcard/Android/data/cn.sharesdk.demo/image.jpg","/sdcard/Android/data/cn.sharesdk.demo/video.mp4"]);
+
+        SharesdkPlugin.share(ShareSDKPlatforms.douyin, params,
+            (SSDKResponseState state, dynamic userdata, dynamic contentEntity,
+                SSDKError error) {
+          showAlert(state, error.rawData, context);
+        });
+    }
 
   ///抖音分享图片
   void shareToDouyinImages(BuildContext context) {
@@ -1515,6 +1549,8 @@ class _HomePageState extends State<HomePage> {
           _creatRow("分享图片到快手", "测试自定义参数", shareKuaiShouCustom, context),
           _creatRow("分享图片到抖音", "需要传入当前图片到抖音", shareToDouyinCustom, context),
           _creatRow("分享图片到抖音IM", "需要传入当前图片到抖音", shareToDouyinIMCustom, context),
+          _creatRow("分享链接到抖音IM", "需使用抖音后台认证的链接", shareWebPageToDouyinIMCustom, context),
+          _creatRow("分享图片视频混合文件到抖音", "需传入图片和视频地址", shareMixFileToDouyin, context),
 
           _creatRow("分享图片到TikTok", "测试自定义参数", shareTikTokCustom, context),
           _creatRow("分享链接到KakaoTalk", "测试自定义参数", shareKakaoTalkCustom, context),

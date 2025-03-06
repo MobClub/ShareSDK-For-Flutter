@@ -218,4 +218,24 @@ class SSDKContentTypes extends Object {
   static SSDKContentType get miniProgram => SSDKContentType(value: 10);
 
   static SSDKContentType get message => SSDKContentType(value: 11);
+
+  static SSDKContentType get open_wxMiniProgram => SSDKContentType(value: 12);
+
+  static SSDKContentType get instagram_friend => SSDKContentType(value: 13);
+
+  static SSDKContentType get qq_miniProgram => SSDKContentType(value: 14);
+
+  static SSDKContentType get kakao_feed_template => SSDKContentType(value: 15);
+
+  static SSDKContentType get kakao_url_template => SSDKContentType(value: 16);
+
+  static SSDKContentType get kakao_commerce_template => SSDKContentType(value: 17);
+
+  static SSDKContentType get kakao_text_template => SSDKContentType(value: 18);
+
+  static SSDKContentType get kakao_custom_template => SSDKContentType(value: 19);
+
+  static SSDKContentType get open_qqMiniProgram => SSDKContentType(value: 20);
+
+  static SSDKContentType get dy_mixFile => SSDKContentType(value: 21);
 }
