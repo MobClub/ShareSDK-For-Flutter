@@ -121,3 +121,6 @@
 
 ## 1.3.16
 * 1. support nameSpace
+
+## 1.3.17
+* 1. support compileSdkVersion
