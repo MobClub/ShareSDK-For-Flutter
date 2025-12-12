@@ -909,18 +909,12 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
       }
     }
 
-    Platform.ShareParams shareParams = null;
-    if (ObjectUtils.notNull(platform)) {
-      shareParams = new Platform.ShareParams();
-      //抖音分享需要参数activity
-      String platName = platform.getName();
-      if ("Douyin".equals(platName)) {
-        if (activity != null) {
-          shareParams.setActivity(activity);
-        } else {
-          Log.e(TAG, "SharesdkPlugin that activity is null");
-        }
-      }
+    Platform.ShareParams shareParams = new Platform.ShareParams();
+	//抖音分享需要参数activity
+	if (activity != null) {
+	  shareParams.setActivity(activity);
+    } else {
+	  Log.e(TAG, "SharesdkPlugin that activity is null");
     }
     if (ObjectUtils.notNull(onekeyShare)) {
       if (activity != null) {
@@ -957,6 +951,13 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
         onekeyShare.setImageUrl(imageUrl);
       }
     }
+	if (!TextUtils.isEmpty(videoUrl)) {
+		if (ObjectUtils.notNull(shareParams)){
+			shareParams.setVideoUrl(videoUrl);
+		}else if (ObjectUtils.notNull(onekeyShare)){
+			onekeyShare.setVideoUrl(videoUrl);
+		}
+	}
 
     if (image_data != null) {
       if (ObjectUtils.notNull(shareParams)){

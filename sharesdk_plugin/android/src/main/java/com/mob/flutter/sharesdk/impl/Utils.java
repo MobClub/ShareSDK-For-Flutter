@@ -126,6 +126,10 @@ public class Utils {
                 return "Taptap";
             case "72":
                 return "HonorAccount";
+	        case "73":
+		        return "Threads";
+	        case "74":
+		        return "Lark";
            /* case "994":
                 return "yixinSeries";
             case "995":
