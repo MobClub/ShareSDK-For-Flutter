@@ -168,6 +168,7 @@ class ShareSDKPlatforms {
       ShareSDKPlatform(name: 'watermelonvideo', id: 69);
   static final ShareSDKPlatform tiktok =
       ShareSDKPlatform(name: 'tiktok', id: 70);
+  static final ShareSDKPlatform lark = ShareSDKPlatform(name: 'lark', id: 74);
   static final ShareSDKPlatform yixinSeries =
       ShareSDKPlatform(name: 'yixinSeries', id: 994);
   static final ShareSDKPlatform kakaoSeries =
