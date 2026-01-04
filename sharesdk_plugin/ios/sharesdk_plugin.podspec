@@ -3,7 +3,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'sharesdk_plugin'
-  s.version          = '1.1.7'
+  s.version          = '1.1.8'
   s.summary          = 'Flutter plugin for ShareSDK.'
   s.description      = <<-DESC
   ShareSDK is the most comprehensive Social SDK in the world,which share easily with 40+ platforms.
