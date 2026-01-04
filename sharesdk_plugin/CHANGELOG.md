@@ -127,3 +127,6 @@
 
 ## 1.3.18
 * 1. support lark
+
+## 1.3.19
+* 1. 更新iOS端 ShareSDK 版本
