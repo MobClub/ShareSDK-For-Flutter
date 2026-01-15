@@ -150,6 +150,14 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void getUserInfoToWechatCode(BuildContext context) {
+    Map map = {"needAuthCode": true};
+    SharesdkPlugin.getUserInfoWithParam(ShareSDKPlatforms.wechatSession, map,
+        (SSDKResponseState state, dynamic user, SSDKError error) {
+      showAlert(state, user != null ? user : error.rawData, context);
+    });
+  }
+
   void getUserInfoToWechat(BuildContext context) {
     SharesdkPlugin.getUserInfo(ShareSDKPlatforms.wechatSession,
         (SSDKResponseState state, dynamic user, SSDKError error) {
@@ -1515,6 +1523,7 @@ class _HomePageState extends State<HomePage> {
           _creatRow("判断微信是否授权", "判断微信平台是否授权", hasAuthed, context),
           _creatRow("微信用户信息", "获取微信用户信息", getUserInfoToWechat, context),
           _creatRow("微信授权", "微信授权(不返回用户数据)", authToWechat, context),
+          _creatRow("微信授权仅Code", "微信授权(仅返回Code)", getUserInfoToWechatCode, context),
           _creatRow("取消微信授权", "取消微信平台的授权", cancelAuth, context),
           _creatRow("华为用户信息", "获取华为用户信息", getUserInfoToHw, context),
           _creatRow("华为授权", "华为授权(不返回用户数据)", authToHWAccount, context),

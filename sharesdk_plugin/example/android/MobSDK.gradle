@@ -16,6 +16,8 @@ MobSDK {
                 callbackUri "http://www.sharesdk.cn"
                 shareByAppClient true
                 enable true
+                //使用微博xSDK
+                supportAndroidX true
             }
 
             TencentWeibo {
@@ -112,10 +114,11 @@ MobSDK {
             Twitter {
                 id 9
                 sortId 9
-                appKey "viOnkeLpHBKs6KXV7MPpeGyzE"
-                appSecret "NJEglQUy2rqZ9Io9FcAU9p17omFqbORknUpRrCDOK46aAbIiey"
-                callbackUri "http://mob.com"
+                appKey "YUJMMTFOcE93MGI4Zi1aRTlHQnM6MTpjaQ"
+                appSecret "ppuG1yR5Sb7PXn2IZAu-4nJwbhh1mLq3ieJXOkC5wOJpVxmWli"
+                callbackUri "https://www.mob.com"
                 shareByAppClient true
+                bypassApproval true
                 enable true
             }
 

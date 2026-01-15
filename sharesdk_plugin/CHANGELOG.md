@@ -130,3 +130,6 @@
 
 ## 1.3.19
 * 1. 更新iOS端 ShareSDK 版本
+
+## 1.3.20
+* 1. support Wechat AuthCode

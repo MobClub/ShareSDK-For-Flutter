@@ -335,19 +335,22 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
    * 授权
    **/
   private void authWithArgs(MethodCall call, Result result) {
-    HashMap<String, Object> params = call.arguments();
-    String num = String.valueOf(params.get("platform"));
-
-    String platStr = Utils.platName(num);
-    Platform platName = ShareSDK.getPlatform(platStr);
-    if ("XMAccount".equals(platStr)) {
-      if (activity != null) {
-        ShareSDK.setActivity(activity);
-      } else {
-        Log.e(TAG, "SharesdkPlugin that activity is null");
-      }
-    }
-    doAuthorize(platName, result);
+	  HashMap<String, Object> params = call.arguments();
+	  String num = String.valueOf(params.get("platform"));
+	  String platStr = Utils.platName(num);
+	  Platform platName = ShareSDK.getPlatform(platStr);
+	  if (activity != null) {
+		  ShareSDK.setActivity(activity);
+	  } else {
+		  Log.e(TAG, "SharesdkPlugin that activity is null");
+	  }
+	  try {
+		  boolean needCode = (boolean) params.get("needAuthCode");
+		  platName.needAuthCode(needCode);
+	  } catch (Throwable throwable) {
+		  Log.e("SharesdkPlugin", throwable + "");
+	  }
+	  doAuthorize(platName, result);
   }
 
   /**
@@ -532,19 +535,23 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
    * 获得用户信息
    **/
   private void getUserInfoWithArgs(MethodCall call, Result result) {
-    HashMap<String, Object> params = call.arguments();
-    String num = String.valueOf(params.get("platform"));
-    String platStr = Utils.platName(num);
-    Platform platName = ShareSDK.getPlatform(platStr);
-    if ("XMAccount".equals(platStr)) {
-      if (activity != null) {
-        ShareSDK.setActivity(activity);
-      } else {
-        Log.e(TAG, "SharesdkPlugin that activity is null");
-      }
-    }
-    doUserInfo(platName, result);
-    Log.e("SharesdkPlugin", " platName " + platName + " ====> " + call.arguments.toString());
+	  HashMap<String, Object> params = call.arguments();
+	  String num = String.valueOf(params.get("platform"));
+	  String platStr = Utils.platName(num);
+	  Platform platName = ShareSDK.getPlatform(platStr);
+	  if (activity != null) {
+		  ShareSDK.setActivity(activity);
+	  } else {
+		  Log.e(TAG, "SharesdkPlugin that activity is null");
+	  }
+	  try {
+		  boolean needCode = (boolean) params.get("needAuthCode");
+		  platName.needAuthCode(needCode);
+	  } catch (Throwable throwable) {
+		  Log.e(TAG, throwable + "");
+	  }
+	  doUserInfo(platName, result);
+	  Log.e("SharesdkPlugin", " platName " + platName + " ====> " + call.arguments.toString());
   }
 
 

@@ -128,6 +128,21 @@ class SharesdkPlugin {
     return callback;
   }
 
+  static Future<dynamic> getUserInfoWithParam(ShareSDKPlatform platform,
+      Map settings, Function(SSDKResponseState, dynamic, SSDKError) result) {
+    Map args = {"platform": platform.id};
+    args.addAll(settings);
+    Future<dynamic> callback =
+        _channel.invokeMethod(ShareSDKMethods.getUserInfo.name!, args);
+    callback.then((dynamic response) {
+      if (result != null) {
+        result(_state(response), response["user"],
+            SSDKError(rawData: response["error"]));
+      }
+    });
+    return callback;
+  }
+
   static Future<dynamic> showMenu(
       dynamic view,
       List<ShareSDKPlatform>? platforms,
