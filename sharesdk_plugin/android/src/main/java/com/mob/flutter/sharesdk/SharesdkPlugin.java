@@ -345,7 +345,7 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
 		  Log.e(TAG, "SharesdkPlugin that activity is null");
 	  }
 	  try {
-		  boolean needCode = (boolean) params.get("needAuthCode");
+		  boolean needCode = (Boolean) params.get("needAuthCode");
 		  platName.needAuthCode(needCode);
 	  } catch (Throwable throwable) {
 		  Log.e("SharesdkPlugin", throwable + "");
@@ -545,7 +545,7 @@ public class SharesdkPlugin implements FlutterPlugin,MethodCallHandler, Activity
 		  Log.e(TAG, "SharesdkPlugin that activity is null");
 	  }
 	  try {
-		  boolean needCode = (boolean) params.get("needAuthCode");
+		  boolean needCode = (Boolean) params.get("needAuthCode");
 		  platName.needAuthCode(needCode);
 	  } catch (Throwable throwable) {
 		  Log.e(TAG, throwable + "");
